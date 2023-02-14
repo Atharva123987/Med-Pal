@@ -1,0 +1,66 @@
+*{
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+/* --- Make sure to change height and width to as per the component size in layout --> */
+
+.dash-component, fieldset{
+    height: 230px;
+    max-height: 230px;
+    
+}
+
+.dash-component{
+    background-color: rgba(255, 255, 255, 0.536);
+    width: auto;
+    margin:5px;
+}
+
+fieldset{
+    border: 2px solid black;
+    display: flex;
+}
+
+legend{
+    font-size: large;
+    color: black; 
+}
+
+.dash-button{
+    display: block;
+    height:auto;
+    width:auto;
+    border-radius: 50%;
+    color:white;
+    font-size: large;
+    border: double 5px white;
+    background-color:black;
+    margin-top: auto;
+    margin-left: auto;
+}
+
+.dash-button:hover{
+    /* background-color: rgba(0, 0, 0, 0.72); */
+    background-color: rgb(215, 86, 0);
+}
+
+.dash-button:active{
+    border-radius:12px ;
+    background-color: rgba(255, 102, 0, 0.657);
+}
+
+/* --- For mobile devices --- */
+
+@media screen and (max-width:480px) {
+
+    .dash-component{
+        height: 200px;
+        width: 200px;
+        overflow: auto;
+    }
+    
+    .dash-button{
+        margin:0 0 auto auto;
+    }
+
+}
