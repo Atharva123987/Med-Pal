@@ -5,15 +5,14 @@
 /* --- Make sure to change height and width to as per the component size in layout --> */
 
 .dash-component, fieldset{
-    height: 230px;
+    height: 40vh;
     /* max-height: 230px; */
 }
 
 .dash-component{
-    
     background-color: rgba(255, 255, 255, 0.536);
     width: auto;
-    margin:5px;
+    margin:1vh;
 }
 
 fieldset{
@@ -21,14 +20,16 @@ fieldset{
     box-shadow: 3px 2px 4px black;
     display: flex;
     flex-direction: column;
+    font-size: 2.5vh;
+    border-radius: 10px;
 }
 @keyframes example {
-    0% {background-color: rgb(255, 255, 255);}
-    100% {background-color: rgb(255, 200, 0);box-shadow: 20px 2px 4px black;}
+    0% {background-color: rgb(255, 255, 255);border-radius: 10px;}
+    100% {background-color: rgb(255, 200, 0);box-shadow: 20px 2px 4px black;border-radius: 0px;}
   }
 fieldset:hover{
     animation-name: example;
-    animation-duration: 1s;
+    animation-duration: 0.5s;
     animation-iteration-count: 1;
     animation-timing-function:ease-out;
     animation-fill-mode: forwards;
@@ -36,8 +37,9 @@ fieldset:hover{
 }
 
 legend{
-    font-size: large;
-    color: black; 
+    color: black;
+    font-size: 3.2vh!important; 
+    margin:1vh 0 0 1vh;
 }
 
 
@@ -46,12 +48,12 @@ legend{
     display: flex;
     justify-content: center;
     align-items: center;
-    height:30px;
-    width:30px;
+    height:4vh;
+    width:4vh;
     border-radius: 50%;
     color:white;
     font-size: large;
-    border: double 5px white;
+    border: double 0.6vh white;
     background-color:black;
     margin-top: auto;
     margin-left: auto;
@@ -66,7 +68,7 @@ legend{
     /* background-color: rgba(0, 0, 0, 0.72); */
     
     animation-name: hover;
-    animation-duration: 0.5s;
+    animation-duration: 0.2s;
     animation-iteration-count: 1;
     animation-timing-function:ease-out;
     animation-fill-mode: forwards;

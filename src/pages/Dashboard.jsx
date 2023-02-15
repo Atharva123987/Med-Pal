@@ -35,7 +35,7 @@ const Dashboard = () =>{
             
                 <div id='badge-container'>
                     <img id='badge' src={Badge}/>
-                    <h5>Gold Member</h5>
+                    <p>Gold Member</p>
                 </div>
             </div>
 
@@ -66,7 +66,7 @@ const Dashboard = () =>{
             </div>
            
             <div id='tips'>
-                <h4>Tip of the day:</h4>
+                <span>Tip of the day:</span>
                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta, voluptate voluptatibus? Id repellendus soluta doloremque cum architecto, qui distinctio corrupti! Ab error numquam labore quibusdam aliquid incidunt illo, nulla excepturi!</p>
             </div>
           
@@ -76,7 +76,7 @@ const Dashboard = () =>{
             <div id='r1'>
             <div id='c1' className='component' style={{flexGrow:6}}><TabList/></div>  {/* Pass a parameter to DashboardItem which will select the particular component */}
           
-            <div id='c2' className='component' style={{flexGrow:2}}><TabStock/></div>
+            <div id='c2' className='component' style={{flexGrow:4}}><TabStock/></div>
            
             <div id='c3' className='component' style={{flexGrow:5}}><Prescription/></div>
             </div>

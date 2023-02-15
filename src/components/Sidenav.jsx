@@ -13,17 +13,17 @@ const Sidenav = () =>{
             <Link to="/reminders"><p>Reminders</p></Link>
             <Link to="/about"><p>About</p></Link> */}
             
-            <ul>
-                <li>
-                  <Link to='/'><AiOutlineHome style={{color: 'white', fontSize: '25px'}}/></Link>
-                </li>
-                <li>
-                  <Link to='/logout'><CgLogOut style={{color:'white',fontSize:'25px'}}/></Link>
-                </li>
-                <li>
-                   <Link to='/about'><BsInfoCircle style={{color:'white',fontSize:'20px'}}/></Link>
-                </li>
-            </ul>
+          
+            
+                  <Link to='/'><AiOutlineHome style={{color: 'white', }}/></Link>
+                
+              
+                  <Link to='/logout'><CgLogOut style={{color:'white',}}/></Link>
+              
+              
+                   <Link to='/about'><BsInfoCircle style={{color:'white'}}/></Link>
+                
+        
         </div>
         </>
     )

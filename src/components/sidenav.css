@@ -1,24 +1,42 @@
 .sidenav{
     height:auto;  
-    width: 7%;  
-    position: sticky;
+    width: 10vh;  
     background-color:black; 
-    transition: .5s ease; 
-    overflow-x: hidden; 
-    padding-top: 10px; 
-    display: flex; 
-    flex-direction: column; 
+    display: flex;
+    flex-direction: column;
     align-items: center;
-    position: -webkit-sticky;
-    position: sticky;
 }
 
-ul li{
-    list-style: none;
-    margin:25px auto;  
+a, svg{
+    margin:2vh 0;
+    font-size: 3vh;;
 }
 
-ul{
-    margin-right:50%;
+@keyframes icons {
+    0%{
+        font-size: 3vh;
+    }
+    100%{
+        font-size: 5vh;
+    }
 }
 
+svg:hover{
+    animation-name: icons;    
+    animation-timing-function: ease-in-out;
+    animation-duration: 0.2s;
+    animation-fill-mode: forwards;
+    animation-iteration-count: 1;
+}
+@keyframes a {
+    0%{
+        color:white;font-size: 5vh;
+    }
+    100%{
+        color:rgb(0, 106, 255);font-size: 5vh;
+    }
+}
+svg:active{
+    animation-name: a;   
+    
+}
