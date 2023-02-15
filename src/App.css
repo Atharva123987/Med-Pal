@@ -19,14 +19,7 @@ body{
   flex-direction: column;
 }
 
-@media screen and (min-width: 600px) {
-  .auth-form-container {
-    padding: 5rem;
-    border: 1px solid white;
-    border-radius: 10px;
-    margin: 0.5rem;
-  }
-}
+
 
 label {
   text-align: left;
@@ -53,4 +46,13 @@ button {
   background: none;
   color: white;
   text-decoration: underline;
+}
+
+@media screen and (min-width: 600px) {
+  .auth-form-container {
+    padding: 5rem;
+    border: 1px solid white;
+    border-radius: 10px;
+    margin: 0.5rem;
+  }
 }

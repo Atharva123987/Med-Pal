@@ -1,8 +1,12 @@
 #content{
     display: flex;
+    position:absolute;
     width: 100%;
+    min-height: 100vh;
     font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
+
+
 
 #user-details{
     display: grid;
@@ -93,11 +97,14 @@
 #tips{
     text-align: center;
     font-size: small;
+    
 }
 
 #dash-components{
     display: flex;
     width: 70%;
+    height: 100vh;
+    justify-content:space-evenly;
     flex-direction: column;   
     margin: auto;
     
@@ -108,7 +115,7 @@
 #r1, #r2{
     display: flex;
     flex-direction: row;
+    
     margin: 10px;
 }
-
 
