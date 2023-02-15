@@ -1,49 +1,25 @@
-.nav-container{
+.container{
   display:flex;
-  align-items: center;
-  justify-content: center;
+  background-color: rgba(0, 0, 139, 0); 
   
-  position:absolute;
-  background-color: rgba(7, 7, 7, 0.656);
-  z-index: 1;
-  padding:0;
-  width: 100%;
 }
 
 .heading{
-  font-size: 60px;
-  color:rgb(255, 255, 255);
-  /* text-shadow: 2px 2px 4px black;
-  -webkit-text-stroke: 1px black; */
+  font-size: 30px;
 }
 
 .logo{
   width: 50px;
   height: 50px;
-  margin-right: auto;
-  display: none;
 }
 
 .heading{
-  
+  margin: 0 auto;
 }
 
 .login , .register{
   width:70px;
   height: 50px;
-
 }
-.login:hover, .register:hover{
-  opacity: 80%;
-  
-}
-.login:active, .register:active{
-  padding: 2px;
-}
-.buttons{
-  margin-left: auto;
-  /* margin-left: auto; */
-}
-
 
 
