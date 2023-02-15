@@ -14,12 +14,12 @@ export const Login = (props) => {
 
     return (
         <>
-        <Navbar />
+      
         <div className="App">
             <div className="auth-form-container">
                 <div className="buttons" style={{display: 'block', width:'100%'}}>
-                    <button style={{float: 'left', width:'50%'}}><Link to={'/login'} style={{textDecoration: 'none'}}>Login</Link></button>
-                    <button style={{float: 'left', width:'50%'}}><Link to={'/register'} style={{textDecoration: 'none'}}>Register</Link></button>
+                <Link to={'/login'} style={{textDecoration: 'none'}}><button style={{float: 'left', width:'50%'}}>Login</button></Link>
+                    <Link to={'/register'} style={{textDecoration: 'none'}}><button style={{float: 'left', width:'50%'}}>Register</button></Link>
                 </div>
                 <h2>Login </h2>
                 <form className="login-form" onSubmit={handleSubmit}>
