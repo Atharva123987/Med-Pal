@@ -6,7 +6,7 @@ const Streaks = () =>{
           <legend align="left">Streaks</legend>
           
           {/* <-- Add component specific info here --> */}
-            <h1>This is component 6</h1>
+            <h1>Coming soon...</h1>
           <button className='dash-button'><span>+</span></button>
         </fieldset>
         </div>
