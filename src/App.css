@@ -6,12 +6,22 @@
   justify-content: center;
   color: white;
   background-image: linear-gradient(79deg, #7439db, #C66FBC 48%, #F7944D);
+  height: 100vh;
+  overflow: hidden;
   
 }
+
+
+
+
+
 body{
   margin:0;
 }
 
+#root {
+  height: 100%;
+}
 
 
 .auth-form-container, .login-form, .register-form {
@@ -55,4 +65,32 @@ button {
     border-radius: 10px;
     margin: 0.5rem;
   }
+}
+
+/* #about-content{
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+} */
+
+.title {
+  z-index: 2;
+  position: relative;
+  margin: auto;
+  font-size: 60px;
+  color: rgb(255, 255, 255);
+
+}
+
+.team-profile{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#team-profiles{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+
 }

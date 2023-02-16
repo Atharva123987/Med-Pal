@@ -1,10 +1,9 @@
-import Carousel from 'react-bootstrap/Carousel';
-import ProfilePic from '../assets/profilepic.png'
-import Car1 from '../assets/carousel1.jpg'
-import Car2 from '../assets/carousel2.jpg'
-import Car3 from '../assets/carousel3.jpg'
-import './slider.css'
-const Slider =()=> {
+import Carousel from "react-bootstrap/Carousel";
+import Car1 from "../assets/carousel1.jpg";
+import Car2 from "../assets/carousel2.jpg";
+import Car3 from "../assets/carousel3.jpg";
+import "./slider.css";
+const Slider = () => {
   return (
     <Carousel fade>
       <Carousel.Item>
@@ -12,7 +11,7 @@ const Slider =()=> {
           className="slider-img"
           src={Car1}
           alt="First slide"
-          style={{width:"100%"}}
+          style={{ width: "100%" }}
         />
         <Carousel.Caption>
           <h3 class="headings">First slide label</h3>
@@ -24,7 +23,7 @@ const Slider =()=> {
           className="slider-img"
           src={Car2}
           alt="Second slide"
-          style={{width:"100%", alignContent:"center"}}
+          style={{ width: "100%", alignContent: "center" }}
         />
 
         <Carousel.Caption>
@@ -37,7 +36,7 @@ const Slider =()=> {
           className="slider-img"
           src={Car3}
           alt="Third slide"
-          style={{width:"100%", alignContent:"center"}}
+          style={{ width: "100%", alignContent: "center" }}
         />
 
         <Carousel.Caption>
@@ -49,6 +48,6 @@ const Slider =()=> {
       </Carousel.Item>
     </Carousel>
   );
-}
+};
 
 export default Slider;
