@@ -4,18 +4,20 @@
     width: 100%;
     min-height: 100vh;
     font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+
 }
 
 
 span{
     font-size: 4vh;
+    
 }
 #user-details{
     display: grid;
     width: 30%;
     margin: 1vh 2vh;
     font-size: 3vh;
-
+    
 }
 
 #name{
@@ -112,10 +114,27 @@ span{
 #doctors td{
     border: 0.22vh solid black;
 }
+
+@keyframes fade {
+    0%{
+        opacity: 0%;
+    }
+    100%{
+        opacity: 100%;
+    }
+    
+}
+
 #tips{
     text-align: center;
     font-size: 2vh;
-    
+    opacity: 0%;
+    animation-name: fade;
+    animation-duration: 2s;
+    animation-iteration-count: 1;
+    animation-timing-function:ease-in-out;
+    animation-play-state: running;
+    animation-fill-mode: forwards;
 }
 
 #dash-components{

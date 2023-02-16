@@ -9,12 +9,12 @@
 
 a, svg{
     margin:2vh 0;
-    font-size: 3vh;;
+    font-size: 4vh;;
 }
 
 @keyframes icons {
     0%{
-        font-size: 3vh;
+        font-size: 4vh;
     }
     100%{
         font-size: 5vh;
