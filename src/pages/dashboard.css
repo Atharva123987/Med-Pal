@@ -121,6 +121,8 @@ span{
     }
     100%{
         opacity: 100%;
+
+        
     }
     
 }
@@ -139,6 +141,7 @@ span{
 
 #dash-components{
     display: flex;
+
     width: 70%;
     height: 100vh;
     justify-content:space-evenly;

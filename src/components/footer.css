@@ -1,4 +1,32 @@
-#footer{
+footer{
     color:white;
     background-color: rgb(51, 51, 51);
+    color:rgb(179, 179, 179);
+    display: flex;
+    flex-direction: column;
+    height: 25vh;
+}
+
+.footer-links{
+    text-decoration: none;
+    color:rgb(179, 179, 179);
+    margin:2vh;
+    font-size: 3vh;
+}
+
+#footer-top{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 5vh;
+}
+
+#footer-bottom{
+    display: flex;
+    justify-content: space-around;
+}
+
+#footer-right{
+    display: flex;
+    width:10vw;
+    justify-content: space-around;
 }

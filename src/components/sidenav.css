@@ -7,24 +7,32 @@
     align-items: center;
 }
 
-a, svg{
+a{
     margin:2vh 0;
-    font-size: 4vh;;
+    font-size: 4vh;
 }
+
+
+div.sidenav,
+      div.sidenav > *{
+        color:rgb(255, 255, 255);
+      }
+
 
 @keyframes icons {
     0%{
         font-size: 4vh;
     }
     100%{
-        font-size: 5vh;
+        font-size: 5vh;color:blue;
     }
 }
 
-svg:hover{
+div.sidenav,
+div.sidenav > *:hover {
     animation-name: icons;    
     animation-timing-function: ease-in-out;
-    animation-duration: 0.2s;
+    animation-duration: 0.3s;
     animation-fill-mode: forwards;
     animation-iteration-count: 1;
 }
