@@ -3,12 +3,6 @@ import './dashboard.css'
 import profilePic from '../assets/profilepic.png'
 import DashboardItem from '../components/DashboardItem';
 import Badge from '../assets/badge.png';
-import TabList from '../components/TabList';
-import TabStock from '../components/TabStock';
-import Prescription from '../components/Prescription';
-import Charts from '../components/Charts';
-import Calendar from '../components/Calendar';
-import Streaks from '../components/Streaks';
 const Dashboard = () =>{
     return(
         <>
@@ -74,19 +68,19 @@ const Dashboard = () =>{
         <div id='dash-components'>
             
             <div id='r1'>
-            <div id='c1' className='component' style={{flexGrow:6}}><TabList/></div>  {/* Pass a parameter to DashboardItem which will select the particular component */}
+            <div id='c1' className='component' style={{flexGrow:6}}><DashboardItem/></div>  {/* Pass a parameter to DashboardItem which will select the particular component */}
           
-            <div id='c2' className='component' style={{flexGrow:2}}><TabStock/></div>
+            <div id='c2' className='component' style={{flexGrow:2}}><DashboardItem/></div>
            
-            <div id='c3' className='component' style={{flexGrow:5}}><Prescription/></div>
+            <div id='c3' className='component' style={{flexGrow:5}}><DashboardItem/></div>
             </div>
 
             <div id='r2'>
-            <div id='c4' className='component' style={{flexGrow:6}}><Charts/></div>
+            <div id='c4' className='component' style={{flexGrow:6}}><DashboardItem/></div>
             
-            <div id='c5' className='component' style={{flexGrow:6}}><Calendar/></div>
+            <div id='c5' className='component' style={{flexGrow:6}}><DashboardItem/></div>
           
-            <div id='c6' className='component' style={{flexGrow:6}}><Streaks/></div>
+            <div id='c6' className='component' style={{flexGrow:6}}><DashboardItem/></div>
             </div>
         </div>
          

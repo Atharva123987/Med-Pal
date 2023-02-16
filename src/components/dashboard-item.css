@@ -6,21 +6,19 @@
 
 .dash-component, fieldset{
     height: 230px;
-    /* max-height: 230px; */
+    max-height: 230px;
+    
 }
 
 .dash-component{
-    
     background-color: rgba(255, 255, 255, 0.536);
     width: auto;
     margin:5px;
 }
 
 fieldset{
-    border: 2px solid black!important;
+    border: 2px solid black;
     display: flex;
-    flex-direction: column;
-    
 }
 
 legend{
@@ -29,11 +27,9 @@ legend{
 }
 
 .dash-button{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height:30px;
-    width:30px;
+    display: block;
+    height:auto;
+    width:auto;
     border-radius: 50%;
     color:white;
     font-size: large;
