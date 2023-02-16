@@ -13,6 +13,8 @@ const Navbar = () => {
           <div className="heading">MedPal</div>
             <div className="buttons">
             <Button variant="primary"><Link to={'/dashboard'} style={{color:"white", textDecoration:"none",display:"block"}}>Dashboard</Link></Button>{' '}
+
+            <Button variant="primary"><Link to={'/about'} style={{color:"white", textDecoration:"none",display:"block"}}>About Us</Link></Button>{' '}
               
               <Link to={'/login'}><img src={Log_In} className="login" alt="login"/></Link>
               <Link to={'/register'}><img src={Register} className="register" alt="register"/></Link>
