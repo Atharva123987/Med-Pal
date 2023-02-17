@@ -1,7 +1,8 @@
 import Navbar from "../Navbar";
 import sampleImg from "../assets/sample-avatar.png";
 import "../App.css";
-import './about.css'
+import "./about.css";
+import Footer from "../components/Footer";
 const About = () => {
 	return (
 		<>
@@ -81,6 +82,7 @@ const About = () => {
 					</div>
 				</div>
 			</div>
+			<Footer />
 		</>
 	);
 };
