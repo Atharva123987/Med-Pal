@@ -9,7 +9,46 @@ import Prescription from '../components/Prescription';
 import Charts from '../components/Charts';
 import Calendar from '../components/Calendar';
 import Streaks from '../components/Streaks';
+import Tips from '../components/Tips';
+import { useEffect } from 'react';
+import { useState } from 'react';
 const Dashboard = () =>{
+
+    const [userDetails, setUserDetails] = useState([
+        {
+            name:"John Doe",
+            email:"example@gmail.com",
+            age:"23",
+            gender:"M",
+            height:"171",
+            weight:"60",
+            membership:"Gold",
+        }
+    ])
+
+    const [doctorList,setDoctorList] = useState([
+    
+        {
+            name:"Doctor Lorem",
+            number:"9393183918",
+            address:"Lorem ipsum dolor sit amet",
+        },
+        {
+            name:"Doctor Lorem",
+            number:"9393183918",
+            address:"Lorem ipsum dolor sit amet",
+        },
+        {
+            name:"Doctor Lorem",
+            number:"9393183918",
+            address:"Lorem ipsum dolor sit amet",
+        },
+                    
+                        
+                       
+    ])
+
+
     return(
         <>
         <div id="content">
@@ -20,22 +59,23 @@ const Dashboard = () =>{
                 
                 <img id='profile-pic' src={profilePic}></img>
                 <div id='uname'>
-                <h2 id='name'>John Doe</h2>
+                <h2 id='name'>{userDetails[0].name}</h2>
                 
-                <p id='email'>example@gmail.com</p>
+                <p id='email'>{userDetails[0].email}</p>
                 </div>
             </div>
             
             <div id='info'>
                 <div id='details'>
-                    <p>Age : 23</p>
-                    <p>Height : 171cm</p>
-                    <p>Weight : 60kg</p>
+                    <p>Age : {userDetails[0].age}</p>
+                    <p>Gender : {userDetails[0].gender}</p>
+                    <p>Height : {userDetails[0].height} cm</p>
+                    <p>Weight : {userDetails[0].weight} kg</p>
                 </div>
             
                 <div id='badge-container'>
                     <img id='badge' src={Badge}/>
-                    <p>Gold Member</p>
+                    <p>{userDetails[0].membership} Member</p>
                 </div>
             </div>
 
@@ -46,28 +86,21 @@ const Dashboard = () =>{
                         <th>Ph. Number</th>
                         <th>Address</th>
                     </tr>
-                    <tr>
-                        <td>Doctor Lorem</td>
-                        <td>9393183918</td>
-                        <td>Lorem ipsum dolor sit amet</td>
-                    </tr>
-                    <tr>
-                        <td>Doctor Lorem</td>
-                        <td>9393183918</td>
-                        <td>Lorem ipsum dolor sit amet</td>
-                    </tr>
-                    <tr>
-                        <td>Doctor Lorem</td>
-                        <td>9393183918</td>
-                        <td>Lorem ipsum dolor sit amet</td>
-                    </tr>
+                    {doctorList.map((val, key) => {
+              return (
+                <tr key={key}>
+                  <td>{val.name}</td>
+                  <td>{val.number}</td>
+                  <td>{val.address}</td>
+                </tr>
+              )
+        })}
                     
                 </table>
             </div>
            
             <div id='tips'>
-                <span>Tip of the day:</span>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta, voluptate voluptatibus? Id repellendus soluta doloremque cum architecto, qui distinctio corrupti! Ab error numquam labore quibusdam aliquid incidunt illo, nulla excepturi!</p>
+                <Tips/>
             </div>
           
         </div>

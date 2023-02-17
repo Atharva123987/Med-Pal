@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import PImg from '../assets/badge.png'
+import PImg from '../assets/prescription.jpg'
 
 const Prescription = () =>{
 
@@ -40,7 +40,7 @@ const Prescription = () =>{
           <legend align="left">Prescriptions</legend>
           <table>
             
-            {imgs.map((val, key) => {
+            {imgs.map((val, key,imgs) => {
               return (
                 <tr key={key} style={
                   {
@@ -48,7 +48,7 @@ const Prescription = () =>{
                     justifyContent:"center",
                   }
                 }>
-                  <td><a href={val.url} target='_blank'><img src={val.url} style={{width:"7vh",height:"7vh"}}/></a></td>
+                  <td><a href={val.url} target='_blank'><img src={val.url} style={{width:"7vh",height:"7vh"}}/></a>  {val.date}  </td>
                   
                 </tr>
               )

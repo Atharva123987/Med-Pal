@@ -90,7 +90,10 @@ table > tr{
 legend{
     color: black;
     font-size: 3.2vh!important; 
+    font-style:italic;
     margin:1vh 0 0 1vh;
+    /* text-decoration: underline; */
+    text-underline-offset:1vh;
 }
 
 
