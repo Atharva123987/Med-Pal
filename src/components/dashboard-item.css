@@ -193,6 +193,7 @@ legend{
 }
 
 #charts{
+    max-width: 40vw;
     overflow: hidden;
     overflow-y: auto;
 }

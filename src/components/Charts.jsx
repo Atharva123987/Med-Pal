@@ -23,7 +23,7 @@ const Charts = () => {
 				{/*  */}
 				{/*  */}
 				<LineChart
-					width={730}
+					width={400}
 					height={250}
 					data={bloodPressure}
 					margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
@@ -42,7 +42,7 @@ const Charts = () => {
 					<center>Blood Sugar Trend</center>
 				</h4>
 				<LineChart
-					width={730}
+					width={400}
 					height={250}
 					data={bloodSugar}
 					margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
@@ -61,7 +61,7 @@ const Charts = () => {
 					<center>Haemoglobin Trend</center>
 				</h4>
 				<LineChart
-					width={730}
+					width={400}
 					height={250}
 					data={haemoglobin}
 					margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
