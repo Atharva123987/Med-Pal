@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import DataTable from "react-data-table-component";
 import axios from 'axios';
 import { setSelectionRange } from "@testing-library/user-event/dist/utils";
+import { Redirect } from "react-router-dom";
 
 
 
@@ -27,38 +28,36 @@ const TabList = () =>{
 
    const columns = [
     {
-        name:"Tablet Name",
-        selector: row => row.name,
-        sector: row => row.nativeName,
+        name:"Crocin",
+        freq:"Daily",
+        time:["morning","evening"],
+        // selector: row => row.name,
+        // sector: row => row.nativeName,
         
     },
     {
-        name:"Stock",
-        selector: row => row.name,
-        sector: row => row.nativeName,
-        sortable:true,
+      name:"Norflox",
+      freq:"Daily",
+      time:["morning","evening"],
+        // selector: row => row.name,
+        // sector: row => row.nativeName,
+        // sortable:true,
     },
     {
-        name:"Expiry",
-        sector: row => row.capital,
+      name:"Becousule",
+      freq:"Daily",
+      time:["morning","evening"],
+        // sector: row => row.capital,
     },
     {
-        name:"Action",
-        cell: row => <button className="btn btn-primary" onClick={()=>alert("Here")}>Edit</button>
-    }
+      name:"Becousule",
+      freq:"Daily",
+      time:["morning","evening"],
+        // sector: row => row.capital,
+    },
+    
+    
 ]
-
-
-   useEffect(()=>{
-    getCountries();
-   },[])
-
-   useEffect(()=>{
-    const result = countries.filter(country => {
-        return country.name.toLowerCase().match(search.toLowerCase());
-   });
-   setFilteredCountries(result);
-   },[search])
 
 
 
@@ -66,40 +65,30 @@ const TabList = () =>{
 
     return (
         <>
-        <div id="component-name" className="dash-component"> 
+        <div id="tab-list" className="dash-component"> 
 
-        <fieldset>
           <legend align="left">Tablet List</legend>
 
-          <DataTable
-          title='Tablet List'
-          columns={columns}
-          data={filteredCountries}
-          fixedHeader
-          fixedHeaderScrollHeight="200px"
-          selectableRows
-          selectableRowsHighlight
-          // pagination
-          highlightOnHover
-          actions={
-            <button className="btn btn-info btn-sm "></button>
-          }
-          subHeader
-          subHeaderComponent={
-            <input 
-            type='text' 
-            placeholder="Search Here" 
-            className="w-25 form-control"
-            value={search}
-            onChange={(e)=> setSearch(e.target.value)}
-            />
-          }
-          subHeaderAlign="left"
-          />
-          
+
+          <table>
+            <tr>
+              <th>Name</th>
+              <th>Frequency</th>
+              <th>Time</th>
+            </tr>
+            {columns.map((val, key) => {
+              return (
+                <tr key={key}>
+                  <td>{val.name}</td>
+                  <td>{val.freq}</td>
+                  <td>{val.time.map((elem,i,time)=> time[i] + ", ")}</td>
+                </tr>
+              )
+        })}
+      </table>
+          <div className="dash-button-container">
           <button className='dash-button'><span>+</span></button>
-        </fieldset>
-        
+          </div>
         </div>
         </>
       )

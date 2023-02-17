@@ -74,11 +74,11 @@ const Dashboard = () =>{
         <div id='dash-components'>
             
             <div id='r1'>
-            <div id='c1' className='component' style={{flexGrow:6}}><TabList/></div>  {/* Pass a parameter to DashboardItem which will select the particular component */}
+            <div id='c1' className='component' style={{flexGrow:6, maxWidth:"20vw"}}><TabList/></div>  {/* Pass a parameter to DashboardItem which will select the particular component */}
           
-            <div id='c2' className='component' style={{flexGrow:4}}><TabStock/></div>
+            <div id='c2' className='component' style={{flexGrow:4, maxWidth:"25vw"}}><TabStock/></div>
            
-            <div id='c3' className='component' style={{flexGrow:5}}><Prescription/></div>
+            <div id='c3' className='component' style={{flexGrow:5, maxWidth:"20vw"}}><Prescription/></div>
             </div>
 
             <div id='r2'>
