@@ -190,3 +190,8 @@ legend{
     }
 
 }
+
+#charts{
+    overflow: hidden;
+    overflow-y: auto;
+}
