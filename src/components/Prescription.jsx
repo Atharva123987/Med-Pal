@@ -48,7 +48,7 @@ const Prescription = () =>{
                     justifyContent:"center",
                   }
                 }>
-                  <td><a href={val.url} target='_blank'><img src={val.url} style={{width:"7vh",height:"7vh"}}/></a>  {val.date}  </td>
+                  <td><a href={val.url} target='_blank'><img src={val.url} style={{width:"7vh",height:"7vh"}}/> {val.date} </a> </td>
                   
                 </tr>
               )
