@@ -1,67 +1,42 @@
-import { tab } from "@testing-library/user-event/dist/tab";
 import { useState, useEffect } from "react";
-import DataTable from "react-data-table-component";
-import axios from 'axios';
-import { setSelectionRange } from "@testing-library/user-event/dist/utils";
-import { Redirect } from "react-router-dom";
+
 
 
 
    
 const TabList = () =>{
 
-  const[countries,setCountries] = useState([]);
-   const[search,setSearch] = useState("");
-   const[filteredCountries,setFilteredCountries] = useState([]);
-
-
-   const getCountries = async ()=>{
-    try{
-        const response = await axios.get("https://restcountries.com/v2/all");
-        setCountries(response.data);
-        setFilteredCountries(response.data);
-    }
-    catch(error){
-        console.log(error);
-    }
-   }
+   
 
    const columns = [
     {
         name:"Crocin",
         freq:"Daily",
         time:["morning","evening"],
-        // selector: row => row.name,
-        // sector: row => row.nativeName,
-        
     },
     {
       name:"Norflox",
       freq:"Daily",
       time:["morning","evening"],
-        // selector: row => row.name,
-        // sector: row => row.nativeName,
-        // sortable:true,
     },
     {
       name:"Becousule",
       freq:"Daily",
       time:["morning","evening"],
-        // sector: row => row.capital,
     },
     {
       name:"Becousule",
       freq:"Daily",
-      time:["morning","evening"],
-        // sector: row => row.capital,
+      time:["morning"],
     },
     
     
 ]
-
-
-
-
+  const [checked,setChecked] = useState(false);
+  const handleChange= (e)=>{
+    setChecked(!checked)
+    console.log(checked)
+  }
 
     return (
         <>
@@ -69,16 +44,17 @@ const TabList = () =>{
 
           <legend align="left">Tablet List</legend>
 
-
           <table>
             <tr>
+              <th><input type="checkbox" onChange={handleChange}></input></th>
               <th>Name</th>
               <th>Frequency</th>
               <th>Time</th>
-            </tr>
+            </tr> 
             {columns.map((val, key) => {
               return (
                 <tr key={key}>
+                  <td><input type="checkbox"></input></td>
                   <td>{val.name}</td>
                   <td>{val.freq}</td>
                   <td>{val.time.map((elem,i,time)=> time[i] + ", ")}</td>

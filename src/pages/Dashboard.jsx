@@ -10,7 +10,6 @@ import Charts from '../components/Charts';
 import Calendar from '../components/Calendar';
 import Streaks from '../components/Streaks';
 import Tips from '../components/Tips';
-import { useEffect } from 'react';
 import { useState } from 'react';
 const Dashboard = () =>{
 

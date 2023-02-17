@@ -15,8 +15,8 @@ const Slider =()=> {
           style={{width:"100%"}}
         />
         <Carousel.Caption>
-          <h3 class="headings">First slide label</h3>
-          <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+          <h3 class="headings">Track all your health related needs from one place</h3>
+          <p>Our all-in-one dashboard makes sure all the medical needs are in one place</p>
         </Carousel.Caption>
       </Carousel.Item>
       <Carousel.Item>
@@ -28,8 +28,8 @@ const Slider =()=> {
         />
 
         <Carousel.Caption>
-          <h3 class="headings">Second slide label</h3>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+          <h3 class="headings">Health First</h3>
+          <p>MedPal gives tips that ensure that health is always the priority</p>
         </Carousel.Caption>
       </Carousel.Item>
       <Carousel.Item>
@@ -41,9 +41,9 @@ const Slider =()=> {
         />
 
         <Carousel.Caption>
-          <h3 class="headings">Third slide label</h3>
+          <h3 class="headings">User friendly interface</h3>
           <p>
-            Praesent commodo cursus magna, vel scelerisque nisl consectetur.
+            MedPal's interface is simplistic so that people of all ages can use it.
           </p>
         </Carousel.Caption>
       </Carousel.Item>

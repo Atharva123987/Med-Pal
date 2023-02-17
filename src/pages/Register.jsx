@@ -7,12 +7,14 @@ export const Register = (props) => {
     const [email, setEmail] = useState('');
     const [pass, setPass] = useState('');
     const [name, setName] = useState('');
+    const [gender, setGender] = useState('');
 
     const handleSubmit = (e) => {
         e.preventDefault();
         console.log(email);
         props.onFormSwitch('login');
     }
+    
 
     return (
         <>
@@ -32,8 +34,8 @@ export const Register = (props) => {
                     <input value={pass} onChange={(e) => setPass(e.target.value)} type="password" placeholder="********" id="password" name="password" />
                     <label htmlFor="gender"> Gender
                     <br />
-                        <input type="radio" name="gender" value="male"/> Male
-                        <input type="radio" name="gender" value="female"/> Female
+                        <input type="radio" name="gender" value="male" onChange={(e)=>setGender(e.target.value)}/> Male
+                        <input type="radio" name="gender" value="female" onChange={(e)=>setGender(e.target.value)}/> Female
                     </label>
                     <label htmlFor="age"> Age
                         <input type="number" min="1" max="150" style={{marginLeft:'2em', width:'75%'}}/>

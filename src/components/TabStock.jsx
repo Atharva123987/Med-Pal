@@ -1,9 +1,3 @@
-import { tab } from "@testing-library/user-event/dist/tab";
-import { useState, useEffect } from "react";
-import DataTable from "react-data-table-component";
-import axios from 'axios';
-import { setSelectionRange } from "@testing-library/user-event/dist/utils";
-
 const TabStock = () =>{
 
 
@@ -79,11 +73,6 @@ const columns = [
             })}
       </table>
 
-
-          
-                
-       
-          
       <div className="dash-button-container">
           <button className='dash-button'><span>+</span></button>
           </div>
