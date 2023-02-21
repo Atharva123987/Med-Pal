@@ -18,7 +18,7 @@ const Charts = () => {
 		<>
 			<div id="charts" className="dash-component">
 				<legend align="center">Charts</legend>
-				<Carousel fade>
+				<Carousel>
 					<Carousel.Item>
 						<h4>
 							<center>Blood Pressure Trend</center>
