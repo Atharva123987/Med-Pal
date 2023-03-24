@@ -1,7 +1,6 @@
 import Sidenav from "../components/Sidenav";
 import "./dashboard.css";
 import profilePic from "../assets/profilepic.png";
-import DashboardItem from "../components/DashboardItem";
 import Badge from "../assets/badge.png";
 import TabList from "../components/TabList";
 import TabStock from "../components/TabStock";
@@ -10,9 +9,7 @@ import Charts from "../components/Charts";
 import Calendar from "../components/Calendar";
 import Streaks from "../components/Streaks";
 import Tips from "../components/Tips";
-import { useEffect } from "react";
 import { useState } from "react";
-import Footer from "../components/Footer";
 
 const Dashboard = () => {
 	const [userDetails, setUserDetails] = useState([

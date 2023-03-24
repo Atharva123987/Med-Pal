@@ -1,8 +1,7 @@
-import Navbar from "../Navbar";
+import Navbar from "../components/Navbar";
 import Slider from "../components/Slider"
 import './home.css'
 import Footer from '../components/Footer'
-import HomeContent from '../components/HomeContent';
 const Home  = () =>{
     return (
         <>
