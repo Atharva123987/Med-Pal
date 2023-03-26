@@ -3,20 +3,18 @@ import './Navbar.css';
 import {Link} from 'react-router-dom';
 import Log_In from '../assets/login.png'
 import Register from '../assets/register.png'
+import Logo from '../assets/logo.png'
 const Navbar = () => {
   return (
     <>
       <div className="nav-container">
-          <a href="/"><img src="https://i.ibb.co/YbHsdnz/mp.png" className="logo" alt="website logo" /></a>
           
-          <div className="heading">MedPal</div>
+          <a href="/"><img src={Logo} className="logo" alt="website logo" /></a>
+          <div className="heading">MEDPAL</div>
             <div className="buttons">
-            <button><Link to={'/dashboard'} style={{color:"white", textDecoration:"none",display:"block"}}>Dashboard</Link></button>{' '}
-
-            <button><Link to={'/about'} style={{color:"white", textDecoration:"none",display:"block"}}>About Us</Link></button>{' '}
+              <Link to={'/login'}><img src={Log_In} className="transition ease-in-out delay-75 hover:scale-110 hover:-translate-x-1 active:opacity-80 duration-200" id='login'alt="login"/></Link>
               
-              <Link to={'/login'}><img src={Log_In} className="login" alt="login"/></Link>
-              <Link to={'/register'}><img src={Register} className="register" alt="register"/></Link>
+              <Link to={'/register'}><img src={Register} className="register" id='register' alt="register"/></Link>
             </div>
         </div>
     </>
