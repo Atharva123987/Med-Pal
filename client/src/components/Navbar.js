@@ -14,7 +14,7 @@ const Navbar = () => {
             <div className="buttons">
               <Link to={'/login'}><img src={Log_In} className="transition ease-in-out delay-75 hover:scale-110 hover:-translate-x-1 active:opacity-80 duration-200" id='login'alt="login"/></Link>
               
-              <Link to={'/register'}><img src={Register} className="register" id='register' alt="register"/></Link>
+              <Link to={'/register'}><img src={Register} className="transition ease-in-out delay-75 hover:scale-110 hover:translate-x-1 active:opacity-80 duration-200" id='register' alt="register"/></Link>
             </div>
         </div>
     </>
