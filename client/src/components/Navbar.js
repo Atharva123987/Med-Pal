@@ -1,9 +1,8 @@
 import React from "react";
 import './Navbar.css';
 import {Link} from 'react-router-dom';
-import Log_In from '../assets/login.png'
-import Register from '../assets/register.png'
-import Button from 'react-bootstrap/Button';
+import Log_In from './assets/login.png'
+import Register from './assets/register.png'
 const Navbar = () => {
   return (
     <>
@@ -12,9 +11,9 @@ const Navbar = () => {
           
           <div className="heading">MedPal</div>
             <div className="buttons">
-            <Button variant="primary"><Link to={'/dashboard'} style={{color:"white", textDecoration:"none",display:"block"}}>Dashboard</Link></Button>{' '}
+            <button><Link to={'/dashboard'} style={{color:"white", textDecoration:"none",display:"block"}}>Dashboard</Link></button>{' '}
 
-            <Button variant="primary"><Link to={'/about'} style={{color:"white", textDecoration:"none",display:"block"}}>About Us</Link></Button>{' '}
+            <button><Link to={'/about'} style={{color:"white", textDecoration:"none",display:"block"}}>About Us</Link></button>{' '}
               
               <Link to={'/login'}><img src={Log_In} className="login" alt="login"/></Link>
               <Link to={'/register'}><img src={Register} className="register" alt="register"/></Link>
