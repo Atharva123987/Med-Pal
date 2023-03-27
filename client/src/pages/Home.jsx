@@ -3,17 +3,14 @@ import '../index.css'
 import HomeContent from '../components/HomeContent'
 import Footer from '../components/Footer'
 import Carousel from "../components/Carousel";
+import { SliderData } from '../assets/SliderData';
 const Home  = () =>{
     return (
         <>
         <div>
         <Navbar/>
-<<<<<<< Updated upstream
-        {/* <Carousel/> 
-            Should have rounded border on bottom*/}
-=======
-        <Carousel/>
->>>>>>> Stashed changes
+        <Carousel slides={SliderData}/> 
+            {/* Should have rounded border on bottom */}
         {/* <HomeContent/> */}
         {/* <h1 className="text-white bg-red-500">HERERERERLELRER</h1> */}
         {/* <Footer/> */}

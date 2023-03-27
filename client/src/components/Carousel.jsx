@@ -1,27 +1,41 @@
-import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
-import styles from 'react-responsive-carousel/lib/styles/carousel.min.css';
-import Img from '../assets/carousel1.png'
-import { Carousel as Carousel1 } from 'react-responsive-carousel';
+import React, { useState } from 'react';
+import { SliderData } from '../assets/SliderData';
+import { AiFillCaretLeft, AiFillCaretRight } from 'react-icons/ai';
+import './carousel.css'
 
-const Carousel = () => {
+const Carousel = ({ slides }) => {
+  const [current, setCurrent] = useState(0);
+  const length = slides.length;
 
+  const nextSlide = () => {
+    setCurrent(current === length - 1 ? 0 : current + 1);
+  };
+
+  const prevSlide = () => {
+    setCurrent(current === 0 ? length - 1 : current - 1);
+  };
+
+  if (!Array.isArray(slides) || slides.length <= 0) {
+    return null;
+  }
 
   return (
-	<Carousel1 infiniteLoop={true} swipeable={true} showStatus={false} showIndicators={false} showThumbs={false}>
-	<div>
-		<img src={Img}/>
-		<p className="legend">Legend 1</p>
-	</div>
-	<div>
-	<img src={Img} />
-		{/* <p className="legend">Legend 2</p> */}
-	</div>
-	<div>
-	<img src={Img} />
-		{/* <p className="legend">Legend 3</p> */}
-	</div>
-</Carousel1>
+    <section className='slider'>
+      <AiFillCaretLeft className='left-arrow' onClick={prevSlide} />
+      <AiFillCaretRight className='right-arrow' onClick={nextSlide} />
+      {SliderData.map((slide, index) => {
+        return (
+          <div
+            className={index === current ? 'slide active' : 'slide'}
+            key={index}
+          >
+            {index === current && (
+              <img src={slide.image} alt='travel image' className='image' />
+            )}
+          </div>
+        );
+      })}
+    </section>
   );
 };
 

@@ -2,8 +2,9 @@
   display:flex;
   align-items: center;
   justify-content: center;
-  background-color: white;
+  background-color: rgba(0, 0, 0, 0);
   width: 100%;
+  z-index: 10;
 }
 
 .heading{
@@ -21,17 +22,17 @@
   font-family:'Franklin Gothic Regular', 'Arial Narrow', Arial, sans-serif;
 }
 
-#login , #register{
+#login-button , #register-button{
   width:70px;
   height: 50px;
 
 }
 
-#login:hover{
+#login-button:hover{
   scale: 110%;
 }
 
-.buttons{
+.navbar-buttons{
   margin:0px 10px 0px auto;
   display: flex;
 }
