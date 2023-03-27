@@ -1,9 +1,7 @@
 .nav-container{
   display:flex;
   align-items: center;
-  justify-content: center;
-  
-  position:absolute;
+  justify-content: center;  
   background-color: white;
   width: 100%;
 }

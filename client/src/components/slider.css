@@ -1,4 +1,4 @@
-.carousel-inner, .carousel{
+/* .carousel-inner, .carousel{
     overflow: hidden;
     z-index: 0;
 }
@@ -12,10 +12,5 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    /* margin-bottom: 40vh; */
     height: 85vh;
-}
-.slider-img{
-    height: 100vh;
-    overflow: hidden;
-}
+} */

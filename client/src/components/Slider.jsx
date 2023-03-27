@@ -3,55 +3,52 @@ import Car1 from "../assets/carousel1.jpg";
 import Car2 from "../assets/carousel2.jpg";
 import Car3 from "../assets/carousel3.jpg";
 import "./slider.css";
+import { useState } from "react";
 const Slider = () => {
+	const [index, setIndex] = useState(0);
+
+	const handleSelect = (selectedIndex, e) => {
+		setIndex(selectedIndex);
+	};
 	return (
-		<Carousel fade>
+		<Carousel activeIndex={index} onSelect={handleSelect}>
 			<Carousel.Item>
 				<img
-					className="slider-img"
+					className="d-block w-100 h-50 overflow-hidden m-auto"
 					src={Car1}
 					alt="First slide"
-					style={{ width: "100%" }}
+					id="slider-img"
 				/>
 				<Carousel.Caption>
-					<h3 class="headings">
-						Track all your health related needs from one place
-					</h3>
-					<p>
-						Our all-in-one dashboard makes sure all the medical
-						needs are in one place
-					</p>
+					<h3>First slide label</h3>
+					<p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
 				</Carousel.Caption>
 			</Carousel.Item>
 			<Carousel.Item>
 				<img
-					className="slider-img"
+					className="d-block w-100 h-50 overflow-hidden"
 					src={Car2}
 					alt="Second slide"
-					style={{ width: "100%", alignContent: "center" }}
+					id="slider-img"
 				/>
 
 				<Carousel.Caption>
-					<h3 class="headings">Health First</h3>
-					<p>
-						MedPal gives tips that ensure that health is always the
-						priority
-					</p>
+					<h3>Second slide label</h3>
+					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
 				</Carousel.Caption>
 			</Carousel.Item>
 			<Carousel.Item>
 				<img
-					className="slider-img"
+					className="d-block w-100 h-50 overflow-hidden"
 					src={Car3}
 					alt="Third slide"
-					style={{ width: "100%", alignContent: "center" }}
+					id="slider-img"
 				/>
 
 				<Carousel.Caption>
-					<h3 class="headings">User friendly interface</h3>
+					<h3>Third slide label</h3>
 					<p>
-						MedPal's interface is simplistic so that people of all
-						ages can use it.
+						Praesent commodo cursus magna, vel scelerisque nisl consectetur.
 					</p>
 				</Carousel.Caption>
 			</Carousel.Item>
