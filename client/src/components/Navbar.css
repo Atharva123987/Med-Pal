@@ -27,6 +27,10 @@
 
 }
 
+#login:hover{
+  scale: 110%;
+}
+
 .buttons{
   margin:0px 10px 0px auto;
   display: flex;
