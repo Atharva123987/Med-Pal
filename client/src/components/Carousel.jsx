@@ -31,7 +31,7 @@ const Carousel = ({ slides }) => {
             key={index}
           >
             {index === current && (
-              <LazyLoadImage src={slide.image} alt='travel image' className='image' effect='blur' />
+              <LazyLoadImage src={slide.image} alt='travel image'  className='image' effect='blur' placeholderSrc={slide.image} />
             )}
           </div>
         );

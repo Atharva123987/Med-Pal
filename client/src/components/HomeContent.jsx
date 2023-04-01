@@ -16,7 +16,7 @@ const HomeContent = () => {
                     <Fade delay='50' damping={0.05} direction='left' triggerOnce='true'>
                         <Col>
                             <Card>
-                                <Card.Img variant="top" src={tempImage} as={LazyLoadImage} />
+                                <Card.Img variant="top" src={tempImage} as={LazyLoadImage} effect='blur' placeholderSrc={tempImage} />
                                 <Card.Body>
                                     <Card.Title>Card title</Card.Title>
                                     <Card.Text>
@@ -31,7 +31,7 @@ const HomeContent = () => {
                     <Fade delay='20' damping={0.05} direction='left' triggerOnce='true'>
                         <Col>
                             <Card>
-                                <Card.Img variant="top" src={tempImage} as={LazyLoadImage} />
+                                <Card.Img variant="top" src={tempImage} as={LazyLoadImage} effect='blur' placeholderSrc={tempImage} />
                                 <Card.Body>
                                     <Card.Title>Card title</Card.Title>
                                     <Card.Text>
@@ -46,7 +46,7 @@ const HomeContent = () => {
                     <Fade damping={0.05} direction='left' triggerOnce='true'>
                         <Col>
                             <Card>
-                                <Card.Img variant="top" src={tempImage} as={LazyLoadImage} />
+                                <Card.Img variant="top" src={tempImage} as={LazyLoadImage} effect='blur' placeholderSrc={tempImage} />
                                 <Card.Body>
                                     <Card.Title>Card title</Card.Title>
                                     <Card.Text>
