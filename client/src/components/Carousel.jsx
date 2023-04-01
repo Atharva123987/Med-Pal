@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { SliderData } from '../assets/SliderData';
 import { AiFillCaretLeft, AiFillCaretRight } from 'react-icons/ai';
 import './carousel.css'
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 const Carousel = ({ slides }) => {
   const [current, setCurrent] = useState(0);
@@ -30,7 +31,7 @@ const Carousel = ({ slides }) => {
             key={index}
           >
             {index === current && (
-              <img src={slide.image} alt='travel image' className='image' />
+              <LazyLoadImage src={slide.image} alt='travel image' className='image' effect='blur' />
             )}
           </div>
         );

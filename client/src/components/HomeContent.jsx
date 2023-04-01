@@ -4,7 +4,7 @@ import Card from 'react-bootstrap/Card';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import tempImage from '../assets/badge.png'
-
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 const HomeContent = () => {
     return (
         <>
@@ -16,7 +16,7 @@ const HomeContent = () => {
                     <Fade delay='50' damping={0.05} direction='left' triggerOnce='true'>
                         <Col>
                             <Card>
-                                <Card.Img variant="top" src={tempImage} />
+                                <Card.Img variant="top" src={tempImage} as={LazyLoadImage} />
                                 <Card.Body>
                                     <Card.Title>Card title</Card.Title>
                                     <Card.Text>
@@ -31,7 +31,7 @@ const HomeContent = () => {
                     <Fade delay='20' damping={0.05} direction='left' triggerOnce='true'>
                         <Col>
                             <Card>
-                                <Card.Img variant="top" src={tempImage} />
+                                <Card.Img variant="top" src={tempImage} as={LazyLoadImage} />
                                 <Card.Body>
                                     <Card.Title>Card title</Card.Title>
                                     <Card.Text>
@@ -46,7 +46,7 @@ const HomeContent = () => {
                     <Fade damping={0.05} direction='left' triggerOnce='true'>
                         <Col>
                             <Card>
-                                <Card.Img variant="top" src={tempImage} />
+                                <Card.Img variant="top" src={tempImage} as={LazyLoadImage} />
                                 <Card.Body>
                                     <Card.Title>Card title</Card.Title>
                                     <Card.Text>
