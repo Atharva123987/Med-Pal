@@ -16,7 +16,7 @@ const HomeContent = () => {
                     <Fade delay='50' damping={0.05} direction='left' triggerOnce='true'>
                         <Col>
                             <Card>
-                                <Card.Img variant="top" src='https://ik.imagekit.io/0qlf5pqwx/default-image.jpg?updatedAt=1680348359231' as={LazyLoadImage} effect='blur' placeholderSrc='https://ik.imagekit.io/0qlf5pqwx/default-image.jpg?updatedAt=1680348359231' />
+                                <Card.Img variant="top" src='https://ik.imagekit.io/0qlf5pqwx/badge.png?updatedAt=1680348847558' as={LazyLoadImage} effect='blur' placeholderSrc='https://ik.imagekit.io/0qlf5pqwx/badge.png?updatedAt=1680348847558' />
                                 <Card.Body>
                                     <Card.Title>Card title</Card.Title>
                                     <Card.Text>
@@ -31,7 +31,7 @@ const HomeContent = () => {
                     <Fade delay='20' damping={0.05} direction='left' triggerOnce='true'>
                         <Col>
                             <Card>
-                                <Card.Img variant="top" src='https://ik.imagekit.io/0qlf5pqwx/default-image.jpg?updatedAt=1680348359231' as={LazyLoadImage} effect='blur' placeholderSrc='https://ik.imagekit.io/0qlf5pqwx/default-image.jpg?updatedAt=1680348359231' />
+                                <Card.Img variant="top" src='https://ik.imagekit.io/0qlf5pqwx/badge.png?updatedAt=1680348847558' as={LazyLoadImage} effect='blur' placeholderSrc='https://ik.imagekit.io/0qlf5pqwx/badge.png?updatedAt=1680348847558' />
                                 <Card.Body>
                                     <Card.Title>Card title</Card.Title>
                                     <Card.Text>
@@ -46,7 +46,7 @@ const HomeContent = () => {
                     <Fade damping={0.05} direction='left' triggerOnce='true'>
                         <Col>
                             <Card>
-                                <Card.Img variant="top" src='https://ik.imagekit.io/0qlf5pqwx/default-image.jpg?updatedAt=1680348359231' as={LazyLoadImage} effect='blur' placeholderSrc='https://ik.imagekit.io/0qlf5pqwx/default-image.jpg?updatedAt=1680348359231' />
+                                <Card.Img variant="top" src='https://ik.imagekit.io/0qlf5pqwx/badge.png?updatedAt=1680348847558' as={LazyLoadImage} effect='blur' placeholderSrc='https://ik.imagekit.io/0qlf5pqwx/badge.png?updatedAt=1680348847558' />
                                 <Card.Body>
                                     <Card.Title>Card title</Card.Title>
                                     <Card.Text>

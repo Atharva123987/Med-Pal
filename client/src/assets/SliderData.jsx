@@ -1,17 +1,15 @@
-import Car1 from './carousel1.png'
-import Car2 from './carousel2.jpg'
-import Car3 from './carousel3.jpg'
+
 export const SliderData = [
     {
       image:
-        Car1
+        'https://ik.imagekit.io/0qlf5pqwx/carousel1.png?updatedAt=1680348826020'
     },
     {
         image:
-          Car2
+         'https://ik.imagekit.io/0qlf5pqwx/carousel2.jpg?updatedAt=1680348846119'
       },
       {
         image:
-          Car3
+          'https://ik.imagekit.io/0qlf5pqwx/carousel3.jpg?updatedAt=1680348847025'
       },
   ];
