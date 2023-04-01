@@ -25,11 +25,16 @@
 #login-button , #register-button{
   width:70px;
   height: 50px;
-
+  transition:scale 0.2s, translate 0.2s;
+  transition-timing-function: ease-in-out;
 }
 
 #login-button:hover{
   scale: 110%;
+  translate: -10px 0px;
+  transition: scale 0.2s, translate 0.2s;
+  transition-timing-function: linear;
+
 }
 
 .navbar-buttons{
