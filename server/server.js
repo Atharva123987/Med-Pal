@@ -4,7 +4,8 @@ require("dotenv").config();
 //require express to create and configure our HTTP server
 const express = require("express");
 const app = express();
-
+const cors = require('cors')
+app.use(cors())
 //require mongoose to connect to our MongoDB database
 const mongoose = require("mongoose");
 
