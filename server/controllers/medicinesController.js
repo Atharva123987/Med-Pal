@@ -1,9 +1,9 @@
-const Medicines = require("../models/medicinesModel");
+const Medicine = require("../models/medicinesModel");
 const mongoose = require("mongoose");
 
 const getAllMedicines = async (req, res) => {
-	const medicines = await Medicines.find({}).sort({ createdAt: -1 });
-	console.log(medicines)
+	const medicines = await Medicine.find({}).sort({ createdAt: -1 });
+	console.log(medicines);
 	res.status(200).json(medicines);
 };
 
@@ -14,7 +14,7 @@ const getSingleMedicine = async (req, res) => {
 		return res.status(404).send(`No medicine with id: ${id}`);
 	}
 
-	const medicine = await Medicines.findById(id);
+	const medicine = await Medicine.findById(id);
 
 	if (!medicine) {
 		return res.status(404).send(`No medicine with id: ${id}`);
@@ -24,6 +24,7 @@ const getSingleMedicine = async (req, res) => {
 };
 
 const createMedicine = async (req, res) => {
+	console.log(req.body);
 	const { name, quantity, expiry, frequency, timeOfDay, dosageEndDate } =
 		req.body;
 	try {
@@ -48,7 +49,7 @@ const deleteMedicine = async (req, res) => {
 		return res.status(404).send(`No medicine with id: ${id}`);
 	}
 
-	const medicine = await Medicines.findOneAndDelete({ _id: id });
+	const medicine = await Medicine.findOneAndDelete({ _id: id });
 
 	if (!medicine) {
 		return res.status(404).send(`No medicine with id: ${id}`);
@@ -64,7 +65,7 @@ const updateMedicine = async (req, res) => {
 		return res.status(404).send(`No medicine with id: ${id}`);
 	}
 
-	const medicine = await Medicines.findOneAndUpdate(
+	const medicine = await Medicine.findOneAndUpdate(
 		{ _id: id },
 		{
 			...req.body,

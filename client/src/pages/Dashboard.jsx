@@ -5,7 +5,7 @@ import Badge from "../assets/badge.png";
 import TabList from "../components/TabList";
 import TabStock from "../components/TabStock";
 import Prescription from "../components/Prescription";
-// import Charts from "../components/Charts";
+import Charts from "../components/Charts";
 import Calendar from "../components/Calendar";
 import Streaks from "../components/Streaks";
 import Tips from "../components/Tips";
