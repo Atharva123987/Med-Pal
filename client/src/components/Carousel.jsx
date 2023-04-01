@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { CarouselData } from '../assets/CarouselData';
 import { AiFillCaretLeft, AiFillCaretRight } from 'react-icons/ai';
 import './carousel.css'
-import { LazyLoadImage } from 'react-lazy-load-image-component';
 
+// !!!IMPLEMENT AUTO SWITCHING IMAGES IN CAROUSEL
 const Carousel = ({ slides }) => {
   const [current, setCurrent] = useState(0);
   const length = slides.length;
