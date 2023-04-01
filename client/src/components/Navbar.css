@@ -29,13 +29,30 @@
   transition-timing-function: ease-in-out;
 }
 
-#login-button:hover{
-  scale: 110%;
-  translate: -10px 0px;
+#login-button:hover, #register-button:hover{
+  scale: 105%;
   transition: scale 0.2s, translate 0.2s;
   transition-timing-function: linear;
+}
+
+#login-button:hover{
+  translate: -5px 0px;
+}
+
+#register-button:hover{
+  translate: 5px 0px;
+}
+
+#login-button:active, #register-button:active{
+  opacity: 80%;
+  scale:100%
+}
+
+#login-button:active{
 
 }
+
+
 
 .navbar-buttons{
   margin:0px 10px 0px auto;
