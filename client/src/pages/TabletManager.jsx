@@ -19,16 +19,16 @@ const TabletManager = () => {
             .filter((checkbox) => checkbox.checked)
             .map((checkbox) => checkbox.value);
 
-        //   console.log("Tablet name :",name);
-        //   console.log("Tablet quantity :",quantity);
-        //   console.log("Tablet expiry :",expiry);
-        //   console.log("Tablet dosageEnd :",dosageEnd)
-        //   console.log("Tablet frequency :",frequency);
-        //   console.log("Time of Day :")
-        //   checkboxesRef.current.forEach((checkbox,i) => {
-        //     console.log(`${i+1}.`,(checkbox.value),(checkbox.checked));
-        //   });
-        //   console.log(selectedFile);
+          console.log("Tablet name :",name);
+          console.log("Tablet quantity :",quantity);
+          console.log("Tablet expiry :",expiry);
+          console.log("Tablet dosageEnd :",dosageEnd)
+          console.log("Tablet frequency :",frequency);
+          console.log("Time of Day :")
+          checkboxesRef.current.forEach((checkbox,i) => {
+            console.log(`${i+1}.`,(checkbox.value),(checkbox.checked));
+          });
+          console.log(selectedFile);
 
     }
 
@@ -95,22 +95,31 @@ const TabletManager = () => {
                 <ol>
                     <button className='btn btn-primary' onClick={handleFetch}>Fetch Tablets</button>
                     {
-                        fetchedData && fetchedData.map((element) => {
-                            return (
-                                <>
-                                    <li><ul>
-                                        <li>Tablet name : {element.first_name}</li>
-                                        <li>Tablet quantity{element.email}</li>
-                                        <li>Tablet expiry{element.gender}</li>
-                                        <li>Tablet frequency{element.last_name}</li>
-                                        <li>Tablet timeOfDay{element.address.map((e)=><p>{e}</p>)}</li>
-                                        <li>Tablet dosageEndDate{element.password}</li>
-                                        <li>Prescription : {element.id}</li>
-                                    </ul></li>
-                                    <br></br>
-                                </>)
-                        })
-                    }
+  fetchedData && fetchedData.map((element,idx) => {
+    return (
+      <>
+        <li>
+          <ul>
+            <li>Tablet name: {element.first_name}</li>
+            <li>Tablet quantity: {element.email}</li>
+            <li>Tablet expiry: {element.gender}</li>
+            <li>Tablet frequency: {element.last_name}</li>
+            <li>Tablet timeOfDay:
+              {Object.keys(element.address).map((key) => (
+                <span>{key}, </span>
+              ))}
+            </li>
+            <li>Tablet dosageEndDate: {element.password}</li>
+            <li>Prescription: {element.id}</li>
+          </ul>
+        </li>
+        <br />
+      </>
+    );
+  })
+}
+
+
                 </ol>
             </div>
         </>
