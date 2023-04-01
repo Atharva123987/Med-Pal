@@ -5,7 +5,7 @@ import Badge from "../assets/badge.png";
 import TabList from "../components/TabList";
 import TabStock from "../components/TabStock";
 import Prescription from "../components/Prescription";
-import Charts from "../components/Charts";
+// import Charts from "../components/Charts";
 import Calendar from "../components/Calendar";
 import Streaks from "../components/Streaks";
 import Tips from "../components/Tips";
@@ -49,7 +49,7 @@ const Dashboard = () => {
 				<div id="user-details">
 					<div id="profile">
 						<img id="profile-pic" src={profilePic}></img>
-						<div id="uname"> 
+						<div id="uname">
 							<h2 id="name">{userDetails[0].name}</h2>
 
 							<p id="email">{userDetails[0].email}</p>
