@@ -1,11 +1,13 @@
+import React from 'react';
+import  Calender1  from './Calendar/Calender1';
+import './dashboard-item.css'
 const Calendar = () =>{
     return (
         <>
-        <div id="component-name" className="dash-component"> {/* <== Change id of the div to the name of component  */}
+        <div id="component-name" className="dash-component">
           <legend align="left">Calendar</legend>
           
-          {/* <-- Add component specific info here --> */}
-          <h1>This is component 5</h1>
+          <Calender1/>
           <div className="dash-button-container">
           <button className='dash-button'><span>+</span></button>
           </div>
@@ -13,4 +15,4 @@ const Calendar = () =>{
         </>
       )
 }
-export default Calendar
+export default Calendar;
