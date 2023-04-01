@@ -8,7 +8,7 @@ const app = express();
 //require mongoose to connect to our MongoDB database
 const mongoose = require("mongoose");
 
-const medicineRoutes = require("./routes/medicines");
+const medicineRoutes = require("./routes/medicinesRoutes");
 
 // middleware
 app.use(express.json());

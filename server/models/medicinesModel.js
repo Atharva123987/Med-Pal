@@ -18,7 +18,6 @@ const medicinesSchema = new Schema(
 		},
 		frequency: {
 			type: String,
-			required: true,
 		},
 		timeOfDay: {
 			morning: {
@@ -40,7 +39,6 @@ const medicinesSchema = new Schema(
 		},
 		dosageEndDate: {
 			type: Date,
-			required: true,
 		},
 	},
 	{ timestamps: true }
