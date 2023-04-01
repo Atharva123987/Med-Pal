@@ -10,7 +10,7 @@
   
   .image {
     width: 90vw;
-    height: 450px;
+    height: 400px;
     border-radius: 50px;
     object-fit: cover;
     /* border-radius: 0 0 50px 50px; */

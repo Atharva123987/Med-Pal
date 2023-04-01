@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { SliderData } from '../assets/SliderData';
+import { CarouselData } from '../assets/CarouselData';
 import { AiFillCaretLeft, AiFillCaretRight } from 'react-icons/ai';
 import './carousel.css'
 import { LazyLoadImage } from 'react-lazy-load-image-component';
@@ -24,14 +24,14 @@ const Carousel = ({ slides }) => {
     <section className='slider mb-5'>
       <AiFillCaretLeft id='left-arrow' onClick={prevSlide} />
       <AiFillCaretRight id='right-arrow' onClick={nextSlide} />
-      {SliderData.map((slide, index) => {
+      {CarouselData.map((slide, index) => {
         return (
           <div
             className={index === current ? 'slide active' : 'slide'}
             key={index}
           >
             {index === current && (
-              <LazyLoadImage src={slide.image} alt='travel image'  className='image' effect='blur' placeholderSrc={slide.image} />
+              <img src={slide.image} alt='travel image'  className='image' />
             )}
           </div>
         );
