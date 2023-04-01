@@ -20,9 +20,9 @@ const Carousel = ({ slides }) => {
   }
 
   return (
-    <section className='slider'>
-      <AiFillCaretLeft className='left-arrow' onClick={prevSlide} />
-      <AiFillCaretRight className='right-arrow' onClick={nextSlide} />
+    <section className='slider mb-5'>
+      <AiFillCaretLeft id='left-arrow' onClick={prevSlide} />
+      <AiFillCaretRight id='right-arrow' onClick={nextSlide} />
       {SliderData.map((slide, index) => {
         return (
           <div

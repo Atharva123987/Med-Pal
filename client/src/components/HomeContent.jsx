@@ -1,16 +1,65 @@
 import './home-content.css'
-const HomeContent = () =>{
+import { Fade } from "react-awesome-reveal";
+import Card from 'react-bootstrap/Card';
+import Col from 'react-bootstrap/Col';
+import Row from 'react-bootstrap/Row';
+import tempImage from '../assets/badge.png'
+
+const HomeContent = () => {
     return (
         <>
-        <div id="home-content" className="subsection1">
-            <h1>This is subsection 1</h1>
-        </div>
-        <div id='home-content' className='subsection2'>
-            <h2>This is subsection 2</h2>
-        </div>
-        <div id='home-content' className='subsection3'>
-            <h2>This is subsection 3</h2>
-        </div>
+            <div className='container'>
+                <Fade delay='10' direction='top' className='mb-5'>
+                    <h2>For all your medical needs</h2>
+                </Fade>
+                <Row xs={1} md={3} className="g-4">
+                    <Fade delay='50' damping={0.05} direction='left' triggerOnce='true'>
+                        <Col>
+                            <Card>
+                                <Card.Img variant="top" src={tempImage} />
+                                <Card.Body>
+                                    <Card.Title>Card title</Card.Title>
+                                    <Card.Text>
+                                        This is a longer card with supporting text below as a natural
+                                        lead-in to additional content. This content is a little bit
+                                        longer.
+                                    </Card.Text>
+                                </Card.Body>
+                            </Card>
+                        </Col>
+                    </Fade>
+                    <Fade delay='20' damping={0.05} direction='left' triggerOnce='true'>
+                        <Col>
+                            <Card>
+                                <Card.Img variant="top" src={tempImage} />
+                                <Card.Body>
+                                    <Card.Title>Card title</Card.Title>
+                                    <Card.Text>
+                                        This is a longer card with supporting text below as a natural
+                                        lead-in to additional content. This content is a little bit
+                                        longer.
+                                    </Card.Text>
+                                </Card.Body>
+                            </Card>
+                        </Col>
+                    </Fade>
+                    <Fade damping={0.05} direction='left' triggerOnce='true'>
+                        <Col>
+                            <Card>
+                                <Card.Img variant="top" src={tempImage} />
+                                <Card.Body>
+                                    <Card.Title>Card title</Card.Title>
+                                    <Card.Text>
+                                        This is a longer card with supporting text below as a natural
+                                        lead-in to additional content. This content is a little bit
+                                        longer.
+                                    </Card.Text>
+                                </Card.Body>
+                            </Card>
+                        </Col>
+                    </Fade>
+                </Row>
+            </div>
         </>
     )
 }

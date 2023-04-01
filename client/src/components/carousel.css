@@ -4,16 +4,19 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    
+    /* overflow-y: hidden; */
   }
   
   .image {
-    width: 1000px;
+    width: 90vw;
     height: 450px;
-    border-radius: 10px;
+    border-radius: 50px;
     object-fit: cover;
+    /* border-radius: 0 0 50px 50px; */
   }
   
-  .right-arrow {
+  #right-arrow {
     position: absolute;
     top: 45%;
     right: 32px;
@@ -24,7 +27,7 @@
     user-select: none;
   }
   
-  .left-arrow {
+  #left-arrow {
     position: absolute;
     top: 45%;
     left: 32px;
@@ -33,7 +36,20 @@
     z-index: 10;
     cursor: pointer;
     user-select: none;
+    transition:scale 0.3s, color 0.1s;
   }
+
+  #right-arrow:hover, #left-arrow:hover{
+    scale: 105%;
+    color:rgb(0, 22, 164);
+    transition: scale 0.3s;
+  }
+  #right-arrow:active, #left-arrow:active{
+    scale: 90%;
+    color:rgb(0, 135, 135);
+    transition: scale 0.3s, color 0.1s;
+  }
+
   
   .slide {
     opacity: 0;
