@@ -27,7 +27,7 @@ const createMedicine = async (req, res) => {
 	const { name, quantity, expiry, frequency, timeOfDay, dosageEndDate } =
 		req.body;
 	try {
-		const newMedicine = await Medicine.create({
+		const newMedicine = await Medicines.create({
 			name,
 			quantity,
 			expiry,
