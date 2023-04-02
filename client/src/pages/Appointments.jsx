@@ -13,12 +13,13 @@ const Appointments = () => {
         e.preventDefault();
 
         // !!!HANDLE POST REQUST HERE
+        
         console.log("Sent Data :",{doctorName,doctorNumber,doctorAddress,appointmentDateAndTime})
     }
 
     const handleFetch = async (e)=>{
-        // !!!HANDLE GET REQUEST HERE
         try{
+            // !!!HANDLE GET REQUEST HERE
             const response = await axios.get(`https://random-data-api.com/api/v2/users?size=5`)
             setFetchedData(response.data)
             console.log("Fetched Data :",response.data)
