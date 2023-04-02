@@ -8,14 +8,14 @@ const TabletManager = () => {
   const [expiry, setExpiry] = useState(new Date());
   const [dosageEnd, setDosageEnd] = useState(new Date());
   const [frequency, setFrequency] = useState('daily')
-  const checkboxesRef = useRef([]);
+  const timeOfDay = useRef([]);
   const [selectedFile, setSelectedFile] = useState(null);
   const [fetchedData, setFetchedData] = useState(null);
 
   const handleSubmit = async (e) => {
     // MAKE POST REQUEST HERE
     e.preventDefault();
-    const checkedValues = checkboxesRef.current
+    const checkedValues = timeOfDay.current
       .filter((checkbox) => checkbox.checked)
       .map((checkbox) => checkbox.value);
 
@@ -25,12 +25,10 @@ const TabletManager = () => {
     // console.log("Tablet dosageEnd :", dosageEnd)
     // console.log("Tablet frequency :", frequency);
     // console.log("Time of Day :")
-    // checkboxesRef.current.forEach((checkbox, i) => {
+    // timeOfDay.current.forEach((checkbox, i) => {
     //   console.log(`${i + 1}.`, (checkbox.value), (checkbox.checked));
     // });
     // console.log(selectedFile);
-    
-
   }
 
   const handleFetch = async (e) => {
@@ -82,13 +80,13 @@ const TabletManager = () => {
             <Form.Label>Tablet TimeOfDay</Form.Label>
             <br></br>
             <label htmlFor='morning'>Morning</label>
-            <input type="checkbox" placeholder="name@example.com" name='timeOfDay' value='morning' ref={(el) => (checkboxesRef.current[0] = el)} />
+            <input type="checkbox" placeholder="name@example.com" name='timeOfDay' value='morning' ref={(el) => (timeOfDay.current[0] = el)} />
             <label htmlFor='afternoon'>Afternoon</label>
-            <input type="checkbox" placeholder="name@example.com" name='timeOfDay' value='afternoon' ref={(el) => (checkboxesRef.current[1] = el)} />
+            <input type="checkbox" placeholder="name@example.com" name='timeOfDay' value='afternoon' ref={(el) => (timeOfDay.current[1] = el)} />
             <label htmlFor='evening'>Evening</label>
-            <input type="checkbox" placeholder="name@example.com" name='timeOfDay' value='evening' ref={(el) => (checkboxesRef.current[2] = el)} />
+            <input type="checkbox" placeholder="name@example.com" name='timeOfDay' value='evening' ref={(el) => (timeOfDay.current[2] = el)} />
             <label htmlFor='night'>Night</label>
-            <input type="checkbox" placeholder="name@example.com" name='timeOfDay' value='night' ref={(el) => (checkboxesRef.current[3] = el)} />
+            <input type="checkbox" placeholder="name@example.com" name='timeOfDay' value='night' ref={(el) => (timeOfDay.current[3] = el)} />
 
           </Form.Group>
           <Form.Group className="mb-3" controlId="exampleForm.ControlInput1" style={{ width: "300px" }}>
