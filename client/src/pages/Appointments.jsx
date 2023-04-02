@@ -2,6 +2,9 @@ import { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import axios from 'axios';
+import Col from 'react-bootstrap/Col';
+import Row from 'react-bootstrap/Row';
+import Toast from 'react-bootstrap/Toast';
 const Appointments = () => {
 
     const [doctorName, setDoctorName] = useState(null);
@@ -9,28 +12,81 @@ const Appointments = () => {
     const [doctorAddress, setDoctorAddress] = useState(null);
     const [appointmentDateAndTime, setAppointmentDateAndTime] = useState(null);
     const [fetchedData, setFetchedData] = useState(null)
+    const [show, setShow] = useState(false)
+    const [month, setMonth] = useState('')
+    
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setShow(true);
+
+        switch (appointmentDateAndTime.getMonth()) {
+            case 0: setMonth(("January"));
+                break;
+            case 1: setMonth(("February"));
+                break;
+            case 2: setMonth(("March"));
+                break;
+            case 3: setMonth(("April"));
+                break;
+            case 4: setMonth(("May"));
+                break;
+            case 5: setMonth(("June"));
+                break;
+            case 6: setMonth(("July"));
+                break;
+            case 7: setMonth(("August"));
+                break;
+            case 8: setMonth(("September"));
+                break;
+            case 9: setMonth(("October"));
+                break;
+            case 10: setMonth("November");
+                break;
+            case 11: setMonth("December");
+                break;
+            default: setMonth("")
+        }
 
         // !!!HANDLE POST REQUST HERE
-        
-        console.log("Sent Data :",{doctorName,doctorNumber,doctorAddress,appointmentDateAndTime})
+        console.log
+            (
+                "Sent Data :",
+                { doctorName, doctorNumber, doctorAddress, appointmentDateAndTime }
+                
+            )
     }
 
-    const handleFetch = async (e)=>{
-        try{
+    const handleFetch = async (e) => {
+        try {
             // !!!HANDLE GET REQUEST HERE
             const response = await axios.get(`https://random-data-api.com/api/v2/users?size=5`)
             setFetchedData(response.data)
-            console.log("Fetched Data :",response.data)
+            console.log("Fetched Data :", response.data)
         }
-        catch(err){
+        catch (err) {
             console.log(err)
         }
     }
 
     return (
         <>
+            <div className='w-100'>
+                
+                    <Toast onClose={() => setShow(false)} bg='light' position='middle-center' show={show} delay={3000} autohide style={{position:"fixed",zIndex:"10",top:"3%", right:"3%"}}>
+                        <Toast.Header>
+                            <img
+                                src="holder.js/20x20?text=%20"
+                                className="rounded me-2"
+                                alt=""
+                            />
+                            <strong className="me-auto">Appointment Added!</strong>
+                            <small>Doctor {doctorName?.charAt(0).toUpperCase() + doctorName?.slice(1)}</small>
+                        </Toast.Header>
+                        <Toast.Body><b>{appointmentDateAndTime?.getDate()}th of {month}</b> at   <b>{appointmentDateAndTime?.getHours()}</b>:<b>{appointmentDateAndTime?.getMinutes()}</b> </Toast.Body>
+                    </Toast>
+                
+                
+            
             <h1>Appointments Page</h1>
             <div className='d-flex justify-content-evenly'>
                 <Form>
@@ -62,19 +118,20 @@ const Appointments = () => {
                     <h2>Fetch Appointments and Doctor details</h2>
                     <button className='btn btn-primary' onClick={handleFetch}>Fetch Appointements</button>
                     <ol>
-                        {fetchedData && fetchedData.map((element,i)=>{
-                        return(<li key={i}>
-                            <ul>
-                                <li key={element.first_name}>{element.first_name}</li>
-                                <li key={element.phone_number}>{element.phone_number}</li>
-                                <li key={element.address.street_name}>{element.address.street_name}</li>
-                                <li key={element.date_of_birth}>{element.date_of_birth}</li>
-                            </ul>
-                        </li>);
+                        {fetchedData && fetchedData.map((element, i) => {
+                            return (<li key={i}>
+                                <ul>
+                                    <li key={element.first_name}>{element.first_name}</li>
+                                    <li key={element.phone_number}>{element.phone_number}</li>
+                                    <li key={element.address.street_name}>{element.address.street_name}</li>
+                                    <li key={element.date_of_birth}>{element.date_of_birth}</li>
+                                </ul>
+                            </li>);
                         })
-                    }
+                        }
                     </ol>
                 </div>
+            </div>
             </div>
         </>
     )
