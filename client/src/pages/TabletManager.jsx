@@ -1,9 +1,6 @@
 import Form from 'react-bootstrap/Form';
 import React, { useState, useRef, useEffect } from 'react';
 import axios from 'axios'
-import Button from 'react-bootstrap/Button';
-import Col from 'react-bootstrap/Col';
-import Row from 'react-bootstrap/Row';
 import Toast from 'react-bootstrap/Toast';
 import Table from 'react-bootstrap/Table'
 const TabletManager = () => {
@@ -13,15 +10,32 @@ const TabletManager = () => {
   const [dosageEnd, setDosageEnd] = useState(new Date());
   const [frequency, setFrequency] = useState(null);
   const checkboxesRef = useRef([]);
-  const [selectedFile, setSelectedFile] = useState(null);
+  // const [selectedFile, setSelectedFile] = useState(null);
   const [fetchedData, setFetchedData] = useState(null);
   const [show, setShow] = useState(false);
   const [nameError, setNameError] = useState(false)
-  const [flag, setFlag] = useState(1);
+  const [flag, setFlag] = useState(0);
+  
+  useEffect(() => {
+    handleFetch();
+  }, [flag])
+  
+  const handleFetch = async (e) => {
+    try {
+      const response = await axios.get(
+        `http://localhost:4000/api/medicines`
+      );
+      setFetchedData(response.data);
+      console.log(response.data[0]);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  
   const handleSubmit = async (e) => {
     // MAKE POST REQUEST HERE
     e.preventDefault();
-    
+
     const checkedValues = checkboxesRef.current
       .filter((checkbox) => checkbox.checked)
       .map((checkbox) => checkbox.value);
@@ -83,24 +97,10 @@ const TabletManager = () => {
       });
   };
 
-  useEffect(()=>{
-    handleFetch();
-    console.log("I am useEFfect!!")
-  },[flag])
 
-  const handleFetch = async (e) => {
-    try {
-      const response = await axios.get(
-        `http://localhost:4000/api/medicines`
-      );
-      setFetchedData(response.data);
-      console.log(response.data[0]);
-    } catch (err) {
-      console.log(err);
-    }
+  
 
-    // email, gender, id, username, password,address
-  };
+  
 
   return (
     <>
@@ -156,7 +156,7 @@ const TabletManager = () => {
               setFrequency(e.target.value)
             }} />
             <br></br>
-            
+
           </Form.Group>
           <Form.Group className="mb-3" controlId="exampleForm.ControlInput1" style={{ width: "300px" }} />
           <Form.Label>Tablet TimeOfDay</Form.Label>
@@ -169,7 +169,7 @@ const TabletManager = () => {
           <input type="checkbox" placeholder="name@example.com" name='timeOfDay' value='evening' ref={(el) => (checkboxesRef.current[2] = el)} />
           <label htmlFor='night'>Night</label>
           <input type="checkbox" placeholder="name@example.com" name='timeOfDay' value='night' ref={(el) => (checkboxesRef.current[3] = el)} />
-            <br></br>
+          <br></br>
           {/* <Form.Label>Upload Prescription</Form.Label>
           <Form.Control
             type="file"
@@ -181,9 +181,6 @@ const TabletManager = () => {
           </button>
         </Form>
         <div style={{ height: "80vh", overflowY: "scroll" }}>
-         
-
-
           <Table striped bordered hover>
             <thead>
               <tr>
@@ -194,7 +191,6 @@ const TabletManager = () => {
               </tr>
             </thead>
             <tbody>
-
               {fetchedData &&
                 fetchedData.map((element, idx) => {
                   return (
@@ -207,26 +203,6 @@ const TabletManager = () => {
                         <td>{element.frequency}</td>
                         {/* <td>{element.timeOfDay}</td> */}
                       </tr>
-
-                      {/* <ul>
-											<li>Tablet name: {element.name}</li>
-											<li>
-												Tablet quantity:{" "}
-												{element.quantity}
-											</li>
-											<li>
-												Tablet expiry: {element.expiry}
-											</li>
-											<li>
-												Tablet frequency:{" "}
-												{element.frequency}
-											</li>
-											<li>
-												Tablet timeOfDay:
-												{}
-											</li>
-										</ul> */}
-
                     </>
                   );
                 })}
