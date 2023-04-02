@@ -5,60 +5,135 @@ import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import Toast from 'react-bootstrap/Toast';
+import Table from 'react-bootstrap/Table'
 const TabletManager = () => {
-
-  const [name, setName] = useState('')
+  const [name, setName] = useState("");
   const [quantity, setQuantity] = useState(1);
   const [expiry, setExpiry] = useState(new Date());
   const [dosageEnd, setDosageEnd] = useState(new Date());
-  const [frequency, setFrequency] = useState('daily')
-  const timeOfDay = useRef([]);
+  const [frequency, setFrequency] = useState(null);
+  const checkboxesRef = useRef([]);
   const [selectedFile, setSelectedFile] = useState(null);
   const [fetchedData, setFetchedData] = useState(null);
   const [show, setShow] = useState(false);
-
+  const [nameError, setNameError] = useState(false)
+  const [flag, setFlag] = useState(1);
   const handleSubmit = async (e) => {
     // MAKE POST REQUEST HERE
     e.preventDefault();
-    setShow(true)
-    const checkedValues = timeOfDay.current
+    
+    const checkedValues = checkboxesRef.current
       .filter((checkbox) => checkbox.checked)
       .map((checkbox) => checkbox.value);
-    console.log("HERE")
-  }
+    var timeOfDay = [];
+    checkboxesRef.current.forEach((checkbox, i) => {
+      timeOfDay.push(checkbox.checked);
+    });
+    // console.log("HERRE", timeOfDay);
+
+    const axios = require("axios");
+    let data = JSON.stringify({
+      name: name,
+      quantity: quantity,
+      expiry: expiry,
+      frequency: frequency,
+      timeOfDay: {
+        morning: {
+          yesOrNot: timeOfDay[0],
+          beforeFood: true,
+        },
+        afternoon: {
+          yesOrNot: timeOfDay[1],
+          beforeFood: true,
+        },
+        evening: {
+          yesOrNot: timeOfDay[2],
+          beforeFood: true,
+        },
+        night: {
+          yesOrNot: timeOfDay[3],
+          beforeFood: true,
+        },
+      },
+      dosageEndDate: dosageEnd,
+    });
+
+    let config = {
+      method: "post",
+      maxBodyLength: Infinity,
+      url: "http://localhost:4000/api/medicines",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      data: data,
+    };
+
+    axios
+      .request(config)
+      .then((response) => {
+        // alert("Tablet added successfully");
+        if (response.status === 200) {
+          setShow(true)
+          setFlag(!flag)
+        }
+      })
+      .catch((error) => {
+        // alert(error);
+        setNameError(true);
+      });
+  };
+
+  useEffect(()=>{
+    handleFetch();
+    console.log("I am useEFfect!!")
+  },[flag])
 
   const handleFetch = async (e) => {
     try {
-      const response = await axios.get(`http://localhost:4000/api/medicines`);
-      setFetchedData(response.data)
-      console.log(response.data[0])
-    }
-    catch (err) {
-      console.log(err)
+      const response = await axios.get(
+        `http://localhost:4000/api/medicines`
+      );
+      setFetchedData(response.data);
+      console.log(response.data[0]);
+    } catch (err) {
+      console.log(err);
     }
 
-
-    // email, gender, id, username, password,address 
-  }
+    // email, gender, id, username, password,address
+  };
 
   return (
     <>
-        <Toast onClose={() => setShow(false)} bg='light' position='middle-center' show={show} delay={3000} autohide style={{position:"fixed",zIndex:"10",top:"3%", right:"3%"}}>
+
+      <div id='toasts' style={{ position: "fixed", zIndex: "10", top: "3%", right: "3%" }}>
+        <Toast onClose={() => { setShow(false) }} bg='success' position='middle-center' show={show} delay={3000} autohide style={{ position: "relative", zIndex: "10" }}>
           <Toast.Header>
             <img
               src="holder.js/20x20?text=%20"
               className="rounded me-2"
               alt=""
             />
-            <strong className="me-auto">Tablet Added!</strong>
-            <small>{frequency.charAt(0).toUpperCase() + frequency.slice(1)}</small>
+            <strong className="me-auto text-success">Tablet Added!</strong>
+            <small>{frequency?.charAt(0).toUpperCase() + frequency?.slice(1)}</small>
           </Toast.Header>
-          <Toast.Body>{name} | Quantity : {quantity}</Toast.Body>
+          <Toast.Body className='text-white'>Name : {name} | Quantity : {quantity}</Toast.Body>
         </Toast>
-     
+        <Toast onClose={() => { setNameError(false) }} bg='danger' position='middle-center' show={nameError} delay={2000} autohide style={{ position: "relative", zIndex: "10" }}>
+          <Toast.Header>
+            <img
+              src="holder.js/20x20?text=%20"
+              className="rounded me-2"
+              alt=""
+            />
+            <strong className="me-auto text-danger">Enter Valid Name!</strong>
+
+          </Toast.Header>
+          <Toast.Body className='text-white'>Tablet name should be unique</Toast.Body>
+        </Toast>
+      </div>
       <h1>Tab manager</h1>
 
-      <div className='d-flex flex-row justify-content-start'>
+      <div className='d-flex flex-row justify-content-evenly'>
         <Form >
           <Form.Group className="mb-3" controlId="exampleForm.ControlInput1" style={{ width: "300px" }}>
             <Form.Label>Tablet Name</Form.Label>
@@ -77,69 +152,93 @@ const TabletManager = () => {
             <Form.Label>Tablet Frequency</Form.Label>
             <br></br>
             <label htmlFor='daily'>Daily</label>
-            <input type="radio" name='frequency' value='daily' onChange={(e) => {
+            <input type="checkbox" name='frequency' value='daily' onChange={(e) => {
               setFrequency(e.target.value)
             }} />
             <br></br>
-            <label htmlFor='weekly'>Weekly</label>
-            <input type="radio" name='frequency' value='weekly' onChange={(e) => {
-              setFrequency(e.target.value)
-            }} />
+            
           </Form.Group>
-          <Form.Group className="mb-3" controlId="exampleForm.ControlInput1" style={{ width: "300px" }}>
-            <Form.Label>Tablet TimeOfDay</Form.Label>
+          <Form.Group className="mb-3" controlId="exampleForm.ControlInput1" style={{ width: "300px" }} />
+          <Form.Label>Tablet TimeOfDay</Form.Label>
+          <br></br>
+          <label htmlFor='morning'>Morning</label>
+          <input type="checkbox" placeholder="name@example.com" name='timeOfDay' value='morning' ref={(el) => (checkboxesRef.current[0] = el)} />
+          <label htmlFor='afternoon'>Afternoon</label>
+          <input type="checkbox" placeholder="name@example.com" name='timeOfDay' value='afternoon' ref={(el) => (checkboxesRef.current[1] = el)} />
+          <label htmlFor='evening'>Evening</label>
+          <input type="checkbox" placeholder="name@example.com" name='timeOfDay' value='evening' ref={(el) => (checkboxesRef.current[2] = el)} />
+          <label htmlFor='night'>Night</label>
+          <input type="checkbox" placeholder="name@example.com" name='timeOfDay' value='night' ref={(el) => (checkboxesRef.current[3] = el)} />
             <br></br>
-            <label htmlFor='morning'>Morning</label>
-            <input type="checkbox" placeholder="name@example.com" name='timeOfDay' value='morning' ref={(el) => (timeOfDay.current[0] = el)} />
-            <label htmlFor='afternoon'>Afternoon</label>
-            <input type="checkbox" placeholder="name@example.com" name='timeOfDay' value='afternoon' ref={(el) => (timeOfDay.current[1] = el)} />
-            <label htmlFor='evening'>Evening</label>
-            <input type="checkbox" placeholder="name@example.com" name='timeOfDay' value='evening' ref={(el) => (timeOfDay.current[2] = el)} />
-            <label htmlFor='night'>Night</label>
-            <input type="checkbox" placeholder="name@example.com" name='timeOfDay' value='night' ref={(el) => (timeOfDay.current[3] = el)} />
-
-          </Form.Group>
-          <Form.Group className="mb-3" controlId="exampleForm.ControlInput1" style={{ width: "300px" }}>
-            <Form.Label>Tablet Dosage End Date</Form.Label>
-            <Form.Control type="date" placeholder="name@example.com" onChange={(e) => setDosageEnd(e.target.value)} />
-          </Form.Group>
-
-          <Form.Label>Upload Prescription</Form.Label>
-          <Form.Control type="file" style={{ width: "300px" }} onChange={(e) => setSelectedFile(e.target.files[0])} />
-          <button className='btn btn-primary ' onClick={handleSubmit}>Add Tablet</button>
+          {/* <Form.Label>Upload Prescription</Form.Label>
+          <Form.Control
+            type="file"
+            style={{ width: "300px" }}
+            onChange={(e) => setSelectedFile(e.target.files[0])}
+          /> */}
+          <button className="btn btn-primary " onClick={handleSubmit}>
+            Add Tablet
+          </button>
         </Form>
-        <ol>
-          <button className='btn btn-primary' onClick={handleFetch}>Fetch Tablets</button>
-          {
-            fetchedData && fetchedData.map((element, idx) => {
-              return (
-                <>
-                  <li>
-                    <ul>
-                      <li>Tablet name: {element.name}</li>
-                      <li>Tablet quantity: {element.quantity}</li>
-                      <li>Tablet expiry: {element.expiry}</li>
-                      <li>Tablet frequency: {element.frequency}</li>
-                      <li>Tablet timeOfDay:
-                        {Object.keys(element.timeOfDay).map((key) => (
-                          <span>{key}, </span>
-                        ))}
-                      </li>
-                      {/* <li>Tablet dosageEndDate: {element.password}</li>
-                      <li>Prescription: {element.id}</li> */}
-                    </ul>
-                  </li>
-                  <br />
-                </>
-              );
-            })
-          }
+        <div style={{ height: "80vh", overflowY: "scroll" }}>
+         
 
 
-        </ol>
-      </div>
+          <Table striped bordered hover>
+            <thead>
+              <tr>
+                <th>Tablet name</th>
+                <th>Tablet quantity</th>
+                <th>Tablet expiry</th>
+                <th>Tablet frequency</th>
+              </tr>
+            </thead>
+            <tbody>
+
+              {fetchedData &&
+                fetchedData.map((element, idx) => {
+                  return (
+                    <>
+                      <tr>
+                        <td>{element.name}</td>
+                        <td>{element.quantity}</td>
+                        <td>{new Date(element.expiry).toLocaleDateString()}</td>
+
+                        <td>{element.frequency}</td>
+                        {/* <td>{element.timeOfDay}</td> */}
+                      </tr>
+
+                      {/* <ul>
+											<li>Tablet name: {element.name}</li>
+											<li>
+												Tablet quantity:{" "}
+												{element.quantity}
+											</li>
+											<li>
+												Tablet expiry: {element.expiry}
+											</li>
+											<li>
+												Tablet frequency:{" "}
+												{element.frequency}
+											</li>
+											<li>
+												Tablet timeOfDay:
+												{}
+											</li>
+										</ul> */}
+
+                    </>
+                  );
+                })}
+            </tbody>
+          </Table>
+        </div>
+      </div >
     </>
-  )
-}
+  );
+};
+
+
+
 
 export default TabletManager;
