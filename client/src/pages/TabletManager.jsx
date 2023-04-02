@@ -1,6 +1,10 @@
 import Form from 'react-bootstrap/Form';
 import React, { useState, useRef, useEffect } from 'react';
 import axios from 'axios'
+import Button from 'react-bootstrap/Button';
+import Col from 'react-bootstrap/Col';
+import Row from 'react-bootstrap/Row';
+import Toast from 'react-bootstrap/Toast';
 const TabletManager = () => {
 
   const [name, setName] = useState('')
@@ -11,24 +15,16 @@ const TabletManager = () => {
   const timeOfDay = useRef([]);
   const [selectedFile, setSelectedFile] = useState(null);
   const [fetchedData, setFetchedData] = useState(null);
+  const [show, setShow] = useState(false);
 
   const handleSubmit = async (e) => {
     // MAKE POST REQUEST HERE
     e.preventDefault();
+    setShow(true)
     const checkedValues = timeOfDay.current
       .filter((checkbox) => checkbox.checked)
       .map((checkbox) => checkbox.value);
-
-    // console.log("Tablet name :", name);
-    // console.log("Tablet quantity :", quantity);
-    // console.log("Tablet expiry :", expiry);
-    // console.log("Tablet dosageEnd :", dosageEnd)
-    // console.log("Tablet frequency :", frequency);
-    // console.log("Time of Day :")
-    // timeOfDay.current.forEach((checkbox, i) => {
-    //   console.log(`${i + 1}.`, (checkbox.value), (checkbox.checked));
-    // });
-    // console.log(selectedFile);
+    console.log("HERE")
   }
 
   const handleFetch = async (e) => {
@@ -47,7 +43,28 @@ const TabletManager = () => {
 
   return (
     <>
+    <Row>
+      <Col xs={6}>
+        <Toast onClose={() => setShow(false)} show={show} delay={3000} autohide>
+          <Toast.Header>
+            <img
+              src="holder.js/20x20?text=%20"
+              className="rounded me-2"
+              alt=""
+            />
+            <strong className="me-auto">Tablet Added!</strong>
+            <small>{frequency.charAt(0).toUpperCase() + frequency.slice(1)}</small>
+          </Toast.Header>
+          <Toast.Body>{name} | Quantity : {quantity}</Toast.Body>
+        </Toast>
+      </Col>
+      <Col xs={6}>
+        <Button onClick={() => setShow(true)}>Show Toast</Button>
+      </Col>
+    </Row>
+
       <h1>Tab manager</h1>
+
       <div className='d-flex flex-row justify-content-start'>
         <Form >
           <Form.Group className="mb-3" controlId="exampleForm.ControlInput1" style={{ width: "300px" }}>
