@@ -43,9 +43,7 @@ const TabletManager = () => {
 
   return (
     <>
-    <Row>
-      <Col xs={6}>
-        <Toast onClose={() => setShow(false)} show={show} delay={3000} autohide>
+        <Toast onClose={() => setShow(false)} bg='light' position='middle-center' show={show} delay={3000} autohide style={{position:"fixed",zIndex:"10",top:"3%", right:"3%"}}>
           <Toast.Header>
             <img
               src="holder.js/20x20?text=%20"
@@ -57,12 +55,7 @@ const TabletManager = () => {
           </Toast.Header>
           <Toast.Body>{name} | Quantity : {quantity}</Toast.Body>
         </Toast>
-      </Col>
-      <Col xs={6}>
-        <Button onClick={() => setShow(true)}>Show Toast</Button>
-      </Col>
-    </Row>
-
+     
       <h1>Tab manager</h1>
 
       <div className='d-flex flex-row justify-content-start'>
