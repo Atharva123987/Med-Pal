@@ -1,8 +1,8 @@
-const Medicine = require("../models/medicinesModel");
+const Medicines = require("../models/medicineModel");
 const mongoose = require("mongoose");
 
 const getAllMedicines = async (req, res) => {
-	const medicines = await Medicine.find({}).sort({ createdAt: -1 });
+	const medicines = await Medicines.find({}).sort({ createdAt: -1 });
 	console.log(medicines);
 	res.status(200).json(medicines);
 };
