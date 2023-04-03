@@ -1,6 +1,5 @@
 const Appointments = require("../models/appointmentModel");
 const mongoose = require("mongoose");
-const { findOneAndDelete } = require("../models/medicineModel");
 
 const getAllAppointments = async (req, res) => {
 	const appointments = await Appointments.find({}).sort({ createdAt: -1 });
