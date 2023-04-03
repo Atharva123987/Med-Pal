@@ -10,6 +10,7 @@ import About from './pages/About';
 import Calendar from "./components/Calendar";
 import TabletManager from "./pages/TabletManager";
 import Appointments from "./pages/Appointments";
+import Admin from "./pages/Admin";
 
 const App = () => {
   return (<>
@@ -22,6 +23,7 @@ const App = () => {
         <Route path="/calendar" component={Calendar} />
         <Route path="/tablets" component={TabletManager}/>
         <Route path="/appointments" component={Appointments}/>
+        <Route path="/admin" component={Admin}/>
     </BrowserRouter>
     </>
 );

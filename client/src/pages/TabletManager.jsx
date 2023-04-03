@@ -15,11 +15,16 @@ const TabletManager = () => {
   const [show, setShow] = useState(false);
   const [nameError, setNameError] = useState(false)
   const [flag, setFlag] = useState(0);
-  
+  const isMountedRef = useRef(false);
+
   useEffect(() => {
-    handleFetch();
+    if (isMountedRef.current) {
+      handleFetch();
+    } else {
+      isMountedRef.current = true;
+    }
   }, [flag])
-  
+
   const handleFetch = async (e) => {
     try {
       const response = await axios.get(
@@ -31,7 +36,7 @@ const TabletManager = () => {
       console.log(err);
     }
   };
-  
+
   const handleSubmit = async (e) => {
     // MAKE POST REQUEST HERE
     e.preventDefault();
@@ -98,9 +103,9 @@ const TabletManager = () => {
   };
 
 
-  
 
-  
+
+
 
   return (
     <>
@@ -180,7 +185,7 @@ const TabletManager = () => {
             Add Tablet
           </button>
         </Form>
-        <div style={{ height: "80vh", overflowY: "scroll" }}>
+        <div style={{ height: "80vh", overflow: "scroll" }}>
           <Table striped bordered hover>
             <thead>
               <tr>
@@ -188,6 +193,7 @@ const TabletManager = () => {
                 <th>Tablet quantity</th>
                 <th>Tablet expiry</th>
                 <th>Tablet frequency</th>
+                <th>Tablet time of days</th>
               </tr>
             </thead>
             <tbody>
@@ -201,7 +207,10 @@ const TabletManager = () => {
                         <td>{new Date(element.expiry).toLocaleDateString()}</td>
 
                         <td>{element.frequency}</td>
-                        {/* <td>{element.timeOfDay}</td> */}
+                        <td>
+                          {}
+                        </td>
+
                       </tr>
                     </>
                   );
