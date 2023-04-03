@@ -4,6 +4,7 @@ import axios from 'axios'
 import Toast from 'react-bootstrap/Toast';
 import Modal from 'react-bootstrap/Modal'
 import AllMedicinesTable from '../components/Medicines/AllMedicinesTable';
+import AddMedicineModal from '../components/Medicines/AddMedicineModal';
 
 const TabletManager = () => {
 	const [name, setName] = useState("");
@@ -19,7 +20,7 @@ const TabletManager = () => {
   const [flag, setFlag] = useState(0);
   const isMountedRef = useRef(false);
  
-
+  
   useEffect(() => {
     if (isMountedRef.current) {
       handleFetch();
@@ -106,7 +107,7 @@ const TabletManager = () => {
 
   return (
     <>
-
+    <AddMedicineModal/>
       <div id='toasts' style={{ position: "fixed", zIndex: "10", top: "3%", right: "3%" }}>
         <Toast onClose={() => { setShowToast(false) }} bg='success' position='middle-center' show={showToast} delay={3000} autohide style={{ position: "relative", zIndex: "10" }}>
           <Toast.Header>
