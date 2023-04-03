@@ -2,7 +2,9 @@ import Form from 'react-bootstrap/Form';
 import React, { useState, useRef, useEffect } from 'react';
 import axios from 'axios'
 import Toast from 'react-bootstrap/Toast';
-import Table from 'react-bootstrap/Table'
+import Modal from 'react-bootstrap/Modal'
+import AllMedicinesTable from '../components/Medicines/AllMedicinesTable';
+
 const TabletManager = () => {
 	const [name, setName] = useState("");
 	const [quantity, setQuantity] = useState(1);
@@ -12,10 +14,11 @@ const TabletManager = () => {
 	const checkboxesRef = useRef([]);
 	const [selectedFile, setSelectedFile] = useState(null);
 	const [fetchedData, setFetchedData] = useState(null);
-  const [show, setShow] = useState(false);
-  const [nameError, setNameError] = useState(false)
+  const [showToast, setShowToast] = useState(false);
+  const [nameError, setNameError] = useState(false) 
   const [flag, setFlag] = useState(0);
   const isMountedRef = useRef(false);
+ 
 
   useEffect(() => {
     if (isMountedRef.current) {
@@ -48,7 +51,6 @@ const TabletManager = () => {
     checkboxesRef.current.forEach((checkbox, i) => {
       timeOfDay.push(checkbox.checked);
     });
-    // console.log("HERRE", timeOfDay);
 
     const axios = require("axios");
     let data = JSON.stringify({
@@ -92,7 +94,7 @@ const TabletManager = () => {
       .then((response) => {
         // alert("Tablet added successfully");
         if (response.status === 200) {
-          setShow(true)
+          setShowToast(true)
           setFlag(!flag)
         }
       })
@@ -106,7 +108,7 @@ const TabletManager = () => {
     <>
 
       <div id='toasts' style={{ position: "fixed", zIndex: "10", top: "3%", right: "3%" }}>
-        <Toast onClose={() => { setShow(false) }} bg='success' position='middle-center' show={show} delay={3000} autohide style={{ position: "relative", zIndex: "10" }}>
+        <Toast onClose={() => { setShowToast(false) }} bg='success' position='middle-center' show={showToast} delay={3000} autohide style={{ position: "relative", zIndex: "10" }}>
           <Toast.Header>
             <img
               src="holder.js/20x20?text=%20"
@@ -181,37 +183,7 @@ const TabletManager = () => {
           </button>
         </Form>
         <div style={{ height: "80vh", overflow: "scroll" }}>
-          <Table striped bordered hover>
-            <thead>
-              <tr>
-                <th>Tablet name</th>
-                <th>Tablet quantity</th>
-                <th>Tablet expiry</th>
-                <th>Tablet frequency</th>
-                <th>Tablet time of days</th>
-              </tr>
-            </thead>
-            <tbody>
-              {fetchedData &&
-                fetchedData.map((element, idx) => {
-                  return (
-                    <>
-                      <tr>
-                        <td>{element.name}</td>
-                        <td>{element.quantity}</td>
-                        <td>{new Date(element.expiry).toLocaleDateString()}</td>
-
-                        <td>{element.frequency}</td>
-                        <td>
-                          {}
-                        </td>
-
-                      </tr>
-                    </>
-                  );
-                })}
-            </tbody>
-          </Table>
+          <AllMedicinesTable fetchedData={fetchedData}/>
         </div>
       </div >
     </>
