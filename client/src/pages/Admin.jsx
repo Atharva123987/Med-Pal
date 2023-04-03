@@ -29,6 +29,7 @@ const Admin = () => {
         try {
             const response = await axios.get(`https://random-data-api.com/api/v2/users?size=5`)
             setFetchedData(response.data)
+            console.log(response.data)
         }
         catch (err) {
             console.log(err);

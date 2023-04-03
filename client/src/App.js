@@ -21,7 +21,7 @@ const App = () => {
         <Route path="/dashboard" component={Dashboard} />
         <Route path="/about" component={About} />
         <Route path="/calendar" component={Calendar} />
-        <Route path="/tablets" component={TabletManager}/>
+        <Route path="/medicines" component={TabletManager}/>
         <Route path="/appointments" component={Appointments}/>
         <Route path="/admin" component={Admin}/>
     </BrowserRouter>
