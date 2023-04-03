@@ -10,7 +10,7 @@ app.use(cors());
 const mongoose = require("mongoose");
 
 const medicineRoutes = require("./routes/medicineRoutes");
-// const appointmentRoutes = require("./models/appointmentRoutes");
+const appointmentRoutes = require("./routes/appointmentRoutes");
 
 // middleware
 app.use(express.json());
@@ -22,7 +22,7 @@ app.use((req, res, next) => {
 
 // routes
 app.use("/api/medicines", medicineRoutes);
-// app.use("/api/appointments", appointmentRoutes);
+app.use("/api/appointments", appointmentRoutes);
 
 // connect to db
 mongoose

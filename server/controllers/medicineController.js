@@ -14,7 +14,7 @@ const getSingleMedicine = async (req, res) => {
 		return res.status(404).send(`No medicine with id: ${id}`);
 	}
 
-	const medicine = await Medicine.findById(id);
+	const medicine = await Medicines.findById(id);
 
 	if (!medicine) {
 		return res.status(404).send(`No medicine with id: ${id}`);
