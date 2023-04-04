@@ -6,24 +6,23 @@ const AllMedicinesTable = (props) => {
   const fetchedData = props.fetchedData;
 
   useEffect(() => {
-    if(fetchedData){
 
-    fetchedData.map((elem)=>{
-        Object.entries(elem.timeOfDay).forEach(([key,value]) =>{
-          console.log(key, value)
+    if (fetchedData) {
+      fetchedData.map((elem) => {
+        Object.entries(elem.timeOfDay).forEach(([key, value]) => {
+          // console.log(key, value)
         })
       })
-
-      
     }
+
   }, [fetchedData])
 
 
   return (
     <>
-      <Table striped bordered hover>
+      <Table striped bordered hover >
         <thead>
-          <tr>
+          <tr  style={{position:"sticky", top:"0%",color:"white", background:"#212529"}}>
             <th>Tablet name</th>
             <th>Tablet quantity</th>
             <th>Tablet expiry</th>

@@ -9,7 +9,7 @@ const Home = () => {
     return (
         <>
             <div id="home-content">
-                <Navbar />
+                <Navbar buttons={true}/>
                 <Carousel slides={CarouselData}/>
                 {/* Should have rounded border on bottom */}
                 <HomeContent/>

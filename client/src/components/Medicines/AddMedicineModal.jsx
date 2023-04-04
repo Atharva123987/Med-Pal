@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
-
+import '../../pages/tabletManager.css'
 const AddMedicineModal = (props) => {
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
@@ -16,11 +16,12 @@ const AddMedicineModal = (props) => {
 
     return (
         <>
-            <Button variant="primary" onClick={handleShow}>
+        <div id='modal-container' style={{marginRight:"5px",marginLeft:"auto"}}>
+            <Button id='add-medicine-button'  onClick={handleShow}>
                 Add Medicine
             </Button>
 
-            <Modal show={show} onHide={handleClose}>
+            <Modal show={show} onHide={handleClose} >
                 <Modal.Header closeButton>
                     <Modal.Title>Medicine details</Modal.Title>
                 </Modal.Header>
@@ -28,7 +29,7 @@ const AddMedicineModal = (props) => {
                 <Form>
   <Form.Group className="mb-3" controlId="exampleForm.ControlInput1" style={{ width: "300px" }}>
     <Form.Label>Medicine Name</Form.Label>
-    <Form.Control type="text" placeholder="Name" onChange={(e) => props.setName(e.target.value)} />
+    <Form.Control autoFocus type="text" placeholder="Name" onChange={(e) => props.setName(e.target.value)} />
   </Form.Group>
   <Form.Group className="mb-3" controlId="exampleForm.ControlInput2" style={{ width: "300px" }}>
     <Form.Label>Medicine Quantity</Form.Label>
@@ -88,6 +89,7 @@ const AddMedicineModal = (props) => {
                     </Button>
                 </Modal.Footer>
             </Modal>
+            </div>
         </>
     );
 }

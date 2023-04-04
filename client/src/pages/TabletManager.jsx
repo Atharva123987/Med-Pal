@@ -5,7 +5,13 @@ import AllMedicinesTable from '../components/Medicines/AllMedicinesTable';
 import AddMedicineModal from '../components/Medicines/AddMedicineModal';
 import NavBar from '../components/Navbar'
 import './tabletManager.css'
-import {ImClock} from 'react-icons/im'
+import UpcomingDose from '../components/Medicines/UpcomingDose';
+import Form from 'react-bootstrap/Form';
+import { AiOutlineSearch } from 'react-icons/ai'
+import { BsArrowUpSquareFill } from 'react-icons/bs'
+import Footer from '../components/Footer'
+import { HashLink as L } from 'react-router-hash-link';
+
 const TabletManager = () => {
   const [name, setName] = useState("");
   const [quantity, setQuantity] = useState(1);
@@ -19,10 +25,11 @@ const TabletManager = () => {
   const [nameError, setNameError] = useState(false)
   const [flag, setFlag] = useState(0);
   const isMountedRef = useRef(false);
+  const [searchQuery, setSearchQuery] = useState('')
 
 
   useEffect(() => {
-      handleFetch();
+    handleFetch();
   }, [flag])
 
   const handleFetch = async (e) => {
@@ -31,7 +38,7 @@ const TabletManager = () => {
         `http://localhost:4000/api/medicines`
       );
       setFetchedData(response.data);
-    
+
     } catch (err) {
       console.log(err);
     }
@@ -41,6 +48,7 @@ const TabletManager = () => {
     // MAKE POST REQUEST HERE
     e.preventDefault();
     // console.log(selectedFile)
+
     const checkedValues = checkboxesRef.current
       .filter((checkbox) => checkbox.checked)
       .map((checkbox) => checkbox.value);
@@ -101,19 +109,82 @@ const TabletManager = () => {
       });
   };
 
+
+  const [scrollPosition, setScrollPosition] = useState(0);
+  const handleScroll = () => {
+    const position = window.pageYOffset;
+    setScrollPosition(position);
+  };
+
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
+  const tempRef = useRef(null);
+  console.log(tempRef)
   return (
     <>
-      <NavBar />
+      <NavBar buttons={false} />
 
-      <h1>Tab manager</h1>
+     
+      <h3>Medicine Manager</h3>
 
-      <AddMedicineModal
-        setName={setName}
-        setQuantity={setQuantity}
-        setExpiry={setExpiry}
-        setFrequency={setFrequency}
-        checkboxesRef={checkboxesRef}
-        handleSubmit={handleSubmit} />
+      {
+        
+        scrollPosition !== 0?(
+         <L to={'#'}><BsArrowUpSquareFill id='back-to-top' /></L>
+        ):""
+      }
+
+
+
+      <div ref={tempRef} className='d-flex flex-row justify-content-evenly '>
+        {/* 
+        <div>
+          <UpcomingDose />
+
+
+        </div> */}
+
+        <div id='medicines-table' className='d-flex flex-column' >
+
+          <div className='d-flex'>
+
+            <Form style={{ width: "300px", padding: "5px", position: "sticky", top: "0%" }}>
+              <Form.Group className='d-flex'>
+                <AiOutlineSearch style={{ fontSize: "25px", margin: "auto" }} />
+                <Form.Control
+                  type="text"
+                  name="searchQuery"
+                  placeholder="Search..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                />
+              </Form.Group>
+            </Form>
+
+            <AddMedicineModal
+              setName={setName}
+              setQuantity={setQuantity}
+              setExpiry={setExpiry}
+              setFrequency={setFrequency}
+              checkboxesRef={checkboxesRef}
+              handleSubmit={handleSubmit}
+            />
+
+          </div>
+
+          <div style={{}}>
+            <AllMedicinesTable fetchedData={fetchedData} />
+          </div>
+
+        </div>
+
+      </div >
 
       <div id='toasts' style={{ position: "fixed", zIndex: "10", top: "3%", right: "3%" }}>
 
@@ -141,43 +212,9 @@ const TabletManager = () => {
           </Toast.Header>
           <Toast.Body className='text-white'>Tablet name should be unique</Toast.Body>
         </Toast>
+
       </div>
-
-      <div className='d-flex flex-row justify-content-evenly'>
-
-        <div style={{width:"35vw"}}>
-          <h4>Upcoming Dose</h4>
-          <ul>
-            <li>
-              <div className='d-flex flex-row justify-content-evenly m-3'>
-              <p style={{margin:"auto 0"}}>Crocin</p>  
-              <span style={{fontSize:"15px"}}><ImClock/></span>
-              <b>12:00pm</b>
-              </div>
-              </li>
-            <li>
-              <div className='d-flex flex-row justify-content-evenly m-3'>
-              <p style={{margin:"auto 0"}}>Crocin</p>  
-              <span style={{fontSize:"15px"}}><ImClock/></span>
-              <b>12:00pm</b>
-              </div>
-              </li>
-            <li>
-              <div className='d-flex flex-row justify-content-evenly m-3'>
-              <p style={{margin:"auto 0"}}>Crocin</p>  
-              <span style={{fontSize:"15px"}}><ImClock/></span>
-              <b>12:00pm</b>
-              </div>
-              </li>
-            
-          </ul>
-        </div>
-
-        <div style={{ height: "80vh", overflow: "scroll" }}>
-          <AllMedicinesTable fetchedData={fetchedData} />
-        </div>
-
-      </div >
+      <Footer />
     </>
   );
 };

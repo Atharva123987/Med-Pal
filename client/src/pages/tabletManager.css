@@ -3,3 +3,62 @@ input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
+
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+  }
+   
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #212529; 
+    border-radius: 5px;
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+  }
+
+  #medicines-table{
+    /* height:70vh; */
+    
+  }
+
+  #add-medicine-button{
+    color:white;
+    scale:100%;
+    transition: background-color 0.4s ,scale 0.4s;
+    background-color:#00BFFF;
+  }
+  #add-medicine-button:hover{
+    transition:background-color 0.4s;
+    background-color:#000
+  }
+  #add-medicine-button:active{
+    transition:scale 0.4s;
+    scale:105%;
+  }
+
+  h3{
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  }
+
+  #back-to-top{
+    color:black;
+    padding: 4px;
+    border-radius: 5px;
+    position: fixed;
+    font-size: 50px;
+    bottom:10%;
+    right:8%;
+    }
+
+    #back-to-top:hover{
+        color:#555;
+    }
