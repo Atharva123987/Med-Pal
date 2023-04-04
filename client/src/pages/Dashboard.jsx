@@ -125,7 +125,7 @@ const Dashboard = () => {
 							className="component"
 							style={{ flexGrow: 6 }}
 						>
-							<Charts />
+							{/* <Charts /> */}
 						</div>
 
 						<div

@@ -18,8 +18,6 @@ export const Register = (props) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    console.log(name, age, gender, height, weight, email, pass);
     
     fetch("", {
       method : "POST",
@@ -163,8 +161,7 @@ export const Register = (props) => {
               to={"/login"}
               style={{ textDecoration: "none", color: "blue", fontSize: 16 }}
             >
-              {" "}
-              Login Here{" "}
+              Login Here
             </Link>
           </Form.Text>
         </Form.Group>

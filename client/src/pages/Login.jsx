@@ -70,9 +70,11 @@ export const Login = (props) => {
         </Form.Group>
 
         <Form.Group className="text-center">
+          <Link to = {'/dashboard'}>
           <Button variant="primary" type="submit" className="mb-3 text-center">
             Submit
           </Button>
+          </Link>
         </Form.Group>
 
         <Form.Group className="mb-5">
@@ -82,8 +84,7 @@ export const Login = (props) => {
               to={"/register"}
               style={{ textDecoration: "none", color: "blue", fontSize: 16 }}
             >
-              {" "}
-              Register Here{" "}
+              Register Here
             </Link>
           </Form.Text>
         </Form.Group>
