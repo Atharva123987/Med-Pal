@@ -1,68 +1,90 @@
-import React, { useEffect,useState,useRef } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
 
-const AddMedicineModal = () => {
+const AddMedicineModal = (props) => {
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
+    const [isDaily, setIsDaily] = useState(false)
+    const handleSubmit = (e) => {
+        props.handleSubmit(e);
+        handleClose();
+    }
 
-    const [name, setName] = useState("");
-    const [quantity, setQuantity] = useState(1);
-    const [expiry, setExpiry] = useState(new Date());
-    const [dosageEnd, setDosageEnd] = useState(new Date());
-    const [frequency, setFrequency] = useState(null);
-    const checkboxesRef = useRef([]);
-    const [selectedFile, setSelectedFile] = useState(null);
-    const [fetchedData, setFetchedData] = useState(null);
-    const [showToast, setShowToast] = useState(false);
-    const [nameError, setNameError] = useState(false)
-    const [flag, setFlag] = useState(0);
-    const isMountedRef = useRef(false);
+
     return (
         <>
             <Button variant="primary" onClick={handleShow}>
-                Launch demo modal
+                Add Medicine
             </Button>
 
             <Modal show={show} onHide={handleClose}>
                 <Modal.Header closeButton>
-                    <Modal.Title>Modal heading</Modal.Title>
+                    <Modal.Title>Medicine details</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <Form >
-                        <Form.Group className="mb-3" controlId="exampleForm.ControlInput1" style={{ width: "300px" }}>
-                            <Form.Label>Tablet Name</Form.Label>
-                            <Form.Control type="email" placeholder="Name" onChange={(e) => setName(e.target.value)} />
-                        </Form.Group>
-                        <Form.Group className="mb-3" controlId="exampleForm.ControlInput1" style={{ width: "300px" }}>
-                            <Form.Label>Tablet Quantity</Form.Label>
-                            <Form.Control type="number" placeholder="10" onChange={(e) =>
-                                setQuantity(e.target.value)} />
-                        </Form.Group>
-                        <Form.Group className="mb-3" controlId="exampleForm.ControlInput1" style={{ width: "300px" }}>
-                            <Form.Label>Tablet Expiry</Form.Label>
-                            <Form.Control type="date" placeholder="10" onChange={(e) => setExpiry(e.target.value)} />
-                        </Form.Group>
-                        <Form.Group className="mb-3" controlId="exampleForm.ControlInput1" style={{ width: "300px" }}>
-                            <Form.Label>Tablet Frequency</Form.Label>
-                            <br></br>
-                            <label htmlFor='daily'>Daily</label>
-                            <input type="checkbox" name='frequency' value='daily' onChange={(e) => {
-                                setFrequency(e.target.value)
-                            }} />
-                            <br></br>
+                <Form>
+  <Form.Group className="mb-3" controlId="exampleForm.ControlInput1" style={{ width: "300px" }}>
+    <Form.Label>Medicine Name</Form.Label>
+    <Form.Control type="text" placeholder="Name" onChange={(e) => props.setName(e.target.value)} />
+  </Form.Group>
+  <Form.Group className="mb-3" controlId="exampleForm.ControlInput2" style={{ width: "300px" }}>
+    <Form.Label>Medicine Quantity</Form.Label>
+    <Form.Control type="number" placeholder="Quantity" onChange={(e) => props.setQuantity(e.target.value)} />
+  </Form.Group>
+  <Form.Group className="mb-3" controlId="exampleForm.ControlInput3" style={{ width: "300px" }}>
+    <Form.Label>Medicine Expiry</Form.Label>
+    <Form.Control type="date" placeholder="10-10-2023" onChange={(e) => props.setExpiry(e.target.value)} />
+  </Form.Group>
+  <Form.Group className="mb-3" controlId="exampleForm.ControlInput4" style={{ width: "300px" }}>
+    <Form.Label>Medicine Frequency</Form.Label>
+    <br></br>
+    <label htmlFor="daily">Daily</label>
+    <input
+      type="checkbox"
+      name="frequency"
+      value="daily"
+      onChange={(e) => {
+        props.setFrequency(e.target.value);
+        setIsDaily(!isDaily);
+      }}
+    />
 
-                        </Form.Group>
-                    </Form>
+    <br></br>
+    {isDaily && (
+      <Form.Group className="mb-3" controlId="exampleForm.ControlInput5" style={{ width: "300px" }}>
+        <Form.Label>Tablet Time of Day</Form.Label>
+        <div>
+          <label htmlFor="morning">Morning</label>
+          <input type="checkbox" placeholder="name@example.com" name="timeOfDay" value="morning" ref={(elem) => (props.checkboxesRef.current[0] = elem)} />
+        </div>
+        <div>
+          <label htmlFor="afternoon">Afternoon</label>
+          <input type="checkbox" placeholder="name@example.com" name="timeOfDay" value="afternoon" ref={(elem) => (props.checkboxesRef.current[1] = elem)} />
+        </div>
+        <div>
+          <label htmlFor="evening">Evening</label>
+          <input type="checkbox" placeholder="name@example.com" name="timeOfDay" value="evening" ref={(elem) => (props.checkboxesRef.current[2] = elem)} />
+        </div>
+        <div>
+          <label htmlFor="night">Night</label>
+          <input type="checkbox" placeholder="name@example.com" name="timeOfDay" value="night" ref={(elem) => (props.checkboxesRef.current[3] = elem)} />
+        </div>
+      </Form.Group>
+    )}
+  </Form.Group>
+</Form>
+
+
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={handleClose}>
                         Close
                     </Button>
-                    <Button variant="primary" onClick={handleClose}>
-                        Save Changes
+                    <Button variant="primary" onClick={handleSubmit}>
+                        Add
                     </Button>
                 </Modal.Footer>
             </Modal>
