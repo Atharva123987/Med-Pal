@@ -11,6 +11,7 @@ import Calendar from "./components/Calendar";
 import TabletManager from "./pages/TabletManager";
 import Appointments from "./pages/Appointments";
 import Admin from "./pages/Admin";
+import Search from "./pages/Search";
 
 const App = () => {
   return (<>
@@ -24,6 +25,7 @@ const App = () => {
         <Route path="/medicines" component={TabletManager}/>
         <Route path="/appointments" component={Appointments}/>
         <Route path="/admin" component={Admin}/>
+        <Route path="/search" component={Search}/>
     </BrowserRouter>
     </>
 );

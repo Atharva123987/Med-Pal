@@ -1,28 +1,35 @@
-import Form from 'react-bootstrap/Form';
 import React, { useState, useRef, useEffect } from 'react';
 import axios from 'axios'
 import Toast from 'react-bootstrap/Toast';
-import Table from 'react-bootstrap/Table'
+import AllMedicinesTable from '../components/Medicines/AllMedicinesTable';
+import AddMedicineModal from '../components/Medicines/AddMedicineModal';
+import NavBar from '../components/Navbar'
+import './tabletManager.css'
+import UpcomingDose from '../components/Medicines/UpcomingDose';
+import Form from 'react-bootstrap/Form';
+import { AiOutlineSearch } from 'react-icons/ai'
+import { BsArrowUpSquareFill } from 'react-icons/bs'
+import Footer from '../components/Footer'
+import { HashLink as L } from 'react-router-hash-link';
+
 const TabletManager = () => {
-	const [name, setName] = useState("");
-	const [quantity, setQuantity] = useState(1);
-	const [expiry, setExpiry] = useState(new Date());
-	const [dosageEnd, setDosageEnd] = useState(new Date());
-	const [frequency, setFrequency] = useState(null);
-	const checkboxesRef = useRef([]);
-	const [selectedFile, setSelectedFile] = useState(null);
-	const [fetchedData, setFetchedData] = useState(null);
-  const [show, setShow] = useState(false);
+  const [name, setName] = useState("");
+  const [quantity, setQuantity] = useState(1);
+  const [expiry, setExpiry] = useState(new Date());
+  const [dosageEnd, setDosageEnd] = useState(new Date());
+  const [frequency, setFrequency] = useState(null);
+  const checkboxesRef = useRef([]);
+  const [selectedFile, setSelectedFile] = useState(null);
+  const [fetchedData, setFetchedData] = useState(null);
+  const [showToast, setShowToast] = useState(false);
   const [nameError, setNameError] = useState(false)
   const [flag, setFlag] = useState(0);
   const isMountedRef = useRef(false);
+  const [searchQuery, setSearchQuery] = useState('')
+
 
   useEffect(() => {
-    if (isMountedRef.current) {
-      handleFetch();
-    } else {
-      isMountedRef.current = true;
-    }
+    handleFetch();
   }, [flag])
 
   const handleFetch = async (e) => {
@@ -31,7 +38,7 @@ const TabletManager = () => {
         `http://localhost:4000/api/medicines`
       );
       setFetchedData(response.data);
-      console.log(response.data[0]);
+
     } catch (err) {
       console.log(err);
     }
@@ -40,6 +47,7 @@ const TabletManager = () => {
   const handleSubmit = async (e) => {
     // MAKE POST REQUEST HERE
     e.preventDefault();
+    // console.log(selectedFile)
 
     const checkedValues = checkboxesRef.current
       .filter((checkbox) => checkbox.checked)
@@ -48,7 +56,6 @@ const TabletManager = () => {
     checkboxesRef.current.forEach((checkbox, i) => {
       timeOfDay.push(checkbox.checked);
     });
-    // console.log("HERRE", timeOfDay);
 
     const axios = require("axios");
     let data = JSON.stringify({
@@ -92,7 +99,7 @@ const TabletManager = () => {
       .then((response) => {
         // alert("Tablet added successfully");
         if (response.status === 200) {
-          setShow(true)
+          setShowToast(true)
           setFlag(!flag)
         }
       })
@@ -102,11 +109,86 @@ const TabletManager = () => {
       });
   };
 
+
+  const [scrollPosition, setScrollPosition] = useState(0);
+  const handleScroll = () => {
+    const position = window.pageYOffset;
+    setScrollPosition(position);
+  };
+
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
+  const tempRef = useRef(null);
+  console.log(tempRef)
   return (
     <>
+      <NavBar buttons={false} />
+
+     
+      <h3>Medicine Manager</h3>
+
+      {
+        
+        scrollPosition !== 0?(
+         <L to={'#'}><BsArrowUpSquareFill id='back-to-top' /></L>
+        ):""
+      }
+
+
+
+      <div ref={tempRef} className='d-flex flex-row justify-content-evenly '>
+        {/* 
+        <div>
+          <UpcomingDose />
+
+
+        </div> */}
+
+        <div id='medicines-table' className='d-flex flex-column' >
+
+          <div className='d-flex'>
+
+            <Form style={{ width: "300px", padding: "5px", position: "sticky", top: "0%" }}>
+              <Form.Group className='d-flex'>
+                <AiOutlineSearch style={{ fontSize: "25px", margin: "auto" }} />
+                <Form.Control
+                  type="text"
+                  name="searchQuery"
+                  placeholder="Search..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                />
+              </Form.Group>
+            </Form>
+
+            <AddMedicineModal
+              setName={setName}
+              setQuantity={setQuantity}
+              setExpiry={setExpiry}
+              setFrequency={setFrequency}
+              checkboxesRef={checkboxesRef}
+              handleSubmit={handleSubmit}
+            />
+
+          </div>
+
+          <div style={{}}>
+            <AllMedicinesTable fetchedData={fetchedData} />
+          </div>
+
+        </div>
+
+      </div >
 
       <div id='toasts' style={{ position: "fixed", zIndex: "10", top: "3%", right: "3%" }}>
-        <Toast onClose={() => { setShow(false) }} bg='success' position='middle-center' show={show} delay={3000} autohide style={{ position: "relative", zIndex: "10" }}>
+
+        <Toast onClose={() => { setShowToast(false) }} bg='success' position='middle-center' show={showToast} delay={3000} autohide style={{ position: "relative", zIndex: "10" }}>
           <Toast.Header>
             <img
               src="holder.js/20x20?text=%20"
@@ -118,6 +200,7 @@ const TabletManager = () => {
           </Toast.Header>
           <Toast.Body className='text-white'>Name : {name} | Quantity : {quantity}</Toast.Body>
         </Toast>
+
         <Toast onClose={() => { setNameError(false) }} bg='danger' position='middle-center' show={nameError} delay={2000} autohide style={{ position: "relative", zIndex: "10" }}>
           <Toast.Header>
             <img
@@ -126,94 +209,12 @@ const TabletManager = () => {
               alt=""
             />
             <strong className="me-auto text-danger">Enter Valid Name!</strong>
-
           </Toast.Header>
           <Toast.Body className='text-white'>Tablet name should be unique</Toast.Body>
         </Toast>
+
       </div>
-      <h1>Tab manager</h1>
-
-      <div className='d-flex flex-row justify-content-evenly'>
-        <Form >
-          <Form.Group className="mb-3" controlId="exampleForm.ControlInput1" style={{ width: "300px" }}>
-            <Form.Label>Tablet Name</Form.Label>
-            <Form.Control type="email" placeholder="Name" onChange={(e) => setName(e.target.value)} />
-          </Form.Group>
-          <Form.Group className="mb-3" controlId="exampleForm.ControlInput1" style={{ width: "300px" }}>
-            <Form.Label>Tablet Quantity</Form.Label>
-            <Form.Control type="number" placeholder="10" onChange={(e) =>
-              setQuantity(e.target.value)} />
-          </Form.Group>
-          <Form.Group className="mb-3" controlId="exampleForm.ControlInput1" style={{ width: "300px" }}>
-            <Form.Label>Tablet Expiry</Form.Label>
-            <Form.Control type="date" placeholder="10" onChange={(e) => setExpiry(e.target.value)} />
-          </Form.Group>
-          <Form.Group className="mb-3" controlId="exampleForm.ControlInput1" style={{ width: "300px" }}>
-            <Form.Label>Tablet Frequency</Form.Label>
-            <br></br>
-            <label htmlFor='daily'>Daily</label>
-            <input type="checkbox" name='frequency' value='daily' onChange={(e) => {
-              setFrequency(e.target.value)
-            }} />
-            <br></br>
-
-          </Form.Group>
-          <Form.Group className="mb-3" controlId="exampleForm.ControlInput1" style={{ width: "300px" }} />
-          <Form.Label>Tablet TimeOfDay</Form.Label>
-          <br></br>
-          <label htmlFor='morning'>Morning</label>
-          <input type="checkbox" placeholder="name@example.com" name='timeOfDay' value='morning' ref={(el) => (checkboxesRef.current[0] = el)} />
-          <label htmlFor='afternoon'>Afternoon</label>
-          <input type="checkbox" placeholder="name@example.com" name='timeOfDay' value='afternoon' ref={(el) => (checkboxesRef.current[1] = el)} />
-          <label htmlFor='evening'>Evening</label>
-          <input type="checkbox" placeholder="name@example.com" name='timeOfDay' value='evening' ref={(el) => (checkboxesRef.current[2] = el)} />
-          <label htmlFor='night'>Night</label>
-          <input type="checkbox" placeholder="name@example.com" name='timeOfDay' value='night' ref={(el) => (checkboxesRef.current[3] = el)} />
-          <br></br>
-          {/* <Form.Label>Upload Prescription</Form.Label>
-          <Form.Control
-            type="file"
-            style={{ width: "300px" }}
-            onChange={(e) => setSelectedFile(e.target.files[0])}
-          /> */}
-          <button className="btn btn-primary " onClick={handleSubmit}>
-            Add Tablet
-          </button>
-        </Form>
-        <div style={{ height: "80vh", overflow: "scroll" }}>
-          <Table striped bordered hover>
-            <thead>
-              <tr>
-                <th>Tablet name</th>
-                <th>Tablet quantity</th>
-                <th>Tablet expiry</th>
-                <th>Tablet frequency</th>
-                <th>Tablet time of days</th>
-              </tr>
-            </thead>
-            <tbody>
-              {fetchedData &&
-                fetchedData.map((element, idx) => {
-                  return (
-                    <>
-                      <tr>
-                        <td>{element.name}</td>
-                        <td>{element.quantity}</td>
-                        <td>{new Date(element.expiry).toLocaleDateString()}</td>
-
-                        <td>{element.frequency}</td>
-                        <td>
-                          {}
-                        </td>
-
-                      </tr>
-                    </>
-                  );
-                })}
-            </tbody>
-          </Table>
-        </div>
-      </div >
+      <Footer />
     </>
   );
 };
