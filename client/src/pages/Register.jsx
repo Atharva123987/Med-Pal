@@ -1,138 +1,175 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-// import Navbar from "../Navbar";
 import "../App.css";
+import Button from "react-bootstrap/Button";
+import Form from "react-bootstrap/Form";
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
 
 export const Register = (props) => {
-	const [email, setEmail] = useState("");
-	const [pass, setPass] = useState("");
-	const [name, setName] = useState("");
+  const [name, setName] = useState("");
+  const [age, setAge] = useState("");
+  const [gender, setGender] = useState("");
+  const [height, setHeight] = useState("")
+  const [weight, setWeight] = useState("")
+  const [email, setEmail] = useState("");
+  const [pass, setPass] = useState("");
 
-	const handleSubmit = (e) => {
-		e.preventDefault();
-		console.log(email);
-		props.onFormSwitch("login");
-	};
+  const handleSubmit = (e) => {
+    e.preventDefault();
 
-	return (
-		<>
-			<div className="App">
-				<div className="auth-form-container">
-					<div
-						className="buttons"
-						style={{ display: "block", width: "100%" }}
-					>
-						<Link to={"/login"} style={{ textDecoration: "none" }}>
-							<button style={{ float: "left", width: "50%" }}>
-								Login
-							</button>
-						</Link>
-						<Link
-							to={"/register"}
-							style={{ textDecoration: "none" }}
-						>
-							<button style={{ float: "left", width: "50%" }}>
-								Register
-							</button>
-						</Link>
-					</div>
-					<h2>Register</h2>
-					<form className="register-form" onSubmit={handleSubmit}>
-						<label htmlFor="name">Full name</label>
-						<input
-							value={name}
-							name="name"
-							onChange={(e) => setName(e.target.value)}
-							id="name"
-							placeholder="Full Name"
-							style={{
-								fontSize: "1em",
-								display: "block",
-								width: "100%",
-							}}
-						/>
-						<label htmlFor="email">Email</label>
-						<input
-							value={email}
-							onChange={(e) => setEmail(e.target.value)}
-							type="email"
-							placeholder="youremail@gmail.com"
-							id="email"
-							name="email"
-							style={{
-								fontSize: "1em",
-								display: "block",
-								width: "100%",
-							}}
-						/>
-						<label htmlFor="password">Password</label>
-						<input
-							value={pass}
-							onChange={(e) => setPass(e.target.value)}
-							type="password"
-							placeholder="********"
-							id="password"
-							name="password"
-						/>
-						<label htmlFor="gender">
-							{" "}
-							Gender
-							<br />
-							<input
-								type="radio"
-								name="gender"
-								value="male"
-							/>{" "}
-							Male
-							<input
-								type="radio"
-								name="gender"
-								value="female"
-							/>{" "}
-							Female
-						</label>
-						<label htmlFor="age">
-							{" "}
-							Age
-							<input
-								type="number"
-								min="1"
-								max="150"
-								style={{ marginLeft: "2em", width: "75%" }}
-							/>
-						</label>
-						<label htmlFor="height">
-							{" "}
-							Height
-							<input
-								type="number"
-								style={{ marginLeft: "1em", width: "73.5%" }}
-							/>
-						</label>
-						<label htmlFor="width">
-							{" "}
-							Width
-							<input
-								type="number"
-								style={{ marginLeft: "1em", width: "73.5%" }}
-							/>
-						</label>
-						<button
-							type="submit"
-							style={{ marginTop: "1rem", borderRadius: "5px" }}
-						>
-							Register
-						</button>
-					</form>
-					<button
-						className="link-btn"
-						onClick={() => props.onFormSwitch("login")}
-					>
-						Already have an account? Login here.
-					</button>
-				</div>
-			</div>
-		</>
-	);
+    console.log(name, age, gender, height, weight, email, pass);
+    
+    fetch("", {
+      method : "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        name: name,
+        age: age,
+        gender: gender,
+        height: height,
+        weight: weight,
+        email: email,
+        password: pass,
+      }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("Success:", data);
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+
+  };
+
+  return (
+    <Container
+      className="d-flex justify-content-center align-items-center border mt-2 mt-md-4 mt-lg-5"
+      style={{ maxWidth: "400px" }}
+    >
+      <Form onSubmit={handleSubmit}>
+        <Form.Group>
+          <h3 className="mt-3">Register</h3>
+        </Form.Group>
+
+        <Form.Group className="mb-3">
+          <Form.Label>Name</Form.Label>
+          <Form.Control
+            type="text"
+            placeholder="Enter Full Name"
+            name="name"
+            onChange={e=> {
+              setName(e.target.value)
+            }}
+          />
+        </Form.Group>
+        <Row>
+        <Col>
+        <Form.Group className="mb-3">
+          <Form.Label>Age</Form.Label>
+          <Form.Control
+            type="text"
+            placeholder="Age"
+            onChange={e=> {
+              setAge(e.target.value)
+            }}
+          />
+        </Form.Group>
+        </Col>
+        
+        <Col>
+        <Form.Group className="mb-3">
+          <Form.Label>Gender</Form.Label>
+
+          <Form.Control
+            as="select"
+            name="gender"
+            onChange={e=> {
+              setGender(e.target.value)
+            }}
+          >
+            <option value="">Select gender</option>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+            <option value="other">Other</option>
+          </Form.Control>
+        </Form.Group>
+        </Col>
+        </Row>
+        <Row>
+        <Col>
+        <Form.Group className="mb-3">
+          <Form.Label>Height</Form.Label>
+          <Form.Control
+            type="text"
+            placeholder="Height in cm"
+            onChange={e=> {
+              setHeight(e.target.value)
+            }}
+          />
+        </Form.Group>
+        </Col>
+        
+        <Col>
+        <Form.Group className="mb-3">
+          <Form.Label>Weight</Form.Label>
+          <Form.Control
+            type="text"
+            placeholder="Weight in kg"
+            onChange={e=> {
+              setWeight(e.target.value)
+            }}
+          />
+        </Form.Group>
+        </Col>
+        </Row>
+
+        <Form.Group className="mb-3" controlId="formBasicEmail">
+          <Form.Label>Email address</Form.Label>
+          <Form.Control
+            type="email"
+            placeholder="Enter email"
+            onChange={e=> {
+              setEmail(e.target.value)
+            }}
+          />
+        </Form.Group>
+
+        <Form.Group className="mb-3" controlId="formBasicPassword">
+          <Form.Label>Password</Form.Label>
+          <Form.Control
+            type="password"
+            placeholder="Enter Password"
+            onChange={e=> {
+              setPass(e.target.value)
+            }}
+          />
+        </Form.Group>
+
+        <Form.Group className="text-center">
+          <Button variant="primary" type="submit" className="mb-3 text-center">
+            Register
+          </Button>
+        </Form.Group>
+
+        <Form.Group className="mb-5">
+          <Form.Text className="text-muted">
+            Already Have an Account,
+            <Link
+              to={"/login"}
+              style={{ textDecoration: "none", color: "blue", fontSize: 16 }}
+            >
+              {" "}
+              Login Here{" "}
+            </Link>
+          </Form.Text>
+        </Form.Group>
+      </Form>
+    </Container>
+  );
 };
 export default Register;
