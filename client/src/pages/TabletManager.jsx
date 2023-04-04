@@ -40,7 +40,7 @@ const TabletManager = () => {
 	const handleSubmit = async (e) => {
 		// MAKE POST REQUEST HERE
 		e.preventDefault();
-
+		console.log(selectedFile);
 		const checkedValues = checkboxesRef.current
 			.filter((checkbox) => checkbox.checked)
 			.map((checkbox) => checkbox.value);
@@ -266,12 +266,12 @@ const TabletManager = () => {
 						ref={(el) => (checkboxesRef.current[3] = el)}
 					/>
 					<br></br>
-					{/* <Form.Label>Upload Prescription</Form.Label>
-          <Form.Control
-            type="file"
-            style={{ width: "300px" }}
-            onChange={(e) => setSelectedFile(e.target.files[0])}
-          /> */}
+					<Form.Label>Upload Prescription</Form.Label>
+					<Form.Control
+						type="file"
+						style={{ width: "300px" }}
+						onChange={(e) => setSelectedFile(e.target.files[0])}
+					/>
 					<button className="btn btn-primary " onClick={handleSubmit}>
 						Add Tablet
 					</button>

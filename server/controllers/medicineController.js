@@ -28,7 +28,7 @@ const createMedicine = async (req, res) => {
 	const { name, quantity, expiry, frequency, timeOfDay, dosageEndDate } =
 		req.body;
 	try {
-		const newMedicine = await Medicine.create({
+		const newMedicine = await Medicines.create({
 			name,
 			quantity,
 			expiry,
@@ -49,7 +49,7 @@ const deleteMedicine = async (req, res) => {
 		return res.status(404).send(`No medicine with id: ${id}`);
 	}
 
-	const medicine = await Medicine.findOneAndDelete({ _id: id });
+	const medicine = await Medicines.findOneAndDelete({ _id: id });
 
 	if (!medicine) {
 		return res.status(404).send(`No medicine with id: ${id}`);
@@ -65,7 +65,7 @@ const updateMedicine = async (req, res) => {
 		return res.status(404).send(`No medicine with id: ${id}`);
 	}
 
-	const medicine = await Medicine.findOneAndUpdate(
+	const medicine = await Medicines.findOneAndUpdate(
 		{ _id: id },
 		{
 			...req.body,
