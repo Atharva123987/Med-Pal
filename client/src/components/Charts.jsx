@@ -14,17 +14,14 @@ import { haemoglobin } from "../data/haemoglobin.js";
 import "./dashboard-item.css";
 
 const Charts = () => {
+
 	return (
 		<>
-			<div id="charts" className="dash-component">
+			<div id="charts" >
 				<legend align="center">Charts</legend>
-				<Carousel>
-					<Carousel.Item>
 						<h4>
 							<center>Blood Pressure Trend</center>
 						</h4>
-						{/*  */}
-						{/*  */}
 						<LineChart
 							width={400}
 							height={250}
@@ -42,8 +39,6 @@ const Charts = () => {
 								stroke="#8884d8"
 							/>
 						</LineChart>
-					</Carousel.Item>
-					<Carousel.Item>
 						<h4>
 							<center>Blood Sugar Trend</center>
 						</h4>
@@ -64,8 +59,6 @@ const Charts = () => {
 								stroke="#8884d8"
 							/>
 						</LineChart>
-					</Carousel.Item>
-					<Carousel.Item>
 						<h4>
 							<center>Haemoglobin Trend</center>
 						</h4>
@@ -86,8 +79,6 @@ const Charts = () => {
 								stroke="#8884d8"
 							/>
 						</LineChart>
-					</Carousel.Item>
-				</Carousel>
 				<div className="dash-button-container">
 					<button className="dash-button">
 						<span>+</span>

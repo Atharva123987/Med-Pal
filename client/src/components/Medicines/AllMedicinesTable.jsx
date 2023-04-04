@@ -8,11 +8,7 @@ const AllMedicinesTable = (props) => {
   useEffect(() => {
 
     if (fetchedData) {
-      fetchedData.map((elem) => {
-        Object.entries(elem.timeOfDay).forEach(([key, value]) => {
-          // console.log(key, value)
-        })
-      })
+
     }
 
   }, [fetchedData])
@@ -22,7 +18,7 @@ const AllMedicinesTable = (props) => {
     <>
       <Table striped bordered hover >
         <thead>
-          <tr  style={{position:"sticky", top:"0%",color:"white", background:"#212529"}}>
+          <tr style={{ position: "sticky", top: "0%", color: "white", background: "#212529" }}>
             <th>Tablet name</th>
             <th>Tablet quantity</th>
             <th>Tablet expiry</th>
@@ -39,11 +35,14 @@ const AllMedicinesTable = (props) => {
                     <td>{element.name}</td>
                     <td>{element.quantity}</td>
                     <td>{new Date(element.expiry).toLocaleDateString()}</td>
-
                     <td>{element.frequency}</td>
                     <td>
                       {
-
+                        fetchedData && fetchedData.map((elem) => {
+                          return(Object.entries(elem.timeOfDay).forEach(([key, value]) => {
+                            return(value.yesOrNot === true ? <h1>key</h1> : "Hello")
+                          })
+                        )})
                       }
                     </td>
 
