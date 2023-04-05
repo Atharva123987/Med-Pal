@@ -3,7 +3,7 @@ import axios from 'axios'
 import Toast from 'react-bootstrap/Toast';
 import AllMedicinesTable from '../components/Medicines/AllMedicinesTable';
 import AddMedicineModal from '../components/Medicines/AddMedicineModal';
-import NavBar from '../components/Navbar'
+import Navbar from '../components/Navbar'
 import './tabletManager.css'
 import UpcomingDose from '../components/Medicines/UpcomingDose';
 import Form from 'react-bootstrap/Form';
@@ -13,101 +13,99 @@ import Footer from '../components/Footer'
 import { HashLink as L } from 'react-router-hash-link';
 
 const TabletManager = () => {
-  const [name, setName] = useState("");
-  const [quantity, setQuantity] = useState(1);
-  const [expiry, setExpiry] = useState(new Date());
-  const [dosageEnd, setDosageEnd] = useState(new Date());
-  const [frequency, setFrequency] = useState(null);
-  const checkboxesRef = useRef([]);
-  const [selectedFile, setSelectedFile] = useState(null);
-  const [fetchedData, setFetchedData] = useState(null);
-  const [showToast, setShowToast] = useState(false);
-  const [nameError, setNameError] = useState(false)
-  const [flag, setFlag] = useState(0);
-  const isMountedRef = useRef(false);
-  const [searchQuery, setSearchQuery] = useState('')
+	const [name, setName] = useState("");
+	const [quantity, setQuantity] = useState(1);
+	const [expiry, setExpiry] = useState(new Date());
+	const [dosageEnd, setDosageEnd] = useState(new Date());
+	const [frequency, setFrequency] = useState(null);
+	const checkboxesRef = useRef([]);
+	const [selectedFile, setSelectedFile] = useState(null);
+	const [fetchedData, setFetchedData] = useState(null);
+	const [showToast, setShowToast] = useState(false);
+	const [nameError, setNameError] = useState(false);
+	const [flag, setFlag] = useState(0);
+	const isMountedRef = useRef(false);
+	const [searchQuery, setSearchQuery] = useState(null)
+
+	const handleFetch = async (e) => {
+		try {
+			const response = await axios.get(
+				`http://localhost:4000/api/medicines`
+			);
+			setFetchedData(response.data);
+			console.log(response.data[0]);
+		} catch (err) {
+			console.log(err);
+		}
+	};
 
 
-  useEffect(() => {
-    handleFetch();
-  }, [flag])
 
-  const handleFetch = async (e) => {
-    try {
-      const response = await axios.get(
-        `http://localhost:4000/api/medicines`
-      );
-      setFetchedData(response.data);
+	const handleSubmit = async (e) => {
+		// MAKE POST REQUEST HERE
+		e.preventDefault();
+		console.log(selectedFile);
+		const checkedValues = checkboxesRef.current
+			.filter((checkbox) => checkbox.checked)
+			.map((checkbox) => checkbox.value);
+		var timeOfDay = [];
+		checkboxesRef.current.forEach((checkbox, i) => {
+			timeOfDay.push(checkbox.checked);
+		});
+		// console.log("HERRE", timeOfDay);
 
-    } catch (err) {
-      console.log(err);
-    }
-  };
+		const axios = require("axios");
+		let data = JSON.stringify({
+			name: name,
+			quantity: quantity,
+			expiry: expiry,
+			frequency: frequency,
+			timeOfDay: {
+				morning: {
+					yesOrNot: timeOfDay[0],
+					beforeFood: true,
+				},
+				afternoon: {
+					yesOrNot: timeOfDay[1],
+					beforeFood: true,
+				},
+				evening: {
+					yesOrNot: timeOfDay[2],
+					beforeFood: true,
+				},
+				night: {
+					yesOrNot: timeOfDay[3],
+					beforeFood: true,
+				},
+			},
+			dosageEndDate: dosageEnd,
+		});
 
-  const handleSubmit = async (e) => {
-    // MAKE POST REQUEST HERE
-    e.preventDefault();
-    // console.log(selectedFile)
+		let config = {
+			method: "post",
+			maxBodyLength: Infinity,
+			url: "http://localhost:4000/api/medicines",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			data: data,
+		};
 
-    const checkedValues = checkboxesRef.current
-      .filter((checkbox) => checkbox.checked)
-      .map((checkbox) => checkbox.value);
-    var timeOfDay = [];
-    checkboxesRef.current.forEach((checkbox, i) => {
-      timeOfDay.push(checkbox.checked);
-    });
+		axios
+			.request(config)
+			.then((response) => {
+				// alert("Tablet added successfully");
+				if (response.status === 200) {
+					setShowToast(true);
+					setFlag(!flag);
+				}
+			})
+			.catch((error) => {
+				// alert(error);
+				setNameError(true);
+			});
+	};
 
-    const axios = require("axios");
-    let data = JSON.stringify({
-      name: name,
-      quantity: quantity,
-      expiry: expiry,
-      frequency: frequency,
-      timeOfDay: {
-        morning: {
-          yesOrNot: timeOfDay[0],
-          beforeFood: true,
-        },
-        afternoon: {
-          yesOrNot: timeOfDay[1],
-          beforeFood: true,
-        },
-        evening: {
-          yesOrNot: timeOfDay[2],
-          beforeFood: true,
-        },
-        night: {
-          yesOrNot: timeOfDay[3],
-          beforeFood: true,
-        },
-      },
-      dosageEndDate: dosageEnd,
-    });
-
-    let config = {
-      method: "post",
-      maxBodyLength: Infinity,
-      url: "http://localhost:4000/api/medicines",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      data: data,
-    };
-
-    axios
-      .request(config)
-      .then((response) => {
-        // alert("Tablet added successfully");
-        if (response.status === 200) {
-          setShowToast(true)
-          setFlag(!flag)
-        }
-      })
-      .catch((error) => {
-        // alert(error);
-        setNameError(true);
-      });
-  };
 
 
   const [scrollPosition, setScrollPosition] = useState(0);
@@ -126,9 +124,10 @@ const TabletManager = () => {
 
   const tempRef = useRef(null);
   console.log(tempRef)
+
   return (
     <>
-      <NavBar buttons={false} />
+      <Navbar buttons={false} />
 
      
       <h3>Medicine Manager</h3>
@@ -218,8 +217,5 @@ const TabletManager = () => {
     </>
   );
 };
-
-
-
 
 export default TabletManager;

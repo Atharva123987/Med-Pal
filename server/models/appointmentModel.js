@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 const Schema = mongoose.Schema;
 
-const appointmentsSchema = new Schema(
+const appointmentSchema = new Schema(
 	{
 		doctorName: {
 			type: String,
@@ -25,4 +25,4 @@ const appointmentsSchema = new Schema(
 	{ timestamps: true }
 );
 
-module.exports = mongoose.model("Appointments", appointmentsSchema);
+module.exports = mongoose.model("Appointments", appointmentSchema);
