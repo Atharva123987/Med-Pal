@@ -9,9 +9,29 @@ const Charts = () => {
     const [bSugar, setBSugar] = useState(null)
     const [bPressure, setBPressure] = useState(null)
     const [bHaemoglobin, setBHaemoglobin] = useState(null)
+    const [readingDate, setReadingDate] = useState(null)
 
-    const handleValue = (e)=>{
-        switch(chartType){
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        switch (chartType) {
+            case 'bSugar':
+                console.log(bSugar)
+                break;
+            case 'bPressure':
+                console.log(bPressure)
+                break;
+            case 'bHaemoglobin':
+                console.log(bHaemoglobin)
+                break;
+            default:
+                console.log("")
+
+        }
+        console.log(readingDate.toISOString())
+    }
+
+    const handleValue = (e) => {
+        switch (chartType) {
             case 'bSugar':
                 setBSugar(e.target.value)
                 break;
@@ -25,7 +45,7 @@ const Charts = () => {
                 console.log("Choose a chart type!!!")
                 e.target.value = ''
         }
-    }   
+    }
 
     return (
         <>
@@ -34,27 +54,50 @@ const Charts = () => {
             <div className="d-flex justify-content-evenly">
                 <div>
                     <Form>
-                        <Form.Select aria-label="Default select example" onChange={(e)=>{
-                                console.log(e.target.value)
-                                setChartType(e.target.value)
-                            }}>
+                        <Form.Select aria-label="Default select example" onChange={(e) => {
+                            console.log(e.target.value)
+                            setChartType(e.target.value)
+                        }}>
                             <option>Select a chart</option>
                             <option value="bSugar" >Blood Sugar</option>
                             <option value="bPressure">Blood Pressure</option>
                             <option value="bHaemoglobin">Haemoglobin</option>
                         </Form.Select>
-                    
+
                         <Form.Group className="mb-3" controlId="exampleForm.ControlInput2" style={{ width: "300px" }}>
                             <Form.Label>Count value</Form.Label>
                             <Form.Control type="number" placeholder="Quantity" onChange={handleValue} />
-                            </Form.Group>
+                        </Form.Group>
+
+                        <Form.Group
+                            className="mb-3"
+                            controlId="appointmentTime"
+                        >
+                            <Form.Label>Time</Form.Label>
+                            <Form.Control
+                                type="date"
+                                placeholder="Time"
+                                onChange={(e) =>
+                                    setReadingDate(
+                                        new Date(e.target.value)
+                                    )
+
+                                }
+                            />
+                        </Form.Group>
+
+                        <Form.Group>
+                            <button className="btn btn-primary" onClick={handleSubmit}>
+                                Submit
+                            </button>
+                        </Form.Group>
 
                     </Form>
                 </div>
                 <AllCharts />
-               
-            {/* <AddMedicineModal/> */}
-        </div >
+
+                {/* <AddMedicineModal/> */}
+            </div >
         </>
     )
 }
