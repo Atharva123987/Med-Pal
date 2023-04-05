@@ -1,7 +1,8 @@
 import Navbar from "../components/Navbar";
 import AllCharts from '../components/Charts'
 import { Form } from "react-bootstrap";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
+import axios from "axios";
 // import AddMedicineModal from "../components/Medicines/AddMedicineModal";
 const Charts = () => {
 
@@ -11,12 +12,21 @@ const Charts = () => {
     const [bHaemoglobin, setBHaemoglobin] = useState(null)
     const [readingDate, setReadingDate] = useState(null)
     const [payLoadData, setPayLoadData] = useState(null)
+    const [fetchedData, setFetchedData] = useState(null)
+
+    useEffect(()=>{
+        handleFetch();
+    },[])
+
 
     const handleSubmit = async (e) => {
         e.preventDefault();
 
         // !!!POST REQUEST HERE
         // INSTEAD OF CONSOLE.LOG IN SWITCH, SET THE PAYLOAD DATA USING setPayLoadData() AND THEN SEND IT USING POST REQUEST
+
+       
+
         switch (chartType) {
             case 'bSugar':
                 console.log(bSugar)
@@ -32,6 +42,17 @@ const Charts = () => {
 
         }
         console.log(readingDate.toISOString())
+    }
+
+    const handleFetch = async()=>{
+        try{
+            // !!!GET REQUEST GOES HERE
+            const response = axios.get(``)
+            setFetchedData(response.data);
+        }
+        catch(err){
+            console.log(err);
+        }
     }
 
     const handleValue = (e) => {
@@ -98,7 +119,7 @@ const Charts = () => {
 
                     </Form>
                 </div>
-                <AllCharts />
+                <AllCharts chartData={fetchedData}/>
 
                 {/* <AddMedicineModal/> */}
             </div >
