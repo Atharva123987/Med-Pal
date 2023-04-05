@@ -101,10 +101,10 @@ const Charts = () => {
 		// 	},
 		// 	data: data,
 		// };
-        
+
         console.log(chartType);
         console.log(readingValue)
-        console.log(readingDate.toISOString())
+        console.log(readingDate.toISOString().slice(0, 10))
 
         
         setShowToast(true);
