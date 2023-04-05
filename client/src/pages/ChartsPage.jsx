@@ -10,9 +10,13 @@ const Charts = () => {
     const [bPressure, setBPressure] = useState(null)
     const [bHaemoglobin, setBHaemoglobin] = useState(null)
     const [readingDate, setReadingDate] = useState(null)
+    const [payLoadData, setPayLoadData] = useState(null)
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
+        // !!!POST REQUEST HERE
+        // INSTEAD OF CONSOLE.LOG IN SWITCH, SET THE PAYLOAD DATA USING setPayLoadData() AND THEN SEND IT USING POST REQUEST
         switch (chartType) {
             case 'bSugar':
                 console.log(bSugar)
