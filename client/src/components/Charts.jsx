@@ -8,23 +8,22 @@ import {
 	Tooltip,
 	Line,
 } from "recharts";
+
+// REPLACE THESE IMPORTS TO STATE VARIABLES WHICH CONTAIN FETCHED DATA FROM MONGO
 import { bloodPressure } from "../data/bloodPressure.js";
 import { bloodSugar } from "../data/bloodSugar.js";
 import { haemoglobin } from "../data/haemoglobin.js";
 import "./dashboard-item.css";
 
 const Charts = () => {
+
 	return (
 		<>
-			<div id="charts" className="dash-component">
+			<div id="charts" >
 				<legend align="center">Charts</legend>
-				<Carousel>
-					<Carousel.Item>
 						<h4>
 							<center>Blood Pressure Trend</center>
 						</h4>
-						{/*  */}
-						{/*  */}
 						<LineChart
 							width={400}
 							height={250}
@@ -42,8 +41,6 @@ const Charts = () => {
 								stroke="#8884d8"
 							/>
 						</LineChart>
-					</Carousel.Item>
-					<Carousel.Item>
 						<h4>
 							<center>Blood Sugar Trend</center>
 						</h4>
@@ -64,8 +61,6 @@ const Charts = () => {
 								stroke="#8884d8"
 							/>
 						</LineChart>
-					</Carousel.Item>
-					<Carousel.Item>
 						<h4>
 							<center>Haemoglobin Trend</center>
 						</h4>
@@ -86,8 +81,6 @@ const Charts = () => {
 								stroke="#8884d8"
 							/>
 						</LineChart>
-					</Carousel.Item>
-				</Carousel>
 				<div className="dash-button-container">
 					<button className="dash-button">
 						<span>+</span>

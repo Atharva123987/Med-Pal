@@ -12,6 +12,7 @@ import TabletManager from "./pages/TabletManager";
 import Appointments from "./pages/Appointments";
 import Admin from "./pages/Admin";
 import Search from "./pages/Search";
+import Charts from "./pages/ChartsPage";
 
 const App = () => {
   return (<>
@@ -26,6 +27,7 @@ const App = () => {
         <Route path="/appointments" component={Appointments}/>
         <Route path="/admin" component={Admin}/>
         <Route path="/search" component={Search}/>
+        <Route path="/charts" component={Charts}/>
     </BrowserRouter>
     </>
 );
