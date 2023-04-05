@@ -8,6 +8,9 @@ import Register from './pages/Register';
 import Dashboard from './pages/Dashboard';
 import About from './pages/About';
 import Calendar from "./components/Calendar";
+import TabletManager from "./pages/TabletManager";
+import Appointments from "./pages/Appointments";
+import Admin from "./pages/Admin";
 
 const App = () => {
   return (<>
@@ -18,6 +21,9 @@ const App = () => {
         <Route path="/dashboard" component={Dashboard} />
         <Route path="/about" component={About} />
         <Route path="/calendar" component={Calendar} />
+        <Route path="/medicines" component={TabletManager}/>
+        <Route path="/appointments" component={Appointments}/>
+        <Route path="/admin" component={Admin}/>
     </BrowserRouter>
     </>
 );

@@ -2,39 +2,66 @@
   display:flex;
   align-items: center;
   justify-content: center;
-  
-  position:absolute;
-  background-color: white;
+  background-color: rgba(0, 0, 0, 0);
   width: 100%;
+  z-index: 10;
 }
 
 .heading{
   font-size: 40px;
   color:black;
-  /* text-shadow: 2px 2px 4px black;
-  -webkit-text-stroke: 1px black; */
 }
 
 .logo{
   width: 50px;
   height: 50px;
   margin: 0px 5px 0px 10px ;
-  
 }
 
 .heading{
   font-family:'Franklin Gothic Regular', 'Arial Narrow', Arial, sans-serif;
 }
 
-#login , #register{
+#login-button , #register-button{
   width:70px;
   height: 50px;
+  transition:scale 0.2s, translate 0.2s;
+  transition-timing-function: ease-in-out;
+}
+
+#login-button:hover, #register-button:hover{
+  scale: 105%;
+  transition: scale 0.2s, translate 0.2s;
+  transition-timing-function: linear;
+}
+
+#login-button:hover{
+  translate: -5px 0px;
+}
+
+#register-button:hover{
+  translate: 5px 0px;
+}
+
+#login-button:active, #register-button:active{
+  opacity: 80%;
+  scale:100%
+}
+
+#login-button:active{
 
 }
 
-.buttons{
+
+
+.navbar-buttons{
   margin:0px 10px 0px auto;
   display: flex;
-  /* margin-left: auto; */
 }
 
+@media screen and (max-width:480px) {
+  .heading{
+    font-size: xx-large;
+  }
+  
+}
