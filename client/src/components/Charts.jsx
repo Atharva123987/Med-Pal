@@ -8,6 +8,8 @@ import {
 	Tooltip,
 	Line,
 } from "recharts";
+
+// REPLACE THESE IMPORTS TO STATE VARIABLES WHICH CONTAIN FETCHED DATA FROM MONGO
 import { bloodPressure } from "../data/bloodPressure.js";
 import { bloodSugar } from "../data/bloodSugar.js";
 import { haemoglobin } from "../data/haemoglobin.js";
