@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { CarouselData } from '../assets/CarouselData';
 import { AiFillCaretLeft, AiFillCaretRight } from 'react-icons/ai';
 import './carousel.css'
+import tempImg from '../assets/carousel1.jpg.png'
 
 // !!!IMPLEMENT AUTO SWITCHING IMAGES IN CAROUSEL
 const Carousel = ({ slides }) => {
@@ -31,7 +32,8 @@ const Carousel = ({ slides }) => {
             key={index}
           >
             {index === current && (
-              <img src={slide.image} alt='travel image'  className='image' />
+              // <img src={slide.image} alt='travel image'  className='image' />
+              <img src={tempImg} alt='travel image'  className='image' />
             )}
           </div>
         );
