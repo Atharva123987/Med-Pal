@@ -91,10 +91,22 @@ const Charts = () => {
 
         // !!!POST REQUEST HERE
         // USE chartType TO DETERMINE TO WHICH ENDPOINT THE POST REQUEST IS TO BE MADE
+        // EXAMPLE : 
+        // let config = {
+		// 	method: "post",
+		// 	maxBodyLength: Infinity,
+		// 	url: "http://localhost:4000/api/charts/${chartType}",
+		// 	headers: {
+		// 		"Content-Type": "application/json",
+		// 	},
+		// 	data: data,
+		// };
+        
         console.log(chartType);
         console.log(readingValue)
         console.log(readingDate.toISOString())
 
+        
         setShowToast(true);
 
     }
