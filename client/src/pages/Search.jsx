@@ -3,7 +3,7 @@ const Search = () => {
 
     return (
         <>
-            <SearchSideBar/>
+            <SearchSideBar />
         </>
     )
 }
