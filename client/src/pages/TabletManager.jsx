@@ -27,6 +27,10 @@ const TabletManager = () => {
 	const isMountedRef = useRef(false);
 	const [searchQuery, setSearchQuery] = useState(null)
 
+	useEffect(()=>{
+		handleFetch();
+	},[flag])
+
 	const handleFetch = async (e) => {
 		try {
 			const response = await axios.get(
