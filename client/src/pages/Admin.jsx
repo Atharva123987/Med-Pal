@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+
 import axios from "axios";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
@@ -10,7 +11,10 @@ const Admin = () => {
 	const [speciality, setSpeciality] = useState("");
 	const [phoneNumber, setPhoneNumber] = useState("");
 	const [clinicOrHospitalName, setClinicOrHospitalName] = useState("");
-	const [address, setAddress] = useState("");
+	const [address, setAddress] = useState('')
+    const [city, setCity] = useState('')
+    const [district, setDistrict] = useState('')
+    const [state, setState] = useState('')
 	const [fees, setFees] = useState(0);
 	const [fetchedData, setFetchedData] = useState(null);
 	const [show, setShow] = useState(false);
@@ -57,6 +61,9 @@ const Admin = () => {
 			phoneNumber,
 			clinicOrHospitalName,
 			address,
+            city,
+            district,
+            state, 
 			fees
 		);
 	};
@@ -191,13 +198,25 @@ const Admin = () => {
 					</Form.Group>
 
 					<Form.Group className="mb-3 " controlId="doctorName">
-						<Form.Label>Address</Form.Label>
-						<textarea
-							type="textarea"
-							placeholder="Enter name"
-							onChange={(e) => setAddress(e.target.value)}
-						/>
-					</Form.Group>
+                        <Form.Label>Address Line 1</Form.Label>
+                        <textarea type="textarea" placeholder="Enter name" onChange={(e) => setAddress(e.target.value)} />
+                    </Form.Group>
+
+                    <Form.Group className="mb-3 " controlId="cityName">
+                        <Form.Label>City</Form.Label>
+                        <Form.Control type="text" placeholder="Enter the city" onChange={(e) => setCity(e.target.value)} />
+                    </Form.Group>
+
+                    <Form.Group className="mb-3 " controlId="districtName">
+                        <Form.Label>District</Form.Label>
+                        <Form.Control type="text" placeholder="Enter the district" onChange={(e) => setDistrict(e.target.value)} />
+                    </Form.Group>
+
+                    <Form.Group className="mb-3 " controlId="stateName">
+                        <Form.Label>State</Form.Label>
+                        <Form.Control type="text" placeholder="Enter the state" onChange={(e) => setState(e.target.value)} />
+                    </Form.Group>
+
 					<Form.Group className="mb-3 " controlId="doctorName">
 						<Form.Label>Fees</Form.Label>
 						<Form.Control
