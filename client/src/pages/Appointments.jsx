@@ -104,16 +104,7 @@ const Appointments = () => {
 	};
 
 	const handleFetch = async (e) => {
-		// try {
-		// 	// !!!HANDLE GET REQUEST HERE
-		// 	const response = await axios.get(
-		// 		`https://random-data-api.com/api/v2/users?size=5`
-		// 	);
-		// 	setFetchedData(response.data);
-		// 	console.log("Fetched Data :", response.data);
-		// } catch (err) {
-		// 	console.log(err);
-		// }
+	
 
 		try {
 			const response = await axios.get(

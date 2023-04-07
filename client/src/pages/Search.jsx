@@ -2,18 +2,20 @@ import React, { useEffect, useState } from "react";
 import { Button, Form, FormGroup } from "react-bootstrap";
 import "../components/searchsidebar.css";
 import axios from "axios";
+import Dropdown from 'react-bootstrap/Dropdown';
+import DropdownButton from 'react-bootstrap/DropdownButton';
+import './search.css'
+import Card from 'react-bootstrap/Card';
 
 const Search = () => {
 	const [searchQuery, setSearchQuery] = useState("");
-	const [filters, setFilters] = useState("");
+	const [filters, setFilters] = useState("Select a category");
 	const [results, setResults] = useState(null);
 	const [min, setMin] = useState(1);
 	const [max, setMax] = useState(1000);
-	const [value, setValue] = useState(null);
-	const [flag, setFlag] = useState(0);
+	const [distanceValue, setDistanceValue] = useState(500);
 	const [latitude, setLatitude] = useState(null);
 	const [longitude, setLongitude] = useState(null);
-	const [list, setList] = useState({});
 
 	if (navigator.geolocation) {
 		navigator.geolocation.getCurrentPosition((position) => {
@@ -32,7 +34,7 @@ const Search = () => {
 		let newData = JSON.stringify({
 			latitude: Number(latitude),
 			longitude: Number(longitude),
-			distance: Number(value),
+			distance: Number(distanceValue),
 			speciality: filters,
 		});
 		console.log(newData);
@@ -57,11 +59,13 @@ const Search = () => {
 			});
 	};
 
+
+	useEffect(()=>console.log(filters),[filters])
 	return (
 		<>
 			<div className="sidebar">
 				<Form onSubmit={handleSubmit}>
-					<Form.Group>
+					{/* <Form.Group>
 						<Form.Control
 							type="text"
 							name="searchQuery"
@@ -69,36 +73,33 @@ const Search = () => {
 							value={searchQuery}
 							onChange={(e) => setSearchQuery(e.target.value)}
 						/>
-					</Form.Group>
+					</Form.Group> */}
 					<Form.Group>
 						<label htmlFor="distanceSlider">
-							Distance (in miles): {value}
+							Distance (in miles): {distanceValue}
 						</label>
 						<Form.Control
 							type="range"
 							name="distanceSlider"
 							min={min}
 							max={max}
-							value={value}
-							onChange={(e) => setValue(e.target.value)}
+							value={distanceValue}
+							onChange={(e) => setDistanceValue(e.target.value)}
 						/>
 					</Form.Group>
 					<Form.Group>
 						<label>Category:</label>
-						<select
-							name="category"
-							value={filters}
-							onChange={(e) => setFilters(e.target.value)}
-						>
-							<option value="Cardiologist">Cardiologist</option>
-							<option value="Rheumatologist">
-								Rheumatologist
-							</option>
-							<option value="Pediatrician">Pediatrician</option>
-							<option value="General Physician">
-								General Physician
-							</option>
-						</select>
+						
+						<DropdownButton title={`${filters?filters:"Select a category"}`} onSelect={(e)=>setFilters(e)}>
+							
+							<Dropdown.Item style={{fontSize:"15px"}} eventKey="">Select a category</Dropdown.Item>
+							<Dropdown.Item style={{fontSize:"15px"}} eventKey="Cardiologist">Cardiologist</Dropdown.Item>
+							<Dropdown.Item style={{fontSize:"15px"}} eventKey="Rheumatologist">Rheumatologist</Dropdown.Item>
+							<Dropdown.Item style={{fontSize:"15px"}} eventKey="Pediatrician">Pediatrician</Dropdown.Item>
+							<Dropdown.Item style={{fontSize:"15px"}} eventKey="General Physician">General Physician</Dropdown.Item>
+
+						</DropdownButton>
+
 					</Form.Group>
 
 					<Button type="submit">Submit</Button>
@@ -108,20 +109,44 @@ const Search = () => {
 				{results &&
 					results.map((elem) => {
 						return (
+							<>
 							<ul>
 								<li style={{ marginLeft: "50vw" }}>
 									<img
 										style={{ height: "100px" }}
-										src={elem.avatar}
+										src='https://t4.ftcdn.net/jpg/00/64/67/63/360_F_64676383_LdbmhiNM6Ypzb3FM4PPuFP9rHe7ri8Ju.jpg'
+										alt="doctor img"
 									/>
 								</li>
 								<li style={{ marginLeft: "50vw" }}>
-									{elem.first_name}
+									Name : {elem.doctorName}
 								</li>
 								<li style={{ marginLeft: "50vw" }}>
-									{elem.last_name}
+									Address : {elem.address}
+								</li>
+								<li style={{ marginLeft: "50vw" }}>
+									Fees : {elem.fees}
+								</li>
+								<li style={{ marginLeft: "50vw" }}>
+									Speciality : {elem.speciality}
+								</li>
+								<li style={{ marginLeft: "50vw" }}>
+									Ph. No. : {elem.phoneNumber}
 								</li>
 							</ul>
+
+							<Card style={{ width: '18rem' }}>
+							<Card.Body>
+							  <Card.Title>Card Title</Card.Title>
+							  <Card.Text>
+								Some quick example text to build on the card title and make up the
+								bulk of the card's content.
+							  </Card.Text>
+							  <img src="https://t4.ftcdn.net/jpg/00/64/67/63/360_F_64676383_LdbmhiNM6Ypzb3FM4PPuFP9rHe7ri8Ju.jpg" width={100}/>
+							  <Button variant="primary">Go somewhere</Button>
+							</Card.Body>
+						  </Card>
+						  </>
 						);
 					})}
 			</div>
