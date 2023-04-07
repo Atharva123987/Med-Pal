@@ -33,6 +33,7 @@ const Search = () => {
 			latitude: Number(latitude),
 			longitude: Number(longitude),
 			distance: Number(value),
+			speciality: filters,
 		});
 		console.log(newData);
 		let config = {
@@ -49,19 +50,7 @@ const Search = () => {
 			.request(config)
 			.then((response) => {
 				console.log(response.data);
-				setList(response.data);
-				console.log(
-					".....................midbreak....................................."
-				);
-				console.log(response.data[0].speciality);
-
-				if (value) {
-					let tempList = response.data.filter(
-						(doctor) => doctor.speciality === filters
-					);
-					setList(tempList);
-				}
-				console.log(list);
+				setResults(response.data);
 			})
 			.catch((error) => {
 				console.log(error);
