@@ -135,7 +135,7 @@ const Search = () => {
 								</li>
 							</ul> */}
 
-							<Card style={{ width: '40rem', marginLeft:"300px" }}>
+							<Card style={{ width: '40rem', marginLeft:"30vw" }}>
 							<Card.Body className="d-flex">
 								<div>
 							  <img src="https://t4.ftcdn.net/jpg/00/64/67/63/360_F_64676383_LdbmhiNM6Ypzb3FM4PPuFP9rHe7ri8Ju.jpg" width={100}/>
