@@ -5,6 +5,7 @@ import axios from "axios";
 import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import './search.css'
+import Card from 'react-bootstrap/Card';
 
 const Search = () => {
 	const [searchQuery, setSearchQuery] = useState("");
@@ -108,6 +109,7 @@ const Search = () => {
 				{results &&
 					results.map((elem) => {
 						return (
+							<>
 							<ul>
 								<li style={{ marginLeft: "50vw" }}>
 									<img
@@ -117,15 +119,34 @@ const Search = () => {
 									/>
 								</li>
 								<li style={{ marginLeft: "50vw" }}>
-									{elem.doctorName}
+									Name : {elem.doctorName}
 								</li>
 								<li style={{ marginLeft: "50vw" }}>
-									{elem.fees}
+									Address : {elem.address}
 								</li>
 								<li style={{ marginLeft: "50vw" }}>
-									{elem.speciality}
+									Fees : {elem.fees}
+								</li>
+								<li style={{ marginLeft: "50vw" }}>
+									Speciality : {elem.speciality}
+								</li>
+								<li style={{ marginLeft: "50vw" }}>
+									Ph. No. : {elem.phoneNumber}
 								</li>
 							</ul>
+
+							<Card style={{ width: '18rem' }}>
+							<Card.Body>
+							  <Card.Title>Card Title</Card.Title>
+							  <Card.Text>
+								Some quick example text to build on the card title and make up the
+								bulk of the card's content.
+							  </Card.Text>
+							  <img src="https://t4.ftcdn.net/jpg/00/64/67/63/360_F_64676383_LdbmhiNM6Ypzb3FM4PPuFP9rHe7ri8Ju.jpg" width={100}/>
+							  <Button variant="primary">Go somewhere</Button>
+							</Card.Body>
+						  </Card>
+						  </>
 						);
 					})}
 			</div>
