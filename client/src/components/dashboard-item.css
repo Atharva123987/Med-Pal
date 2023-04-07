@@ -197,3 +197,7 @@ legend{
     overflow: hidden;
     overflow-y: auto;
 }
+
+.recharts-surface:hover{
+    cursor: crosshair;
+}

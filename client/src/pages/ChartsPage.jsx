@@ -15,16 +15,21 @@ const Charts = () => {
 	const [showToast, setShowToast] = useState(false);
 	const [showError, setShowError] = useState(false);
 	const [fetchedData, setFetchedData] = useState([[]]);
-
+	const [requiredError, setRequiredError] = useState(false);
 	useEffect(() => {
 		handleFetch();
+		
 	}, [readingType])
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 
-		if(!readingValue){
+		if(!readingValue || !readingDate){
 			setShowError(true)
+			setRequiredError(true)
+		}
+		else if(readingValue && readingDate){
+			setRequiredError(false)
 		}
 		// console.log(readingType);
 		// console.log(readingValue);
@@ -97,12 +102,11 @@ const Charts = () => {
 	return (
 		<>
 			<Navbar buttons={false} />
-			<h1>Charts</h1>
-			
-			<div className="d-flex justify-content-evenly">
+			<h3 id="charts-heading">Charts</h3>
+			<div className="d-flex justify-content-evenly" id="charts-container">
 				<div>
-					<Form>
-						
+					<Form id='charts-form'>
+						<h4>Add reading</h4>
 					<Dropdown as={ButtonGroup} id='chart-dropdown'>
 							<button id='add-value' className='bg-dark d-flex'onClick={handleSubmit}>
 								<AiFillPlusCircle id="add-icon"/>
@@ -131,10 +135,11 @@ const Charts = () => {
 							controlId="exampleForm.ControlInput2"
 							style={{ width: "300px" }}
 						>
-							<Form.Label>Count value</Form.Label>
+							<Form.Label>Reading value {requiredError && <p style={{all:'unset'}} className="text-danger">*</p>}</Form.Label>
 							<Form.Control
 								type="number"
-								placeholder="Count value"
+								placeholder="Value"
+								required
 								onChange={(e) =>
 									setReadingValue(e.target.value)
 								}
@@ -145,10 +150,11 @@ const Charts = () => {
 							className="mb-3"
 							controlId="appointmentTime"
 						>
-							<Form.Label>Time</Form.Label>
+							<Form.Label>Date {requiredError && <p style={{all:'unset'}} className="text-danger">*</p>}</Form.Label>
 							<Form.Control
 								type="date"
-								placeholder="Time"
+								 placeholder="Enter date"
+								 required
 								onChange={(e) =>
 									setReadingDate(new Date(e.target.value))
 								}

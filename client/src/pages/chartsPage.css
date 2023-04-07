@@ -1,3 +1,18 @@
+#charts-form{
+    padding: 20px;
+    /* border:1px solid rgb(146,188,248);  */
+    transition: all 0.3s;
+}
+
+#charts-form:hover{
+    box-shadow: 0px 0px 10px rgba(146, 189, 248, 0.433);
+    
+    border-radius: 20px;
+    scale: 105%;
+    transition: all 0.3s;
+}
+
+
 #add-value{
     font-size: 30px;
     color:white;
@@ -25,4 +40,13 @@
     /* border:1px solid aqua; */
     box-shadow: 2px 2px 5px #00BCE4;
     transition: all 0.3s;
+}
+
+#charts-heading{
+    /* border:2px solid rgb(0,188,228); */
+   text-align: center;
+    color:white;
+    text-shadow: 2px 2px 2px rgba(0, 112, 177, 0.499);
+   background-color: rgb(0,188,228);
+   margin-bottom: 40px;
 }
