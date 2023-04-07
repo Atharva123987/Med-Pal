@@ -16,11 +16,11 @@ const Charts = (props) => {
 	return (
 		<>
 			<div id="charts">
-				<legend align="center">Chart</legend>
+				<legend align="center">{props.chartType}</legend>
 				<h4>{/* <center>{displayData.testName}</center> */}</h4>
 				<LineChart
-					width={400}
-					height={250}
+					width={600}
+					height={350}
 					data={displayData}
 					margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
 				>
@@ -31,11 +31,7 @@ const Charts = (props) => {
 					{/* <Legend /> */}
 					<Line type="monotone" dataKey="count" stroke="#8884d8" />
 				</LineChart>
-				<div className="dash-button-container">
-					<button className="dash-button">
-						<span>+</span>
-					</button>
-				</div>
+				
 			</div>
 		</>
 	);

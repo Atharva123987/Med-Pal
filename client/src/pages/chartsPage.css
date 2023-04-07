@@ -1,0 +1,28 @@
+#add-value{
+    font-size: 30px;
+    color:white;
+    transition: all 0.3s;
+    padding: 10px;
+    margin:auto;
+    border-radius: 10px 0 0 10px;
+}
+#add-value:hover{
+    transition: all 0.3s;
+    scale:105%;
+    color:#00BCE4;
+
+}
+#add-value:active{
+    transition: all 0.3s;
+    scale:100%;
+    color:#00ECD2;
+    box-shadow: 2px 2px 5px rgb(77,81,84) inset;
+}
+#chart-dropdown{
+    transition: all 0.3s;
+}
+#chart-dropdown:hover{
+    /* border:1px solid aqua; */
+    box-shadow: 2px 2px 5px #00BCE4;
+    transition: all 0.3s;
+}
