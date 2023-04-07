@@ -5,20 +5,22 @@
 
 #charts-form:hover {
     box-shadow: 0px 0px 10px rgba(146, 189, 248, 0.433);
-
     border-radius: 20px;
     scale: 105%;
     transition: all 0.3s;
 }
 
+#dropdown-split-basic{
+    border-radius: 10px;
+}
 
 #add-value {
     font-size: 30px;
     color: white;
     transition: all 0.3s;
     padding: 10px;
-    margin: auto;
-    border-radius: 10px 0 0 10px;
+    margin-left: auto;
+    border-radius: 10px;
 }
 
 #add-value:hover {
@@ -46,11 +48,11 @@
 
 #charts-heading {
     text-align: center;
-    background-image:radial-gradient( rgb(0, 208, 255),rgb(112,238,232));
     color: white;
     text-shadow: 2px 2px 2px rgba(0, 112, 177, 0.499);
     background-color: rgb(0, 188, 228);
     margin-bottom: 40px;
+    margin:0 auto;
     padding:5px;
     border-radius: 40px;
     width: 400px;
