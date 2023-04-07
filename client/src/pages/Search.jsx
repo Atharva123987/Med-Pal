@@ -30,6 +30,24 @@ const Search = () => {
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
+		const axios = require("axios");
+		let newData = JSON.stringify({
+			latitude: Number(latitude),
+			longitude: Number(longitude),
+			distance: Number(distanceValue),
+			speciality: filters,
+		});
+		console.log("Filters",typeof(filters))
+		console.log(newData);
+		let config = {
+			method: "post",
+			maxBodyLength: Infinity,
+			url: "http://localhost:4000/api/doctors/nearby",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			data: newData,
+		};
 
 		
 	};
@@ -84,7 +102,8 @@ const Search = () => {
 				{results &&
 					results.map((elem) => {
 						return (
-							<ul>
+							<>
+							{/* <ul>
 								<li style={{ marginLeft: "50vw" }}>
 									<img
 										style={{ height: "100px" }}
@@ -101,7 +120,24 @@ const Search = () => {
 								<li style={{ marginLeft: "50vw" }}>
 									{elem.speciality}
 								</li>
-							</ul>
+							</ul> */}
+
+							<Card style={{ width: '28rem', marginLeft:"400px" }}>
+							<Card.Body className="d-flex">
+								<div>
+							  <img src="https://t4.ftcdn.net/jpg/00/64/67/63/360_F_64676383_LdbmhiNM6Ypzb3FM4PPuFP9rHe7ri8Ju.jpg" width={100}/>
+							  </div>
+							  <div>
+							  <Card.Title>{elem.doctorName}</Card.Title>
+							  <Card.Text>{elem.address}</Card.Text>
+							  {/* <Button variant="primary"></Button> */}
+							  <Card.Text>{elem.fees}</Card.Text>
+							  <Card.Text>{elem.speciality}</Card.Text>
+							  <Card.Text>{elem.phoneNumber}</Card.Text>
+							  </div>
+							</Card.Body>
+						  </Card>
+						  </>
 						);
 					})}
 			</div>
