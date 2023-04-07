@@ -6,6 +6,7 @@ import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import './search.css'
 import Card from 'react-bootstrap/Card';
+import {IoIosNavigate} from 'react-icons/io'
 
 const Search = () => {
 	const [searchQuery, setSearchQuery] = useState("");
@@ -146,8 +147,8 @@ const Search = () => {
 							  <Card.Text>Fees : {elem.fees}</Card.Text>
 							  <Card.Text>Phone number : {elem.phoneNumber}</Card.Text>
 							  <Card.Text>Speciality : {elem.speciality}</Card.Text>
+							  <Button variant="success"><IoIosNavigate style={{fontSize:"30px", margin:"5px"}}/></Button>
 							  </div>
-							  {/* <Button variant="primary">Go somewhere</Button> */}
 							</Card.Body>
 						  </Card>
 						  </>
