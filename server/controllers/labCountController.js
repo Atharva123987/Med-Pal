@@ -5,6 +5,7 @@ const getTypeOfLabCount = async (req, res) => {
 	console.log(req.body);
 	const { testName } = req.body;
 	LabCounts.find({ testName: testName })
+		.sort({ dateTaken: 1 })
 		.then((labCount) => {
 			if (!labCount.length) {
 				return res
@@ -44,17 +45,16 @@ const createLabCount = async (req, res) => {
 	console.log(req.body);
 	const { testName, count, dateTaken } = req.body;
 	try {
-		if(testName === 'noselection'){
-			res.status(404).json({mssg:"Select a chart type!"})
+		if (testName === "noselection") {
+			res.status(404).json({ mssg: "Select a chart type!" });
+		} else {
+			const newLabCount = await LabCounts.create({
+				testName,
+				count,
+				dateTaken,
+			});
+			res.status(200).json({ mssg: "POST a new labCount", newLabCount });
 		}
-		else{
-		const newLabCount = await LabCounts.create({
-			testName,
-			count,
-			dateTaken,
-		});
-		res.status(200).json({ mssg: "POST a new labCount", newLabCount });
-	}
 	} catch (err) {
 		res.status(400).json({ error: err.message });
 	}
