@@ -104,7 +104,7 @@ const Charts = () => {
 		<>
 			<Navbar buttons={false} />
 			<div className="d-flex justify-content-center">
-			<h3 id="charts-heading" >Charts <BiBarChartAlt2 style={{fontSize:"30px"}}/></h3>
+			<h3 id="charts-heading" >Charts <BiBarChartAlt2 style={{fontSize:"30px", }}/></h3>
 			</div>
 			<div className="d-flex justify-content-evenly" id="charts-container">
 				<div>

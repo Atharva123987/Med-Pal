@@ -46,6 +46,7 @@
 
 #charts-heading {
     text-align: center;
+    background-image:radial-gradient( rgb(0, 208, 255),rgb(112,238,232));
     color: white;
     text-shadow: 2px 2px 2px rgba(0, 112, 177, 0.499);
     background-color: rgb(0, 188, 228);
