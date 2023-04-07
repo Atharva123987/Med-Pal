@@ -1,6 +1,25 @@
 const LabCounts = require("../models/labCountModel");
 const mongoose = require("mongoose");
 
+
+const getTypeOfLabCount = async (req, res) => {
+	console.log(req.body);
+	const { testName } = req.body;
+	LabCounts.find({ testName: testName })
+		.then((labCount) => {
+			if (!labCount.length) {
+				return res
+					.status(404)
+					.json({ success: false, error: `LabCount not found` });
+			}
+			return res.status(200).json({ success: true, data: labCount });
+		})
+		.catch((err) =>
+			res.status(400).json({ success: false, error: err.message })
+		);
+};
+
+
 const getAllLabCounts = async (req, res) => {
 	const labCounts = await LabCounts.find({}).sort({ createdAt: -1 });
 	console.log(labCounts);
@@ -81,4 +100,6 @@ module.exports = {
 	createLabCount,
 	deleteLabCount,
 	updateLabCount,
+	getTypeOfLabCount,
+
 };

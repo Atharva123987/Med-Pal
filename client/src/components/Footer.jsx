@@ -12,7 +12,7 @@ const Footer = ()=>{
         <>
         <footer>
             <div id='footer-top'>
-            <L smooth to="/#" className='footer-links'>
+            <L smooth to="#" className='footer-links'>
                 <BsArrowUpCircle/>
                 <span>   Back to Top</span>
                 </L>
