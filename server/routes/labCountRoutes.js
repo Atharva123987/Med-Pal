@@ -5,9 +5,13 @@ const {
 	createLabCount,
 	deleteLabCount,
 	updateLabCount,
+	getTypeOfLabCount,
 } = require("../controllers/labCountController");
 
 const router = express.Router();
+
+// GET type of labCount
+router.post("/type", getTypeOfLabCount);
 
 // GET all labCounts
 router.get("/", getAllLabCounts);
