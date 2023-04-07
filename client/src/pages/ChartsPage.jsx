@@ -7,6 +7,7 @@ import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import { AiFillPlusCircle } from 'react-icons/ai'
 import Dropdown from 'react-bootstrap/Dropdown';
 import Button from 'react-bootstrap/Button';
+import {BiBarChartAlt2} from 'react-icons/bi'
 import './chartsPage.css'
 const Charts = () => {
 	const [readingType, setReadingType] = useState('Blood Sugar');
@@ -102,7 +103,9 @@ const Charts = () => {
 	return (
 		<>
 			<Navbar buttons={false} />
-			<h3 id="charts-heading">Charts</h3>
+			<div className="d-flex justify-content-center">
+			<h3 id="charts-heading" >Charts <BiBarChartAlt2 style={{fontSize:"30px"}}/></h3>
+			</div>
 			<div className="d-flex justify-content-evenly" id="charts-container">
 				<div>
 					<Form id='charts-form'>
