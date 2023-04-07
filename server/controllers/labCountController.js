@@ -1,6 +1,7 @@
 const LabCounts = require("../models/labCountModel");
 const mongoose = require("mongoose");
 
+
 const getTypeOfLabCount = async (req, res) => {
 	console.log(req.body);
 	const { testName } = req.body;
@@ -17,6 +18,7 @@ const getTypeOfLabCount = async (req, res) => {
 			res.status(400).json({ success: false, error: err.message })
 		);
 };
+
 
 const getAllLabCounts = async (req, res) => {
 	const labCounts = await LabCounts.find({}).sort({ createdAt: -1 });
@@ -99,4 +101,5 @@ module.exports = {
 	deleteLabCount,
 	updateLabCount,
 	getTypeOfLabCount,
+
 };
