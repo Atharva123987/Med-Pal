@@ -1,9 +1,9 @@
-const Medicines = require("../models/medicinesModel");
+const Medicines = require("../models/medicineModel");
 const mongoose = require("mongoose");
 
 const getAllMedicines = async (req, res) => {
 	const medicines = await Medicines.find({}).sort({ createdAt: -1 });
-	console.log(medicines)
+	console.log(medicines);
 	res.status(200).json(medicines);
 };
 
@@ -24,10 +24,11 @@ const getSingleMedicine = async (req, res) => {
 };
 
 const createMedicine = async (req, res) => {
+	console.log(req.body);
 	const { name, quantity, expiry, frequency, timeOfDay, dosageEndDate } =
 		req.body;
 	try {
-		const newMedicine = await Medicine.create({
+		const newMedicine = await Medicines.create({
 			name,
 			quantity,
 			expiry,

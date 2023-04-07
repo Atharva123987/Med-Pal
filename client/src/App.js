@@ -9,6 +9,10 @@ import Dashboard from './pages/Dashboard';
 import About from './pages/About';
 import Calendar from "./components/Calendar";
 import TabletManager from "./pages/TabletManager";
+import Appointments from "./pages/Appointments";
+import Admin from "./pages/Admin";
+import Search from "./pages/Search";
+import Charts from "./pages/ChartsPage";
 
 const App = () => {
   return (<>
@@ -19,7 +23,11 @@ const App = () => {
         <Route path="/dashboard" component={Dashboard} />
         <Route path="/about" component={About} />
         <Route path="/calendar" component={Calendar} />
-        <Route path="/tablets" component={TabletManager}/>
+        <Route path="/medicines" component={TabletManager}/>
+        <Route path="/appointments" component={Appointments}/>
+        <Route path="/admin" component={Admin}/>
+        <Route path="/search" component={Search}/>
+        <Route path="/charts" component={Charts}/>
     </BrowserRouter>
     </>
 );

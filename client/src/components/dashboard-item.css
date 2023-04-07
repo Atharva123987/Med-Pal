@@ -193,7 +193,11 @@ legend{
 }
 
 #charts{
-    max-width: 40vw;
+    max-width:100vw;
     overflow: hidden;
     overflow-y: auto;
+}
+
+.recharts-surface:hover{
+    cursor: crosshair;
 }
