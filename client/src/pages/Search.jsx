@@ -45,16 +45,27 @@ const Search = () => {
 			data: newData,
 		};
 
-		axios
+		await axios
 			.request(config)
 			.then((response) => {
-				console.log(JSON.stringify(response.data));
+				console.log(response.data);
 				setList(response.data);
+				console.log(
+					".....................midbreak....................................."
+				);
+				console.log(response.data[0].speciality);
+
+				if (value) {
+					let tempList = response.data.filter(
+						(doctor) => doctor.speciality === filters
+					);
+					setList(tempList);
+				}
+				console.log(list);
 			})
 			.catch((error) => {
 				console.log(error);
 			});
-		console.log(list);
 	};
 
 	return (
@@ -87,15 +98,15 @@ const Search = () => {
 						<label>Category:</label>
 						<select
 							name="category"
-							value={filters.category}
+							value={filters}
 							onChange={(e) => setFilters(e.target.value)}
 						>
-							<option value="cardiologist">Cardiologist</option>
-							<option value="rheumatologist">
+							<option value="Cardiologist">Cardiologist</option>
+							<option value="Rheumatologist">
 								Rheumatologist
 							</option>
-							<option value="pediatrician">Pediatrician</option>
-							<option value="general_physician">
+							<option value="Pediatrician">Pediatrician</option>
+							<option value="General Physician">
 								General Physician
 							</option>
 						</select>
