@@ -2,15 +2,17 @@ import React, { useEffect, useState } from "react";
 import { Button, Form, FormGroup } from "react-bootstrap";
 import "../components/searchsidebar.css";
 import axios from "axios";
+import Dropdown from 'react-bootstrap/Dropdown';
+import DropdownButton from 'react-bootstrap/DropdownButton';
+import './search.css'
 
 const Search = () => {
 	const [searchQuery, setSearchQuery] = useState("");
-	const [filters, setFilters] = useState("");
+	const [filters, setFilters] = useState("Select a category");
 	const [results, setResults] = useState(null);
 	const [min, setMin] = useState(1);
 	const [max, setMax] = useState(1000);
-	const [value, setValue] = useState(null);
-	const [flag, setFlag] = useState(0);
+	const [distanceValue, setDistanceValue] = useState(500);
 	const [latitude, setLatitude] = useState(null);
 	const [longitude, setLongitude] = useState(null);
 	const [list, setList] = useState({});
@@ -28,51 +30,17 @@ const Search = () => {
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-		const axios = require("axios");
-		let newData = JSON.stringify({
-			latitude: Number(latitude),
-			longitude: Number(longitude),
-			distance: Number(value),
-		});
-		console.log(newData);
-		let config = {
-			method: "post",
-			maxBodyLength: Infinity,
-			url: "http://localhost:4000/api/doctors/nearby",
-			headers: {
-				"Content-Type": "application/json",
-			},
-			data: newData,
-		};
 
-		await axios
-			.request(config)
-			.then((response) => {
-				console.log(response.data);
-				setList(response.data);
-				console.log(
-					".....................midbreak....................................."
-				);
-				console.log(response.data[0].speciality);
-
-				if (value) {
-					let tempList = response.data.filter(
-						(doctor) => doctor.speciality === filters
-					);
-					setList(tempList);
-				}
-				console.log(list);
-			})
-			.catch((error) => {
-				console.log(error);
-			});
+		
 	};
 
+
+	useEffect(()=>console.log(filters),[filters])
 	return (
 		<>
 			<div className="sidebar">
 				<Form onSubmit={handleSubmit}>
-					<Form.Group>
+					{/* <Form.Group>
 						<Form.Control
 							type="text"
 							name="searchQuery"
@@ -80,36 +48,33 @@ const Search = () => {
 							value={searchQuery}
 							onChange={(e) => setSearchQuery(e.target.value)}
 						/>
-					</Form.Group>
+					</Form.Group> */}
 					<Form.Group>
 						<label htmlFor="distanceSlider">
-							Distance (in miles): {value}
+							Distance (in miles): {distanceValue}
 						</label>
 						<Form.Control
 							type="range"
 							name="distanceSlider"
 							min={min}
 							max={max}
-							value={value}
-							onChange={(e) => setValue(e.target.value)}
+							value={distanceValue}
+							onChange={(e) => setDistanceValue(e.target.value)}
 						/>
 					</Form.Group>
 					<Form.Group>
 						<label>Category:</label>
-						<select
-							name="category"
-							value={filters}
-							onChange={(e) => setFilters(e.target.value)}
-						>
-							<option value="Cardiologist">Cardiologist</option>
-							<option value="Rheumatologist">
-								Rheumatologist
-							</option>
-							<option value="Pediatrician">Pediatrician</option>
-							<option value="General Physician">
-								General Physician
-							</option>
-						</select>
+						
+						<DropdownButton title={`${filters?filters:"Select a category"}`} onSelect={(e)=>setFilters(e)}>
+							
+							<Dropdown.Item style={{fontSize:"15px"}} eventKey="">Select a category</Dropdown.Item>
+							<Dropdown.Item style={{fontSize:"15px"}} eventKey="Cardiologist">Cardiologist</Dropdown.Item>
+							<Dropdown.Item style={{fontSize:"15px"}} eventKey="Rheumatologist">Rheumatologist</Dropdown.Item>
+							<Dropdown.Item style={{fontSize:"15px"}} eventKey="Pediatrician">Pediatrician</Dropdown.Item>
+							<Dropdown.Item style={{fontSize:"15px"}} eventKey="General Physician">General Physician</Dropdown.Item>
+
+						</DropdownButton>
+
 					</Form.Group>
 
 					<Button type="submit">Submit</Button>
@@ -123,14 +88,18 @@ const Search = () => {
 								<li style={{ marginLeft: "50vw" }}>
 									<img
 										style={{ height: "100px" }}
-										src={elem.avatar}
+										src='https://t4.ftcdn.net/jpg/00/64/67/63/360_F_64676383_LdbmhiNM6Ypzb3FM4PPuFP9rHe7ri8Ju.jpg'
+										alt="doctor img"
 									/>
 								</li>
 								<li style={{ marginLeft: "50vw" }}>
-									{elem.first_name}
+									{elem.doctorName}
 								</li>
 								<li style={{ marginLeft: "50vw" }}>
-									{elem.last_name}
+									{elem.fees}
+								</li>
+								<li style={{ marginLeft: "50vw" }}>
+									{elem.speciality}
 								</li>
 							</ul>
 						);

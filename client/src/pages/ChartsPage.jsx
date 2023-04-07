@@ -22,6 +22,8 @@ const Charts = () => {
 		
 	}, [readingType])
 
+
+
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 
@@ -32,10 +34,7 @@ const Charts = () => {
 		else if(readingValue && readingDate){
 			setRequiredError(false)
 		}
-		// console.log(readingType);
-		// console.log(readingValue);
-		// console.log(readingDate.toISOString().slice(0, 10));
-
+	
 		let data = JSON.stringify({
 			testName: readingType,
 			count: readingValue,
@@ -55,7 +54,6 @@ const Charts = () => {
 		axios
 			.request(config)
 			.then((response) => {
-				// console.log(JSON.stringify(response.data));
 				setShowToast(true);
 				handleFetch();
 
@@ -100,20 +98,24 @@ const Charts = () => {
 		}
 	};
 
+	const handleDelete = async(e) =>{
+		e.preventDefault();
+		// !!!DELETE REQUEST HERE
+	}
+
 	return (
 		<>
 			<Navbar buttons={false} />
-			<div className="d-flex justify-content-center">
+			<div>
 			<h3 id="charts-heading" >Charts <BiBarChartAlt2 style={{fontSize:"30px", }}/></h3>
 			</div>
 			<div className="d-flex justify-content-evenly" id="charts-container">
-				<div>
+				<div >
 					<Form id='charts-form'>
-						<h4>Add reading</h4>
+						<h4 >Add reading</h4>
+						
 					<Dropdown as={ButtonGroup} id='chart-dropdown'>
-							<button id='add-value' className='bg-dark d-flex'onClick={handleSubmit}>
-								<AiFillPlusCircle id="add-icon"/>
-							</button>
+							
 
 								<Dropdown.Toggle split variant="dark" id="dropdown-split-basic"  drop='end' key='end'>{readingType?readingType:'Select a chart'}</Dropdown.Toggle>
 
@@ -163,12 +165,16 @@ const Charts = () => {
 								}
 							/>
 						</Form.Group>
-
 						
+							<button id='add-value' className='bg-dark d-flex'onClick={handleSubmit}>
+								<AiFillPlusCircle id="add-icon"/>
+							</button>
 					</Form>
+					<button className="btn btn-danger my-3" onClick={handleDelete}>Delete last entry</button>
 				</div>
-
+				
 				<AllCharts chartData={fetchedData} chartType={readingType} />
+				
 				<div
 					id="toasts"
 					style={{
