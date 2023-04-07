@@ -142,10 +142,10 @@ const Search = () => {
 							  </div>
 							  <div>
 							  <Card.Title>{elem.doctorName}</Card.Title>
-							  <Card.Text>{elem.address}</Card.Text>
-							  <Card.Text>{elem.fees}</Card.Text>
-							  <Card.Text>{elem.phoneNumber}</Card.Text>
-							  <Card.Text>{elem.speciality}</Card.Text>
+							  <Card.Text>Address : {elem.address}</Card.Text>
+							  <Card.Text>Fees : {elem.fees}</Card.Text>
+							  <Card.Text>Phone number : {elem.phoneNumber}</Card.Text>
+							  <Card.Text>Speciality : {elem.speciality}</Card.Text>
 							  </div>
 							  {/* <Button variant="primary">Go somewhere</Button> */}
 							</Card.Body>
