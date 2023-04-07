@@ -15,7 +15,6 @@ const Search = () => {
 	const [distanceValue, setDistanceValue] = useState(500);
 	const [latitude, setLatitude] = useState(null);
 	const [longitude, setLongitude] = useState(null);
-	const [list, setList] = useState({});
 
 	if (navigator.geolocation) {
 		navigator.geolocation.getCurrentPosition((position) => {
