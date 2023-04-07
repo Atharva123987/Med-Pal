@@ -39,7 +39,7 @@ const Search = () => {
 			speciality: filters,
 		});
 		console.log("Filters",typeof(filters))
-		console.log(newData);
+		// console.log(newData);
 		let config = {
 			method: "post",
 			maxBodyLength: Infinity,
@@ -49,6 +49,7 @@ const Search = () => {
 			},
 			data: newData,
 		};
+
 
 		
 	};
