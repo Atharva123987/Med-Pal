@@ -5,12 +5,16 @@ const {
 	createDoctor,
 	deleteDoctor,
 	updateDoctor,
+	getNearbyDoctors,
 } = require("../controllers/doctorController");
 
 const router = express.Router();
 
 // GET all doctors
 router.get("/", getAllDoctors);
+
+// GET nearby doctors
+router.post("/nearby", getNearbyDoctors);
 
 // GET a single doctor
 router.get("/:id", getSingleDoctor);
