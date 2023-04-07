@@ -76,12 +76,16 @@ const createDoctor = async (req, res) => {
 		speciality,
 		phoneNumber,
 		clinicOrHospitalName,
-		address,
+		addressLine1,
+		city,
+		district,
+		state,
 		fees,
 	} = req.body;
 	try {
+		const address = `${district}, ${state}`;
+		console.log(address);
 		const result = await geocoder.geocode(address);
-		console.log(result);
 		if (result.length === 0 || !result) {
 			return res.status(404).send("Could not geocode");
 		} else {
@@ -95,7 +99,10 @@ const createDoctor = async (req, res) => {
 				speciality,
 				phoneNumber,
 				clinicOrHospitalName,
-				address,
+				addressLine1,
+				city,
+				district,
+				state,
 				fees,
 				location,
 			});
