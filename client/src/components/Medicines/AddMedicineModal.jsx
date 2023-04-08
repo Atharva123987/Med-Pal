@@ -2,16 +2,21 @@ import React, { useEffect, useState, useRef } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
+import { AiFillPlusCircle } from 'react-icons/ai'
 import '../../pages/tabletManager.css'
+
 const AddMedicineModal = (props) => {
-  
+
   const [show, setShow] = useState(false);
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  const [formError, setFormError] = useState(false);
   const [isDaily, setIsDaily] = useState(false)
+
+  const handleClose = () => { setShow(false); setIsDaily(false); console.log(isDaily) }
+  const handleShow = () => setShow(true);
   const handleSubmit = (e) => {
     props.handleSubmit(e);
-    handleClose();
+
+    if (!formError) handleClose();
   }
 
 
@@ -22,6 +27,8 @@ const AddMedicineModal = (props) => {
         <Button id='add-medicine-button' onClick={handleShow}>
           Add Medicine
         </Button>
+
+
 
         <Modal show={show} onHide={handleClose} >
           <Modal.Header closeButton>
@@ -48,21 +55,23 @@ const AddMedicineModal = (props) => {
                 <br></br>
 
                 <label htmlFor="daily">Daily</label>
-                <input
-                  type="checkbox"
-                  name="frequency"
-                  value="daily"
+
+                <Form.Check
+                  type="switch"
+                  id="custom-switch"
+                  value='Daily'
                   onChange={(e) => {
                     props.setFrequency(e.target.value);
-                    setIsDaily(!isDaily);
+                    setIsDaily(!isDaily)
                   }}
+
                 />
 
                 <br></br>
                 {isDaily && (
                   <Form.Group className="mb-3" controlId="exampleForm.ControlInput5" style={{ width: "300px" }}>
                     <Form.Label>Tablet Time of Day</Form.Label>
-                    <div>
+                    {/* <div>
                       <label htmlFor="morning">Morning</label>
                       <input type="checkbox" placeholder="name@example.com" name="timeOfDay" value="morning" ref={(elem) => (props.checkboxesRef.current[0] = elem)} />
                     </div>
@@ -77,7 +86,49 @@ const AddMedicineModal = (props) => {
                     <div>
                       <label htmlFor="night">Night</label>
                       <input type="checkbox" placeholder="name@example.com" name="timeOfDay" value="night" ref={(elem) => (props.checkboxesRef.current[3] = elem)} />
+                    </div> */}
+
+                    <div>
+                      <Form.Check
+                        inline
+                        label="Morning"
+                        name="group1"
+                        type='checkbox'
+                        id={`inline-checkbox`}
+                        className='modal-checkbox'
+                        ref={(elem) => (props.checkboxesRef.current[0] = elem)}
+                      />
+
+                      <Form.Check
+                        inline
+                        label="Afternoon"
+                        name="group1"
+                        type='checkbox'
+                        id={`inline-checkbox`}
+                        className='modal-checkbox'
+                        ref={(elem) => (props.checkboxesRef.current[1] = elem)}
+                      />
+                      <Form.Check
+                        inline
+                        label="Evening"
+                        name="group1"
+                        type='checkbox'
+                        id={`inline-checkbox`}
+                        className='modal-checkbox'
+                        ref={(elem) => (props.checkboxesRef.current[2] = elem)}
+                      />
+                      <Form.Check
+                        inline
+                        label="Night"
+                        name="group1"
+                        type='checkbox'
+                        id={`inline-checkbox`}
+                        className='modal-checkbox'
+                        ref={(elem) => (props.checkboxesRef.current[3] = elem)}
+                      />
                     </div>
+
+
                   </Form.Group>
                 )}
               </Form.Group>
@@ -88,9 +139,14 @@ const AddMedicineModal = (props) => {
             <Button variant="secondary" onClick={handleClose}>
               Close
             </Button>
-            <Button variant="primary" onClick={handleSubmit}>
+            {/* <Button variant="primary" onClick={handleSubmit}>
               Add
+            </Button> */}
+
+            <Button id='add-value' className='bg-dark d-flex' onClick={handleSubmit}>
+              <AiFillPlusCircle id="add-icon" />
             </Button>
+
           </Modal.Footer>
         </Modal>
 

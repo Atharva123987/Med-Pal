@@ -6,59 +6,160 @@ input::-webkit-inner-spin-button {
 
 /* width */
 ::-webkit-scrollbar {
-    width: 10px;
-  }
-  
-  /* Track */
-  ::-webkit-scrollbar-track {
-    background: #f1f1f1; 
-  }
-   
-  /* Handle */
-  ::-webkit-scrollbar-thumb {
-    background: #212529; 
-    border-radius: 5px;
-  }
-  
-  /* Handle on hover */
-  ::-webkit-scrollbar-thumb:hover {
-    background: #555; 
-  }
+  width: 10px;
+}
 
-  #medicines-table{
-    /* height:70vh; */
-    
-  }
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
 
-  #add-medicine-button{
-    color:white;
-    scale:100%;
-    transition: background-color 0.4s ,scale 0.4s;
-    background-color:#00BFFF;
-  }
-  #add-medicine-button:hover{
-    transition:background-color 0.4s;
-    background-color:#000
-  }
-  #add-medicine-button:active{
-    transition:scale 0.4s;
-    scale:105%;
-  }
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #212529;
+  border-radius: 5px;
+}
 
-  h3{
-    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-  }
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
 
-  #back-to-top{
-    color:black;
-    padding: 4px;
-    border-radius: 5px;
-    position: fixed;
-    font-size: 50px;
-    bottom:10%;
-    right:8%;
+#medicines-table {
+  /* height:70vh; */
+
+}
+
+#add-medicine-button {
+  color: white;
+  scale: 100%;
+  transition: background-color 0.4s, scale 0.4s;
+  background-color: #00BFFF;
+}
+
+#add-medicine-button:hover {
+  transition: background-color 0.4s;
+  background-color: #000
+}
+
+#add-medicine-button:active {
+  transition: scale 0.4s;
+  scale: 105%;
+}
+
+h3 {
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+#medicines-heading{
+  text-align: center;
+    color: white;
+    text-shadow: 2px 2px 2px rgba(81, 81, 81, 0.499);
+    background-color: rgb(255, 191, 0);
+    margin-bottom: 40px;
+    margin:0 auto;
+    padding:5px;
+    border-radius: 40px;
+    width: 400px;
+}
+
+#back-to-top {
+  color: black;
+  padding: 4px;
+  border-radius: 5px;
+  position: fixed;
+  font-size: 50px;
+  bottom: 10%;
+  right: 8%;
+  transition: all 0.3s;
+}
+
+@keyframes backToTop {
+    0%{
+      color:rgb(0, 0, 0);
     }
-
-    #back-to-top:hover{
-        color:#555;
+    50%{
+      color:rgb(101, 101, 101);
+      translate: 0px -5px;
     }
+   100%{
+      color:rgb(0, 0, 0);
+    }
+}
+
+#back-to-top:hover {
+  color: #555;
+  
+  animation-name: backToTop;
+  animation-duration: 1s;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in-out;
+  animation-fill-mode: forwards;
+  transition: all 0.5s;
+}
+.fade .modal-backdrop .show{
+  background-color: red;
+}
+
+/* #meds-table-list{
+  list-style-type:none;
+  list-style-image: url('../assets/bullet.png');
+  
+  margin: 0;
+  padding: 0;
+} */
+
+
+#meds-table-list {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+#meds-table-list li::before {
+  content: "";
+  display: inline-block;
+  width: 20px; /* set the width */
+  height: 20px; /* set the height */
+  /* background-image: url('../assets/bullet.png'); */
+  background-size: contain;
+  background-repeat:no-repeat;
+  margin-right: 10px;
+}
+
+#custom-switch{
+  font-size: 14px;
+  padding: 5px 15px;
+  transition: all 0.3s;
+}
+
+#custom-switch:checked{
+  background-color: rgb(0,191,255);
+  transition: all 0.3s;
+}
+
+.modal-checkbox{
+  font-size: 0.8em;
+}
+
+#inline-checkbox + label {
+  font-size: 14px;
+  padding: auto;
+}
+
+#inline-checkbox {
+  transform: scale(0.5);
+  margin:0;
+  box-shadow: 2px 2px 4px black;
+  transition: all 0.3s;
+}
+
+#inline-checkbox:checked{
+  background-color: rgb(0,191,255);
+
+}
+
+#inline-checkbox:hover{
+  box-shadow: 2px 2px 4px #00BCE4;
+  transition: all 0.3s;
+}
