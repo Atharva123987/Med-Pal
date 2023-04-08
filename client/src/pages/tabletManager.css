@@ -130,6 +130,12 @@ h3 {
 #custom-switch{
   font-size: 14px;
   padding: 5px 15px;
+  transition: all 0.3s;
+}
+
+#custom-switch:checked{
+  background-color: rgb(0,191,255);
+  transition: all 0.3s;
 }
 
 .modal-checkbox{
@@ -144,9 +150,16 @@ h3 {
 #inline-checkbox {
   transform: scale(0.5);
   margin:0;
-  box-shadow: 2px 2px 1px black;
+  box-shadow: 2px 2px 4px black;
+  transition: all 0.3s;
+}
+
+#inline-checkbox:checked{
+  background-color: rgb(0,191,255);
+
 }
 
 #inline-checkbox:hover{
   box-shadow: 2px 2px 4px #00BCE4;
+  transition: all 0.3s;
 }

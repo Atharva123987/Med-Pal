@@ -1,18 +1,23 @@
 import Table from 'react-bootstrap/Table'
 import { useState, useEffect } from 'react';
-import {CgUnavailable} from 'react-icons/cg'
+import { CgUnavailable } from 'react-icons/cg'
+import Button from 'react-bootstrap/esm/Button';
+import { AiFillDelete } from 'react-icons/ai';
+
 const AllMedicinesTable = (props) => {
 
+  // const [deleteID, setDeleteID] = useState(null)
   const fetchedData = props.fetchedData;
 
   useEffect(() => {
 
-    if (fetchedData) {
-
-    }
 
   }, [fetchedData])
 
+  const handleDelete = async(deleteID)=>{
+    console.log(deleteID)
+
+  }
 
   return (
     <>
@@ -24,6 +29,7 @@ const AllMedicinesTable = (props) => {
             <th>Tablet expiry</th>
             <th>Tablet frequency</th>
             <th>Tablet time of days</th>
+            <th>Remove</th>
           </tr>
         </thead>
         <tbody>
@@ -31,66 +37,39 @@ const AllMedicinesTable = (props) => {
             fetchedData.map((element, idx) => {
               return (
                 <>
-                  <tr>
+                  <tr key={element._id}>
                     <td>{element.name}</td>
                     <td>{element.quantity}</td>
                     <td>{new Date(element.expiry).toLocaleDateString()}</td>
-                    <td>{element.frequency?element.frequency:<CgUnavailable/>}</td>
+                    <td>{element.frequency ? element.frequency : <CgUnavailable />}</td>
                     <td>
                       {
 
                         (
-                          
-                          <ul id='meds-table-list'>
-                          {
-                            (element?.timeOfDay && Object.values(element.timeOfDay).every(val => !val.yesOrNot)) ? 
-                              <li><CgUnavailable/></li>
-                              : 
-                              <>
-                                {element?.timeOfDay?.morning?.yesOrNot && <li>Morning {fetchedData[0].timeOfDay.morning.yesOrNot}</li>}
-                                {element?.timeOfDay?.afternoon?.yesOrNot && <li>Afternoon {fetchedData[0].timeOfDay.afternoon.yesOrNot}</li>}
-                                {element?.timeOfDay?.evening?.yesOrNot && <li>Evening {fetchedData[0].timeOfDay.evening.yesOrNot}</li>}
-                                {element?.timeOfDay?.night?.yesOrNot && <li>Night {fetchedData[0].timeOfDay.night.yesOrNot}</li>}
-                              </>
-                          }
-                        </ul>
 
-                          
+                          <ul id='meds-table-list'>
+                            {
+                              (element?.timeOfDay && Object.values(element.timeOfDay).every(val => !val.yesOrNot)) ?
+                                <li><CgUnavailable /></li>
+                                :
+                                <>
+                                  {element?.timeOfDay?.morning?.yesOrNot && <li>Morning {fetchedData[0].timeOfDay.morning.yesOrNot}</li>}
+                                  {element?.timeOfDay?.afternoon?.yesOrNot && <li>Afternoon {fetchedData[0].timeOfDay.afternoon.yesOrNot}</li>}
+                                  {element?.timeOfDay?.evening?.yesOrNot && <li>Evening {fetchedData[0].timeOfDay.evening.yesOrNot}</li>}
+                                  {element?.timeOfDay?.night?.yesOrNot && <li>Night {fetchedData[0].timeOfDay.night.yesOrNot}</li>}
+                                </>
+                            }
+                          </ul>
+
+
 
                         )
                       }
                     </td>
-
-                    {/* e.timeOfDay.morning.yesOrNot && (
-                      <li>Morning {fetchedData[0].timeOfDay.morning.yesOrNot}</li>
-                      ),
-                      e.timeOfDay.morning.yesOrNot && (
-                      <li>Afternoon {fetchedData[0].timeOfDay.afternoon.yesOrNot}</li>
-                      ),
-                      e.timeOfDay.morning.yesOrNot && (
-                      <li>Evening {fetchedData[0].timeOfDay.evening.yesOrNot}</li>
-                      ),
-                      e.timeOfDay.morning.yesOrNot && (
-                      <li>Night {fetchedData[0].timeOfDay.night.yesOrNot}</li>
-                      ) */}
-
-
-
-
-                    {/* {fetchedData[0].timeOfDay.morning.yesOrNot && (
-          <li>Morning {fetchedData[0].timeOfDay.morning.yesOrNot}</li>
-        )}
-        {fetchedData[0].timeOfDay.afternoon.yesOrNot && (
-          <li>Afternoon {fetchedData[0].timeOfDay.afternoon.yesOrNot}</li>
-        )}
-        {fetchedData[0].timeOfDay.evening.yesOrNot && (
-          <li>Evening {fetchedData[0].timeOfDay.evening.yesOrNot}</li>
-        )}
-        {fetchedData[0].timeOfDay.night.yesOrNot && (
-          <li>Night {fetchedData[0].timeOfDay.night.yesOrNot}</li>
-        )} */}
-
-
+                    <td><Button onClick={(e)=>{
+                      // setDeleteID(element._id)
+                      handleDelete(element._id)
+                    }} variant="danger"><AiFillDelete /></Button></td>
 
                   </tr>
                 </>
