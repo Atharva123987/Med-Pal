@@ -1,6 +1,6 @@
 import Table from 'react-bootstrap/Table'
 import { useState, useEffect } from 'react';
-
+import {CgUnavailable} from 'react-icons/cg'
 const AllMedicinesTable = (props) => {
 
   const fetchedData = props.fetchedData;
@@ -35,16 +35,62 @@ const AllMedicinesTable = (props) => {
                     <td>{element.name}</td>
                     <td>{element.quantity}</td>
                     <td>{new Date(element.expiry).toLocaleDateString()}</td>
-                    <td>{element.frequency}</td>
+                    <td>{element.frequency?element.frequency:<CgUnavailable/>}</td>
                     <td>
                       {
-                        fetchedData && fetchedData.map((elem) => {
-                          return(Object.entries(elem.timeOfDay).forEach(([key, value]) => {
-                            return(value.yesOrNot === true ? <h1>key</h1> : "Hello")
-                          })
-                        )})
+
+                        (
+                          
+                          <ul id='meds-table-list'>
+                          {
+                            (element?.timeOfDay && Object.values(element.timeOfDay).every(val => !val.yesOrNot)) ? 
+                              <li><CgUnavailable/></li>
+                              : 
+                              <>
+                                {element?.timeOfDay?.morning?.yesOrNot && <li>Morning {fetchedData[0].timeOfDay.morning.yesOrNot}</li>}
+                                {element?.timeOfDay?.afternoon?.yesOrNot && <li>Afternoon {fetchedData[0].timeOfDay.afternoon.yesOrNot}</li>}
+                                {element?.timeOfDay?.evening?.yesOrNot && <li>Evening {fetchedData[0].timeOfDay.evening.yesOrNot}</li>}
+                                {element?.timeOfDay?.night?.yesOrNot && <li>Night {fetchedData[0].timeOfDay.night.yesOrNot}</li>}
+                              </>
+                          }
+                        </ul>
+
+                          
+
+                        )
                       }
                     </td>
+
+                    {/* e.timeOfDay.morning.yesOrNot && (
+                      <li>Morning {fetchedData[0].timeOfDay.morning.yesOrNot}</li>
+                      ),
+                      e.timeOfDay.morning.yesOrNot && (
+                      <li>Afternoon {fetchedData[0].timeOfDay.afternoon.yesOrNot}</li>
+                      ),
+                      e.timeOfDay.morning.yesOrNot && (
+                      <li>Evening {fetchedData[0].timeOfDay.evening.yesOrNot}</li>
+                      ),
+                      e.timeOfDay.morning.yesOrNot && (
+                      <li>Night {fetchedData[0].timeOfDay.night.yesOrNot}</li>
+                      ) */}
+
+
+
+
+                    {/* {fetchedData[0].timeOfDay.morning.yesOrNot && (
+          <li>Morning {fetchedData[0].timeOfDay.morning.yesOrNot}</li>
+        )}
+        {fetchedData[0].timeOfDay.afternoon.yesOrNot && (
+          <li>Afternoon {fetchedData[0].timeOfDay.afternoon.yesOrNot}</li>
+        )}
+        {fetchedData[0].timeOfDay.evening.yesOrNot && (
+          <li>Evening {fetchedData[0].timeOfDay.evening.yesOrNot}</li>
+        )}
+        {fetchedData[0].timeOfDay.night.yesOrNot && (
+          <li>Night {fetchedData[0].timeOfDay.night.yesOrNot}</li>
+        )} */}
+
+
 
                   </tr>
                 </>

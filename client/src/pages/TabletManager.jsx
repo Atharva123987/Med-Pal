@@ -127,14 +127,14 @@ const TabletManager = () => {
   }, []);
 
   const tempRef = useRef(null);
-  console.log(tempRef)
+//   console.log(tempRef)
 
   return (
     <>
       <Navbar buttons={false} />
 
      
-      <h3>Medicine Manager</h3>
+      <h3 id='medicines-heading'>Medicine Manager</h3>
 
       {
         
