@@ -6,6 +6,7 @@ const {
 	deleteLabCount,
 	updateLabCount,
 	getTypeOfLabCount,
+	deleteLatestLabCount,
 } = require("../controllers/labCountController");
 
 const router = express.Router();
@@ -23,7 +24,10 @@ router.get("/:id", getSingleLabCount);
 router.post("/", createLabCount);
 
 // DELETE a labCount
-router.delete("/:id", deleteLabCount);
+router.delete("/delete/:id", deleteLabCount);
+
+//DELETE latest labCount
+router.delete("/latest", deleteLatestLabCount);
 
 // UPDATE a labCount
 router.patch("/:id", updateLabCount);
