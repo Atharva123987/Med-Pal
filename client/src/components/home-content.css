@@ -1,8 +1,13 @@
-.subsection1{
-    background-color: rgb(255, 255, 255);
+.subsection1, .subsection2{
+    padding: 20px;
+    width: 100%;
+    border-radius: 10px;
 }
-.subsection2{
-    background-color: rgb(213, 213, 213);
+.home-content-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 .subsection3{
     background-color: rgb(255, 255, 255);

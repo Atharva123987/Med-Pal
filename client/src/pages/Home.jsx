@@ -8,7 +8,7 @@ import { CarouselData } from '../assets/CarouselData';
 const Home = () => {
     return (
         <>
-            <div id="home-content">
+            <div id="home-content" >
                 <Navbar buttons={true}/>
                 <Carousel slides={CarouselData}/>
                 {/* Should have rounded border on bottom */}
