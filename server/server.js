@@ -27,7 +27,7 @@ app.use("/api/medicines", medicineRoutes);
 app.use("/api/appointments", appointmentRoutes);
 app.use("/api/doctors", doctorRoutes);
 app.use("/api/labCounts", labCountRoutes);
-app.use("/api/user", userRoutes);
+// app.use("/api/user", userRoutes);
 
 // connect to db
 mongoose

@@ -26,11 +26,14 @@ const TabletManager = () => {
 	const [flag, setFlag] = useState(0);
 	const isMountedRef = useRef(false);
 	const [searchQuery, setSearchQuery] = useState(null)
+	const [deleteCalled, setDeleteCalled] = useState(0);
+	const [deleteToast, setDeleteToast] = useState(false)
 
 	useEffect(()=>{
 		handleFetch();
-	},[flag])
+	},[flag, deleteCalled])
 
+	
 
 	const handleFetch = async (e) => {
 		try {
@@ -111,6 +114,7 @@ const TabletManager = () => {
 
 
 
+
   const [scrollPosition, setScrollPosition] = useState(0);
   const handleScroll = () => {
     const position = window.pageYOffset;
@@ -181,7 +185,7 @@ const TabletManager = () => {
           </div>
 
           <div style={{}}>
-            <AllMedicinesTable fetchedData={fetchedData} />
+            <AllMedicinesTable fetchedData={fetchedData} setDeleteCalled={setDeleteCalled} deleteCalled={deleteCalled} />
           </div>
 
         </div>
@@ -203,17 +207,32 @@ const TabletManager = () => {
           <Toast.Body className='text-white'>Name : {name} | Quantity : {quantity}</Toast.Body>
         </Toast>
 
-        <Toast onClose={() => { setNameError(false) }} bg='danger' position='middle-center' show={nameError} delay={2000} autohide style={{ position: "relative", zIndex: "10" }}>
+        <Toast onClose={() => { setNameError(false) }} bg='warning' position='middle-center' show={nameError} delay={2000} autohide style={{ position: "relative", zIndex: "10" }}>
           <Toast.Header>
             <img
               src="holder.js/20x20?text=%20"
               className="rounded me-2"
               alt=""
             />
-            <strong className="me-auto text-danger">Enter Valid Name!</strong>
+            <strong className="me-auto text-warning">Enter Valid Name!</strong>
           </Toast.Header>
           <Toast.Body className='text-white'>Tablet name should be unique</Toast.Body>
         </Toast>
+
+		<Toast onClose={() => { setDeleteToast(false) }} bg='danger' position='middle-center' show={deleteToast} delay={3000} autohide style={{ position: "relative", zIndex: "10" }}>
+										<Toast.Header>
+											<img
+												src="holder.js/20x20?text=%20"
+												className="rounded me-2"
+												alt=""
+											/>
+											<strong className="me-auto text-danger">Successfully Deleted!</strong>
+										</Toast.Header>
+										<Toast.Body className='text-white'>
+											Medicine entry deleted
+										</Toast.Body>
+									</Toast>
+		
 
       </div>
       <Footer />
