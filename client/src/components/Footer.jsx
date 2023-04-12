@@ -12,21 +12,22 @@ const Footer = ()=>{
         <>
         <footer>
             <div id='footer-top'>
-            <L smooth to="#" className='footer-links'>
+            <L smooth to="#" className='footer-links d-flex'>
                 <BsArrowUpCircle/>
-                <span>   Back to Top</span>
+                <h4>   Back to Top</h4>
                 </L>
             </div>
             <div id='footer-bottom'>
-                <div id='footer-left'>
+
+            <div id='footer-left'>
                 <Link to='/about' className='footer-links'>About</Link>
                 <Link to='/contact' className='footer-links'>Contact Us</Link>
             </div>
             
             <div id='footer-right'>
-                <span><a href='http://www.google.com'><AiFillGithub/></a> </span>
-                <span><a href='http://www.google.com'><CiLinkedin/></a> </span>
-                <span><a href='http://www.google.com'><AiOutlineMail/></a> </span>
+                <span><a href='http://www.google.com'><AiFillGithub style={{fontSize:'1.5rem', margin:'5px'}}/></a> </span>
+                <span><a href='http://www.google.com'><CiLinkedin style={{fontSize:'1.5rem', margin:'5px'}}/></a> </span>
+                <span><a href='http://www.google.com'><AiOutlineMail style={{fontSize:'1.5rem', margin:'5px'}}/></a> </span>
                 
             </div>
             </div>

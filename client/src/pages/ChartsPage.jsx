@@ -17,8 +17,10 @@ const Charts = () => {
 	const [showError, setShowError] = useState(false);
 	const [fetchedData, setFetchedData] = useState([[]]);
 	const [requiredError, setRequiredError] = useState(false);
+
 	useEffect(() => {
 		handleFetch();
+		
 	}, [readingType]);
 
 	const handleSubmit = async (e) => {
@@ -58,15 +60,13 @@ const Charts = () => {
 				setShowError(true);
 			});
 	};
-
 	const handleFetch = async (e) => {
 		// e.preventDefault();
-		try {
+		
 			const axios = require("axios");
 			let data = JSON.stringify({
 				testName: readingType,
 			});
-
 			let config = {
 				method: "post",
 				maxBodyLength: Infinity,
@@ -85,10 +85,7 @@ const Charts = () => {
 				.catch((error) => {
 					setShowError(true);
 				});
-		} catch (err) {
-			console.log(err);
-			setShowError(true);
-		}
+		
 	};
 
 	const handleDelete = async (e) => {
@@ -103,7 +100,7 @@ const Charts = () => {
 		axios
 			.request(config)
 			.then((response) => {
-				console.log(JSON.stringify(response.data));
+				// console.log(JSON.stringify(response.data));
 			})
 			.catch((error) => {
 				console.log(error);
@@ -142,7 +139,6 @@ const Charts = () => {
 									style={{ fontSize: "15px" }}
 									onClick={() => {
 										setReadingType("Blood Sugar");
-										handleFetch();
 									}}
 								>
 									Blood Sugar
@@ -151,7 +147,6 @@ const Charts = () => {
 									style={{ fontSize: "15px" }}
 									onClick={() => {
 										setReadingType("Blood Pressure");
-										handleFetch();
 									}}
 								>
 									Blood Pressure
@@ -160,7 +155,6 @@ const Charts = () => {
 									style={{ fontSize: "15px" }}
 									onClick={() => {
 										setReadingType("Haemoglobin");
-										handleFetch();
 									}}
 								>
 									Haemoglobin

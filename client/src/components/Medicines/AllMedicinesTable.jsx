@@ -1,19 +1,44 @@
 import Table from "react-bootstrap/Table";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { CgUnavailable } from "react-icons/cg";
 import Button from "react-bootstrap/esm/Button";
 import { AiFillDelete } from "react-icons/ai";
 import Toast from 'react-bootstrap/Toast';
+import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
+import Popover from 'react-bootstrap/Popover';
 
 const AllMedicinesTable = (props) => {
 	// const [deleteID, setDeleteID] = useState(null)
 	const fetchedData = props.fetchedData;
-	
 
-	useEffect(() => { }, [fetchedData]);
+
+	const [showPopup, setShowPopup] = useState(false);
+	const [target, setTarget] = useState(null);
+	const[deleteID, setDeleteID] = useState(null);
+	
+	const ref = useRef(null);
+
+	const handlePopup = (deleteID) => {
+		setDeleteID(deleteID)
+		setShowPopup(!showPopup);
+		console.log(showPopup)
+		// setTarget(event.target);
+	};
+
+	const popover = (
+		<Popover id="popover-basic">
+		  <Popover.Header as="h3">Warning</Popover.Header>
+		  <Popover.Body>
+			Are you sure you want to <strong>delete this medicine?</strong>
+			<Button variant="danger" onClick={(e)=>handleDelete(deleteID)}>Yes</Button>
+			<Button variant="dark" onClick={() => handlePopup(null)}>No</Button>
+
+		  </Popover.Body>
+		</Popover>
+	  );
+
 
 	const handleDelete = async (deleteID) => {
-		console.log(deleteID);
 		const axios = require("axios");
 
 		let config = {
@@ -147,19 +172,36 @@ const AllMedicinesTable = (props) => {
 											}
 										</td>
 										<td>
-											<Button
-												onClick={(e) => {
-													// setDeleteID(element._id)
-													handleDelete(element._id);
-												}}
-												variant="danger"
-											>
-												<AiFillDelete />
-											</Button>
+
+											<div ref={ref}>
+
+												<OverlayTrigger 
+												trigger="click" 
+												placement="right" 
+												overlay={popover} 
+												onToggle={handlePopup}>
+												<Button
+													onClick={(e) => {
+														// setDeleteID(element._id)
+														// handleDelete(element._id);
+														handlePopup(element._id);
+													}}
+													variant="danger"
+												>
+													<AiFillDelete />
+												</Button>
+												</OverlayTrigger>
+												
+
+
+												
+
+											</div>
+
 										</td>
 									</tr>
 
-									
+
 
 								</>
 							);
