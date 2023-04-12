@@ -3,33 +3,43 @@ import { useState, useEffect } from 'react';
 import { CgUnavailable } from 'react-icons/cg'
 import Button from 'react-bootstrap/esm/Button';
 import { AiFillDelete } from 'react-icons/ai';
+import { AiFillEdit } from 'react-icons/ai'
+import Modal from 'react-bootstrap/Modal';
+import Form from 'react-bootstrap/Form';
+import { AiFillPlusCircle } from 'react-icons/ai'
 
 const AllMedicinesTable = (props) => {
 
-  // const [deleteID, setDeleteID] = useState(null)
   const fetchedData = props.fetchedData;
+  const [showWarningModal, setShowWarningModal] = useState(false);
+  
 
-  useEffect(() => {
 
 
-  }, [fetchedData])
-
-  const handleDelete = async(deleteID)=>{
+  const handleDelete = async (deleteID) => {
     console.log(deleteID)
 
   }
+
+  const handleEdit = async (editID) => {
+
+  }
+
+
 
   return (
     <>
       <Table striped bordered hover >
         <thead>
+
           <tr style={{ position: "sticky", top: "0%", color: "white", background: "#212529" }}>
             <th>Tablet name</th>
             <th>Tablet quantity</th>
             <th>Tablet expiry</th>
             <th>Tablet frequency</th>
             <th>Tablet time of days</th>
-            <th>Remove</th>
+            <th>Edit</th>
+
           </tr>
         </thead>
         <tbody>
@@ -66,12 +76,22 @@ const AllMedicinesTable = (props) => {
                         )
                       }
                     </td>
-                    <td><Button onClick={(e)=>{
-                      // setDeleteID(element._id)
+
+                    <td>
+                      <Button onClick={(e) => {
                       handleDelete(element._id)
-                    }} variant="danger"><AiFillDelete /></Button></td>
+                    }} variant="danger"><AiFillDelete /></Button>
+                    
+                      <Button onClick={() => handleEdit(element._id)}>
+                        <AiFillEdit />
+                      </Button>
+                    </td>
 
                   </tr>
+                    
+                    
+
+
                 </>
               );
             })}

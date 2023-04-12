@@ -53,9 +53,9 @@ h3 {
 
 #medicines-heading{
   text-align: center;
-    color: white;
+    color: black;
     text-shadow: 2px 2px 2px rgba(81, 81, 81, 0.499);
-    background-color: rgb(255, 191, 0);
+    /* background-image: linear-gradient(cyan,cyan); */
     margin-bottom: 40px;
     margin:0 auto;
     padding:5px;

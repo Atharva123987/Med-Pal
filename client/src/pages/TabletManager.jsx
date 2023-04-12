@@ -26,6 +26,7 @@ const TabletManager = () => {
 	const [flag, setFlag] = useState(0);
 	const isMountedRef = useRef(false);
 	const [searchQuery, setSearchQuery] = useState(null)
+	const [error, setError] = useState(false)
 
 	useEffect(()=>{
 		handleFetch();
@@ -46,9 +47,14 @@ const TabletManager = () => {
 
 
 	const handleSubmit = async (e) => {
-		// MAKE POST REQUEST HERE
 		e.preventDefault();
 		console.log(selectedFile);
+
+		if(!name || !quantity || !expiry){
+			setError(true)
+			setNameError(true)
+		}
+
 		const checkedValues = checkboxesRef.current
 			.filter((checkbox) => checkbox.checked)
 			.map((checkbox) => checkbox.value);
@@ -56,7 +62,6 @@ const TabletManager = () => {
 		checkboxesRef.current.forEach((checkbox, i) => {
 			timeOfDay.push(checkbox.checked);
 		});
-		// console.log("HERRE", timeOfDay);
 
 		const axios = require("axios");
 		let data = JSON.stringify({
@@ -98,14 +103,12 @@ const TabletManager = () => {
 		axios
 			.request(config)
 			.then((response) => {
-				// alert("Tablet added successfully");
 				if (response.status === 200) {
 					setShowToast(true);
 					setFlag(!flag);
 				}
 			})
 			.catch((error) => {
-				// alert(error);
 				setNameError(true);
 			});
 	};
@@ -127,7 +130,6 @@ const TabletManager = () => {
   }, []);
 
   const tempRef = useRef(null);
-//   console.log(tempRef)
 
   return (
     <>
@@ -177,12 +179,15 @@ const TabletManager = () => {
               setFrequency={setFrequency}
               checkboxesRef={checkboxesRef}
               handleSubmit={handleSubmit}
+			  error={error}
             />
 
           </div>
 
           <div style={{}}>
-            <AllMedicinesTable fetchedData={fetchedData} />
+            <AllMedicinesTable 
+			fetchedData={fetchedData}
+			/>
           </div>
 
         </div>

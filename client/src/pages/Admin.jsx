@@ -5,6 +5,8 @@ import Form from "react-bootstrap/Form";
 import Toast from "react-bootstrap/Toast";
 import { FaHospital } from "react-icons/fa";
 import { FaMoneyBill } from "react-icons/fa";
+import './admin.css'
+
 const Admin = () => {
 	const [doctorName, setDoctorName] = useState("");
 	const [speciality, setSpeciality] = useState("");
@@ -62,8 +64,6 @@ const Admin = () => {
 	};
 
 	const fetchData = async (e) => {
-		// e.preventDefault();
-		// !!!HANDLE GET REQUEST HERE
 		try {
 			const response = await axios.get(
 				`http://localhost:4000/api/doctors`
