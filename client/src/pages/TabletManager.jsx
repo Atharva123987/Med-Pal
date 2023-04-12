@@ -31,6 +31,7 @@ const TabletManager = () => {
 		handleFetch();
 	},[flag])
 
+
 	const handleFetch = async (e) => {
 		try {
 			const response = await axios.get(
@@ -42,8 +43,6 @@ const TabletManager = () => {
 			console.log(err);
 		}
 	};
-
-
 
 	const handleSubmit = async (e) => {
 		// MAKE POST REQUEST HERE
@@ -220,6 +219,7 @@ const TabletManager = () => {
       <Footer />
     </>
   );
+
 };
 
 export default TabletManager;

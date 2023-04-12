@@ -5,6 +5,7 @@ const app = express();
 
 app.use(express.json());
 
+
 const NodeGeocoder = require("node-geocoder");
 
 const geocoder = NodeGeocoder({
@@ -16,6 +17,7 @@ const getAllDoctors = async (req, res) => {
 	console.log(doctors);
 	res.status(200).json(doctors);
 };
+
 
 const getNearbyDoctors = async (req, res) => {
 	console.log(req.body);
@@ -52,6 +54,7 @@ const getNearbyDoctors = async (req, res) => {
 		res.sendStatus(500);
 	}
 };
+
 
 const getSingleDoctor = async (req, res) => {
 	const { id } = req.params;
@@ -161,4 +164,5 @@ module.exports = {
 	deleteDoctor,
 	updateDoctor,
 	getNearbyDoctors,
+
 };
