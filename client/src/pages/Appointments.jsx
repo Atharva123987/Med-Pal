@@ -5,6 +5,8 @@ import axios from "axios";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import Toast from "react-bootstrap/Toast";
+import AddAppointmentModal from "../components/Appointments/addAppointmentModal";
+import Navbar from '../components/Navbar'
 const Appointments = () => {
 	const [doctorName, setDoctorName] = useState(null);
 	const [doctorNumber, setDoctorNumber] = useState(null);
@@ -17,47 +19,6 @@ const Appointments = () => {
 	const [error, setError] = useState(false);
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-
-		switch (appointmentDateAndTime?.getMonth()) {
-			case 0:
-				setMonth("January");
-				break;
-			case 1:
-				setMonth("February");
-				break;
-			case 2:
-				setMonth("March");
-				break;
-			case 3:
-				setMonth("April");
-				break;
-			case 4:
-				setMonth("May");
-				break;
-			case 5:
-				setMonth("June");
-				break;
-			case 6:
-				setMonth("July");
-				break;
-			case 7:
-				setMonth("August");
-				break;
-			case 8:
-				setMonth("September");
-				break;
-			case 9:
-				setMonth("October");
-				break;
-			case 10:
-				setMonth("November");
-				break;
-			case 11:
-				setMonth("December");
-				break;
-			default:
-				setMonth("");
-		}
 
 		// !!!HANDLE POST REQUST HERE
 		let data = JSON.stringify({
@@ -119,6 +80,7 @@ const Appointments = () => {
 
 	return (
 		<>
+			<Navbar/>
 			<div className="w-100">
 				<div
 					id="toasts"
@@ -197,72 +159,17 @@ const Appointments = () => {
 
 				<h1>Appointments Page</h1>
 				<div className="d-flex justify-content-evenly">
-					<Form>
-						<Form.Group className="mb-3 " controlId="doctorName">
-							<Form.Label>Doctor Name</Form.Label>
-							<Form.Control
-								type="email"
-								placeholder="Enter name"
-								onChange={(e) => setDoctorName(e.target.value)}
-							/>
-						</Form.Group>
 
-						<Form.Group className="mb-3" controlId="doctorNumber">
-							<Form.Label>Doctor Ph.no</Form.Label>
-							<Form.Control
-								type="tel"
-								placeholder="Enter number"
-								onChange={(e) =>
-									setDoctorNumber(e.target.value)
-								}
-							/>
-						</Form.Group>
-
-						<Form.Group className="mb-3" controlId="doctorAddress">
-							<Form.Label>Address</Form.Label>
-							<textarea
-								placeholder="Enter address"
-								onChange={(e) =>
-									setDoctorAddress(e.target.value)
-								}
-							/>
-						</Form.Group>
-						<Form.Group className="mb-3" controlId="notes">
-							<Form.Label>Notes</Form.Label>
-							<textarea
-								placeholder="Enter notes"
-								onChange={(e) => setNotes(e.target.value)}
-							/>
-						</Form.Group>
-
-						<Form.Group
-							className="mb-3"
-							controlId="appointmentTime"
-						>
-							<Form.Label>Time</Form.Label>
-							<Form.Control
-								type="datetime-local"
-								placeholder="Time"
-								onChange={(e) =>
-									setAppointmentDateAndTime(
-										new Date(e.target.value)
-									)
-								}
-							/>
-						</Form.Group>
-
-						<Button
-							variant="primary"
-							type="submit"
-							onClick={handleSubmit}
-						>
-							Submit
-						</Button>
-					</Form>
 					<div className="ml-5">
 						<h3>Upcoming appointments</h3>
+					<AddAppointmentModal/>
+
+						</div>
+					
 						<dl></dl>
 						<br></br>
+						<div>
+
 						<h2>Fetch Appointments and Doctor details</h2>
 						<button
 							className="btn btn-primary"
@@ -308,7 +215,9 @@ const Appointments = () => {
 									})}
 							</ol>
 						</div>
-					</div>
+						</div>
+
+					
 				</div>
 			</div>
 		</>
