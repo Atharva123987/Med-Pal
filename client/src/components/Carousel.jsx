@@ -28,7 +28,7 @@ const Carousel = ({ slides }) => {
   }
 
   return (
-    <Container fluid>
+    <Container fluid id='carousel-div'>
       <Row>
         <Col>
           <section className='slider mb-5'>

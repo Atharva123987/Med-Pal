@@ -70,11 +70,11 @@ export const Login = (props) => {
         </Form.Group>
 
         <Form.Group className="text-center">
-          <Link to = {'/dashboard'}>
+          {/* <Link to = {'/dashboard'}> */}
           <Button variant="primary" type="submit" className="mb-3 text-center">
             Submit
           </Button>
-          </Link>
+          {/* </Link> */}
         </Form.Group>
 
         <Form.Group className="mb-5">
