@@ -26,12 +26,8 @@ const TabletManager = () => {
 	const [flag, setFlag] = useState(0);
 	const isMountedRef = useRef(false);
 	const [searchQuery, setSearchQuery] = useState(null)
-<<<<<<< HEAD
-	const [error, setError] = useState(false)
-=======
 	const [deleteCalled, setDeleteCalled] = useState(0);
 	const [deleteToast, setDeleteToast] = useState(false)
->>>>>>> Main
 
 	useEffect(()=>{
 		handleFetch();
@@ -56,7 +52,6 @@ const TabletManager = () => {
 		console.log(selectedFile);
 
 		if(!name || !quantity || !expiry){
-			setError(true)
 			setNameError(true)
 		}
 
@@ -185,19 +180,13 @@ const TabletManager = () => {
               setFrequency={setFrequency}
               checkboxesRef={checkboxesRef}
               handleSubmit={handleSubmit}
-			  error={error}
+			  error={nameError}
             />
 
           </div>
 
           <div style={{}}>
-<<<<<<< HEAD
-            <AllMedicinesTable 
-			fetchedData={fetchedData}
-			/>
-=======
             <AllMedicinesTable fetchedData={fetchedData} setDeleteCalled={setDeleteCalled} deleteCalled={deleteCalled} />
->>>>>>> Main
           </div>
 
         </div>
