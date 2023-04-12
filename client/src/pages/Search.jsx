@@ -5,18 +5,18 @@ import axios from "axios";
 import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import './search.css'
-import {Card} from 'react-bootstrap'
+import Card from 'react-bootstrap/Card';
+import {IoIosNavigate} from 'react-icons/io'
 
 const Search = () => {
 	const [searchQuery, setSearchQuery] = useState("");
-	const [filters, setFilters] = useState("Select a category");
+	const [filters, setFilters] = useState("");
 	const [results, setResults] = useState(null);
 	const [min, setMin] = useState(1);
 	const [max, setMax] = useState(1000);
 	const [distanceValue, setDistanceValue] = useState(500);
 	const [latitude, setLatitude] = useState(null);
 	const [longitude, setLongitude] = useState(null);
-	const [list, setList] = useState({});
 
 	if (navigator.geolocation) {
 		navigator.geolocation.getCurrentPosition((position) => {
@@ -38,8 +38,7 @@ const Search = () => {
 			distance: Number(distanceValue),
 			speciality: filters,
 		});
-		console.log("Filters",typeof(filters))
-		// console.log(newData);
+		console.log(newData);
 		let config = {
 			method: "post",
 			maxBodyLength: Infinity,
@@ -50,8 +49,15 @@ const Search = () => {
 			data: newData,
 		};
 
-
-		
+		await axios
+			.request(config)
+			.then((response) => {
+				console.log(response.data);
+				setResults(response.data);
+			})
+			.catch((error) => {
+				console.log(error);
+			});
 	};
 
 
@@ -114,28 +120,34 @@ const Search = () => {
 									/>
 								</li>
 								<li style={{ marginLeft: "50vw" }}>
-									{elem.doctorName}
+									Name : {elem.doctorName}
 								</li>
 								<li style={{ marginLeft: "50vw" }}>
-									{elem.fees}
+									Address : {elem.address}
 								</li>
 								<li style={{ marginLeft: "50vw" }}>
-									{elem.speciality}
+									Fees : {elem.fees}
+								</li>
+								<li style={{ marginLeft: "50vw" }}>
+									Speciality : {elem.speciality}
+								</li>
+								<li style={{ marginLeft: "50vw" }}>
+									Ph. No. : {elem.phoneNumber}
 								</li>
 							</ul> */}
 
-							<Card style={{ width: '28rem', marginLeft:"400px" }}>
+							<Card style={{ width: '40rem', marginLeft:"30vw" }}>
 							<Card.Body className="d-flex">
 								<div>
 							  <img src="https://t4.ftcdn.net/jpg/00/64/67/63/360_F_64676383_LdbmhiNM6Ypzb3FM4PPuFP9rHe7ri8Ju.jpg" width={100}/>
 							  </div>
 							  <div>
 							  <Card.Title>{elem.doctorName}</Card.Title>
-							  <Card.Text>{elem.address}</Card.Text>
-							  {/* <Button variant="primary"></Button> */}
-							  <Card.Text>{elem.fees}</Card.Text>
-							  <Card.Text>{elem.speciality}</Card.Text>
-							  <Card.Text>{elem.phoneNumber}</Card.Text>
+							  <Card.Text>Address : {elem.address}</Card.Text>
+							  <Card.Text>Fees : {elem.fees}</Card.Text>
+							  <Card.Text>Phone number : {elem.phoneNumber}</Card.Text>
+							  <Card.Text>Speciality : {elem.speciality}</Card.Text>
+							  <Button variant="success"><IoIosNavigate style={{fontSize:"30px", margin:"5px"}}/></Button>
 							  </div>
 							</Card.Body>
 						  </Card>
