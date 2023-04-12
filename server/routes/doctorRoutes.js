@@ -6,6 +6,7 @@ const {
 	deleteDoctor,
 	updateDoctor,
 	getNearbyDoctors,
+
 } = require("../controllers/doctorController");
 
 const router = express.Router();

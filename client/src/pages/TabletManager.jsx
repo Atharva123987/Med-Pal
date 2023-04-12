@@ -26,11 +26,18 @@ const TabletManager = () => {
 	const [flag, setFlag] = useState(0);
 	const isMountedRef = useRef(false);
 	const [searchQuery, setSearchQuery] = useState(null)
+<<<<<<< HEAD
 	const [error, setError] = useState(false)
+=======
+	const [deleteCalled, setDeleteCalled] = useState(0);
+	const [deleteToast, setDeleteToast] = useState(false)
+>>>>>>> Main
 
 	useEffect(()=>{
 		handleFetch();
-	},[flag])
+	},[flag, deleteCalled])
+
+	
 
 	const handleFetch = async (e) => {
 		try {
@@ -43,8 +50,6 @@ const TabletManager = () => {
 			console.log(err);
 		}
 	};
-
-
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
@@ -112,6 +117,7 @@ const TabletManager = () => {
 				setNameError(true);
 			});
 	};
+
 
 
 
@@ -185,9 +191,13 @@ const TabletManager = () => {
           </div>
 
           <div style={{}}>
+<<<<<<< HEAD
             <AllMedicinesTable 
 			fetchedData={fetchedData}
 			/>
+=======
+            <AllMedicinesTable fetchedData={fetchedData} setDeleteCalled={setDeleteCalled} deleteCalled={deleteCalled} />
+>>>>>>> Main
           </div>
 
         </div>
@@ -209,22 +219,38 @@ const TabletManager = () => {
           <Toast.Body className='text-white'>Name : {name} | Quantity : {quantity}</Toast.Body>
         </Toast>
 
-        <Toast onClose={() => { setNameError(false) }} bg='danger' position='middle-center' show={nameError} delay={2000} autohide style={{ position: "relative", zIndex: "10" }}>
+        <Toast onClose={() => { setNameError(false) }} bg='warning' position='middle-center' show={nameError} delay={2000} autohide style={{ position: "relative", zIndex: "10" }}>
           <Toast.Header>
             <img
               src="holder.js/20x20?text=%20"
               className="rounded me-2"
               alt=""
             />
-            <strong className="me-auto text-danger">Enter Valid Name!</strong>
+            <strong className="me-auto text-warning">Enter Valid Name!</strong>
           </Toast.Header>
           <Toast.Body className='text-white'>Tablet name should be unique</Toast.Body>
         </Toast>
+
+		<Toast onClose={() => { setDeleteToast(false) }} bg='danger' position='middle-center' show={deleteToast} delay={3000} autohide style={{ position: "relative", zIndex: "10" }}>
+										<Toast.Header>
+											<img
+												src="holder.js/20x20?text=%20"
+												className="rounded me-2"
+												alt=""
+											/>
+											<strong className="me-auto text-danger">Successfully Deleted!</strong>
+										</Toast.Header>
+										<Toast.Body className='text-white'>
+											Medicine entry deleted
+										</Toast.Body>
+									</Toast>
+		
 
       </div>
       <Footer />
     </>
   );
+
 };
 
 export default TabletManager;
