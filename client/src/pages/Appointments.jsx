@@ -5,6 +5,13 @@ import axios from "axios";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import Toast from "react-bootstrap/Toast";
+import Calendar from '../components/Calendar'
+import { useEffect } from "react";
+import Navbar from "../components/Navbar";
+import { FaClinicMedical } from 'react-icons/fa'
+import AddAppointmentModal from '../components/Appointments/AddAppointmentModal'
+import './appointments.css'
+
 const Appointments = () => {
 	const [doctorName, setDoctorName] = useState(null);
 	const [doctorNumber, setDoctorNumber] = useState(null);
@@ -15,6 +22,9 @@ const Appointments = () => {
 	const [show, setShow] = useState(false);
 	const [month, setMonth] = useState("");
 	const [error, setError] = useState(false);
+
+
+
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 
@@ -82,6 +92,7 @@ const Appointments = () => {
 			.request(config)
 			.then((response) => {
 				console.log(JSON.stringify(response.data));
+				handleFetch();
 			})
 			.catch((error) => {
 				console.log(error);
@@ -103,8 +114,12 @@ const Appointments = () => {
 		}
 	};
 
+
+
+	useEffect(() => handleFetch(), [])
+
 	const handleFetch = async (e) => {
-	
+
 
 		try {
 			const response = await axios.get(
@@ -119,6 +134,7 @@ const Appointments = () => {
 
 	return (
 		<>
+
 			<div className="w-100">
 				<div
 					id="toasts"
@@ -195,120 +211,21 @@ const Appointments = () => {
 					</Toast>
 				</div>
 
-				<h1>Appointments Page</h1>
-				<div className="d-flex justify-content-evenly">
-					<Form>
-						<Form.Group className="mb-3 " controlId="doctorName">
-							<Form.Label>Doctor Name</Form.Label>
-							<Form.Control
-								type="email"
-								placeholder="Enter name"
-								onChange={(e) => setDoctorName(e.target.value)}
-							/>
-						</Form.Group>
+				<Navbar />
 
-						<Form.Group className="mb-3" controlId="doctorNumber">
-							<Form.Label>Doctor Ph.no</Form.Label>
-							<Form.Control
-								type="tel"
-								placeholder="Enter number"
-								onChange={(e) =>
-									setDoctorNumber(e.target.value)
-								}
-							/>
-						</Form.Group>
-
-						<Form.Group className="mb-3" controlId="doctorAddress">
-							<Form.Label>Address</Form.Label>
-							<textarea
-								placeholder="Enter address"
-								onChange={(e) =>
-									setDoctorAddress(e.target.value)
-								}
-							/>
-						</Form.Group>
-						<Form.Group className="mb-3" controlId="notes">
-							<Form.Label>Notes</Form.Label>
-							<textarea
-								placeholder="Enter notes"
-								onChange={(e) => setNotes(e.target.value)}
-							/>
-						</Form.Group>
-
-						<Form.Group
-							className="mb-3"
-							controlId="appointmentTime"
-						>
-							<Form.Label>Time</Form.Label>
-							<Form.Control
-								type="datetime-local"
-								placeholder="Time"
-								onChange={(e) =>
-									setAppointmentDateAndTime(
-										new Date(e.target.value)
-									)
-								}
-							/>
-						</Form.Group>
-
-						<Button
-							variant="primary"
-							type="submit"
-							onClick={handleSubmit}
-						>
-							Submit
-						</Button>
-					</Form>
-					<div className="ml-5">
-						<h3>Upcoming appointments</h3>
-						<dl></dl>
-						<br></br>
-						<h2>Fetch Appointments and Doctor details</h2>
-						<button
-							className="btn btn-primary"
-							onClick={handleFetch}
-						>
-							Fetch Appointements
-						</button>
-						<div style={{ height: "50vh", overflowY: "scroll" }}>
-							<ol>
-								{fetchedData &&
-									fetchedData.map((element, i) => {
-										return (
-											<li key={i}>
-												<ul>
-													<li
-														key={element.doctorName}
-													>
-														{element.doctorName}
-													</li>
-													<li
-														key={
-															element.phoneNumber
-														}
-													>
-														{element.phoneNumber}
-													</li>
-													<li key={element.address}>
-														{element.address}
-													</li>
-													<li
-														key={
-															element.timeAndDate
-														}
-													>
-														{element.timeAndDate}
-													</li>
-													<li key={element.notes}>
-														{element.notes}
-													</li>
-												</ul>
-											</li>
-										);
-									})}
-							</ol>
-						</div>
-					</div>
+					<h3 className="charts-heading">
+						Appointments <FaClinicMedical style={{ fontSize: "30px" }} />
+					</h3>
+						
+				<div id='appointments-container'>
+				<Calendar id='calendar-component' appointments={fetchedData ? fetchedData : null} />
+				<AddAppointmentModal 
+				setDoctorName={setDoctorName} 
+				setDoctorNumber={setDoctorNumber} 
+				setDoctorAddress={setDoctorAddress} 
+				setNotes={setNotes} 
+				setAppointmentDateAndTime={setAppointmentDateAndTime} 
+				handleSubmit={handleSubmit} />
 				</div>
 			</div>
 		</>

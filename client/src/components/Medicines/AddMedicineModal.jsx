@@ -13,10 +13,15 @@ const AddMedicineModal = (props) => {
 
   const handleClose = () => { setShow(false); setIsDaily(false); console.log(isDaily) }
   const handleShow = () => setShow(true);
-  const handleSubmit = (e) => {
-    props.handleSubmit(e);
 
-    if (!formError) handleClose();
+  const handleSubmit = (e) => {
+
+    if (props.error) handleClose();
+    else {
+      props.handleSubmit(e);
+      handleClose();
+    }
+
   }
 
 
@@ -71,22 +76,6 @@ const AddMedicineModal = (props) => {
                 {isDaily && (
                   <Form.Group className="mb-3" controlId="exampleForm.ControlInput5" style={{ width: "300px" }}>
                     <Form.Label>Tablet Time of Day</Form.Label>
-                    {/* <div>
-                      <label htmlFor="morning">Morning</label>
-                      <input type="checkbox" placeholder="name@example.com" name="timeOfDay" value="morning" ref={(elem) => (props.checkboxesRef.current[0] = elem)} />
-                    </div>
-                    <div>
-                      <label htmlFor="afternoon">Afternoon</label>
-                      <input type="checkbox" placeholder="name@example.com" name="timeOfDay" value="afternoon" ref={(elem) => (props.checkboxesRef.current[1] = elem)} />
-                    </div>
-                    <div>
-                      <label htmlFor="evening">Evening</label>
-                      <input type="checkbox" placeholder="name@example.com" name="timeOfDay" value="evening" ref={(elem) => (props.checkboxesRef.current[2] = elem)} />
-                    </div>
-                    <div>
-                      <label htmlFor="night">Night</label>
-                      <input type="checkbox" placeholder="name@example.com" name="timeOfDay" value="night" ref={(elem) => (props.checkboxesRef.current[3] = elem)} />
-                    </div> */}
 
                     <div>
                       <Form.Check
@@ -139,9 +128,7 @@ const AddMedicineModal = (props) => {
             <Button variant="secondary" onClick={handleClose}>
               Close
             </Button>
-            {/* <Button variant="primary" onClick={handleSubmit}>
-              Add
-            </Button> */}
+           
 
             <Button id='add-value' className='bg-dark d-flex' onClick={handleSubmit}>
               <AiFillPlusCircle id="add-icon" />

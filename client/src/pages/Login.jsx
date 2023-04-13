@@ -66,24 +66,29 @@ export const Login = (props) => {
 					</Button>
 				</Form.Group>
 
-				<Form.Group className="mb-5">
-					<Form.Text className="text-muted">
-						Doesn't have an account,
-						<Link
-							to={"/register"}
-							style={{
-								textDecoration: "none",
-								color: "blue",
-								fontSize: 16,
-							}}
-						>
-							Register Here
-						</Link>
-					</Form.Text>
-				</Form.Group>
-			</Form>
-		</Container>
-	);
+        <Form.Group className="text-center">
+          {/* <Link to = {'/dashboard'}> */}
+          <Button variant="primary" type="submit" className="mb-3 text-center">
+            Submit
+          </Button>
+          {/* </Link> */}
+        </Form.Group>
+
+        <Form.Group className="mb-5">
+          <Form.Text className="text-muted">
+            Doesn't have an account,
+            <Link
+              to={"/register"}
+              style={{ textDecoration: "none", color: "blue", fontSize: 16 }}
+            >
+              Register Here
+            </Link>
+          </Form.Text>
+        </Form.Group>
+      </Form>
+    </Container>
+  );
+
 };
 
 export default Login;

@@ -55,7 +55,7 @@ h3 {
   text-align: center;
     color: white;
     text-shadow: 2px 2px 2px rgba(81, 81, 81, 0.499);
-    background-color: rgb(255, 191, 0);
+    background-color: rgb(23,29,61);
     margin-bottom: 40px;
     margin:0 auto;
     padding:5px;
@@ -116,16 +116,15 @@ h3 {
   padding: 0;
 }
 
-#meds-table-list li::before {
+/* #meds-table-list li::before {
   content: "";
   display: inline-block;
-  width: 20px; /* set the width */
-  height: 20px; /* set the height */
-  /* background-image: url('../assets/bullet.png'); */
+  width: 20px; 
+  height: 20px; 
   background-size: contain;
   background-repeat:no-repeat;
   margin-right: 10px;
-}
+} */
 
 #custom-switch{
   font-size: 14px;
@@ -162,4 +161,27 @@ h3 {
 #inline-checkbox:hover{
   box-shadow: 2px 2px 4px #00BCE4;
   transition: all 0.3s;
+}
+
+#unavailable-logo{
+  text-align: end;
+}
+
+@media screen and (max-width: 520px) {
+  #delete-button-overlay{
+    font-size: 13px;
+  }
+  thead, tr, td{
+    font-size: 0.7rem;
+    max-width: 10px;
+    overflow-wrap:break-word;
+    
+  }
+
+  #medicines-heading{
+    width:20rem;
+    margin-bottom: 1rem;
+  }
+
+ 
 }

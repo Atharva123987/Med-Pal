@@ -17,8 +17,10 @@ const Charts = () => {
 	const [showError, setShowError] = useState(false);
 	const [fetchedData, setFetchedData] = useState([[]]);
 	const [requiredError, setRequiredError] = useState(false);
+
 	useEffect(() => {
 		handleFetch();
+		
 	}, [readingType]);
 
 	const handleSubmit = async (e) => {
@@ -58,15 +60,13 @@ const Charts = () => {
 				setShowError(true);
 			});
 	};
-
 	const handleFetch = async (e) => {
 		// e.preventDefault();
-		try {
+		
 			const axios = require("axios");
 			let data = JSON.stringify({
 				testName: readingType,
 			});
-
 			let config = {
 				method: "post",
 				maxBodyLength: Infinity,
@@ -85,10 +85,7 @@ const Charts = () => {
 				.catch((error) => {
 					setShowError(true);
 				});
-		} catch (err) {
-			console.log(err);
-			setShowError(true);
-		}
+		
 	};
 
 	const handleDelete = async (e) => {
@@ -103,9 +100,11 @@ const Charts = () => {
 		axios
 			.request(config)
 			.then((response) => {
-				console.log(JSON.stringify(response.data));
+				// console.log(JSON.stringify(response.data));
+				handleFetch();
 			})
 			.catch((error) => {
+				handleFetch();
 				console.log(error);
 			});
 	};
@@ -114,7 +113,7 @@ const Charts = () => {
 		<>
 			<Navbar buttons={false} />
 			<div>
-				<h3 id="charts-heading">
+				<h3 className="charts-heading">
 					Charts <BiBarChartAlt2 style={{ fontSize: "30px" }} />
 				</h3>
 			</div>
@@ -142,7 +141,6 @@ const Charts = () => {
 									style={{ fontSize: "15px" }}
 									onClick={() => {
 										setReadingType("Blood Sugar");
-										handleFetch();
 									}}
 								>
 									Blood Sugar
@@ -151,7 +149,6 @@ const Charts = () => {
 									style={{ fontSize: "15px" }}
 									onClick={() => {
 										setReadingType("Blood Pressure");
-										handleFetch();
 									}}
 								>
 									Blood Pressure
@@ -160,7 +157,6 @@ const Charts = () => {
 									style={{ fontSize: "15px" }}
 									onClick={() => {
 										setReadingType("Haemoglobin");
-										handleFetch();
 									}}
 								>
 									Haemoglobin

@@ -26,10 +26,13 @@ const TabletManager = () => {
 	const [flag, setFlag] = useState(0);
 	const isMountedRef = useRef(false);
 	const [searchQuery, setSearchQuery] = useState(null)
+	const [deleteCalled, setDeleteCalled] = useState(0);
+	const [deleteToast, setDeleteToast] = useState(false)
 
-	useEffect(()=>{
+	useEffect(() => {
 		handleFetch();
-	},[flag])
+	}, [flag, deleteCalled])
+
 
 
 	const handleFetch = async (e) => {
@@ -45,9 +48,13 @@ const TabletManager = () => {
 	};
 
 	const handleSubmit = async (e) => {
-		// MAKE POST REQUEST HERE
 		e.preventDefault();
 		console.log(selectedFile);
+
+		if (!name || !quantity || !expiry) {
+			setNameError(true)
+		}
+
 		const checkedValues = checkboxesRef.current
 			.filter((checkbox) => checkbox.checked)
 			.map((checkbox) => checkbox.value);
@@ -55,7 +62,6 @@ const TabletManager = () => {
 		checkboxesRef.current.forEach((checkbox, i) => {
 			timeOfDay.push(checkbox.checked);
 		});
-		// console.log("HERRE", timeOfDay);
 
 		const axios = require("axios");
 		let data = JSON.stringify({
@@ -97,128 +103,142 @@ const TabletManager = () => {
 		axios
 			.request(config)
 			.then((response) => {
-				// alert("Tablet added successfully");
 				if (response.status === 200) {
 					setShowToast(true);
 					setFlag(!flag);
 				}
 			})
 			.catch((error) => {
-				// alert(error);
 				setNameError(true);
 			});
 	};
 
 
 
-  const [scrollPosition, setScrollPosition] = useState(0);
-  const handleScroll = () => {
-    const position = window.pageYOffset;
-    setScrollPosition(position);
-  };
 
-  useEffect(() => {
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, []);
+	const [scrollPosition, setScrollPosition] = useState(0);
+	const handleScroll = () => {
+		const position = window.pageYOffset;
+		setScrollPosition(position);
+	};
 
-  const tempRef = useRef(null);
-//   console.log(tempRef)
+	useEffect(() => {
+		window.addEventListener('scroll', handleScroll, { passive: true });
 
-  return (
-    <>
-      <Navbar buttons={false} />
+		return () => {
+			window.removeEventListener('scroll', handleScroll);
+		};
+	}, []);
 
-     
-      <h3 id='medicines-heading'>Medicine Manager</h3>
+	const tempRef = useRef(null);
 
-      {
-        
-        scrollPosition !== 0?(
-         <L to={'#'}><BsArrowUpSquareFill id='back-to-top' /></L>
-        ):""
-      }
+	return (
+		<>
+			<Navbar buttons={false} />
 
 
+			<h3 id='medicines-heading'>Medicine Manager</h3>
 
-      <div ref={tempRef} className='d-flex flex-row justify-content-evenly '>
-        {/* 
+			{
+
+				scrollPosition !== 0 ? (
+					<L to={'#'}><BsArrowUpSquareFill id='back-to-top' /></L>
+				) : ""
+			}
+
+
+
+			<div ref={tempRef} className='d-flex flex-row justify-content-evenly '>
+				{/* 
         <div>
           <UpcomingDose />
 
 
         </div> */}
 
-        <div id='medicines-table' className='d-flex flex-column' >
+				<div id='medicines-table' className='d-flex flex-column' >
 
-          <div className='d-flex'>
+					<div className='d-flex my-3'>
 
-            <Form style={{ width: "300px", padding: "5px", position: "sticky", top: "0%" }}>
-              <Form.Group className='d-flex'>
-                <AiOutlineSearch style={{ fontSize: "25px", margin: "auto" }} />
-                <Form.Control
-                  type="text"
-                  name="searchQuery"
-                  placeholder="Search..."
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                />
-              </Form.Group>
-            </Form>
+						<Form style={{ width: "300px", padding: "5px", position: "sticky", top: "0%" }}>
+							<Form.Group className='d-flex'>
+								<AiOutlineSearch style={{ fontSize: "25px", margin: "auto" }} />
+								<Form.Control
+									type="text"
+									name="searchQuery"
+									placeholder="Search..."
+									value={searchQuery}
+									onChange={(e) => setSearchQuery(e.target.value)}
+								/>
+							</Form.Group>
+						</Form>
 
-            <AddMedicineModal
-              setName={setName}
-              setQuantity={setQuantity}
-              setExpiry={setExpiry}
-              setFrequency={setFrequency}
-              checkboxesRef={checkboxesRef}
-              handleSubmit={handleSubmit}
-            />
+						<AddMedicineModal
+							setName={setName}
+							setQuantity={setQuantity}
+							setExpiry={setExpiry}
+							setFrequency={setFrequency}
+							checkboxesRef={checkboxesRef}
+							handleSubmit={handleSubmit}
+							error={nameError}
+						/>
 
-          </div>
+					</div>
 
-          <div style={{}}>
-            <AllMedicinesTable fetchedData={fetchedData} />
-          </div>
+					<div style={{}}>
+						<AllMedicinesTable fetchedData={fetchedData} setDeleteCalled={setDeleteCalled} deleteCalled={deleteCalled} />
+					</div>
 
-        </div>
+				</div>
 
-      </div >
+			</div >
 
-      <div id='toasts' style={{ position: "fixed", zIndex: "10", top: "3%", right: "3%" }}>
+			<div id='toasts' style={{ position: "fixed", zIndex: "10", top: "3%", right: "3%" }}>
 
-        <Toast onClose={() => { setShowToast(false) }} bg='success' position='middle-center' show={showToast} delay={3000} autohide style={{ position: "relative", zIndex: "10" }}>
-          <Toast.Header>
-            <img
-              src="holder.js/20x20?text=%20"
-              className="rounded me-2"
-              alt=""
-            />
-            <strong className="me-auto text-success">Tablet Added!</strong>
-            <small>{frequency?.charAt(0).toUpperCase() + frequency?.slice(1)}</small>
-          </Toast.Header>
-          <Toast.Body className='text-white'>Name : {name} | Quantity : {quantity}</Toast.Body>
-        </Toast>
+				<Toast onClose={() => { setShowToast(false) }} bg='success' position='middle-center' show={showToast} delay={3000} autohide style={{ position: "relative", zIndex: "10" }}>
+					<Toast.Header>
+						<img
+							src="holder.js/20x20?text=%20"
+							className="rounded me-2"
+							alt=""
+						/>
+						<strong className="me-auto text-success">Tablet Added!</strong>
+						<small>{frequency?.charAt(0).toUpperCase() + frequency?.slice(1)}</small>
+					</Toast.Header>
+					<Toast.Body className='text-white'>Name : {name} | Quantity : {quantity}</Toast.Body>
+				</Toast>
 
-        <Toast onClose={() => { setNameError(false) }} bg='danger' position='middle-center' show={nameError} delay={2000} autohide style={{ position: "relative", zIndex: "10" }}>
-          <Toast.Header>
-            <img
-              src="holder.js/20x20?text=%20"
-              className="rounded me-2"
-              alt=""
-            />
-            <strong className="me-auto text-danger">Enter Valid Name!</strong>
-          </Toast.Header>
-          <Toast.Body className='text-white'>Tablet name should be unique</Toast.Body>
-        </Toast>
+				<Toast onClose={() => { setNameError(false) }} bg='warning' position='middle-center' show={nameError} delay={2000} autohide style={{ position: "relative", zIndex: "10" }}>
+					<Toast.Header>
+						<img
+							src="holder.js/20x20?text=%20"
+							className="rounded me-2"
+							alt=""
+						/>
+						<strong className="me-auto text-warning">Enter Valid Name!</strong>
+					</Toast.Header>
+					<Toast.Body className='text-white'>Tablet name should be unique</Toast.Body>
+				</Toast>
 
-      </div>
-      <Footer />
-    </>
-  );
+				<Toast onClose={() => { setDeleteToast(false) }} bg='danger' position='middle-center' show={deleteToast} delay={3000} autohide style={{ position: "relative", zIndex: "10" }}>
+					<Toast.Header>
+						<img
+							src="holder.js/20x20?text=%20"
+							className="rounded me-2"
+							alt=""
+						/>
+						<strong className="me-auto text-danger">Successfully Deleted!</strong>
+					</Toast.Header>
+					<Toast.Body className='text-white'>
+						Medicine entry deleted
+					</Toast.Body>
+				</Toast>
+
+
+			</div>
+			<Footer />
+		</>
+	);
 
 };
 

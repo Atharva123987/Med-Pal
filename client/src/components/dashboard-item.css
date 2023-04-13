@@ -140,6 +140,13 @@ legend{
     overflow:hidden
 }
 
+#floater-nodata{
+    position:relative;
+    width: fit-content;
+    color: rgb(148, 148, 148);
+    top: 40%;
+    left:45%;
+}
 
 .dash-button-container{
     margin-top: auto;

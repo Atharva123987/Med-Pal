@@ -2,20 +2,27 @@
   display:flex;
   align-items: center;
   justify-content: center;
-  background-color: rgba(0, 0, 0, 0);
+  background-color: #171d3d;
   width: 100%;
   z-index: 10;
+  margin-bottom: 20px;
+  box-shadow: 0px 0px 10px black;
 }
 
 .heading{
   font-size: 40px;
-  color:black;
+  color:white;
 }
 
 .logo{
   width: 50px;
   height: 50px;
   margin: 0px 5px 0px 10px ;
+  color:white;
+  background-color: rgb(23,29,61);
+  padding: 2px;
+  border-radius: 10%; 
+
 }
 
 .heading{

@@ -1,17 +1,44 @@
 import Table from "react-bootstrap/Table";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { CgUnavailable } from "react-icons/cg";
 import Button from "react-bootstrap/esm/Button";
 import { AiFillDelete } from "react-icons/ai";
+import Toast from 'react-bootstrap/Toast';
+import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
+import Popover from 'react-bootstrap/Popover';
 
 const AllMedicinesTable = (props) => {
-	// const [deleteID, setDeleteID] = useState(null)
 	const fetchedData = props.fetchedData;
+	const [showPopup, setShowPopup] = useState(false);
+	const [target, setTarget] = useState(null);
+	const [deleteID, setDeleteID] = useState(null);
+	const ref = useRef(null);
+	const [clickedIndex, setClickedIndex] = useState(null);
 
-	useEffect(() => {}, [fetchedData]);
+	const handlePopup = (event, deleteID, index) => {
+		setDeleteID(deleteID);
+		setShowPopup(true);
+		setClickedIndex(index);
+	};
+
+	const handleClosePopup = () => {
+		setShowPopup(false);
+	};
+	const popover = (
+		<Popover id="popover-basic">
+			<Popover.Header as="h3" className="text-white bg-danger">Warning</Popover.Header>
+			<Popover.Body>
+				Are you sure you want to <strong>delete this medicine?</strong>
+				<Button variant="danger" className="mx-2" onClick={(e) => {
+					handleDelete(deleteID)
+					handleClosePopup();
+				}}>Yes</Button>
+				<Button variant="dark" onClick={() => setShowPopup(false)}>No</Button>
+			</Popover.Body>
+		</Popover>
+	);
 
 	const handleDelete = async (deleteID) => {
-		console.log(deleteID);
 		const axios = require("axios");
 
 		let config = {
@@ -25,6 +52,8 @@ const AllMedicinesTable = (props) => {
 			.request(config)
 			.then((response) => {
 				console.log(JSON.stringify(response.data));
+				props.setDeleteCalled(!props.deleteCalled);
+
 			})
 			.catch((error) => {
 				console.log(error);
@@ -64,96 +93,110 @@ const AllMedicinesTable = (props) => {
 												element.expiry
 											).toLocaleDateString()}
 										</td>
-										<td>
+										<td > 
 											{element.frequency ? (
 												element.frequency
 											) : (
 												<CgUnavailable />
 											)}
 										</td>
-										<td>
+										<td >
 											{
 												<ul id="meds-table-list">
 													{element?.timeOfDay &&
-													Object.values(
-														element.timeOfDay
-													).every(
-														(val) => !val.yesOrNot
-													) ? (
-														<li>
-															<CgUnavailable />
-														</li>
+														Object.values(
+															element.timeOfDay
+														).every(
+															(val) => !val.yesOrNot
+														) ? (
+															<CgUnavailable/>
 													) : (
 														<>
 															{element?.timeOfDay
 																?.morning
 																?.yesOrNot && (
-																<li>
-																	Morning{" "}
-																	{
-																		fetchedData[0]
-																			.timeOfDay
-																			.morning
-																			.yesOrNot
-																	}
-																</li>
-															)}
+																	<li>
+																		Morning{" "}
+																		{
+																			fetchedData[0]
+																				.timeOfDay
+																				.morning
+																				.yesOrNot
+																		}
+																	</li>
+																)}
 															{element?.timeOfDay
 																?.afternoon
 																?.yesOrNot && (
-																<li>
-																	Afternoon{" "}
-																	{
-																		fetchedData[0]
-																			.timeOfDay
-																			.afternoon
-																			.yesOrNot
-																	}
-																</li>
-															)}
+																	<li>
+																		Afternoon{" "}
+																		{
+																			fetchedData[0]
+																				.timeOfDay
+																				.afternoon
+																				.yesOrNot
+																		}
+																	</li>
+																)}
 															{element?.timeOfDay
 																?.evening
 																?.yesOrNot && (
-																<li>
-																	Evening{" "}
-																	{
-																		fetchedData[0]
-																			.timeOfDay
-																			.evening
-																			.yesOrNot
-																	}
-																</li>
-															)}
+																	<li>
+																		Evening{" "}
+																		{
+																			fetchedData[0]
+																				.timeOfDay
+																				.evening
+																				.yesOrNot
+																		}
+																	</li>
+																)}
 															{element?.timeOfDay
 																?.night
 																?.yesOrNot && (
-																<li>
-																	Night{" "}
-																	{
-																		fetchedData[0]
-																			.timeOfDay
-																			.night
-																			.yesOrNot
-																	}
-																</li>
-															)}
+																	<li>
+																		Night{" "}
+																		{
+																			fetchedData[0]
+																				.timeOfDay
+																				.night
+																				.yesOrNot
+																		}
+																	</li>
+																)}
 														</>
 													)}
 												</ul>
 											}
 										</td>
-										<td>
-											<Button
-												onClick={(e) => {
-													// setDeleteID(element._id)
-													handleDelete(element._id);
+										<td id='popup-overlay'>
+											<OverlayTrigger
+												trigger="click"
+												placement="right"
+												overlay={popover}
+												rootClose
+												flip
+												fallbackPlacements={['left', 'top', 'bottom']}
+												show={showPopup && clickedIndex === idx}
+												onHide={() => {
+													setShowPopup(false);
+													setClickedIndex(null);
 												}}
-												variant="danger"
 											>
-												<AiFillDelete />
-											</Button>
+												<Button
+													onClick={(e) => {
+														handlePopup(e, element._id, idx);
+													}}
+													variant="danger"
+												>
+													<AiFillDelete id="delete-button-overlay" />
+												</Button>
+											</OverlayTrigger>
 										</td>
 									</tr>
+
+
+
 								</>
 							);
 						})}
