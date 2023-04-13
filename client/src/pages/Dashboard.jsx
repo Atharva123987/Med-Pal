@@ -44,6 +44,33 @@ const Dashboard = () => {
 		},
 	]);
 
+	 const appointments = [
+		{
+		  id: 1,
+		  date: "2023-04-01T14:00:00.000Z",
+		  doctor: "Dr. Smith",
+		  phoneNumber: "555-1234",
+		  address: "123 Main St.",
+		  notes: "Bring medical records",
+		},
+		{
+		  id: 2,
+		  date: new Date("2023-04-03T14:00:00.000Z"),
+		  doctor: "Dr. Johnson",
+		  phoneNumber: "555-5678",
+		  address: "456 Oak St.",
+		  notes: "Get blood test",
+		},
+		{
+		  id: 2,
+		  date: new Date("2023-04-05T14:00:00.000Z"),
+		  doctor: "Dr. Drake",
+		  phoneNumber: "322-5678",
+		  address: "96 Fat St.",
+		  notes: "Get sugar report",
+		}
+	]
+
 	const [readingType, setReadingType] = useState("Blood Sugar")
 	const [fetchedData, setFetchedData] = useState(null)
 	
@@ -175,7 +202,7 @@ const Dashboard = () => {
 							className="component"
 							style={{ flexGrow: 6 }}
 						>
-							{/* <Calendar /> */}
+							<Calendar appointments={appointments} />
 						</div>
 
 						<div

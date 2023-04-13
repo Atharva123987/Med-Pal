@@ -53,23 +53,22 @@ const Calendar = ({ appointments }) =>{
     return null;
   };
 
-  if (loading) {
+  if (loading || appointments === null) {
     return <p>Loading...</p>;
   }
 
   return (
-    <Container>
-      <Row className="mt-5">
-        <Col md={4}>
+    <div>
+
+
           <Calendar1
             onChange={(date) => setSelectedDate(date.toISOString())}
             value={new Date(selectedDate)}
             tileContent={tileContent}
           />
-        </Col>
-        <Col md={8}>
+
+
           <ListGroup>
-            {/* Display selected date appointments */}
             {findAppointments(selectedDate).map((appointment, index) => (
               <ListGroup.Item key={index}>
                 <div>Doctor: {appointment.doctorName}</div>
@@ -80,9 +79,9 @@ const Calendar = ({ appointments }) =>{
               </ListGroup.Item>
             ))}
           </ListGroup>
-        </Col>
-      </Row>
-    </Container>
+          
+
+    </div>
   );
 }
 
