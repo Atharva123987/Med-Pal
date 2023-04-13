@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useAuthContext } from "./useAuthContext";
+import { useAuthContext } from "../hooks/useAuthContext";
 
 export const useLogin = () => {
 	const [error, setError] = useState(null);
