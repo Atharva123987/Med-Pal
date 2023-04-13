@@ -6,6 +6,7 @@ import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import Toast from "react-bootstrap/Toast";
 import Calendar from '../components/Calendar'
+import { useEffect } from "react";
 
 const Appointments = () => {
 	const [doctorName, setDoctorName] = useState(null);
@@ -17,93 +18,126 @@ const Appointments = () => {
 	const [show, setShow] = useState(false);
 	const [month, setMonth] = useState("");
 	const [error, setError] = useState(false);
+	const appointments = [
+		{
+		  id: 1,
+		  date: new Date("2023-04-01T14:00:00.000Z"),
+		  doctor: "Dr. Smith",
+		  phoneNumber: "555-1234",
+		  address: "123 Main St.",
+		  notes: "Bring medical records",
+		},
+		{
+		  id: 2,
+		  date: new Date("2023-04-03T14:00:00.000Z"),
+		  doctor: "Dr. Johnson",
+		  phoneNumber: "555-5678",
+		  address: "456 Oak St.",
+		  notes: "Get blood test",
+		},
+		{
+		  id: 2,
+		  date: new Date("2023-04-05T14:00:00.000Z"),
+		  doctor: "Dr. Drake",
+		  phoneNumber: "322-5678",
+		  address: "96 Fat St.",
+		  notes: "Get sugar report",
+		}
+	]
+
+
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-
+	  
 		switch (appointmentDateAndTime?.getMonth()) {
-			case 0:
-				setMonth("January");
-				break;
-			case 1:
-				setMonth("February");
-				break;
-			case 2:
-				setMonth("March");
-				break;
-			case 3:
-				setMonth("April");
-				break;
-			case 4:
-				setMonth("May");
-				break;
-			case 5:
-				setMonth("June");
-				break;
-			case 6:
-				setMonth("July");
-				break;
-			case 7:
-				setMonth("August");
-				break;
-			case 8:
-				setMonth("September");
-				break;
-			case 9:
-				setMonth("October");
-				break;
-			case 10:
-				setMonth("November");
-				break;
-			case 11:
-				setMonth("December");
-				break;
-			default:
-				setMonth("");
+		  case 0:
+			setMonth("January");
+			break;
+		  case 1:
+			setMonth("February");
+			break;
+		  case 2:
+			setMonth("March");
+			break;
+		  case 3:
+			setMonth("April");
+			break;
+		  case 4:
+			setMonth("May");
+			break;
+		  case 5:
+			setMonth("June");
+			break;
+		  case 6:
+			setMonth("July");
+			break;
+		  case 7:
+			setMonth("August");
+			break;
+		  case 8:
+			setMonth("September");
+			break;
+		  case 9:
+			setMonth("October");
+			break;
+		  case 10:
+			setMonth("November");
+			break;
+		  case 11:
+			setMonth("December");
+			break;
+		  default:
+			setMonth("");
 		}
-
+	  
 		// !!!HANDLE POST REQUST HERE
 		let data = JSON.stringify({
-			doctorName: doctorName,
-			phoneNumber: doctorNumber,
-			address: doctorAddress,
-			timeAndDate: appointmentDateAndTime,
-			notes: notes,
+		  doctorName: doctorName,
+		  phoneNumber: doctorNumber,
+		  address: doctorAddress,
+		  timeAndDate: appointmentDateAndTime,
+		  notes: notes,
 		});
-
+	  
 		let config = {
-			method: "post",
-			maxBodyLength: Infinity,
-			url: "http://localhost:4000/api/appointments",
-			headers: {
-				"Content-Type": "application/json",
-			},
-			data: data,
+		  method: "post",
+		  maxBodyLength: Infinity,
+		  url: "http://localhost:4000/api/appointments",
+		  headers: {
+			"Content-Type": "application/json",
+		  },
+		  data: data,
 		};
-
+	  
 		axios
-			.request(config)
-			.then((response) => {
-				console.log(JSON.stringify(response.data));
-			})
-			.catch((error) => {
-				console.log(error);
-			});
-
+		  .request(config)
+		  .then((response) => {
+			console.log(JSON.stringify(response.data));
+			handleFetch();
+		  })
+		  .catch((error) => {
+			console.log(error);
+		  });
+	  
 		try {
-			console.log("Sent Data :", {
-				doctorName,
-				doctorNumber,
-				doctorAddress,
-				appointmentDateAndTime,
-				notes,
-			});
-			if (doctorName) setShow(true);
-			else setError(true);
+		  console.log("Sent Data :", {
+			doctorName,
+			doctorNumber,
+			doctorAddress,
+			appointmentDateAndTime,
+			notes,
+		  });
+		  if (doctorName) setShow(true);
+		  else setError(true);
 		} catch (err) {
-			console.log(err);
-			setError(true);
+		  console.log(err);
+		  setError(true);
 		}
-	};
+	  };
+	  
+
+	
+	useEffect(()=>handleFetch(), [])
 
 	const handleFetch = async (e) => {
 	
@@ -121,7 +155,7 @@ const Appointments = () => {
 
 	return (
 		<>
-		<Calendar/>
+
 			<div className="w-100">
 				<div
 					id="toasts"
@@ -200,6 +234,7 @@ const Appointments = () => {
 
 				<h1>Appointments Page</h1>
 				<div className="d-flex justify-content-evenly">
+				<Calendar appointments={fetchedData?fetchedData:appointments}/>
 					<Form>
 						<Form.Group className="mb-3 " controlId="doctorName">
 							<Form.Label>Doctor Name</Form.Label>
@@ -264,53 +299,14 @@ const Appointments = () => {
 					</Form>
 					<div className="ml-5">
 						<h3>Upcoming appointments</h3>
-						<dl></dl>
-						<br></br>
-						<h2>Fetch Appointments and Doctor details</h2>
-						<button
+						
+						{/* <button
 							className="btn btn-primary"
 							onClick={handleFetch}
 						>
 							Fetch Appointements
-						</button>
-						<div style={{ height: "50vh", overflowY: "scroll" }}>
-							<ol>
-								{fetchedData &&
-									fetchedData.map((element, i) => {
-										return (
-											<li key={i}>
-												<ul>
-													<li
-														key={element.doctorName}
-													>
-														{element.doctorName}
-													</li>
-													<li
-														key={
-															element.phoneNumber
-														}
-													>
-														{element.phoneNumber}
-													</li>
-													<li key={element.address}>
-														{element.address}
-													</li>
-													<li
-														key={
-															element.timeAndDate
-														}
-													>
-														{element.timeAndDate}
-													</li>
-													<li key={element.notes}>
-														{element.notes}
-													</li>
-												</ul>
-											</li>
-										);
-									})}
-							</ol>
-						</div>
+						</button> */}
+						
 					</div>
 				</div>
 			</div>
