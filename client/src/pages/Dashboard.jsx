@@ -158,12 +158,12 @@ const Dashboard = () => {
 						<Tips />
 					</div>
 				</div>
+
 				<div id="dash-components">
 					<div id="r1">
 						<div
 							id="c1"
 							className="component"
-							style={{ flexGrow: 6, maxWidth: "20vw" }}
 						>
 							<TabList />
 						</div>
@@ -171,14 +171,12 @@ const Dashboard = () => {
 						<div
 							id="c2"
 							className="component"
-							style={{ flexGrow: 4, maxWidth: "25vw" }}
 						>
 							<TabStock />
 						</div>
 						<div
 							id="c3"
 							className="component"
-							style={{ flexGrow: 5, maxWidth: "20vw" }}
 						>
 							<Prescription />
 						</div>
@@ -188,11 +186,10 @@ const Dashboard = () => {
 						<div
 							id="c4"
 							className="component"
-							style={{ flexGrow: 6 }}
 						>
 							{
 
-							fetchedData && <AllCharts chartData={fetchedData} chartType={readingType} />
+							fetchedData && <AllCharts chartData={fetchedData} chartType={readingType} width={450} height={230} />
 							}
 
 						</div>
@@ -200,18 +197,18 @@ const Dashboard = () => {
 						<div
 							id="c5"
 							className="component"
-							style={{ flexGrow: 6 }}
+							
 						>
 							<Calendar appointments={appointments} />
 						</div>
 
-						<div
+						{/* <div
 							id="c6"
 							className="component"
 							style={{ flexGrow: 6 }}
 						>
-							{/* <Streaks /> */}
-						</div>
+							<Streaks />
+						</div> */}
 					</div>
 				</div>
 			</div>

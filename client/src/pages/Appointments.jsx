@@ -218,7 +218,6 @@ const Appointments = () => {
 					</h3>
 						
 				<div id='appointments-container'>
-				<Calendar id='calendar-component' appointments={fetchedData ? fetchedData : null} />
 				<AddAppointmentModal 
 				setDoctorName={setDoctorName} 
 				setDoctorNumber={setDoctorNumber} 
@@ -226,6 +225,7 @@ const Appointments = () => {
 				setNotes={setNotes} 
 				setAppointmentDateAndTime={setAppointmentDateAndTime} 
 				handleSubmit={handleSubmit} />
+				<Calendar id='calendar-component' appointments={fetchedData ? fetchedData : null} />
 				</div>
 			</div>
 		</>

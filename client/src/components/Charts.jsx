@@ -12,7 +12,8 @@ import "./dashboard-item.css";
 
 const Charts = (props) => {
 	const displayData = props.chartData.data;
-
+	const {width,height} = props;
+	
 	if (!displayData) {
 		return (
 			<>
@@ -22,8 +23,8 @@ const Charts = (props) => {
 					No data to show
 				</p>
 				<LineChart
-					width={600}
-					height={350}
+					width={width?width:500}
+					height={height?height:300}
 					data={[{count:'Not available',dateTaken:`${new Date()}`},{}]}
 					margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
 				>
@@ -32,7 +33,7 @@ const Charts = (props) => {
 					<YAxis />
 					<Tooltip />
 					{/* <Legend /> */}
-					<Line type="monotone" dataKey="count" stroke="#8884d8" />
+					{/* <Line type="monotone" dataKey="count" stroke="#8884d8" /> */}
 				</LineChart>
 				</div>
 
@@ -42,30 +43,28 @@ const Charts = (props) => {
 
 	return (
 		<>
-			<div id="charts">
+			{/* <div id="charts"> */}
 
 				{
 					displayData &&
 					<>
 						<legend align="center">{props.chartType}</legend>
 						<LineChart
-							width={600}
-							height={350}
+							width={width?width:500}
+							height={height?height:300}
 							data={displayData}
-							margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
 						>
 							<CartesianGrid strokeDasharray="3 3" />
-							<XAxis dataKey="dateTaken" />
+							{/* <XAxis dataKey="dateTaken" /> */}
 							<YAxis />
 							<Tooltip />
-							{/* <Legend /> */}
 							<Line type="monotone" dataKey="count" stroke="#8884d8" />
 						</LineChart>
 					</>
 				}
 
 
-			</div>
+			{/* </div> */}
 		</>
 	);
 };

@@ -35,14 +35,14 @@ input {
 }
 
 
-button {
+/* button {
   border: none;
   
   background-color: white;
   border-radius: 10px;
   cursor: pointer;
   color: #7439db;
-}
+} */
 
 .link-btn {
   background: none;

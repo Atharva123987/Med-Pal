@@ -3,7 +3,11 @@ import Calendar1 from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Container, Row, Col, ListGroup } from 'react-bootstrap';
-
+import {GrCaretNext} from 'react-icons/gr'
+import {GrCaretPrevious} from 'react-icons/gr'
+import {TbPlayerTrackPrev} from 'react-icons/tb'
+import {TbPlayerTrackNext} from 'react-icons/tb'
+import './calendar.css'
 const Calendar = ({ appointments }) =>{
 
   const [selectedDate, setSelectedDate] = useState(new Date().toISOString());
@@ -59,28 +63,34 @@ const Calendar = ({ appointments }) =>{
 
   return (
     <div>
+   
+   <Calendar1
+  onChange={(date) => setSelectedDate(date.toISOString())}
+  value={new Date(selectedDate)}
+  tileContent={tileContent}
+  nextLabel={<GrCaretNext />}
+  prevLabel={<GrCaretPrevious />}
+  prev2Label={<TbPlayerTrackPrev />}
+  next2Label={<TbPlayerTrackNext />}
+  style={{
+    backgroundColor: "black",
+    color: "white",
+    borderRadius: "5px",
+    padding: "10px"
+  }}
+/>
 
-
-          <Calendar1
-            onChange={(date) => setSelectedDate(date.toISOString())}
-            value={new Date(selectedDate)}
-            tileContent={tileContent}
-          />
-
-
-          <ListGroup>
-            {findAppointments(selectedDate).map((appointment, index) => (
-              <ListGroup.Item key={index}>
-                <div>Doctor: {appointment.doctorName}</div>
-                <div>Phone: {appointment.phoneNumber}</div>
-                <div>Date: {appointment.timeAndDate}</div>
-                <div>Address: {appointment.address}</div>
-                <div>Notes: {appointment.notes}</div>
-              </ListGroup.Item>
-            ))}
-          </ListGroup>
-          
-
+      <ListGroup>
+        {findAppointments(selectedDate).map((appointment, index) => (
+          <ListGroup.Item key={index}>
+            <div>Doctor: {appointment.doctorName}</div>
+            <div>Phone: {appointment.phoneNumber}</div>
+            <div>Date: {appointment.timeAndDate}</div>
+            <div>Address: {appointment.address}</div>
+            <div>Notes: {appointment.notes}</div>
+          </ListGroup.Item>
+        ))}
+      </ListGroup>
     </div>
   );
 }

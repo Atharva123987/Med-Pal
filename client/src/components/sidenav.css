@@ -1,5 +1,5 @@
 .sidenav{
-    height:auto;  
+    height:100vh;  
     width: 10vh;  
     background-color:black; 
     display: flex;
