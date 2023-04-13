@@ -1,4 +1,5 @@
 import React from "react";
+
 import './Navbar.css';
 import {Link} from 'react-router-dom';
 import Log_In from '../assets/login.png'
@@ -35,5 +36,6 @@ const Navbar = (props) => {
         </div>
     </>
   );
+
 };
 export default Navbar;
