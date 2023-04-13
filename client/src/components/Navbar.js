@@ -5,9 +5,11 @@ import Log_In from "../assets/login.png";
 import Register from "../assets/register.png";
 import Logo from "../assets/logo.png";
 import { useLogout } from "../hooks/useLogout";
+import { useAuthContext } from "../hooks/useAuthContext";
 
 const Navbar = (props) => {
 	const { logout } = useLogout();
+	const { user } = useAuthContext();
 
 	const handleClick = () => {
 		logout();
@@ -21,11 +23,14 @@ const Navbar = (props) => {
 				</a>
 				<div className="heading">MEDPAL</div>
 				<div className="navbar-buttons">
+					{user && (
+						<div>
+							<span>{user.email}</span>
+							<button onClick={handleClick}>Log out</button>
+						</div>
+					)}
 					<div>
-						<button onClick={handleClick}>Log out</button>
-					</div>
-					<div>
-						{props.buttons && (
+						{props.buttons && !user && (
 							<>
 								<Link to={"/login"}>
 									<img
