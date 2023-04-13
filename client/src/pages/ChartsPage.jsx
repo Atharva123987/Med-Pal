@@ -104,6 +104,7 @@ const Charts = () => {
 				handleFetch();
 			})
 			.catch((error) => {
+				handleFetch();
 				console.log(error);
 			});
 	};
