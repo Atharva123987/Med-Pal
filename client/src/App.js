@@ -2,7 +2,7 @@ import React from "react";
 import "./App.css";
 import "./index.css";
 import Home from "./pages/Home";
-import { BrowserRouter, Route, Redirect, Switch } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Dashboard from "./pages/Dashboard";
@@ -17,122 +17,69 @@ import ErrorPage from "./pages/ErrorPage";
 import ErrorPageLink from "./pages/ErrorPageLink";
 import { useAuthContext } from "./hooks/useAuthContext";
 
-const AppRoutes = ({ user }) => {
-	const isAuthenticated = user !== null;
 
-	return (
-		<BrowserRouter>
-			<Switch>
-				<Route exact path="/" component={Home} />
-				<Route
-					path="/login"
-					render={() =>
-						!isAuthenticated ? (
-							<Login />
-						) : (
-							<Redirect to="/dashboard" />
-						)
-					}
-				/>
-				<Route
-					path="/register"
-					render={() =>
-						!isAuthenticated ? (
-							<Register />
-						) : (
-							<Redirect to="/dashboard" />
-						)
-					}
-				/>
-				<Route
-					path="/dashboard"
-					render={() =>
-						isAuthenticated ? (
-							<Dashboard />
-						) : (
-							<Redirect to="/error" />
-						)
-					}
-				/>
-				<Route
-					path="/dashboard"
-					render={() =>
-						isAuthenticated ? (
-							<Dashboard />
-						) : (
-							<Redirect to="/error" />
-						)
-					}
-				/>
-				<Route
-					path="/about"
-					render={() =>
-						isAuthenticated ? <About /> : <Redirect to="/error" />
-					}
-				/>
-				<Route
-					path="/calendar"
-					render={() =>
-						isAuthenticated ? (
-							<Calendar />
-						) : (
-							<Redirect to="/error" />
-						)
-					}
-				/>
-				<Route
-					path="/medicines"
-					render={() =>
-						isAuthenticated ? (
-							<TabletManager />
-						) : (
-							<Redirect to="/error" />
-						)
-					}
-				/>
-				<Route
-					path="/appointments"
-					render={() =>
-						isAuthenticated ? (
-							<Appointments />
-						) : (
-							<Redirect to="/error" />
-						)
-					}
-				/>
-				<Route
-					path="/admin"
-					render={() =>
-						isAuthenticated ? <Admin /> : <Redirect to="/error" />
-					}
-				/>
-				<Route
-					path="/search"
-					render={() =>
-						isAuthenticated ? <Search /> : <Redirect to="/error" />
-					}
-				/>
-				<Route
-					path="/charts"
-					render={() =>
-						isAuthenticated ? <Charts /> : <Redirect to="/error" />
-					}
-				/>
-				<Route path="/error" component={ErrorPage} />
-				<Route component={ErrorPageLink} />
-			</Switch>
-		</BrowserRouter>
-	);
-};
 
 const App = () => {
-	const { user } = useAuthContext();
-
-	return (
-		<>
-			<AppRoutes user={user} />
-		</>
-	);
+  const { user } = useAuthContext();
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route
+          path="/login"
+          element={user ? <Navigate to="/dashboard" /> : <Login />}
+        />
+        <Route
+          path="/register"
+          element={
+            user ? <Navigate to="/dashboard" /> : <Register />
+          }
+        />
+        <Route
+          path="/dashboard"
+          element={
+            user ? <Dashboard /> : <Navigate to="/error" />
+          }
+        />
+        <Route
+          path="/about"
+          element={user ? <About /> : <Navigate to="/error" />}
+        />
+        <Route
+          path="/calendar"
+          element={
+            user ? <Calendar /> : <Navigate to="/error" />
+          }
+        />
+        <Route
+          path="/medicines"
+          element={
+            user ? <TabletManager /> : <Navigate to="/error" />
+          }
+        />
+        <Route
+          path="/appointments"
+          element={
+            user ? <Appointments /> : <Navigate to="/error" />
+          }
+        />
+        <Route
+          path="/admin"
+          element={user ? <Admin /> : <Navigate to="/error" />}
+        />
+        <Route
+          path="/search"
+          element={user ? <Search /> : <Navigate to="/error" />}
+        />
+        <Route
+          path="/charts"
+          element={user ? <Charts /> : <Navigate to="/error" />}
+        />
+        <Route path="/error" element={<ErrorPage />} />
+        <Route path="*" element={<ErrorPageLink />} />
+      </Routes>
+    </BrowserRouter>
+  );
 };
 
 export default App;
