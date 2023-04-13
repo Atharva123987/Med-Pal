@@ -13,6 +13,7 @@ const medicineRoutes = require("./routes/medicineRoutes");
 const appointmentRoutes = require("./routes/appointmentRoutes");
 const doctorRoutes = require("./routes/doctorRoutes");
 const labCountRoutes = require("./routes/labCountRoutes.js");
+const userRoutes = require("./routes/userRoutes");
 
 // middleware
 app.use(express.json());
