@@ -5,6 +5,8 @@ import axios from "axios";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import Toast from "react-bootstrap/Toast";
+import Calendar from '../components/Calendar'
+
 const Appointments = () => {
 	const [doctorName, setDoctorName] = useState(null);
 	const [doctorNumber, setDoctorNumber] = useState(null);
@@ -119,6 +121,7 @@ const Appointments = () => {
 
 	return (
 		<>
+		<Calendar/>
 			<div className="w-100">
 				<div
 					id="toasts"

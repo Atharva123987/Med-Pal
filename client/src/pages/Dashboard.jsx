@@ -10,6 +10,8 @@ import Calendar from "../components/Calendar";
 import Streaks from "../components/Streaks";
 import Tips from "../components/Tips";
 import { useState } from "react";
+import AllCharts from '../components/Charts'
+import { useEffect } from "react";
 
 const Dashboard = () => {
 	const [userDetails, setUserDetails] = useState([
@@ -41,6 +43,42 @@ const Dashboard = () => {
 			address: "22 SUSSEX ST, HACKENSACK NJ 07601",
 		},
 	]);
+
+	const [readingType, setReadingType] = useState("Blood Sugar")
+	const [fetchedData, setFetchedData] = useState(null)
+	
+	useEffect(()=>{
+		handleFetch()
+		console.log("here")
+	}, [])
+
+	const handleFetch = async (e) => {
+		
+			const axios = require("axios");
+			let data = JSON.stringify({
+				testName: readingType,
+			});
+			let config = {
+				method: "post",
+				maxBodyLength: Infinity,
+				url: "http://localhost:4000/api/labcounts/type",
+				headers: {
+					"Content-Type": "application/json",
+				},
+				data: data,
+			};
+
+			axios
+				.request(config)
+				.then((response) => {
+					setFetchedData(response.data);
+					console.log(fetchedData)
+				})
+				.catch((error) => {
+					// setShowError(true);
+				});
+		
+	};
 
 	return (
 		<>
@@ -125,28 +163,10 @@ const Dashboard = () => {
 							className="component"
 							style={{ flexGrow: 6 }}
 						>
-							<Charts chartData={[
-								{
-									date: new Date(2020, 6, 1).toISOString().slice(0, 10),
-									count: 130,
-								},
-								{
-									date: new Date(2021, 5, 1).toISOString().slice(0, 10),
-									count: 220,
-								},
-								{
-									date: new Date(2021, 7, 1).toISOString().slice(0, 10),
-									count: 250,
-								},
-								{
-									date: new Date(2021, 8, 1).toISOString().slice(0, 10),
-									count: 300,
-								},
-								{
-									date: new Date(2022, 12, 1).toISOString().slice(0, 10),
-									count: 100,
-								},
-							]} readingType="Blood Sugar" />
+							{
+
+							fetchedData && <AllCharts chartData={fetchedData} chartType={readingType} />
+							}
 
 						</div>
 
@@ -155,7 +175,7 @@ const Dashboard = () => {
 							className="component"
 							style={{ flexGrow: 6 }}
 						>
-							<Calendar />
+							{/* <Calendar /> */}
 						</div>
 
 						<div
