@@ -75,6 +75,8 @@ userSchema.statics.signup = async function (
 		weight,
 	});
 
+	console.log("User created: ", user);
+
 	return user;
 };
 
