@@ -11,9 +11,7 @@ const Home = () => {
             <div id="home-content" >
                 <Navbar buttons={true}/>
                 <Carousel slides={CarouselData}/>
-                {/* Should have rounded border on bottom */}
                 <HomeContent/>
-                {/* <h1 className="text-white bg-red-500">HERERERERLELRER</h1> */}
                 <Footer/>
             </div>
         </>
