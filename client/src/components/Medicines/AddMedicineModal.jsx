@@ -17,7 +17,10 @@ const AddMedicineModal = (props) => {
   const handleSubmit = (e) => {
 
     if (props.error) handleClose();
-    else props.handleSubmit(e);
+    else {
+      props.handleSubmit(e);
+      handleClose();
+    }
 
   }
 

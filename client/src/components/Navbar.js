@@ -22,6 +22,14 @@ const Navbar = (props) => {
                 </> 
                 )
               }
+              {
+                !props.buttons &&
+                (
+                  <>
+                  <Link to={'/dashboard'} className="btn btn-primary">Dashboard</Link>
+                  </>
+                )
+              }
               
             </div>
         </div>

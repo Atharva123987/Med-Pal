@@ -158,7 +158,7 @@ const TabletManager = () => {
 
 				<div id='medicines-table' className='d-flex flex-column' >
 
-					<div className='d-flex'>
+					<div className='d-flex my-3'>
 
 						<Form style={{ width: "300px", padding: "5px", position: "sticky", top: "0%" }}>
 							<Form.Group className='d-flex'>
