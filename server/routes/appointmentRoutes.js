@@ -14,7 +14,7 @@ const router = express.Router();
 router.use(requireAuth);
 
 // GET all appointments
-router.post("/", getAllAppointments);
+router.get("/", getAllAppointments);
 
 // GET a single appointment
 router.post("/:id", getSingleAppointment);
