@@ -2,10 +2,11 @@
   display:flex;
   align-items: center;
   justify-content: center;
-  background-color: #171d3d;
+  /* background-color: rgb(39,33,33); */
+  background-color: rgb(23,29,61);
   width: 100%;
   z-index: 10;
-  margin-bottom: 20px;
+  /* margin-bottom: 20px; */
   box-shadow: 0px 0px 10px black;
 }
 
@@ -30,8 +31,11 @@
 }
 
 .navbar-buttons{
-  margin:0px 10px 0px auto;
-  display: flex;
+  margin:0px 0px 0px auto;
+  /* display: flex; */
+  text-decoration: none;
+  height: max-content;
+  font-size: small;
 }
 
 
@@ -42,16 +46,26 @@
   transition: all 0.3s;
 }
 
+#login-button{
+  border-radius: 50px 0px 0px 50px;
+  border-right: 2px solid black;
+}
+
 #login-button:hover{
   scale: 105%;
   transition: all 0.2s;
-  translate: -5px 0px;
+  translate: -3px 0px;
+}
+
+#register-button{
+  border-left: 2px solid black;
+  margin-right:20px;
 }
 
 #register-button:hover{
   scale: 105%;
   transition: all 0.2s;
-  translate: 5px 0px;
+  translate: 3px 0px;
 }
 
 #login-button:active, #register-button:active{
@@ -60,21 +74,24 @@
 }
 
 #logout-button{
-  color:rgb(23,29,61);
-  padding: 10px;
-  border-radius: 100px;
+  /* color:rgb(23,29,61); */
+  border-radius: 0px 40px 40px 0px;
+  padding: 12px 10px;
+  background-color: white;
+  color:red;
+  border-color: white;
+  /* border-radius: 100px; */
   transition: all 0.3s;
-  margin-right: 27px;
+  margin-right: 20px;
 }
 
 #logout-button:hover{
   scale:105%;
+  translate: 3px 0px;
   transition: all 0.3s;
-  background-color: white;
+  
 }
 
-
-  
 #logout-button:active{
   /* scale:95%; */
   background-color: rgb(195, 0, 0);
@@ -83,6 +100,34 @@
   transition: all 0.3s;
   
 }
+
+#dashboard-button{
+  color:rgb(0, 60, 171);
+  padding: 12px 2px;
+  border-radius: 40px 0px 0px 40px;
+  transition: all 0.3s;
+  border-color: rgb(0, 60, 171);
+  margin-right: 5px;
+  /* margin-right: 27px; */
+}
+
+#dashboard-button:hover{
+  scale:105%;
+  background-color: white;
+  translate: -3px 0px;
+  transition: all 0.3s;
+}
+
+#dashboard-button:active{
+  background-color: rgb(0, 89, 255);
+  color:white;
+}
+
+
+
+
+  
+
 
 
 

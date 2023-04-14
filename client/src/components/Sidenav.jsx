@@ -11,6 +11,13 @@ const Sidenav = () =>{
 
     const { logout } = useLogout();
 
+    const scrollToTop = () => {
+        window.scrollTo({
+          top: 0,
+          behavior: "smooth"
+        });
+      }
+
 	const handleLogout = () => {
 		logout();
         
@@ -20,13 +27,13 @@ const Sidenav = () =>{
         <>
         <div className="sidenav">
             
-                  <Link to='/'><AiOutlineHome/></Link>
+                  <Link to='/' ><AiOutlineHome/></Link>
                 
               
                   <Link to={'/'} onClick={handleLogout}><CgLogOut/></Link>
               
               
-                   <Link to='/about'><BsInfoCircle /></Link>
+                   <Link to='/about' onClick={scrollToTop}><BsInfoCircle /></Link>
 
                    {/* <Link><button onClick={()=>{console.log("herdfdgde")}}><AiOutlineSearch/></button></Link>      */}
         

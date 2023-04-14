@@ -11,6 +11,7 @@ import { AiOutlineSearch } from 'react-icons/ai'
 import { BsArrowUpSquareFill } from 'react-icons/bs'
 import Footer from '../components/Footer'
 import { HashLink as L } from 'react-router-hash-link';
+import { useAuthContext } from '../hooks/useAuthContext';
 
 const TabletManager = () => {
 	const [name, setName] = useState("");
@@ -28,24 +29,31 @@ const TabletManager = () => {
 	const [searchQuery, setSearchQuery] = useState(null)
 	const [deleteCalled, setDeleteCalled] = useState(0);
 	const [deleteToast, setDeleteToast] = useState(false)
-
+	const {user} = useAuthContext()
 	useEffect(() => {
 		handleFetch();
 	}, [flag, deleteCalled])
 
 
 
-	const handleFetch = async (e) => {
+	const handleFetch = async () => {
 		try {
-			const response = await axios.get(
-				`http://localhost:4000/api/medicines`
-			);
-			setFetchedData(response.data);
-			console.log(response.data[0]);
+		  const response = await axios.post(
+			"http://localhost:4000/api/medicines",
+			{},
+			{
+			  headers: {
+				authorization:user.token,
+			  },
+			}
+		  );
+		  setFetchedData(response.data);
+		  console.log(response.data[0]);
 		} catch (err) {
-			console.log(err);
+		  console.log(err);
 		}
-	};
+	  };
+	  
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();

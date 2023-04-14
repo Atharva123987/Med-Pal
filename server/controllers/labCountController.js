@@ -3,7 +3,6 @@ const mongoose = require("mongoose");
 
 
 const getTypeOfLabCount = async (req, res) => {
-	console.log(req.body);
 	const { testName } = req.body;
 	LabCounts.find({ testName: testName })
 		.sort({ dateTaken: 1 })

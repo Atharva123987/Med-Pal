@@ -6,13 +6,20 @@ import {AiFillGithub} from 'react-icons/ai';
 import {CiLinkedin} from 'react-icons/ci';
 import {AiOutlineMail} from 'react-icons/ai';
 
+const scrollToTop = () => {
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  });
+}
+
 const Footer = ()=>{
     
     return(
         <>
         <footer>
             <div id='footer-top'>
-            <L smooth to="#" className='footer-links d-flex'>
+            <L smooth to="#" className='footer-links d-flex' onClick={scrollToTop}>
                 <BsArrowUpCircle/>
                 <h4>   Back to Top</h4>
                 </L>
@@ -20,8 +27,11 @@ const Footer = ()=>{
             <div id='footer-bottom'>
 
             <div id='footer-left'>
-                <Link to='/about' className='footer-links'>About</Link>
-                <Link to='/contact' className='footer-links'>Contact Us</Link>
+            
+                <Link to='/about' className='footer-links' onClick={scrollToTop}>About</Link>
+                
+                <Link to='/contact' className='footer-links' onClick={scrollToTop}>Contact Us</Link>
+              
             </div>
             
             <div id='footer-right'>
@@ -35,4 +45,5 @@ const Footer = ()=>{
         </>
     );
 }
+
 export default Footer;

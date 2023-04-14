@@ -12,7 +12,8 @@ import Tips from "../components/Tips";
 import { useState } from "react";
 import AllCharts from '../components/Charts'
 import { useEffect } from "react";
-
+import Footer from '../components/Footer'
+import Navbar from '../components/Navbar'
 const Dashboard = () => {
 	const [userDetails, setUserDetails] = useState([
 		{
@@ -110,6 +111,7 @@ const Dashboard = () => {
 
 	return (
 		<>
+		<Navbar/>
 			<div id="content">
 				<Sidenav />
 				<div id="user-details">
@@ -213,6 +215,7 @@ const Dashboard = () => {
 					</div>
 				</div>
 			</div>
+			<Footer/>
 		</>
 	);
 };

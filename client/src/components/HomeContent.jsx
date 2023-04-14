@@ -4,7 +4,7 @@ import Card from 'react-bootstrap/Card';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import Accordion from 'react-bootstrap/Accordion';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { FaFilePrescription } from 'react-icons/fa';
 import { VscGraphLine } from 'react-icons/vsc'
 import { AiOutlineSearch } from 'react-icons/ai'
@@ -17,6 +17,7 @@ import tempImg4 from '../assets/accordian4.jpg'
 const HomeContent = () => {
   const accordionRef = useRef(null);
   const buttonsRef = useRef([]);
+  const[userClick, setUserClick] = useState(1)
 
   useEffect(() => {
     if (accordionRef.current) {
@@ -31,7 +32,12 @@ const HomeContent = () => {
     const intervalId = setInterval(() => {
       buttonsRef.current[index].click();
       index = (index + 1) % buttonsRef.current.length;
+      if(userClick !== index){
+        clearInterval(intervalId)
+      }
     }, 5000);
+
+    
 
     // Click the first button initially
     buttonsRef.current[0].click();
@@ -50,7 +56,7 @@ const HomeContent = () => {
         <Row xs={1} md={3} className='g-4 subsection1' >
           <Fade delay={100} damping={0.05} direction='left' triggerOnce>
             <Col>
-              <Card>
+              <Card c>
                 <Card.Img
                   variant='top'
                   src='https://ik.imagekit.io/0qlf5pqwx/card-section-1.jpg?updatedAt=1681302671556'
@@ -101,31 +107,31 @@ const HomeContent = () => {
 
         <Accordion className='my-5 subsection2' ref={accordionRef}>
           <Accordion.Item eventKey='0'>
-            <Accordion.Header><AiOutlineSearch style={{ marginRight: "10px" }} />Find a doctor that meets your needs</Accordion.Header>
+            <Accordion.Header onClick={()=>setUserClick(1)}><AiOutlineSearch style={{ marginRight: "10px" }} />Find a doctor that meets your needs</Accordion.Header>
             <Accordion.Body>
-              <img src={tempImg} height={100} /><br></br>
+              <img alt='accordion image1' src={tempImg} height={100} /><br></br>
               Our platform allows you to search for healthcare providers by name, specialty, location, and other filters, making it easy to find a doctor that fits your unique healthcare needs.
             </Accordion.Body>
           </Accordion.Item>
           <Accordion.Item eventKey='1'>
-            <Accordion.Header><VscGraphLine style={{ marginRight: "10px" }} />Track Your Progress with Charts and Graphs</Accordion.Header>
+            <Accordion.Header onClick={()=>setUserClick(2)}><VscGraphLine style={{ marginRight: "10px" }} />Track Your Progress with Charts and Graphs</Accordion.Header>
             <Accordion.Body>
-              <img src={tempImg2} height={100} /> <br></br>
+              <img alt='accordion image2' src={tempImg2} height={100} /> <br></br>
               Med Pal provides you with easy-to-read charts and graphs that allow you to track your progress and monitor your health goals. With just a glance, you can see how your tablets info, doctor appointments, and medical history are affecting your overall health. Plus, our dashboard feature allows you to view your health data in a comprehensive and organized way, making it easy to identify areas for improvement and stay on top of your health.
             </Accordion.Body>
           </Accordion.Item>
           <Accordion.Item eventKey='2'>
-            <Accordion.Header> <FaFilePrescription style={{ marginRight: "10px" }} /> Access medical records and history</Accordion.Header>
+            <Accordion.Header onClick={()=>setUserClick(3)}> <FaFilePrescription style={{ marginRight: "10px" }} /> Access medical records and history</Accordion.Header>
 
             <Accordion.Body>
-              <img src={tempImg3} height={100} /> <br></br>
+              <img alt='accordion image3' src={tempImg3} height={100} /> <br></br>
               With our platform, you can easily access your medical records and history, so you can share them with your healthcare provider. This feature allows for more personalized care, and helps your doctor make informed decisions about your health.
             </Accordion.Body>
           </Accordion.Item>
           <Accordion.Item eventKey='3'>
-            <Accordion.Header><BsFillPinMapFill style={{ marginRight: "10px" }} />Get directions and contact information</Accordion.Header>
+            <Accordion.Header onClick={()=>setUserClick(4)}><BsFillPinMapFill style={{ marginRight: "10px" }} />Get directions and contact information</Accordion.Header>
             <Accordion.Body>
-            <img src={tempImg4} height={100} /> <br></br>
+            <img alt='accordion image4' src={tempImg4} height={100} /> <br></br>
               Med Pal provides easy access to a doctor's contact information, office hours, and directions. This allows you to plan your visit more efficiently and make the most of your time at the doctor's office.
             </Accordion.Body>
           </Accordion.Item>

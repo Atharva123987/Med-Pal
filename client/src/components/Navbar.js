@@ -7,7 +7,8 @@ import Logo from "../assets/logo.png";
 import { useLogout } from "../hooks/useLogout";
 import { useAuthContext } from "../hooks/useAuthContext";
 import { Button } from "react-bootstrap";
-import {FiLogOut} from 'react-icons/fi'
+import { FiLogOut } from 'react-icons/fi'
+import { MdDashboard } from 'react-icons/md'
 
 const Navbar = (props) => {
 	const { logout } = useLogout();
@@ -26,13 +27,10 @@ const Navbar = (props) => {
 				<div className="heading">MEDPAL</div>
 				<div className="navbar-buttons">
 
-					
-					{user && (
-						<div>
-							{/* <span>{user.email}</span> */}
-							<Button variant="light" id="logout-button" onClick={handleClick}>Log out <FiLogOut/></Button>
-						</div>
-					)}
+
+					{/* {user && (
+						
+					)} */}
 					<div>
 						{props.buttons && !user && (
 							<>
@@ -52,6 +50,19 @@ const Navbar = (props) => {
 								</Link>
 							</>
 						)}
+
+						{props.buttons && user && (
+							<>
+
+								<Link to={'/dashboard'} className="navbar-buttons" > <Button variant="light" className="navbar-buttons" id="dashboard-button">Dashboard  <MdDashboard /></Button></Link>
+								{/* <span>{user.email}</span> */}
+								
+								<Button variant="light" className="navbar-buttons" id="logout-button" onClick={handleClick}>Log out  <FiLogOut /></Button>
+								
+
+							</>
+						)
+						}
 					</div>
 				</div>
 			</div>

@@ -1,6 +1,5 @@
 #content{
     display: flex;
-    position:absolute;
     width: 100%;
     font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 
@@ -156,7 +155,7 @@ span{
     display: flex;
     width: 70%;
     /* height: 100vh; */
-    justify-content:space-evenly;
+    /* justify-content:space-evenly; */
     flex-direction: column;   
     /* margin: auto; */
     

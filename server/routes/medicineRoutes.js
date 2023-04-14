@@ -14,7 +14,7 @@ const router = express.Router();
 router.use(requireAuth);
 
 // GET all medicines
-router.get("/", getAllMedicines);
+router.post("/", getAllMedicines);
 
 // GET a single medicine
 router.get("/:id", getSingleMedicine);
