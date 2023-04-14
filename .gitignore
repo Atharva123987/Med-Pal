@@ -9,6 +9,9 @@
 /server/.env
 /server/keys
 /server/uploads
+
+
+
 # testing
 /coverage
 
