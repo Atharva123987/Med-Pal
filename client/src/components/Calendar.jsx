@@ -8,11 +8,12 @@ import {GrCaretPrevious} from 'react-icons/gr'
 import {TbPlayerTrackPrev} from 'react-icons/tb'
 import {TbPlayerTrackNext} from 'react-icons/tb'
 import './calendar.css'
+
 const Calendar = ({ appointments }) =>{
 
   const [selectedDate, setSelectedDate] = useState(new Date().toISOString());
   const [loading, setLoading] = useState(true);
-
+  const [clicked, setClicked] = useState(false)
   useEffect(() => {
     setLoading(false);
   }, [appointments]);
@@ -36,6 +37,7 @@ const Calendar = ({ appointments }) =>{
   const tileContent = ({ date }) => {
     const matchingAppointments = findAppointments(date);
     if (matchingAppointments.length > 0) {
+      setClicked(true)
       return (
         <div>
           {matchingAppointments.map((appointment, index) => (
@@ -48,7 +50,7 @@ const Calendar = ({ appointments }) =>{
               }}
               style={{ cursor: "pointer" }}
             >
-              {appointment.doctorName}
+              Dr. {appointment.doctorName.split(' ')[0]}
             </div>
           ))}
         </div>
@@ -72,16 +74,11 @@ const Calendar = ({ appointments }) =>{
   prevLabel={<GrCaretPrevious />}
   prev2Label={<TbPlayerTrackPrev />}
   next2Label={<TbPlayerTrackNext />}
-  style={{
-    backgroundColor: "black",
-    color: "white",
-    borderRadius: "5px",
-    padding: "10px"
-  }}
+  
 />
 
       <ListGroup>
-        {findAppointments(selectedDate).map((appointment, index) => (
+        {clicked && findAppointments(selectedDate).map((appointment, index) => (
           <ListGroup.Item key={index}>
             <div>Doctor: {appointment.doctorName}</div>
             <div>Phone: {appointment.phoneNumber}</div>
