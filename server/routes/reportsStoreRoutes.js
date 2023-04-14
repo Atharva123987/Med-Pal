@@ -1,7 +1,7 @@
 const express = require("express");
 const multer = require("multer");
 const {
-	getSingleReport,
+	getListOfReports,
 	createReport,
 } = require("../controllers/reportsStoreController");
 const requireAuth = require("../middleware/requireAuth");
@@ -14,7 +14,7 @@ router.use(requireAuth);
 const upload = multer({ dest: "uploads/" });
 
 // GET certain report
-router.post("/:id", getSingleReport);
+router.get("/", getListOfReports);
 
 // POST a new report
 router.post("/", upload.single("file"), createReport);
