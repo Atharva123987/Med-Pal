@@ -10,14 +10,14 @@ const requireAuth = require("../middleware/requireAuth");
 
 const router = express.Router();
 
-// require auth for all workout routes
+// require auth for all appointment routes
 router.use(requireAuth);
 
 // GET all appointments
-router.get("/", getAllAppointments);
+router.post("/", getAllAppointments);
 
 // GET a single appointment
-router.get("/:id", getSingleAppointment);
+router.post("/:id", getSingleAppointment);
 
 // POST a new appointment
 router.post("/", createAppointment);
