@@ -61,14 +61,7 @@
     width: 400px;
 }
 
-.react-calendar, .react-calendar__navigation, .react-calendar__navigation__label__labelText, .react-calendar__navigation__label__labelText--from, .react-calendar__month-view__days button{
-    /* background-color: rgb(51, 68, 80)!important; */
-    /* color: white!important; */
-    font-size: 1rem!important;
-    width: 30rem !important;
-    height: 3rem !important;
+#charts-legend{
+    font-size: 2rem;
 }
 
-.react-calendar__month-view__days button{
-    font-size: 0.7rem!important;
-}
