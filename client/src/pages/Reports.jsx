@@ -6,25 +6,27 @@ import { Button } from "react-bootstrap";
 import { Form } from "react-bootstrap";
 import { FaFilePdf, FaFileWord, FaFileExcel, FaFileImage } from "react-icons/fa";
 import tempImg from '../assets/badge.png'
+import {GrSelect} from 'react-icons/gr'
+import './reports.css'
 const Reports = () => {
 	const [reports, setReports] = useState([]);
 	const { user } = useAuthContext();
 	const [selectedFile, setSelectedFile] = useState(null);
 	const [isFileSelected, setIsFileSelected] = useState(false);
 	const [fileUrl, setFileUrl] = useState(null);
+	const [currentFile, setCurrentFile] = useState(null);
+	const [extension, setExtension] = useState(null);
 
 	useEffect(() => {
 		const fetchReports = async () => {
 			try {
-				const response = await axios.get(
-					"http://localhost:4000/api/reportsStore",
-					{
-						headers: {
-							Authorization: `Bearer ${user.token}`,
-						},
-					}
-				);
+				const response = await axios.get("http://localhost:4000/api/reportsStore", {
+					headers: {
+						Authorization: `Bearer ${user.token}`,
+					},
+				});
 				setReports(response.data);
+				console.log(reports);
 			} catch (error) {
 				console.error(error);
 			}
@@ -41,26 +43,26 @@ const Reports = () => {
 	const handleSubmit = async (event) => {
 		event.preventDefault();
 
+		if (selectedFile.size > 2 * 1024 * 1024) {
+			alert("File size should be less than 2MB");
+			return;
+		}
+
 		try {
 			const formData = new FormData();
 			formData.append("file", selectedFile);
-			const response = await axios.post(
-				"http://localhost:4000/api/reportsStore",
-				formData,
-				{
-					headers: {
-						Authorization: `Bearer ${user.token}`,
-						"Content-Type": "multipart/form-data",
-					},
-				}
-			);
+			const response = await axios.post("http://localhost:4000/api/reportsStore", formData, {
+				headers: {
+					Authorization: `Bearer ${user.token}`,
+					"Content-Type": "multipart/form-data",
+				},
+			});
 
 			setFileUrl(response.data.fileUrl);
 		} catch (error) {
 			console.error(error);
 		}
 	};
-
 
 	const handleDownloadReport = async (report) => {
 		try {
@@ -100,77 +102,91 @@ const Reports = () => {
 
 	return (
 		<>
-		  <Navbar buttons='true' />
-		  <div className="d-flex">
-			<div>
-			  <Form onSubmit={handleSubmit}>
-				<Form.Group controlId="formBasicFile">
-				  <Form.Label>Upload a file</Form.Label>
-				  <Form.Control type="file" placeholder="Choose a file" onChange={handleFileSelect} />
-				  <Form.Text className="text-muted">
-					The file <b>should not exceed 2MB</b> in size.
-				  </Form.Text>
-				  <Button type="submit" disabled={!isFileSelected}>
-					Upload
-				  </Button>
-				</Form.Group>
-			  </Form>
-			</div>
-	  
-			<div>
-			  <h2>My Reports</h2>
-			  <ul>
-            {reports.map((report) => (
-              <li key={report._id}>
-                {report.reportResourceURL.match(/\.(jpeg|jpg|png)$/) ? (
-                  <img
-                    alt="report image"
-                    src={report.reportResourceURL}
-                    srcSet={`${report.reportResourceURL} 500w,
-                         ${report.reportResourceURL}?w=1000 1000w,
-                         ${report.reportResourceURL}?w=1500 1500w`}
-                    sizes="(max-width: 500px) 100vw, (max-width: 1000px) 50vw, 33vw"
-                    width="150"
-                    height="150"
-                  />
-                ) : (
-                  <img
-                    alt="report image"
-                    src={`https://docs.google.com/gview?url=${report.reportResourceURL}&embedded=true`}
-                    width="150"
-                    height="150"
-                    frameBorder="0"
-                    scrolling="no"
-                    style={{ border: "none" }}
-                  />
-				  
-                )}
-                <div>
-                  {/* <span>{report.reportName}</span> */}
-                  <Button variant="success" onClick={() => handleDownloadReport(report)}>
-                    Download {getFileTypeIcon(report.reportName)}
-                  </Button>
-                </div>
-                <iframe
-  src={`https://docs.google.com/gview?url=${report.reportResourceURL}&embedded=true`}
-  style={{ width: "100%", height: "500px", border: "none" }}
-  frameBorder="0"
-  scrolling="no"
-  
-/>
-<embed
-  src={`https://docs.google.com/gview?url=${report.reportResourceURL}&embedded=true`}
-  style={{ width: "100%", height: "500px" }}
-  type="application/pdf"
-/>
+			<Navbar buttons='true' />
+			<div className="d-flex justify-content-evenly my-4">
+				<div>
 
-              </li>
-            ))}
-          </ul>
+				</div>
+
+				<div>
+					<h2>My Reports</h2>
+					<Form onSubmit={handleSubmit}>
+						<Form.Group controlId="formBasicFile">
+							<Form.Label>Upload a file</Form.Label>
+							<Form.Control type="file" placeholder="Choose a file" onChange={handleFileSelect} />
+							<Form.Text className="text-muted">
+								The file <b>should not exceed 2MB</b> in size.
+							</Form.Text>
+							<Button type="submit" disabled={!isFileSelected}>
+								Upload
+							</Button>
+						</Form.Group>
+					</Form>
+					<ul style={{ listStyle: "none", margin: "0px", padding: "0px" }}>
+						{reports.map((report) => (
+							<li key={report._id}>
+								<div className="d-flex justify-content-between my-3">
+									<Button id="reports-button" onClick={() => {
+										setCurrentFile(report);
+										setExtension(report.reportResourceURL.split(".").pop());
+									}}>
+										<span className="mx-2">{report.reportName.length <= 20 ? report.reportName : report.reportName.slice(0, 20) + "..."}</span>
+									</Button>
+
+								</div>
+							</li>
+						))}
+					</ul>
+				</div>
+				{currentFile ?
+					(
+						<div id="viewer-container"style={{backgroundColor:"rgb(23,29,61)",color:"white"}} >
+							<div className="d-flex justify-content-between" >
+								<h3>Reports viewer</h3>
+
+
+								<Button variant="success" id="download-button" onClick={() => handleDownloadReport(currentFile)}>
+									Download {getFileTypeIcon(currentFile.reportName)}
+								</Button>
+
+							</div>
+							<div style={{backgroundColor:"white"}}>
+							{(extension === "pdf" ? (
+								<embed
+									src={`https://docs.google.com/gview?url=${currentFile?.reportResourceURL}&embedded=true`}
+									style={{ width: "28rem", height: "31rem", borderRadius: "5px" }}
+									type="application/pdf"
+								/>
+							) : (
+								<img
+									src={currentFile.reportResourceURL}
+									style={{ maxWidth: "28rem", maxHeight: "35rem", padding: "1rem", boxShadow: "1px 1px 5px black" }}
+									id="viewer-image"
+									alt="report image"
+								/>
+							))}
+							</div>
+						</div>)
+					:
+					(
+						<div id="viewer-container" style={{backgroundColor:"rgb(23,29,61)", color:"white"}}>
+							<div className="d-flex justify-content-between" >
+								<h3>Reports viewer</h3>
+								
+
+							</div>
+							<div className="d-flex justify-content-center align-items-center" style={{backgroundColor:"rgb(147,148,150,0.3)", width:'100%', height:"90%"}}>
+									<span style={{fontSize:"1.2rem"}}><GrSelect />Select a file to view</span>
+									</div>
+
+						</div>
+					)
+				}
+
 			</div>
-		  </div>
 		</>
-	  );
-	  }
-	  export default Reports;
-	  
+	);
+
+}
+
+export default Reports;

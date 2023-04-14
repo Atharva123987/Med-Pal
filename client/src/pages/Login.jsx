@@ -5,6 +5,7 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Container from "react-bootstrap/Container";
 import { useLogin } from "../hooks/useLogin";
+import Navbar from "../components/Navbar";
 
 export const Login = (props) => {
 	const [email, setEmail] = useState("");
@@ -21,6 +22,8 @@ export const Login = (props) => {
 	};
 
 	return (
+		<>
+		<Navbar/>
 		<Container
 			className="d-flex justify-content-center align-items-center border mt-2 mt-md-4 mt-lg-5"
 			style={{ maxWidth: "400px" }}
@@ -87,6 +90,7 @@ export const Login = (props) => {
         </Form.Group>
       </Form>
     </Container>
+	</>
   );
 
 };

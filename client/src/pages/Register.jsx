@@ -7,6 +7,7 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import { useRegister } from "../hooks/useRegister";
+import Navbar from "../components/Navbar";
 
 export const Register = (props) => {
 	const [name, setName] = useState("");
@@ -25,6 +26,9 @@ export const Register = (props) => {
 	};
 
 	return (
+		<>
+		<Navbar/>
+		
 		<Container
 			className="d-flex justify-content-center align-items-center border mt-2 mt-md-4 mt-lg-5"
 			style={{ maxWidth: "400px" }}
@@ -157,6 +161,7 @@ export const Register = (props) => {
 				</Form.Group>
 			</Form>
 		</Container>
+		</>
 	);
 };
 export default Register;

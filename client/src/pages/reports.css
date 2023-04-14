@@ -1,0 +1,26 @@
+#reports-button{
+    all: unset;
+    border:2px solid black;
+    width: 300px;
+    padding:10px;
+    transition:all 0.3s;
+}
+#reports-button:hover{
+    scale:105%;
+    transition:all 0.3s;
+}
+#viewer-container{
+    height: 35rem;
+    width: 30rem;
+    padding: 1rem;
+    box-shadow: 0px 0px 5px rgb(62, 109, 173);
+    border-radius: 20px;
+    color:rgb(62, 109, 173);
+    overflow: hidden;
+}
+
+#download-button{
+    position:relative;
+    right:0%;
+    bottom: 89%;
+}
