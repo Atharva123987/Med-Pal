@@ -15,10 +15,9 @@ import Search from "./pages/Search";
 import Charts from "./pages/ChartsPage";
 import ErrorPage from "./pages/ErrorPage";
 import ErrorPageLink from "./pages/ErrorPageLink";
-import ReportInput from "./pages/ReportInput";
 import { useAuthContext } from "./hooks/useAuthContext";
 import { Contact } from "./pages/Contact";
-import ReportsList from "./pages/ReportsList";
+import Reports from "./pages/Reports";
 
 
 const App = () => {
@@ -81,13 +80,10 @@ const App = () => {
           path="/charts"
           element={user ? <Charts /> : <Navigate to="/login" />}
         />
-        <Route
-					path="/reports"
-					element={user ? <ReportInput /> : <Navigate to="/error" />}
-				/>
+        
 				<Route
-					path="/reportslist"
-					element={user ? <ReportsList /> : <Navigate to="/error" />}
+					path="/reports"
+					element={user ? <Reports /> : <Navigate to="/error" />}
 				/>
         <Route path="/error" element={<ErrorPage />} />
         <Route path="*" element={<ErrorPageLink />} />

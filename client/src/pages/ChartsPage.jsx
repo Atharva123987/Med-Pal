@@ -120,7 +120,7 @@ const Charts = () => {
 
 	return (
 		<>
-			<Navbar buttons={false} />
+			<Navbar buttons={true} />
 			<div>
 				<h3 className="charts-heading">
 					Charts <BiBarChartAlt2 style={{ fontSize: "30px" }} />

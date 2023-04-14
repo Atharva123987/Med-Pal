@@ -6,6 +6,10 @@ import { useLogout } from "../hooks/useLogout";
 
 import { BsInfoCircle } from "react-icons/bs";
 import {AiOutlineSearch} from 'react-icons/ai'
+import {GiMedicines} from 'react-icons/gi'
+import {FaRegHospital} from 'react-icons/fa'
+import {AiOutlineAreaChart} from 'react-icons/ai'
+import {TbReport} from 'react-icons/tb'
 import { Button } from 'react-bootstrap';
 const Sidenav = () =>{
 
@@ -34,6 +38,10 @@ const Sidenav = () =>{
               
               
                    <Link to='/about' onClick={scrollToTop}><BsInfoCircle /></Link>
+                   <Link to='/medicines' onClick={scrollToTop}><GiMedicines /></Link>
+                   <Link to='/appointments' onClick={scrollToTop}><FaRegHospital /></Link>
+                   <Link to='/charts' onClick={scrollToTop}><AiOutlineAreaChart /></Link>
+                   <Link to='/reports' onClick={scrollToTop}><TbReport /></Link>
 
                    {/* <Link><button onClick={()=>{console.log("herdfdgde")}}><AiOutlineSearch/></button></Link>      */}
         

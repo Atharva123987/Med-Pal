@@ -142,7 +142,7 @@ const TabletManager = () => {
 
 	return (
 		<>
-			<Navbar buttons={false} />
+			<Navbar buttons={true} />
 
 
 			<h3 id='medicines-heading'>Medicine Manager</h3>

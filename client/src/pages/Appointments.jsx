@@ -215,7 +215,7 @@ const Appointments = () => {
 					</Toast>
 				</div>
 
-				<Navbar />
+				<Navbar buttons='true' />
 
 					<h3 className="charts-heading">
 						Appointments <FaClinicMedical style={{ fontSize: "30px" }} />
