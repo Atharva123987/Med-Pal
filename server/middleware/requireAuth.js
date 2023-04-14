@@ -3,7 +3,7 @@ const User = require("../models/userModel");
 
 const requireAuth = async (req, res, next) => {
 	// verify user is authenticated
-	const { authorization } = req.headers;
+	const { authorization } = await req.headers;
 
 	if (!authorization) {
 		return res.status(401).json({ error: "Authorization token required" });
