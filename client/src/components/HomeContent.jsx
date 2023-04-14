@@ -49,7 +49,7 @@ const HomeContent = () => {
   return (
     <>
       <div className='container home-content-container'>
-        <Fade delay={10} direction='top' className='my-5' triggerOnce>
+        <Fade delay={10} direction='top' className='my-5 home-content-heading' triggerOnce>
           <h2>For all your medical needs</h2>
         </Fade>
 

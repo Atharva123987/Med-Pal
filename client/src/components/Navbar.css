@@ -74,13 +74,11 @@
 }
 
 #logout-button{
-  /* color:rgb(23,29,61); */
   border-radius: 0px 40px 40px 0px;
   padding: 12px 10px;
   background-color: white;
   color:red;
   border-color: white;
-  /* border-radius: 100px; */
   transition: all 0.3s;
   margin-right: 20px;
 }
@@ -136,6 +134,15 @@
 @media screen and (max-width:480px) {
   .heading{
     font-size: xx-large;
+  }
+
+  #dashboard-button{
+    margin:2px;
+    padding:5px 0px;
+  }
+  #logout-button{
+    margin:2px;
+    padding:5px 3px;
   }
   
 }
