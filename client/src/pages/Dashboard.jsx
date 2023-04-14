@@ -74,6 +74,7 @@ const Dashboard = () => {
 	const [readingType, setReadingType] = useState("Blood Sugar")
 	const [fetchedData, setFetchedData] = useState(null)
 	
+
 	useEffect(()=>{
 		handleFetch()
 		console.log("here")

@@ -16,6 +16,7 @@ import Charts from "./pages/ChartsPage";
 import ErrorPage from "./pages/ErrorPage";
 import ErrorPageLink from "./pages/ErrorPageLink";
 import { useAuthContext } from "./hooks/useAuthContext";
+import { Contact } from "./pages/Contact";
 
 
 
@@ -38,29 +39,33 @@ const App = () => {
         <Route
           path="/dashboard"
           element={
-            user ? <Dashboard /> : <Navigate to="/error" />
+            user ? <Dashboard /> : <Navigate to="/login" />
           }
         />
         <Route
           path="/about"
-          element={user ? <About /> : <Navigate to="/error" />}
+          element={<About />}
+        />
+        <Route
+          path="/contact"
+          element={<Contact />}
         />
         <Route
           path="/calendar"
           element={
-            user ? <Calendar /> : <Navigate to="/error" />
+            user ? <Calendar /> : <Navigate to="/login" />
           }
         />
         <Route
           path="/medicines"
           element={
-            user ? <TabletManager /> : <Navigate to="/error" />
+            user ? <TabletManager /> : <Navigate to="/login" />
           }
         />
         <Route
           path="/appointments"
           element={
-            user ? <Appointments /> : <Navigate to="/error" />
+            user ? <Appointments /> : <Navigate to="/login" />
           }
         />
         <Route
@@ -73,7 +78,7 @@ const App = () => {
         />
         <Route
           path="/charts"
-          element={user ? <Charts /> : <Navigate to="/error" />}
+          element={user ? <Charts /> : <Navigate to="/login" />}
         />
         <Route path="/error" element={<ErrorPage />} />
         <Route path="*" element={<ErrorPageLink />} />

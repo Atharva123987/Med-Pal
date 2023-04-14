@@ -6,6 +6,8 @@ import Register from "../assets/register.png";
 import Logo from "../assets/logo.png";
 import { useLogout } from "../hooks/useLogout";
 import { useAuthContext } from "../hooks/useAuthContext";
+import { Button } from "react-bootstrap";
+import {FiLogOut} from 'react-icons/fi'
 
 const Navbar = (props) => {
 	const { logout } = useLogout();
@@ -24,12 +26,11 @@ const Navbar = (props) => {
 				<div className="heading">MEDPAL</div>
 				<div className="navbar-buttons">
 
-					<Link to={'/dashboard'}><button>Dashboard</button></Link>
 					
 					{user && (
 						<div>
-							<span>{user.email}</span>
-							<button onClick={handleClick}>Log out</button>
+							{/* <span>{user.email}</span> */}
+							<Button variant="light" id="logout-button" onClick={handleClick}>Log out <FiLogOut/></Button>
 						</div>
 					)}
 					<div>

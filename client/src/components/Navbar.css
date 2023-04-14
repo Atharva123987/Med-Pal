@@ -29,24 +29,28 @@
   font-family:'Franklin Gothic Regular', 'Arial Narrow', Arial, sans-serif;
 }
 
-#login-button , #register-button{
-  width:70px;
-  height: 50px;
-  transition:scale 0.2s, translate 0.2s;
-  transition-timing-function: ease-in-out;
+.navbar-buttons{
+  margin:0px 10px 0px auto;
+  display: flex;
 }
 
-#login-button:hover, #register-button:hover{
-  scale: 105%;
-  transition: scale 0.2s, translate 0.2s;
-  transition-timing-function: linear;
+
+
+#login-button, #register-button{
+  width:70px;
+  height: 50px;
+  transition: all 0.3s;
 }
 
 #login-button:hover{
+  scale: 105%;
+  transition: all 0.2s;
   translate: -5px 0px;
 }
 
 #register-button:hover{
+  scale: 105%;
+  transition: all 0.2s;
   translate: 5px 0px;
 }
 
@@ -55,16 +59,34 @@
   scale:100%
 }
 
-#login-button:active{
+#logout-button{
+  color:rgb(23,29,61);
+  padding: 10px;
+  border-radius: 100px;
+  transition: all 0.3s;
+  margin-right: 27px;
+}
 
+#logout-button:hover{
+  scale:105%;
+  transition: all 0.3s;
+  background-color: white;
+}
+
+
+  
+#logout-button:active{
+  /* scale:95%; */
+  background-color: rgb(195, 0, 0);
+  border-color: rgb(39,33,33);
+  color:white;
+  transition: all 0.3s;
+  
 }
 
 
 
-.navbar-buttons{
-  margin:0px 10px 0px auto;
-  display: flex;
-}
+
 
 @media screen and (max-width:480px) {
   .heading{
