@@ -156,7 +156,7 @@ const TabletManager = () => {
 
 
 
-			<div ref={tempRef} className='d-flex flex-row justify-content-evenly '>
+			<div ref={tempRef} className='d-flex flex-row justify-content-evenly medicines-container'>
 				{/* 
         <div>
           <UpcomingDose />
