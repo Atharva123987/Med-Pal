@@ -47,13 +47,14 @@ const Prescription = () => {
 									<a href={val.url} target="_blank">
 										<img
 											src={val.url}
+											alt="prescriptions"
 											style={{
-												width: "7vh",
-												height: "7vh",
+												width: "2rem",
+												height: "2rem",
 											}}
-										/>{" "}
-										{val.date}{" "}
-									</a>{" "}
+										/>
+										{val.date}
+									</a>
 								</td>
 							</tr>
 						);

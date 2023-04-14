@@ -66,13 +66,13 @@ export const Login = (props) => {
 					</Button>
 				</Form.Group>
 
-        <Form.Group className="text-center">
-          {/* <Link to = {'/dashboard'}> */}
+        {/* <Form.Group className="text-center">
+          <Link to = {'/dashboard'}>
           <Button variant="primary" type="submit" className="mb-3 text-center">
             Submit
           </Button>
-          {/* </Link> */}
-        </Form.Group>
+          </Link>
+        </Form.Group> */}
 
         <Form.Group className="mb-5">
           <Form.Text className="text-muted">

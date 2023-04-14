@@ -12,25 +12,19 @@ export const authReducer = (state, action) => {
 			return state;
 	}
 };
-
 export const AuthContextProvider = ({ children }) => {
+	const storedUser = JSON.parse(localStorage.getItem("user"));
+  
 	const [state, dispatch] = useReducer(authReducer, {
-		user: null,
+	  user: storedUser || null,
 	});
-
-	useEffect(() => {
-		const user = JSON.parse(localStorage.getItem("user"));
-
-		if (user) {
-			dispatch({ type: "LOGIN", payload: user });
-		}
-	}, []);
-
+  
 	console.log("AuthContext state:", state);
-
+  
 	return (
-		<AuthContext.Provider value={{ ...state, dispatch }}>
-			{children}
-		</AuthContext.Provider>
+	  <AuthContext.Provider value={{ ...state, dispatch }}>
+		{children}
+	  </AuthContext.Provider>
 	);
-};
+  };
+  
