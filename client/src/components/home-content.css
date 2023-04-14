@@ -11,9 +11,12 @@
     align-items: center;
     
 }
-.home-content-container>h2{
-    align-items: start;
-    
+.home-content-heading{
+    color:white;
+    /* text-align: center; */
+    background-color: rgb(38, 39, 33);
+    border-radius: 10px;
+    padding:10px
 }
 
 .card{

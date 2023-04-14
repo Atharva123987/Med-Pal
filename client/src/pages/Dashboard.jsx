@@ -14,7 +14,9 @@ import AllCharts from '../components/Charts'
 import { useEffect } from "react";
 import Footer from '../components/Footer'
 import Navbar from '../components/Navbar'
+import { useAuthContext } from "../hooks/useAuthContext";
 const Dashboard = () => {
+	const {user} = useAuthContext();
 	const [userDetails, setUserDetails] = useState([
 		{
 			name: "John Doe",
@@ -93,6 +95,7 @@ const Dashboard = () => {
 				url: "http://localhost:4000/api/labcounts/type",
 				headers: {
 					"Content-Type": "application/json",
+					Authorization:`Bearer ${user.token}`
 				},
 				data: data,
 			};
@@ -215,7 +218,7 @@ const Dashboard = () => {
 					</div>
 				</div>
 			</div>
-			<Footer/>
+			{/* <Footer/> */}
 		</>
 	);
 };

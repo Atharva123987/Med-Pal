@@ -5,7 +5,6 @@ import {BsArrowUpCircle} from 'react-icons/bs';
 import {AiFillGithub} from 'react-icons/ai';
 import {CiLinkedin} from 'react-icons/ci';
 import {AiOutlineMail} from 'react-icons/ai';
-
 const scrollToTop = () => {
   window.scrollTo({
     top: 0,
