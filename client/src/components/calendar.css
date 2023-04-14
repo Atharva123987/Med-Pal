@@ -46,11 +46,7 @@ margin-bottom: 30px;
     vertical-align: middle;
 } */
 
-#calendar {
-    float: right;
-    width: 900px;
-}
 
-.react-calendar, .react-calendar *, .react-calendar *:before, .react-calendar *:after{
-    /* background-color: red!important; */
-}
+
+
+  

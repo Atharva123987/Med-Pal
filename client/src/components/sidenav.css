@@ -1,7 +1,9 @@
 .sidenav{
     height:100vh;  
     width: 10vh;  
-    background-color:black; 
+    background-color:rgb(23,29,61); 
+    /* background-color:white;  */
+    box-shadow: 0px 2px 5px black;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -13,38 +15,16 @@ a{
 }
 
 
-div.sidenav,
-      div.sidenav > *{
-        color:rgb(255, 255, 255);
-      }
+ div.sidenav > *{
+    color:white;
+    transition:all 0.3s;
+    }
+ div.sidenav > *:hover{
+    scale:115%;
+    color:rgb(0, 206, 237);
+    transition:all 0.3s;
+    }
 
-
-@keyframes icons {
-    0%{
-        font-size: 4vh;
-    }
-    100%{
-        font-size: 5vh;color:blue;
-    }
-}
-
-div.sidenav,
-div.sidenav > *:hover {
-    animation-name: icons;    
-    animation-timing-function: ease-in-out;
-    animation-duration: 0.3s;
-    animation-fill-mode: forwards;
-    animation-iteration-count: 1;
-}
-@keyframes a {
-    0%{
-        color:white;font-size: 5vh;
-    }
-    100%{
-        color:rgb(0, 106, 255);font-size: 5vh;
-    }
-}
 svg:active{
-    animation-name: a;   
     
 }

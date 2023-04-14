@@ -6,7 +6,7 @@ import { AiFillDelete } from "react-icons/ai";
 import Toast from 'react-bootstrap/Toast';
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Popover from 'react-bootstrap/Popover';
-
+import { useAuthContext } from "../../hooks/useAuthContext"; 
 const AllMedicinesTable = (props) => {
 	const fetchedData = props.fetchedData;
 	const [showPopup, setShowPopup] = useState(false);
@@ -14,6 +14,7 @@ const AllMedicinesTable = (props) => {
 	const [deleteID, setDeleteID] = useState(null);
 	const ref = useRef(null);
 	const [clickedIndex, setClickedIndex] = useState(null);
+	const {user} = useAuthContext();
 
 	const handlePopup = (event, deleteID, index) => {
 		setDeleteID(deleteID);
@@ -45,7 +46,9 @@ const AllMedicinesTable = (props) => {
 			method: "delete",
 			maxBodyLength: Infinity,
 			url: "http://localhost:4000/api/medicines/" + deleteID,
-			headers: {},
+			headers: {
+				Authorization:`Bearer ${user.token}`
+			},
 		};
 
 		axios

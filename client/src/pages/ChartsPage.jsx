@@ -8,7 +8,9 @@ import { AiFillPlusCircle } from "react-icons/ai";
 import Dropdown from "react-bootstrap/Dropdown";
 import Button from "react-bootstrap/Button";
 import { BiBarChartAlt2 } from "react-icons/bi";
+import { useAuthContext } from "../hooks/useAuthContext";
 import "./chartsPage.css";
+
 const Charts = () => {
 	const [readingType, setReadingType] = useState("Blood Sugar");
 	const [readingValue, setReadingValue] = useState(null);
@@ -17,10 +19,11 @@ const Charts = () => {
 	const [showError, setShowError] = useState(false);
 	const [fetchedData, setFetchedData] = useState([[]]);
 	const [requiredError, setRequiredError] = useState(false);
+	const {user} = useAuthContext();
+
 
 	useEffect(() => {
 		handleFetch();
-		
 	}, [readingType]);
 
 	const handleSubmit = async (e) => {
@@ -45,6 +48,7 @@ const Charts = () => {
 			url: "http://localhost:4000/api/labcounts",
 			headers: {
 				"Content-Type": "application/json",
+				Authorization:`Bearer ${user.token}`
 			},
 			data: data,
 		};
@@ -70,13 +74,14 @@ const Charts = () => {
 			let config = {
 				method: "post",
 				maxBodyLength: Infinity,
-				url: "http://localhost:4000/api/labcounts/type",
+				url: "http://localhost:4000/api/labCounts/type",
 				headers: {
 					"Content-Type": "application/json",
+					Authorization:`Bearer ${user.token}`
 				},
 				data: data,
+				
 			};
-
 			axios
 				.request(config)
 				.then((response) => {
@@ -94,7 +99,9 @@ const Charts = () => {
 			method: "delete",
 			maxBodyLength: Infinity,
 			url: "http://localhost:4000/api/labcounts/latest",
-			headers: {},
+			headers: {
+				Authorization:`Bearer ${user.token}`
+			},
 		};
 
 		axios

@@ -11,7 +11,7 @@ import Navbar from "../components/Navbar";
 import { FaClinicMedical } from 'react-icons/fa'
 import AddAppointmentModal from '../components/Appointments/AddAppointmentModal'
 import './appointments.css'
-
+import { useAuthContext } from "../hooks/useAuthContext";
 const Appointments = () => {
 	const [doctorName, setDoctorName] = useState(null);
 	const [doctorNumber, setDoctorNumber] = useState(null);
@@ -22,7 +22,7 @@ const Appointments = () => {
 	const [show, setShow] = useState(false);
 	const [month, setMonth] = useState("");
 	const [error, setError] = useState(false);
-
+	const {user} = useAuthContext();
 
 
 	const handleSubmit = async (e) => {
@@ -84,6 +84,7 @@ const Appointments = () => {
 			url: "http://localhost:4000/api/appointments",
 			headers: {
 				"Content-Type": "application/json",
+				Authorization:`Bearer ${user.token}`
 			},
 			data: data,
 		};
@@ -99,13 +100,7 @@ const Appointments = () => {
 			});
 
 		try {
-			console.log("Sent Data :", {
-				doctorName,
-				doctorNumber,
-				doctorAddress,
-				appointmentDateAndTime,
-				notes,
-			});
+			
 			if (doctorName) setShow(true);
 			else setError(true);
 		} catch (err) {
@@ -119,18 +114,27 @@ const Appointments = () => {
 	useEffect(() => handleFetch(), [])
 
 	const handleFetch = async (e) => {
-
-
 		try {
-			const response = await axios.get(
-				`http://localhost:4000/api/appointments`
-			);
+			const axios = require("axios");
+			let config = {
+				method: "get",
+				url: "http://localhost:4000/api/appointments",
+				headers: {
+					"Content-Type": "application/json",
+					"Authorization": `Bearer ${user.token}`,
+				},
+				data: {},
+			};
+			const response = await axios(config);
 			setFetchedData(response.data);
 			console.log(response.data[0]);
 		} catch (err) {
 			console.log(err);
 		}
 	};
+	
+	
+
 
 	return (
 		<>
@@ -225,7 +229,7 @@ const Appointments = () => {
 				setNotes={setNotes} 
 				setAppointmentDateAndTime={setAppointmentDateAndTime} 
 				handleSubmit={handleSubmit} />
-				<Calendar id='calendar-component' appointments={fetchedData ? fetchedData : null} />
+				<Calendar id='calendar-component' appointments={fetchedData? fetchedData : null} />
 				</div>
 			</div>
 		</>

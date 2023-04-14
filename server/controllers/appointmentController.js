@@ -26,6 +26,7 @@ const getSingleAppointment = async (req, res) => {
 const createAppointment = async (req, res) => {
 	console.log(req.body);
 	const { doctorName, phoneNumber, address, timeAndDate, notes } = req.body;
+	const user_id = req.user._id;
 	try {
 		const newAppointment = await Appointments.create({
 			doctorName,
@@ -33,6 +34,7 @@ const createAppointment = async (req, res) => {
 			address,
 			timeAndDate,
 			notes,
+			user_id,
 		});
 		res.status(200).json({
 			mssg: "POST a new appointment",

@@ -41,6 +41,10 @@ const medicinesSchema = new Schema(
 		dosageEndDate: {
 			type: Date,
 		},
+		user_id:{
+			type:String,
+			required:true,
+		}
 	},
 	{ timestamps: true }
 );

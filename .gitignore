@@ -11,6 +11,7 @@
 /server/uploads
 
 
+
 # testing
 /coverage
 
@@ -20,7 +21,8 @@
 # misc
 .DS_Store
 .env.local
-
+/server/uploads
+/server/keys
 
 .env.development.local
 .env.test.local

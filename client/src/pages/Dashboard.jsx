@@ -12,8 +12,11 @@ import Tips from "../components/Tips";
 import { useState } from "react";
 import AllCharts from '../components/Charts'
 import { useEffect } from "react";
-
+import Footer from '../components/Footer'
+import Navbar from '../components/Navbar'
+import { useAuthContext } from "../hooks/useAuthContext";
 const Dashboard = () => {
+	const {user} = useAuthContext();
 	const [userDetails, setUserDetails] = useState([
 		{
 			name: "John Doe",
@@ -74,6 +77,7 @@ const Dashboard = () => {
 	const [readingType, setReadingType] = useState("Blood Sugar")
 	const [fetchedData, setFetchedData] = useState(null)
 	
+
 	useEffect(()=>{
 		handleFetch()
 		console.log("here")
@@ -91,6 +95,7 @@ const Dashboard = () => {
 				url: "http://localhost:4000/api/labcounts/type",
 				headers: {
 					"Content-Type": "application/json",
+					Authorization:`Bearer ${user.token}`
 				},
 				data: data,
 			};
@@ -109,6 +114,7 @@ const Dashboard = () => {
 
 	return (
 		<>
+		<Navbar/>
 			<div id="content">
 				<Sidenav />
 				<div id="user-details">
@@ -212,6 +218,7 @@ const Dashboard = () => {
 					</div>
 				</div>
 			</div>
+			{/* <Footer/> */}
 		</>
 	);
 };
