@@ -7,6 +7,9 @@
 /server/node_modules
 /client/node_modules
 /server/.env
+/server/keys
+/server/uploads
+
 
 # testing
 /coverage
