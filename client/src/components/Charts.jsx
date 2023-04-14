@@ -6,9 +6,11 @@ import {
 	YAxis,
 	Tooltip,
 	Line,
+	Legend,
 } from "recharts";
 
 import "./dashboard-item.css";
+import '../pages/chartsPage.css'
 
 const Charts = (props) => {
 	const displayData = props.chartData.data;
@@ -18,7 +20,7 @@ const Charts = (props) => {
 		return (
 			<>
 			<div>
-				<legend align="center">{props.chartType}</legend>
+				<Legend align="center">{props.chartType}</Legend>
 				<p id="floater-nodata">
 					No data to show
 				</p>
@@ -43,12 +45,12 @@ const Charts = (props) => {
 
 	return (
 		<>
-			{/* <div id="charts"> */}
 
 				{
 					displayData &&
 					<>
-						<legend align="center">{props.chartType}</legend>
+					<div>
+							<legend align="center">{props.chartType}</legend>
 						<LineChart
 							width={width?width:500}
 							height={height?height:300}
@@ -60,6 +62,7 @@ const Charts = (props) => {
 							<Tooltip />
 							<Line type="monotone" dataKey="count" stroke="#8884d8" />
 						</LineChart>
+						</div>
 					</>
 				}
 

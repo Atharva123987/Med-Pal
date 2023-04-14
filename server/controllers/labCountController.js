@@ -45,6 +45,7 @@ const getSingleLabCount = async (req, res) => {
 const createLabCount = async (req, res) => {
 	console.log(req.body);
 	const { testName, count, dateTaken } = req.body;
+	const user_id = req.user._id;
 	try {
 		if (testName === "noselection") {
 			res.status(404).json({ mssg: "Select a chart type!" });
@@ -53,6 +54,7 @@ const createLabCount = async (req, res) => {
 				testName,
 				count,
 				dateTaken,
+				user_id,
 			});
 			res.status(200).json({ mssg: "POST a new labCount", newLabCount });
 		}

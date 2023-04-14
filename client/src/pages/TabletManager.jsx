@@ -35,15 +35,13 @@ const TabletManager = () => {
 	}, [flag, deleteCalled])
 
 
-
 	const handleFetch = async () => {
 		try {
-		  const response = await axios.post(
+		  const response = await axios.get(
 			"http://localhost:4000/api/medicines",
-			{},
 			{
 			  headers: {
-				authorization:user.token,
+				Authorization: `Bearer ${user.token}`,
 			  },
 			}
 		  );
@@ -53,6 +51,7 @@ const TabletManager = () => {
 		  console.log(err);
 		}
 	  };
+	  
 	  
 
 	const handleSubmit = async (e) => {
@@ -104,6 +103,7 @@ const TabletManager = () => {
 			url: "http://localhost:4000/api/medicines",
 			headers: {
 				"Content-Type": "application/json",
+				Authorization:`Bearer ${user.token}`,
 			},
 			data: data,
 		};

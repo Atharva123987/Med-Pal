@@ -19,8 +19,8 @@ const Charts = () => {
 	const [showError, setShowError] = useState(false);
 	const [fetchedData, setFetchedData] = useState([[]]);
 	const [requiredError, setRequiredError] = useState(false);
+	const {user} = useAuthContext();
 
-	const { user } = useAuthContext();
 
 	useEffect(() => {
 		handleFetch();
@@ -48,6 +48,7 @@ const Charts = () => {
 			url: "http://localhost:4000/api/labcounts",
 			headers: {
 				"Content-Type": "application/json",
+				Authorization:`Bearer ${user.token}`
 			},
 			data: data,
 		};
@@ -76,12 +77,11 @@ const Charts = () => {
 				url: "http://localhost:4000/api/labCounts/type",
 				headers: {
 					"Content-Type": "application/json",
-					authorization:user.token
+					Authorization:`Bearer ${user.token}`
 				},
 				data: data,
 				
 			};
-			console.log("FRONTEND",user.token)
 			axios
 				.request(config)
 				.then((response) => {
@@ -99,7 +99,9 @@ const Charts = () => {
 			method: "delete",
 			maxBodyLength: Infinity,
 			url: "http://localhost:4000/api/labcounts/latest",
-			headers: {},
+			headers: {
+				Authorization:`Bearer ${user.token}`
+			},
 		};
 
 		axios

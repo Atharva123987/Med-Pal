@@ -3,4 +3,26 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    
 }
+#calendar-component {
+    height: 100%;
+  }
+
+/* .react-calendar{
+    height: 40rem;
+}
+
+.react-calendar__viewContainer{
+    width:30rem;
+} */
+
+.react-calendar {
+    height: 300px;
+    width: 300px;
+  }
+  
+  .react-calendar__viewContainer {
+    width: 100%;
+  }
+  
