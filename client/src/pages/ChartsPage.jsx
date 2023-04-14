@@ -19,8 +19,7 @@ const Charts = () => {
 	const [showError, setShowError] = useState(false);
 	const [fetchedData, setFetchedData] = useState([[]]);
 	const [requiredError, setRequiredError] = useState(false);
-	const {user} = useAuthContext();
-
+	const { user } = useAuthContext();
 
 	useEffect(() => {
 		handleFetch();
@@ -48,7 +47,7 @@ const Charts = () => {
 			url: "http://localhost:4000/api/labcounts",
 			headers: {
 				"Content-Type": "application/json",
-				Authorization:`Bearer ${user.token}`
+				Authorization: `Bearer ${user.token}`,
 			},
 			data: data,
 		};
@@ -66,42 +65,45 @@ const Charts = () => {
 	};
 	const handleFetch = async (e) => {
 		// e.preventDefault();
-		
-			const axios = require("axios");
-			let data = JSON.stringify({
-				testName: readingType,
+
+		const axios = require("axios");
+		let data = JSON.stringify({
+			testName: readingType,
+		});
+		let config = {
+			method: "post",
+			maxBodyLength: Infinity,
+			url: "http://localhost:4000/api/labCounts/type",
+			headers: {
+				"Content-Type": "application/json",
+				Authorization: `Bearer ${user.token}`,
+			},
+			data: data,
+		};
+		axios
+			.request(config)
+			.then((response) => {
+				setFetchedData(response.data);
+			})
+			.catch((error) => {
+				setShowError(true);
 			});
-			let config = {
-				method: "post",
-				maxBodyLength: Infinity,
-				url: "http://localhost:4000/api/labCounts/type",
-				headers: {
-					"Content-Type": "application/json",
-					Authorization:`Bearer ${user.token}`
-				},
-				data: data,
-				
-			};
-			axios
-				.request(config)
-				.then((response) => {
-					setFetchedData(response.data);
-				})
-				.catch((error) => {
-					setShowError(true);
-				});
-		
 	};
 
 	const handleDelete = async (e) => {
 		e.preventDefault();
+		let data = JSON.stringify({
+			testName: readingType,
+		});
 		let config = {
 			method: "delete",
 			maxBodyLength: Infinity,
 			url: "http://localhost:4000/api/labcounts/latest",
 			headers: {
-				Authorization:`Bearer ${user.token}`
+				"Content-Type": "application/json",
+				Authorization: `Bearer ${user.token}`,
 			},
+			data: data,
 		};
 
 		axios
