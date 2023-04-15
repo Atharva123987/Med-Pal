@@ -32,10 +32,12 @@ const Calendar = (props) => {
   }, [appointments]);
 
   useEffect(()=>{
-    handleDelete();
+    if(deleteID !== null)handleDelete();
+    console.log(deleteID)
   },[deleteID])
-  const handleDelete = async () => {
 
+  const handleDelete = async () => {
+    if(!deleteID)return 
     let config = {
       method: "delete",
       maxBodyLength: Infinity,
@@ -59,7 +61,7 @@ const Calendar = (props) => {
   };
 
   const findAppointments = (date) => {
-    return appointments.filter((appointment) =>
+    return appointments?.filter((appointment) =>
       isSameDay(appointment.timeAndDate, date)
     );
   };
@@ -76,7 +78,7 @@ const Calendar = (props) => {
 
   const tileContent = ({ date }) => {
     const matchingAppointments = findAppointments(date);
-    if (matchingAppointments.length > 0) {
+    if (matchingAppointments?.length > 0) {
       setClicked(true)
       return (
         <div>
@@ -87,7 +89,7 @@ const Calendar = (props) => {
     return null;
   };
 
-  if (loading || appointments === null) {
+  if (loading) {
     return <p>Loading...</p>;
   }
 
