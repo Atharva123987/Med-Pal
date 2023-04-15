@@ -1,5 +1,7 @@
 import React from "react";
 import tempImg from '../assets/Access-Denied.jpg'
+import { Link } from "react-router-dom";
+import { Button } from "react-bootstrap";
 const ErrorPage = () => {
 	return (
 		<div style={{  textAlign: "center", padding: "50px" }}>
@@ -9,6 +11,7 @@ const ErrorPage = () => {
 				src={tempImg}
 				style={{ width: "5rem" }}
 			/>
+			<Link><Button>Go to Home</Button></Link>
 		</div>
 	);
 };
