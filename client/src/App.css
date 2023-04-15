@@ -12,15 +12,21 @@ body{
   margin:0;
 }
 
-
-
 .auth-form-container, .login-form, .register-form {
   display: flex;
   flex-direction: column;
   
 }
 
+#login-container{
+  box-shadow: 2px 2px 5px black;
+}
 
+#outer-container{
+  /* background-image: linear-gradient(red,yellow); */
+  height: 100vh;
+
+}
 
 label {
   text-align: left;
@@ -34,23 +40,11 @@ input {
   border-radius: 10px;
 }
 
-
-/* button {
-  border: none;
-  
-  background-color: white;
-  border-radius: 10px;
-  cursor: pointer;
-  color: #7439db;
-} */
-
 .link-btn {
   background: none;
   color: white;
   text-decoration: underline;
 }
-
-
 
 @media screen and (min-width: 600px) {
   .auth-form-container {

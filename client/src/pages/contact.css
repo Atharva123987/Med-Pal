@@ -1,0 +1,22 @@
+@media (max-width: 575.98px) {
+    .social-icon {
+      font-size: 20px;
+    }
+  }
+  
+  @media (min-width: 576px) {
+    .social-icon {
+      font-size: 30px;
+    }
+  }
+  
+  .nav-item {
+    margin-right: 1rem;
+  }
+  
+  @media (min-width: 576px) {
+    .nav-item {
+      margin-right: 2rem;
+    }
+  }
+  

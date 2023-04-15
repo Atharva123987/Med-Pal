@@ -24,9 +24,11 @@ export const Login = (props) => {
 	return (
 		<>
 		<Navbar/>
+		<div id="outer-container">
 		<Container
-			className="d-flex justify-content-center align-items-center border mt-2 mt-md-4 mt-lg-5"
+			className="d-flex justify-content-center align-items-center border"
 			style={{ maxWidth: "400px" }}
+			id="login-container"
 		>
 			<Form onSubmit={handleSubmit}>
 				<Form.Group>
@@ -90,6 +92,7 @@ export const Login = (props) => {
         </Form.Group>
       </Form>
     </Container>
+	</div>
 	</>
   );
 
