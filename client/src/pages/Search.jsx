@@ -2,12 +2,14 @@ import React, { useEffect, useState } from "react";
 import { Button, Form, FormGroup } from "react-bootstrap";
 import "../components/searchsidebar.css";
 import axios from "axios";
+
 import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import './search.css'
 import Card from 'react-bootstrap/Card';
 import {IoIosNavigate} from 'react-icons/io'
 import { useAuthContext } from "../hooks/useAuthContext";
+
 const Search = () => {
 	const [searchQuery, setSearchQuery] = useState("");
 	const [filters, setFilters] = useState("");
@@ -62,8 +64,7 @@ const Search = () => {
 			});
 	};
 
-
-	useEffect(()=>console.log(filters),[filters])
+	useEffect(() => console.log(filters), [filters]);
 	return (
 		<>
 			<div className="sidebar">
@@ -92,17 +93,42 @@ const Search = () => {
 					</Form.Group>
 					<Form.Group>
 						<label>Category:</label>
-						
-						<DropdownButton title={`${filters?filters:"Select a category"}`} onSelect={(e)=>setFilters(e)}>
-							
-							<Dropdown.Item style={{fontSize:"15px"}} eventKey="">Select a category</Dropdown.Item>
-							<Dropdown.Item style={{fontSize:"15px"}} eventKey="Cardiologist">Cardiologist</Dropdown.Item>
-							<Dropdown.Item style={{fontSize:"15px"}} eventKey="Rheumatologist">Rheumatologist</Dropdown.Item>
-							<Dropdown.Item style={{fontSize:"15px"}} eventKey="Pediatrician">Pediatrician</Dropdown.Item>
-							<Dropdown.Item style={{fontSize:"15px"}} eventKey="General Physician">General Physician</Dropdown.Item>
 
+						<DropdownButton
+							title={`${filters ? filters : "Select a category"}`}
+							onSelect={(e) => setFilters(e)}
+						>
+							<Dropdown.Item
+								style={{ fontSize: "15px" }}
+								eventKey=""
+							>
+								Select a category
+							</Dropdown.Item>
+							<Dropdown.Item
+								style={{ fontSize: "15px" }}
+								eventKey="Cardiologist"
+							>
+								Cardiologist
+							</Dropdown.Item>
+							<Dropdown.Item
+								style={{ fontSize: "15px" }}
+								eventKey="Rheumatologist"
+							>
+								Rheumatologist
+							</Dropdown.Item>
+							<Dropdown.Item
+								style={{ fontSize: "15px" }}
+								eventKey="Pediatrician"
+							>
+								Pediatrician
+							</Dropdown.Item>
+							<Dropdown.Item
+								style={{ fontSize: "15px" }}
+								eventKey="General Physician"
+							>
+								General Physician
+							</Dropdown.Item>
 						</DropdownButton>
-
 					</Form.Group>
 
 					<Button type="submit">Submit</Button>
@@ -113,7 +139,7 @@ const Search = () => {
 					results.map((elem) => {
 						return (
 							<>
-							{/* <ul>
+								{/* <ul>
 								<li style={{ marginLeft: "50vw" }}>
 									<img
 										style={{ height: "100px" }}
@@ -138,22 +164,48 @@ const Search = () => {
 								</li>
 							</ul> */}
 
-							<Card style={{ width: '40rem', marginLeft:"30vw" }}>
-							<Card.Body className="d-flex">
-								<div>
-							  <img src="https://t4.ftcdn.net/jpg/00/64/67/63/360_F_64676383_LdbmhiNM6Ypzb3FM4PPuFP9rHe7ri8Ju.jpg" width={100}/>
-							  </div>
-							  <div>
-							  <Card.Title>{elem.doctorName}</Card.Title>
-							  <Card.Text>Address : {elem.address}</Card.Text>
-							  <Card.Text>Fees : {elem.fees}</Card.Text>
-							  <Card.Text>Phone number : {elem.phoneNumber}</Card.Text>
-							  <Card.Text>Speciality : {elem.speciality}</Card.Text>
-							  <Button variant="success"><IoIosNavigate style={{fontSize:"30px", margin:"5px"}}/></Button>
-							  </div>
-							</Card.Body>
-						  </Card>
-						  </>
+								<Card
+									style={{
+										width: "40rem",
+										marginLeft: "30vw",
+									}}
+								>
+									<Card.Body className="d-flex">
+										<div>
+											<img
+												src="https://t4.ftcdn.net/jpg/00/64/67/63/360_F_64676383_LdbmhiNM6Ypzb3FM4PPuFP9rHe7ri8Ju.jpg"
+												width={100}
+											/>
+										</div>
+										<div>
+											<Card.Title>
+												{elem.doctorName}
+											</Card.Title>
+											<Card.Text>
+												Address : {elem.address}
+											</Card.Text>
+											<Card.Text>
+												Fees : {elem.fees}
+											</Card.Text>
+											<Card.Text>
+												Phone number :{" "}
+												{elem.phoneNumber}
+											</Card.Text>
+											<Card.Text>
+												Speciality : {elem.speciality}
+											</Card.Text>
+											<Button variant="success">
+												<IoIosNavigate
+													style={{
+														fontSize: "30px",
+														margin: "5px",
+													}}
+												/>
+											</Button>
+										</div>
+									</Card.Body>
+								</Card>
+							</>
 						);
 					})}
 			</div>
