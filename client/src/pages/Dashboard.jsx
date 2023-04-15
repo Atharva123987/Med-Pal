@@ -1,6 +1,5 @@
 import Sidenav from "../components/Sidenav";
 import "./dashboard.css";
-import profilePic from "../assets/profilepic.png";
 import Badge from "../assets/badge.png";
 import TabList from "../components/TabList";
 import TabStock from "../components/TabStock";
@@ -19,67 +18,18 @@ import { useAuthContext } from "../hooks/useAuthContext";
 
 const Dashboard = () => {
 	const {user} = useAuthContext();
-	const [userDetails, setUserDetails] = useState([
-		{
-			name: "John Doe",
-			email: "example@gmail.com",
-			age: "23",
-			gender: "M",
-			height: "171",
-			weight: "60",
-			membership: "Gold",
-		},
-	]);
-
-	const [doctorList, setDoctorList] = useState([
-		{
-			name: "Doctor Tyagi",
-			number: "8861134955",
-			address: "93 NORTH 9TH STREET, BROOKLYN NY 1121",
-		},
-		{
-			name: "Doctor Joshua",
-			number: "9393183918",
-			address: "380 WESTMINSTER ST, PROVIDENCE RI 02903",
-		},
-		{
-			name: "Doctor Praveen",
-			number: "7895397561",
-			address: "22 SUSSEX ST, HACKENSACK NJ 07601",
-		},
-	]);
-
-	 const appointments = [
-		{
-		  id: 1,
-		  date: "2023-04-01T14:00:00.000Z",
-		  doctor: "Dr. Smith",
-		  phoneNumber: "555-1234",
-		  address: "123 Main St.",
-		  notes: "Bring medical records",
-		},
-		{
-		  id: 2,
-		  date: new Date("2023-04-03T14:00:00.000Z"),
-		  doctor: "Dr. Johnson",
-		  phoneNumber: "555-5678",
-		  address: "456 Oak St.",
-		  notes: "Get blood test",
-		},
-		{
-		  id: 2,
-		  date: new Date("2023-04-05T14:00:00.000Z"),
-		  doctor: "Dr. Drake",
-		  phoneNumber: "322-5678",
-		  address: "96 Fat St.",
-		  notes: "Get sugar report",
-		}
-	]
-
+	const [userDetails, setUserDetails] = useState(null);
+	const [doctorList, setDoctorList] = useState(null);
+	const [appointments, setAppointments]  = useState(null)
 	const [readingType, setReadingType] = useState("Blood Sugar")
-	const [fetchedData, setFetchedData] = useState(null)
-	
-
+	const [fetchedChartData, setFetchedChartData] = useState(null)
+	const [fetchedMedicinesData, setFetchedMedicinesData] = useState(null)
+	const [fetchedReportsData, setFetchedReportsData] = useState(null)
+	const [doctorName, setDoctorName] = useState("");
+  const [doctorNumber, setDoctorNumber] = useState("");
+  const [doctorAddress, setDoctorAddress] = useState("");
+  const [notes, setNotes] = useState("");
+  const [appointmentDateAndTime, setAppointmentDateAndTime] = useState("");
 	useEffect(()=>{
 		handleFetch()
 		console.log("here")
@@ -91,7 +41,7 @@ const Dashboard = () => {
 			let data = JSON.stringify({
 				testName: readingType,
 			});
-			let config = {
+			let configCharts = {
 				method: "post",
 				maxBodyLength: Infinity,
 				url: "https://medpal-backend.onrender.com/api/labcounts/type",
@@ -102,15 +52,73 @@ const Dashboard = () => {
 				data: data,
 			};
 
+			let configMedicines = {
+				method: "get",
+				maxBodyLength: Infinity,
+				url: "https://medpal-backend.onrender.com/api/medicines",
+				headers: {
+					"Content-Type": "application/json",
+					Authorization:`Bearer ${user.token}`
+				},
+			};
+
+			let configReports = {
+				method: "get",
+				maxBodyLength: Infinity,
+				url: "https://medpal-backend.onrender.com/api/reportsStore",
+				headers: {
+					"Content-Type": "application/json",
+					Authorization:`Bearer ${user.token}`
+				},
+				data: data,
+			};
+			let configUser = {
+				method: "get",
+				maxBodyLength: Infinity,
+				url: `https://medpal-backend.onrender.com/api/user/${user.user_id}`,
+				headers: {
+					"Content-Type": "application/json",
+					Authorization:`Bearer ${user.token}`
+				},
+				data: data,
+			};
+
+			let configAppointments = {
+				method: "get",
+				maxBodyLength: Infinity,
+				url: `https://medpal-backend.onrender.com/api/appointments/`,
+				headers: {
+					"Content-Type": "application/json",
+					Authorization:`Bearer ${user.token}`
+				},
+				data: data,
+			};
+
 			axios
-				.request(config)
+				.request(configCharts)
 				.then((response) => {
-					setFetchedData(response.data);
-					console.log(fetchedData)
+					setFetchedChartData(response.data);
+
 				})
 				.catch((error) => {
 					// setShowError(true);
 				});
+			
+			axios.request(configUser)
+			.then((res)=>setUserDetails(res.data))
+			.catch((err)=>console.log(err))
+
+			axios.request(configMedicines)
+			.then((res)=>setFetchedMedicinesData(res.data))
+			.catch((err)=>console.log(err))
+
+			axios.request(configReports)
+			.then((res)=>setFetchedReportsData(res.data))
+			.catch((err)=>console.log(err))
+
+			axios.request(configAppointments)
+			.then((res)=>setFetchedReportsData(res.data))
+			.catch((err)=>console.log(err))
 		
 	};
 
@@ -121,29 +129,32 @@ const Dashboard = () => {
 				<Sidenav />
 				<div id="user-details">
 					<div id="profile">
-						<img id="profile-pic" src={profilePic}></img>
+						<img id="profile-pic" src='https://ik.imagekit.io/0qlf5pqwx/am-a-19-year-old-multimedia-artist-student-from-manila_-_21.png?updatedAt=1681593465157'></img>
 						<div id="uname">
-							<h2 id="name">{userDetails[0].name}</h2>
+							<h2 id="name">{userDetails?.name}</h2>
 
-							<p id="email">{userDetails[0].email}</p>
+							<p id="email">{userDetails?.email}</p>
 						</div>
 					</div>
 
 					<div id="info">
 						<div id="details">
-							<p>Age : {userDetails[0].age}</p>
-							<p>Gender : {userDetails[0].gender}</p>
-							<p>Height : {userDetails[0].height} cm</p>
-							<p>Weight : {userDetails[0].weight} kg</p>
+						<div class="arrow-down"></div>
+							<p>Age : {userDetails?.age}</p>
+							<p>Gender : {userDetails?.gender[0].toUpperCase() + userDetails?.gender.slice(1,10)}</p>
+							<p>Height : {userDetails?.height} cm</p>
+							<p>Weight : {userDetails?.weight} kg</p>
 						</div>
 
-						<div id="badge-container">
+
+
+						{/* <div id="badge-container">
 							<img id="badge" src={Badge} />
 							<p>{userDetails[0].membership} Member</p>
-						</div>
+						</div> */}
 					</div>
 
-					<div id="doctors">
+					{/* <div id="doctors">
 						<table>
 							<tr>
 								<th>Name</th>
@@ -160,7 +171,7 @@ const Dashboard = () => {
 								);
 							})}
 						</table>
-					</div>
+					</div> */}
 
 					<div id="tips">
 						<Tips />
@@ -173,20 +184,21 @@ const Dashboard = () => {
 							id="c1"
 							className="component"
 						>
-							<TabList />
+							<TabList fetchedMedicineData={fetchedMedicinesData ? fetchedMedicinesData : null} />
+
 						</div>
 						{/* Pass a parameter to DashboardItem which will select the particular component */}
 						<div
 							id="c2"
 							className="component"
 						>
-							<TabStock />
+							<TabStock fetchedMedicineData={fetchedMedicinesData ? fetchedMedicinesData : null} />
 						</div>
 						<div
 							id="c3"
 							className="component"
 						>
-							<Prescription />
+							<Prescription fetchedReportsData={fetchedReportsData ? fetchedReportsData : null} />
 						</div>
 					</div>
 
@@ -197,7 +209,7 @@ const Dashboard = () => {
 						>
 							{
 
-							fetchedData && <AllCharts chartData={fetchedData} chartType={readingType} width={450} height={230} />
+							fetchedChartData && <AllCharts chartData={fetchedChartData} chartType={readingType} width={450} height={230} />
 							}
 
 						</div>
@@ -207,7 +219,15 @@ const Dashboard = () => {
 							className="component"
 							
 						>
-							<Calendar appointments={appointments} />
+							{/* <Calendar appointments={appointments} /> */}
+							<Calendar
+          appointments={appointments}
+          setDoctorName={setDoctorName}
+          setDoctorNumber={setDoctorNumber}
+          setDoctorAddress={setDoctorAddress}
+          setNotes={setNotes}
+          setAppointmentDateAndTime={setAppointmentDateAndTime}
+        />
 						</div>
 
 						{/* <div

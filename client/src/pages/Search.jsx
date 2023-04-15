@@ -2,11 +2,13 @@ import React, { useEffect, useState } from "react";
 import { Button, Form, FormGroup } from "react-bootstrap";
 import "../components/searchsidebar.css";
 import axios from "axios";
-import Dropdown from "react-bootstrap/Dropdown";
-import DropdownButton from "react-bootstrap/DropdownButton";
-import "./search.css";
-import Card from "react-bootstrap/Card";
-import { IoIosNavigate } from "react-icons/io";
+
+import Dropdown from 'react-bootstrap/Dropdown';
+import DropdownButton from 'react-bootstrap/DropdownButton';
+import './search.css'
+import Card from 'react-bootstrap/Card';
+import {IoIosNavigate} from 'react-icons/io'
+import { useAuthContext } from "../hooks/useAuthContext";
 
 const Search = () => {
 	const [searchQuery, setSearchQuery] = useState("");
@@ -17,7 +19,7 @@ const Search = () => {
 	const [distanceValue, setDistanceValue] = useState(500);
 	const [latitude, setLatitude] = useState(null);
 	const [longitude, setLongitude] = useState(null);
-
+	const {user} = useAuthContext();
 	if (navigator.geolocation) {
 		navigator.geolocation.getCurrentPosition((position) => {
 			const { latitude, longitude } = position.coords;
@@ -45,6 +47,7 @@ const Search = () => {
 			url: "https://medpal-backend.onrender.com/api/doctors/nearby",
 			headers: {
 				"Content-Type": "application/json",
+				Authorization:`Bearer ${user.token}`,
 			},
 			data: newData,
 		};
@@ -54,6 +57,7 @@ const Search = () => {
 			.then((response) => {
 				console.log(response.data);
 				setResults(response.data);
+				console.log("HERE")
 			})
 			.catch((error) => {
 				console.log(error);

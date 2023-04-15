@@ -1,66 +1,117 @@
-const TabList = () => {
-	const columns = [
-		{
-			name: "Crocin",
-			freq: "Daily",
-			time: ["morning", "evening"],
-			// selector: row => row.name,
-			// sector: row => row.nativeName,
-		},
-		{
-			name: "Norflox",
-			freq: "Daily",
-			time: ["morning", "evening"],
-			// selector: row => row.name,
-			// sector: row => row.nativeName,
-			// sortable:true,
-		},
-		{
-			name: "Becousule",
-			freq: "Bi-weekly",
-			time: ["morning", "evening"],
-			// sector: row => row.capital,
-		},
-		{
-			name: "Paracetamol",
-			freq: "Daily",
-			time: ["morning", "evening"],
-			// sector: row => row.capital,
-		},
-	];
+import { useEffect, useState } from "react";
+import { Table } from "react-bootstrap";
+import { CgUnavailable } from "react-icons/cg";
 
-	return (
-		<>
-			<div id="tab-list" className="dash-component">
-				<legend align="center">Tablet List</legend>
+const TabList = (props) => {
+    const [fetchedMedicineData, setFetchedMedicineData] = useState(null);
 
-				<table>
-					<tr>
-						<th>Name</th>
-						<th>Frequency</th>
-						<th>Time</th>
-					</tr>
-					{columns.map((val, key) => {
-						return (
-							<tr key={key}>
-								<td>{val.name}</td>
-								<td>{val.freq}</td>
-								<td>
-									{val.time.map(
-										(elem, i, time) => time[i] + ", "
-									)}
-								</td>
-							</tr>
-						);
-					})}
-				</table>
-				<div className="dash-button-container">
-					<button className="dash-button">
-						<span>+</span>
-					</button>
-				</div>
-			</div>
-		</>
-	);
+    useEffect(() => setFetchedMedicineData(props.fetchedMedicineData), [props.fetchedMedicineData]);
+
+    return (
+        <>
+            <div id="tab-list" className="dash-component">
+                <legend align="center">Tablet List</legend>
+                {fetchedMedicineData ? (
+                    <>
+                        <Table striped bordered hover>
+                            <tr>
+                                <th>Name</th>
+                                <th>Frequency</th>
+                                <th>Time</th>
+                            </tr>
+                            {fetchedMedicineData.map((element, key) => {
+                                return (
+                                    <tr key={key}>
+                                        <td>{element.name}</td>
+                                        <td>
+                                            {element.frequency ? (
+                                                element.frequency
+                                            ) : (
+                                                <CgUnavailable style={{color:"black"}} />
+                                            )}
+                                        </td>
+                                        <td>
+										<ul id="meds-table-list">
+													{element?.timeOfDay &&
+														Object.values(
+															element.timeOfDay
+														).every(
+															(val) => !val.yesOrNot
+														) ? (
+															<CgUnavailable/>
+													) : (
+														<>
+															{element?.timeOfDay
+																?.morning
+																?.yesOrNot && (
+																	<li>
+																		Morning{" "}
+																		{
+																			fetchedMedicineData[0]
+																				.timeOfDay
+																				.morning
+																				.yesOrNot
+																		}
+																	</li>
+																)}
+															{element?.timeOfDay
+																?.afternoon
+																?.yesOrNot && (
+																	<li>
+																		Afternoon{" "}
+																		{
+																			fetchedMedicineData[0]
+																				.timeOfDay
+																				.afternoon
+																				.yesOrNot
+																		}
+																	</li>
+																)}
+															{element?.timeOfDay
+																?.evening
+																?.yesOrNot && (
+																	<li>
+																		Evening{" "}
+																		{
+																			fetchedMedicineData[0]
+																				.timeOfDay
+																				.evening
+																				.yesOrNot
+																		}
+																	</li>
+																)}
+															{element?.timeOfDay
+																?.night
+																?.yesOrNot && (
+																	<li>
+																		Night{" "}
+																		{
+																			fetchedMedicineData[0]
+																				.timeOfDay
+																				.night
+																				.yesOrNot
+																		}
+																	</li>
+																)}
+														</>
+													)}
+												</ul>
+                                        </td>
+                                    </tr>
+                                );
+                            })}
+                        </Table>
+                        <div className="dash-button-container">
+                            <button className="dash-button">
+                                <span>+</span>
+                            </button>
+                        </div>
+                    </>
+                ) : (
+                    <p>Loading medicine data...</p>
+                )}
+            </div>
+        </>
+    );
 };
 export default TabList;

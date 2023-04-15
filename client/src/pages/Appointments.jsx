@@ -111,8 +111,12 @@ const Appointments = () => {
 
 
 
-	useEffect(() => handleFetch(), [])
+	useEffect(() =>{
+		
+		handleFetch()
+	}, [])
 
+	
 	const handleFetch = async (e) => {
 		try {
 			const axios = require("axios");
@@ -131,8 +135,7 @@ const Appointments = () => {
 		} catch (err) {
 			console.log(err);
 		}
-	};
-	
+	}
 	
 
 

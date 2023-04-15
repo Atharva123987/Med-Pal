@@ -11,7 +11,7 @@ import { Link } from "react-router-dom";
 const About = () => {
 	return (
 		<>
-			<Navbar />
+			<Navbar buttons={true} />
 <div id="about-container">
 				<div id="about-left-container">
 					<Fade delay={10} direction='top' style={{ color: "black" }} triggerOnce>

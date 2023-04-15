@@ -27,15 +27,24 @@ const Calendar = (props) => {
   const [loading, setLoading] = useState(true);
   const [clicked, setClicked] = useState(false)
   const [deleteID, setDeleteID] = useState(null)
+
+  
+
   useEffect(() => {
     setLoading(false);
   }, [appointments]);
 
   useEffect(()=>{
-    handleDelete();
+    if(deleteID !== null)handleDelete();
+    console.log(deleteID)
   },[deleteID])
-  const handleDelete = async () => {
 
+  if(!appointments){
+    return(<h4>Loading...</h4>)
+  }
+  
+  const handleDelete = async () => {
+    if(!deleteID)return 
     let config = {
       method: "delete",
       maxBodyLength: Infinity,
@@ -59,7 +68,7 @@ const Calendar = (props) => {
   };
 
   const findAppointments = (date) => {
-    return appointments.filter((appointment) =>
+    return appointments?.filter((appointment) =>
       isSameDay(appointment.timeAndDate, date)
     );
   };
@@ -76,7 +85,7 @@ const Calendar = (props) => {
 
   const tileContent = ({ date }) => {
     const matchingAppointments = findAppointments(date);
-    if (matchingAppointments.length > 0) {
+    if (matchingAppointments?.length > 0) {
       setClicked(true)
       return (
         <div>
