@@ -87,7 +87,7 @@ const Calendar = (props) => {
     return null;
   };
 
-  if (loading || appointments === null) {
+  if (loading) {
     return <p>Loading...</p>;
   }
 
