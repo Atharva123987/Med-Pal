@@ -30,7 +30,7 @@ export const Register = (props) => {
 		<Navbar/>
 		
 		<div
-			className="d-flex justify-content-center align-items-center border mt-2 mt-md-4 mt-lg-5 auth-container"
+			className="auth-container"
 			style={{ maxWidth: "400px" }}
 		>
 			<Form onSubmit={handleSubmit}>
