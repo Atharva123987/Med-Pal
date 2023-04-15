@@ -19,7 +19,7 @@ const AddAppointmentModal = (props) => {
 
   return (
     <>
-      <div id='modal-container' style={{ marginRight: "5px" }}>
+      <div id='modal-container' style={{ marginRight: "5px", marginTop:"15px" }}>
         <Button id='add-medicine-button' onClick={handleShow}>
           Add Appointment
         </Button>

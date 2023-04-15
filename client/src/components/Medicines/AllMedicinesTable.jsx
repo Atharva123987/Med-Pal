@@ -75,11 +75,11 @@ const AllMedicinesTable = (props) => {
 							background: "#212529",
 						}}
 					>
-						<th>Tablet name</th>
-						<th>Tablet quantity</th>
-						<th>Tablet expiry</th>
-						<th>Tablet frequency</th>
-						<th>Tablet time of days</th>
+						<th>Medicine name</th>
+						<th>Medicine quantity</th>
+						<th>Medicine expiry</th>
+						<th>Medicine frequency</th>
+						<th>Medicine time of days</th>
 						<th>Remove</th>
 					</tr>
 				</thead>

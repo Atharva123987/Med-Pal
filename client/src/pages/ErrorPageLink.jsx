@@ -12,11 +12,11 @@ const ErrorPageLink = () => {
 			>
 				Go to Home
 			</button>
-			<img
+			{/* <img
 				src="https://cdn.pixabay.com/photo/2017/03/09/12/31/error-2129569_960_720.jpg"
 				alt="Error page illustration"
 				className="error-page-illustration"
-			/>
+			/> */}
 		</div>
 	);
 };

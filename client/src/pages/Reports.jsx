@@ -8,6 +8,7 @@ import { FaFilePdf, FaFileWord, FaFileExcel, FaFileImage } from "react-icons/fa"
 import tempImg from '../assets/badge.png'
 import {GrSelect} from 'react-icons/gr'
 import './reports.css'
+import { TbReportMedical } from "react-icons/tb";
 const Reports = () => {
 	const [reports, setReports] = useState([]);
 	const { user } = useAuthContext();
@@ -20,7 +21,7 @@ const Reports = () => {
 	useEffect(() => {
 		const fetchReports = async () => {
 			try {
-				const response = await axios.get("http://localhost:4000/api/reportsStore", {
+				const response = await axios.get("https://medpal-backend.onrender.com/api/reportsStore", {
 					headers: {
 						Authorization: `Bearer ${user.token}`,
 					},
@@ -51,7 +52,7 @@ const Reports = () => {
 		try {
 			const formData = new FormData();
 			formData.append("file", selectedFile);
-			const response = await axios.post("http://localhost:4000/api/reportsStore", formData, {
+			const response = await axios.post("https://medpal-backend.onrender.com/api/reportsStore", formData, {
 				headers: {
 					Authorization: `Bearer ${user.token}`,
 					"Content-Type": "multipart/form-data",
@@ -109,6 +110,11 @@ const Reports = () => {
 				</div>
 
 				<div id="reports-container">
+				<div>
+				<h3 className="charts-heading">
+					My Reports <TbReportMedical style={{ fontSize: "30px" }} />
+				</h3>
+			</div>
 					<h2>My Reports</h2>
 					<Form onSubmit={handleSubmit}>
 						<Form.Group controlId="formBasicFile">
@@ -122,6 +128,7 @@ const Reports = () => {
 							</Button>
 						</Form.Group>
 					</Form>
+					<h4 className="my-3">All reports</h4>
 					<ul style={{ listStyle: "none", margin: "0px", padding: "0px" }}>
 						{reports.map((report) => (
 							<li key={report._id}>

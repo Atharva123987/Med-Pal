@@ -94,7 +94,7 @@ const Dashboard = () => {
 			let config = {
 				method: "post",
 				maxBodyLength: Infinity,
-				url: "http://localhost:4000/api/labcounts/type",
+				url: "https://medpal-backend.onrender.com/api/labcounts/type",
 				headers: {
 					"Content-Type": "application/json",
 					Authorization:`Bearer ${user.token}`

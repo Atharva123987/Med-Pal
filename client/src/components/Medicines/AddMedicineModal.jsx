@@ -75,7 +75,7 @@ const AddMedicineModal = (props) => {
                 <br></br>
                 {isDaily && (
                   <Form.Group className="mb-3" controlId="exampleForm.ControlInput5" style={{ width: "300px" }}>
-                    <Form.Label>Tablet Time of Day</Form.Label>
+                    <Form.Label>Medicine Time of Day</Form.Label>
 
                     <div>
                       <Form.Check

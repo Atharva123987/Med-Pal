@@ -218,7 +218,7 @@ const Appointments = () => {
 				<Navbar buttons='true' />
 
 					<h3 className="charts-heading">
-						Appointments <FaClinicMedical style={{ fontSize: "30px" }} />
+						My Appointments <FaClinicMedical style={{ fontSize: "30px" }} />
 					</h3>
 						
 				<div id='appointments-container'>
@@ -228,7 +228,10 @@ const Appointments = () => {
 				setDoctorAddress={setDoctorAddress} 
 				setNotes={setNotes} 
 				setAppointmentDateAndTime={setAppointmentDateAndTime} 
-				handleSubmit={handleSubmit}/>
+				handleSubmit={handleSubmit}
+				handleFetch={handleFetch}
+				showList={true}
+				/>
 				</div>
 			</div>
 		</>

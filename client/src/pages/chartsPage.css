@@ -70,6 +70,8 @@
 @media screen and (max-width:850px) {
     #charts-container{
         flex-direction: column;
+        justify-content: center;
+        align-items: center;
     }
     #charts-form{
         max-width: 30rem;

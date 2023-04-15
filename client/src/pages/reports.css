@@ -6,7 +6,8 @@
 
 #reports-button{
     all: unset;
-    border:2px solid black;
+    /* border:2px solid black; */
+    box-shadow: 2px 2px 5px rgb(23,29,61);
     width: 300px;
     padding:10px;
     transition:all 0.3s;
