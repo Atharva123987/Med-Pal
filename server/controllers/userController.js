@@ -51,6 +51,10 @@ const getUserDetailsWithId = async (req, res) => {
 	res.status(200).json({
 		name: user_data.name,
 		email: user_data.email,
+		age: user_data.age,
+		gender: user_data.gender,
+		height: user_data.height,
+		weight: user_data.weight,
 	});
 };
 
