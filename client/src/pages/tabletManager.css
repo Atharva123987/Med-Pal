@@ -31,19 +31,20 @@ input::-webkit-inner-spin-button {
 }
 
 #add-medicine-button {
-  color: white;
+  color: black;
   scale: 100%;
-  transition: background-color 0.4s, scale 0.4s;
-  background-color: #00BFFF;
+  transition: all 0.4s;
+  background-color: #fff;
 }
 
 #add-medicine-button:hover {
-  transition: background-color 0.4s;
-  background-color: #000
+  transition: all 0.4s;
+  background-color: rgb(39,33,33);
+  color:white;
 }
 
 #add-medicine-button:active {
-  transition: scale 0.4s;
+  transition: all 0.4s;
   scale: 105%;
 }
 

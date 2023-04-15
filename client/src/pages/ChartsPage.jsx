@@ -127,7 +127,6 @@ const Charts = () => {
 				</h3>
 			</div>
 			<div
-				className="d-flex justify-content-evenly"
 				id="charts-container"
 			>
 				<div>

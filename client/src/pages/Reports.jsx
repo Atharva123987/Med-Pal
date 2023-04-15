@@ -103,12 +103,12 @@ const Reports = () => {
 	return (
 		<>
 			<Navbar buttons='true' />
-			<div className="d-flex justify-content-evenly my-4">
+			<div className="my-4" id="reports-page-container">
 				<div>
 
 				</div>
 
-				<div>
+				<div id="reports-container">
 					<h2>My Reports</h2>
 					<Form onSubmit={handleSubmit}>
 						<Form.Group controlId="formBasicFile">
@@ -140,7 +140,7 @@ const Reports = () => {
 				</div>
 				{currentFile ?
 					(
-						<div id="viewer-container"style={{backgroundColor:"rgb(23,29,61)",color:"white"}} >
+						<div id="viewer-container" style={{backgroundColor:"rgb(23,29,61)",color:"white"}} >
 							<div className="d-flex justify-content-between" >
 								<h3>Reports viewer</h3>
 
@@ -150,17 +150,17 @@ const Reports = () => {
 								</Button>
 
 							</div>
-							<div style={{backgroundColor:"white"}}>
+							<div id="viewer">
 							{(extension === "pdf" ? (
 								<embed
 									src={`https://docs.google.com/gview?url=${currentFile?.reportResourceURL}&embedded=true`}
-									style={{ width: "28rem", height: "31rem", borderRadius: "5px" }}
+									id="viewer-embed"
 									type="application/pdf"
 								/>
 							) : (
 								<img
 									src={currentFile.reportResourceURL}
-									style={{ maxWidth: "28rem", maxHeight: "35rem", padding: "1rem", boxShadow: "1px 1px 5px black" }}
+									
 									id="viewer-image"
 									alt="report image"
 								/>

@@ -7,13 +7,21 @@ import {GrCaretNext} from 'react-icons/gr'
 import {GrCaretPrevious} from 'react-icons/gr'
 import {TbPlayerTrackPrev} from 'react-icons/tb'
 import {TbPlayerTrackNext} from 'react-icons/tb'
+import {BsFillCalendarFill} from 'react-icons/bs'
+import {BsFillTelephoneFill} from 'react-icons/bs'
+import {RiNurseLine} from 'react-icons/ri'
+import {ImLocation2} from 'react-icons/im'
+import {MdNotes} from 'react-icons/md'
+import {GiHospitalCross} from 'react-icons/gi'
 import './calendar.css'
+import AddAppointmentModal from './Appointments/AddAppointmentModal';
 
-const Calendar = ({ appointments }) =>{
-
+const Calendar = (props) =>{
+  const appointments = props.appointments;
   const [selectedDate, setSelectedDate] = useState(new Date().toISOString());
   const [loading, setLoading] = useState(true);
   const [clicked, setClicked] = useState(false)
+
   useEffect(() => {
     setLoading(false);
   }, [appointments]);
@@ -40,7 +48,7 @@ const Calendar = ({ appointments }) =>{
       setClicked(true)
       return (
         <div>
-          {matchingAppointments.map((appointment, index) => (
+          {/* {matchingAppointments.map((appointment, index) => (
             <div
               key={index}
               onClick={() => {
@@ -51,8 +59,10 @@ const Calendar = ({ appointments }) =>{
               style={{ cursor: "pointer" }}
             >
               Dr. {appointment.doctorName.split(' ')[0]}
+             
             </div>
-          ))}
+          ))} */}
+           <GiHospitalCross id='appointment-indicator'/>
         </div>
       );
     }
@@ -64,32 +74,48 @@ const Calendar = ({ appointments }) =>{
   }
 
   return (
-    <div>
-   
-   <Calendar1
-  onChange={(date) => setSelectedDate(date.toISOString())}
-  value={new Date(selectedDate)}
-  tileContent={tileContent}
-  nextLabel={<GrCaretNext />}
-  prevLabel={<GrCaretPrevious />}
-  prev2Label={<TbPlayerTrackPrev />}
-  next2Label={<TbPlayerTrackNext />}
+    <>
+      <div  id='calendar-container'>
+        <Calendar1
+          onChange={(date) => setSelectedDate(date.toISOString())}
+          value={new Date(selectedDate)}
+          tileContent={tileContent}
+          nextLabel={<GrCaretNext />}
+          prevLabel={<GrCaretPrevious />}
+          prev2Label={<TbPlayerTrackPrev />}
+          next2Label={<TbPlayerTrackNext />}
+        />
   
-/>
-
-      <ListGroup>
-        {clicked && findAppointments(selectedDate).map((appointment, index) => (
-          <ListGroup.Item key={index}>
-            <div>Doctor: {appointment.doctorName}</div>
-            <div>Phone: {appointment.phoneNumber}</div>
-            <div>Date: {appointment.timeAndDate}</div>
-            <div>Address: {appointment.address}</div>
-            <div>Notes: {appointment.notes}</div>
-          </ListGroup.Item>
-        ))}
-      </ListGroup>
-    </div>
+        <div id='appointments-list'>
+          <h4 className='m-3'>Appointment Details</h4>
+          <div id='appointments-list-box'>
+          {clicked && findAppointments(selectedDate).length > 0 ? (
+            <ListGroup>
+              {findAppointments(selectedDate).map((appointment, index) => (
+                <ListGroup.Item key={index} style={{display:"flex",flexDirection:"column", gap:"20px"}}>
+                  <div><RiNurseLine style={{fontSize:"20px"}}/>Dr. {appointment.doctorName}</div>
+                  <div><BsFillTelephoneFill/> {appointment.phoneNumber}</div>
+                  <div><BsFillCalendarFill/> {new Date(appointment.timeAndDate).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</div>
+                  <div><ImLocation2/> {appointment.address}</div>
+                  <div><MdNotes/> {appointment.notes}</div>
+                </ListGroup.Item>
+              ))}
+            </ListGroup>
+          ) : (
+            <p id='no-appointments'>No appointments available</p>
+          )}
+          </div>
+          <AddAppointmentModal setDoctorName={props.setDoctorName} 
+				setDoctorNumber={props.setDoctorNumber} 
+				setDoctorAddress={props.setDoctorAddress} 
+				setNotes={props.setNotes} 
+				setAppointmentDateAndTime={props.setAppointmentDateAndTime} 
+				handleSubmit={props.handleSubmit}/>
+        </div>
+      </div>
+    </>
   );
+  
 }
 
 export default Calendar;
