@@ -44,4 +44,14 @@ const signupUser = async (req, res) => {
 	}
 };
 
-module.exports = { signupUser, loginUser };
+const getUserDetailsWithId = async (req, res) => {
+	const { id } = req.params;
+	const user_data = await User.findById(id);
+	console.log(user_data);
+	res.status(200).json({
+		name: user_data.name,
+		email: user_data.email,
+	});
+};
+
+module.exports = { signupUser, loginUser, getUserDetailsWithId };
