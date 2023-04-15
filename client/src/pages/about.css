@@ -6,7 +6,7 @@
   color: black;
 }
 p{
-  font-size: 4vh;
+  /* font-size: 4vh; */
 }
 
 .team-profile {
@@ -32,11 +32,13 @@ p{
 
 #about-text {
   margin-top: 2rem; /* added */
+  font-size: 1.5rem;
 }
 
 #about-container{
   display: flex;
   height: 100vh;
+  font-size: 1.5rem;
 }
 #about-left-container{
   margin:10px 0px 10px 20px;
@@ -46,7 +48,7 @@ p{
   text-decoration: none;
   margin: auto;
   display: block;
-  font-size: medium;
+  font-size: 2rem;
   margin-bottom: 15px;
   transition: all 0.4s;
   color:black

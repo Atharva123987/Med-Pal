@@ -27,6 +27,9 @@ const Calendar = (props) => {
   const [loading, setLoading] = useState(true);
   const [clicked, setClicked] = useState(false)
   const [deleteID, setDeleteID] = useState(null)
+
+  
+
   useEffect(() => {
     setLoading(false);
   }, [appointments]);
@@ -36,6 +39,10 @@ const Calendar = (props) => {
     console.log(deleteID)
   },[deleteID])
 
+  if(!appointments){
+    return(<h4>Loading...</h4>)
+  }
+  
   const handleDelete = async () => {
     if(!deleteID)return 
     let config = {
