@@ -9,6 +9,7 @@ import './search.css'
 import Card from 'react-bootstrap/Card';
 import {IoIosNavigate} from 'react-icons/io'
 import { useAuthContext } from "../hooks/useAuthContext";
+import Navbar from "../components/Navbar";
 
 const Search = () => {
 	const [searchQuery, setSearchQuery] = useState("");
@@ -67,17 +68,11 @@ const Search = () => {
 	useEffect(() => console.log(filters), [filters]);
 	return (
 		<>
+		<Navbar/>
 			<div className="sidebar">
+				<div>
 				<Form onSubmit={handleSubmit}>
-					{/* <Form.Group>
-						<Form.Control
-							type="text"
-							name="searchQuery"
-							placeholder="Search..."
-							value={searchQuery}
-							onChange={(e) => setSearchQuery(e.target.value)}
-						/>
-					</Form.Group> */}
+				
 					<Form.Group>
 						<label htmlFor="distanceSlider">
 							Distance (in miles): {distanceValue}
@@ -133,41 +128,18 @@ const Search = () => {
 
 					<Button type="submit">Submit</Button>
 				</Form>
-			</div>
+				</div>
 			<div>
 				{results &&
 					results.map((elem) => {
 						return (
 							<>
-								{/* <ul>
-								<li style={{ marginLeft: "50vw" }}>
-									<img
-										style={{ height: "100px" }}
-										src='https://t4.ftcdn.net/jpg/00/64/67/63/360_F_64676383_LdbmhiNM6Ypzb3FM4PPuFP9rHe7ri8Ju.jpg'
-										alt="doctor img"
-									/>
-								</li>
-								<li style={{ marginLeft: "50vw" }}>
-									Name : {elem.doctorName}
-								</li>
-								<li style={{ marginLeft: "50vw" }}>
-									Address : {elem.address}
-								</li>
-								<li style={{ marginLeft: "50vw" }}>
-									Fees : {elem.fees}
-								</li>
-								<li style={{ marginLeft: "50vw" }}>
-									Speciality : {elem.speciality}
-								</li>
-								<li style={{ marginLeft: "50vw" }}>
-									Ph. No. : {elem.phoneNumber}
-								</li>
-							</ul> */}
 
 								<Card
 									style={{
 										width: "40rem",
-										marginLeft: "30vw",
+										height:"20rem",
+										marginLeft: "3rem",
 									}}
 								>
 									<Card.Body className="d-flex">
@@ -209,6 +181,8 @@ const Search = () => {
 						);
 					})}
 			</div>
+			</div>
+
 		</>
 	);
 };
