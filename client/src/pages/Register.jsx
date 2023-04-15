@@ -27,10 +27,11 @@ export const Register = (props) => {
 
 	return (
 		<>
+		<div className="outer-container">
 		<Navbar/>
 		
-		<Container
-			className="d-flex justify-content-center align-items-center border mt-2 mt-md-4 mt-lg-5"
+		<div
+			className="d-flex justify-content-center align-items-center border mt-2 mt-md-4 mt-lg-5 auth-container"
 			style={{ maxWidth: "400px" }}
 		>
 			<Form onSubmit={handleSubmit}>
@@ -160,7 +161,8 @@ export const Register = (props) => {
 					</Form.Text>
 				</Form.Group>
 			</Form>
-		</Container>
+		</div>
+		</div>
 		</>
 	);
 };

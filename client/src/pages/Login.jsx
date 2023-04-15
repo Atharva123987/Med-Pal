@@ -23,16 +23,15 @@ export const Login = (props) => {
 
 	return (
 		<>
+		<div className="outer-container">
 		<Navbar/>
-		<div id="outer-container">
-		<Container
-			className="d-flex justify-content-center align-items-center border"
+		<div
+			className="d-flex justify-content-center align-items-center auth-container"
 			style={{ maxWidth: "400px" }}
-			id="login-container"
 		>
 			<Form onSubmit={handleSubmit}>
 				<Form.Group>
-					<h3 className="mt-3">Login Page</h3>
+					<h3 className="mt-3">Login</h3>
 				</Form.Group>
 
 				<Form.Group className="mb-3" controlId="formBasicEmail">
@@ -91,7 +90,7 @@ export const Login = (props) => {
           </Form.Text>
         </Form.Group>
       </Form>
-    </Container>
+    </div>
 	</div>
 	</>
   );

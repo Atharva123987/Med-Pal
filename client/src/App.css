@@ -18,13 +18,20 @@ body{
   
 }
 
-#login-container{
+.auth-container{
   box-shadow: 2px 2px 5px black;
+  background-color: white;
+  color:black;
+  margin:20px auto;
 }
 
-#outer-container{
-  /* background-image: linear-gradient(red,yellow); */
+.outer-container{
   height: 100vh;
+  color:white;
+  background: linear-gradient(-45deg, #00EFD1, #b9d4ff, #adb7f9,#00fffb);
+    background-size: 400% 400%;
+    animation:gradient 10s infinite alternate 1s;
+    height:100vh;
 
 }
 
@@ -40,6 +47,10 @@ input {
   border-radius: 10px;
 }
 
+.form-text{
+  color: black !important;
+}
+
 .link-btn {
   background: none;
   color: white;
@@ -52,5 +63,17 @@ input {
     border: 1px solid white;
     border-radius: 10px;
     margin: 0.5rem;
+  }
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
   }
 }
