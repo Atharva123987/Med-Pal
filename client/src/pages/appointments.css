@@ -1,28 +1,132 @@
 #appointments-container{
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    flex-direction: row;
+    justify-content:center;
+
+    /* min-height: 100vh; */
+    /* margin: 0px; */
     
 }
 #calendar-component {
     width: 100%;
+    
   }
 
-/* .react-calendar{
-    height: 40rem;
-}
+  #calendar-container{
+    /* height:25rem; */
+    display: flex;
+    
+  }
 
-.react-calendar__viewContainer{
-    width:30rem;
-} */
 
 .react-calendar {
-    height: 300px;
-    width: 300px;
+    position: -webkit-sticky;
+  position: sticky;
+  top: 10%;
   }
   
   .react-calendar__viewContainer {
-    width: 100%;
   }
   
+  
+  .react-calendar, .react-calendar__navigation, .react-calendar__navigation__label__labelText, .react-calendar__navigation__label__labelText--from, .react-calendar__month-view__days button{
+    /* background-color: rgb(51, 68, 80)!important; */
+    /* color: white!important; */
+    font-size: 1rem!important;
+    width: 30rem !important;
+    height: 3rem !important;
+}
+
+.react-calendar__tile--active{
+  color: white!important;
+} 
+
+
+.react-calendar__month-view__days button{
+    font-size: 0.8rem!important;
+}
+
+#appointments-list{
+  border-radius: 5%;
+  width:30rem;
+  background-color: rgb(86, 0, 0);
+  color:white;
+  padding:10px;
+  display: flex;
+  flex-direction: column;
+  margin-left: 5rem;
+
+}
+
+.list-group-item{
+  border:none;
+  border: 2px solid white;
+  /* height: 15rem; */
+  background-color: rgba(240, 248, 255, 0);
+  color:white;
+  padding:20px;
+}
+
+#no-appointments{
+   text-align: center;
+   color:rgb(255, 255, 255);
+}
+#appointments-list-box{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  /* max-height: 20rem; */
+  background-color: rgba(255, 0, 0, 0.199);
+  margin-top: 1rem;
+  margin-bottom: auto;
+}   
+
+@keyframes indicator {
+  0%{
+    scale:100%
+  }
+  100%{
+    scale:110%
+  }
+  
+}
+
+#appointment-indicator{
+  font-size: 20px;
+  animation: indicator 0.5s ease-in-out alternate infinite;
+}
+
+@media screen and (max-width:1000px) {
+  
+
+  #appointments-container{
+    flex-direction: column;
+  }
+  #calendar-container{
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+  }
+  #appointments-list{
+    margin:0;
+    margin-top: 22rem;
+  }
+  .react-calendar{
+    position:inherit;
+  }
+
+}
+
+@media screen and (max-width:650px) {
+
+  .react-calendar, .react-calendar__navigation, .react-calendar__navigation__label__labelText, .react-calendar__navigation__label__labelText--from, .react-calendar__month-view__days button, .react-calendar__navigation{
+    width: 20rem !important;;
+    height:3rem!important;;
+  }
+
+  #appointments-list{
+    width: 22rem;
+  }
+  
+}

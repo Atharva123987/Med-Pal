@@ -5,6 +5,7 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Container from "react-bootstrap/Container";
 import { useLogin } from "../hooks/useLogin";
+import Navbar from "../components/Navbar";
 
 export const Login = (props) => {
 	const [email, setEmail] = useState("");
@@ -21,13 +22,16 @@ export const Login = (props) => {
 	};
 
 	return (
-		<Container
-			className="d-flex justify-content-center align-items-center border mt-2 mt-md-4 mt-lg-5"
+		<>
+		<div className="outer-container">
+		<Navbar/>
+		<div
+			className="d-flex justify-content-center align-items-center auth-container"
 			style={{ maxWidth: "400px" }}
 		>
 			<Form onSubmit={handleSubmit}>
 				<Form.Group>
-					<h3 className="mt-3">Login Page</h3>
+					<h3 className="mt-3">Login</h3>
 				</Form.Group>
 
 				<Form.Group className="mb-3" controlId="formBasicEmail">
@@ -86,7 +90,9 @@ export const Login = (props) => {
           </Form.Text>
         </Form.Group>
       </Form>
-    </Container>
+    </div>
+	</div>
+	</>
   );
 
 };

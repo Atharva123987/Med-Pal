@@ -19,7 +19,7 @@ export const useRegister = () => {
 		setError(null);
 
 		const response = await fetch(
-			"http://localhost:4000/api/user/register",
+			"https://medpal-backend.onrender.com/api/user/register",
 			{
 				method: "POST",
 				headers: { "Content-Type": "application/json" },

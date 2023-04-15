@@ -15,6 +15,8 @@ import { useEffect } from "react";
 import Footer from '../components/Footer'
 import Navbar from '../components/Navbar'
 import { useAuthContext } from "../hooks/useAuthContext";
+
+
 const Dashboard = () => {
 	const {user} = useAuthContext();
 	const [userDetails, setUserDetails] = useState([
@@ -92,7 +94,7 @@ const Dashboard = () => {
 			let config = {
 				method: "post",
 				maxBodyLength: Infinity,
-				url: "http://localhost:4000/api/labcounts/type",
+				url: "https://medpal-backend.onrender.com/api/labcounts/type",
 				headers: {
 					"Content-Type": "application/json",
 					Authorization:`Bearer ${user.token}`

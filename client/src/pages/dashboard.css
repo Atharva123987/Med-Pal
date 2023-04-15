@@ -6,17 +6,11 @@
 }
 
 .react-calendar__tile--now{
-    background-color: rgb(179, 127, 43)!important;
-    color:white;
+    background-color: rgb(207, 207, 207)!important;
+    color:black;
 }
 
-.react-calendar, .react-calendar__navigation, .react-calendar__navigation__label__labelText, .react-calendar__navigation__label__labelText--from, .react-calendar__month-view__days button{
-    /* background-color: rgb(51, 68, 80)!important; */
-    /* color: white!important; */
-    font-size: 1.5rem;
-    width: 24rem !important;
-    height: 2rem !important;
-}
+
 
 span{
     

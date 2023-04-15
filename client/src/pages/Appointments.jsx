@@ -215,21 +215,23 @@ const Appointments = () => {
 					</Toast>
 				</div>
 
-				<Navbar />
+				<Navbar buttons='true' />
 
 					<h3 className="charts-heading">
-						Appointments <FaClinicMedical style={{ fontSize: "30px" }} />
+						My Appointments <FaClinicMedical style={{ fontSize: "30px" }} />
 					</h3>
 						
 				<div id='appointments-container'>
-				<AddAppointmentModal 
-				setDoctorName={setDoctorName} 
+				
+				<Calendar id='calendar-component' appointments={fetchedData? fetchedData : null} setDoctorName={setDoctorName} 
 				setDoctorNumber={setDoctorNumber} 
 				setDoctorAddress={setDoctorAddress} 
 				setNotes={setNotes} 
 				setAppointmentDateAndTime={setAppointmentDateAndTime} 
-				handleSubmit={handleSubmit} />
-				<Calendar id='calendar-component' appointments={fetchedData? fetchedData : null} />
+				handleSubmit={handleSubmit}
+				handleFetch={handleFetch}
+				showList={true}
+				/>
 				</div>
 			</div>
 		</>

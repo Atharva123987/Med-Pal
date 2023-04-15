@@ -12,6 +12,7 @@ import { useAuthContext } from "../hooks/useAuthContext";
 import "./chartsPage.css";
 
 const Charts = () => {
+	const { user } = useAuthContext();
 	const [readingType, setReadingType] = useState("Blood Sugar");
 	const [readingValue, setReadingValue] = useState(null);
 	const [readingDate, setReadingDate] = useState(null);
@@ -19,11 +20,27 @@ const Charts = () => {
 	const [showError, setShowError] = useState(false);
 	const [fetchedData, setFetchedData] = useState([[]]);
 	const [requiredError, setRequiredError] = useState(false);
-	const { user } = useAuthContext();
+	const [width, setWidth] = useState(window.innerWidth);
+	const [height, setHeight] = useState(window.innerHeight);
+
 
 	useEffect(() => {
 		handleFetch();
 	}, [readingType]);
+
+	useEffect(() => {
+		const handleResize = () => {
+		  setWidth(window.innerWidth);
+		  setHeight(window.innerHeight);
+		};
+		
+		window.addEventListener('resize', handleResize);
+		
+		return () => {
+		  window.removeEventListener('resize', handleResize);
+		};
+	  }, []);
+
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
@@ -44,7 +61,7 @@ const Charts = () => {
 		let config = {
 			method: "post",
 			maxBodyLength: Infinity,
-			url: "http://localhost:4000/api/labcounts",
+			url: "https://medpal-backend.onrender.com/api/labcounts",
 			headers: {
 				"Content-Type": "application/json",
 				Authorization: `Bearer ${user.token}`,
@@ -73,7 +90,7 @@ const Charts = () => {
 		let config = {
 			method: "post",
 			maxBodyLength: Infinity,
-			url: "http://localhost:4000/api/labCounts/type",
+			url: "https://medpal-backend.onrender.com/api/labCounts/type",
 			headers: {
 				"Content-Type": "application/json",
 				Authorization: `Bearer ${user.token}`,
@@ -98,7 +115,7 @@ const Charts = () => {
 		let config = {
 			method: "delete",
 			maxBodyLength: Infinity,
-			url: "http://localhost:4000/api/labcounts/latest",
+			url: "https://medpal-backend.onrender.com/api/labcounts/latest",
 			headers: {
 				"Content-Type": "application/json",
 				Authorization: `Bearer ${user.token}`,
@@ -120,14 +137,13 @@ const Charts = () => {
 
 	return (
 		<>
-			<Navbar buttons={false} />
+			<Navbar buttons={true} />
 			<div>
 				<h3 className="charts-heading">
 					Charts <BiBarChartAlt2 style={{ fontSize: "30px" }} />
 				</h3>
 			</div>
 			<div
-				className="d-flex justify-content-evenly"
 				id="charts-container"
 			>
 				<div>
@@ -240,7 +256,13 @@ const Charts = () => {
 					</button>
 				</div>
 
-				<AllCharts chartData={fetchedData} chartType={readingType} />
+				<AllCharts
+					chartData={fetchedData}
+					chartType={readingType}
+					width={width < 500 ? 380:undefined}
+					// height={width < 500 ? height : undefined}
+					height={width < 500 ?250:undefined}
+				/>
 
 				<div
 					id="toasts"

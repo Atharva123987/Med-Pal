@@ -7,6 +7,7 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import { useRegister } from "../hooks/useRegister";
+import Navbar from "../components/Navbar";
 
 export const Register = (props) => {
 	const [name, setName] = useState("");
@@ -25,8 +26,12 @@ export const Register = (props) => {
 	};
 
 	return (
-		<Container
-			className="d-flex justify-content-center align-items-center border mt-2 mt-md-4 mt-lg-5"
+		<>
+		<div className="outer-container">
+		<Navbar/>
+		
+		<div
+			className="d-flex justify-content-center align-items-center border mt-2 mt-md-4 mt-lg-5 auth-container"
 			style={{ maxWidth: "400px" }}
 		>
 			<Form onSubmit={handleSubmit}>
@@ -156,7 +161,9 @@ export const Register = (props) => {
 					</Form.Text>
 				</Form.Group>
 			</Form>
-		</Container>
+		</div>
+		</div>
+		</>
 	);
 };
 export default Register;
