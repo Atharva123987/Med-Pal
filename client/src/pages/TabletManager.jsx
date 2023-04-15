@@ -5,7 +5,6 @@ import AllMedicinesTable from '../components/Medicines/AllMedicinesTable';
 import AddMedicineModal from '../components/Medicines/AddMedicineModal';
 import Navbar from '../components/Navbar'
 import './tabletManager.css'
-import UpcomingDose from '../components/Medicines/UpcomingDose';
 import Form from 'react-bootstrap/Form';
 import { AiOutlineSearch } from 'react-icons/ai'
 import { BsArrowUpSquareFill } from 'react-icons/bs'
@@ -25,11 +24,11 @@ const TabletManager = () => {
 	const [showToast, setShowToast] = useState(false);
 	const [nameError, setNameError] = useState(false);
 	const [flag, setFlag] = useState(0);
-	const isMountedRef = useRef(false);
 	const [searchQuery, setSearchQuery] = useState(null)
-	const [deleteCalled, setDeleteCalled] = useState(0);
+	const [deleteCalled, setDeleteCalled] = useState(false);
 	const [deleteToast, setDeleteToast] = useState(false)
 	const {user} = useAuthContext()
+
 	useEffect(() => {
 		handleFetch();
 	}, [flag, deleteCalled])
