@@ -1,11 +1,10 @@
 const LabCounts = require("../models/labCountModel");
 const mongoose = require("mongoose");
 
-
 const getTypeOfLabCount = async (req, res) => {
-	console.log(req.body);
+	const user_id = req.user._id;
 	const { testName } = req.body;
-	LabCounts.find({ testName: testName })
+	LabCounts.find({ testName: testName, user_id: user_id })
 		.sort({ dateTaken: 1 })
 		.then((labCount) => {
 			if (!labCount.length) {
@@ -19,7 +18,6 @@ const getTypeOfLabCount = async (req, res) => {
 			res.status(400).json({ success: false, error: err.message })
 		);
 };
-
 
 const getAllLabCounts = async (req, res) => {
 	const labCounts = await LabCounts.find({}).sort({ createdAt: -1 });
@@ -46,6 +44,7 @@ const getSingleLabCount = async (req, res) => {
 const createLabCount = async (req, res) => {
 	console.log(req.body);
 	const { testName, count, dateTaken } = req.body;
+	const user_id = req.user._id;
 	try {
 		if (testName === "noselection") {
 			res.status(404).json({ mssg: "Select a chart type!" });
@@ -54,6 +53,7 @@ const createLabCount = async (req, res) => {
 				testName,
 				count,
 				dateTaken,
+				user_id,
 			});
 			res.status(200).json({ mssg: "POST a new labCount", newLabCount });
 		}
@@ -79,7 +79,13 @@ const deleteLabCount = async (req, res) => {
 };
 
 const deleteLatestLabCount = async (req, res) => {
-	LabCounts.findOneAndDelete({}, { sort: { _id: -1 } })
+	const user_id = req.user._id;
+	const { testName } = req.body;
+	console.log(req.body);
+	LabCounts.findOneAndDelete(
+		{ user_id: user_id, testName: testName },
+		{ sort: { createdAt: -1 } }
+	)
 		.then((doc) => {
 			console.log(doc);
 			res.status(200).json(doc);
@@ -119,5 +125,4 @@ module.exports = {
 	updateLabCount,
 	getTypeOfLabCount,
 	deleteLatestLabCount,
-
 };

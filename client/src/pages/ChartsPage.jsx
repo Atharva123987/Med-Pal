@@ -8,7 +8,9 @@ import { AiFillPlusCircle } from "react-icons/ai";
 import Dropdown from "react-bootstrap/Dropdown";
 import Button from "react-bootstrap/Button";
 import { BiBarChartAlt2 } from "react-icons/bi";
+import { useAuthContext } from "../hooks/useAuthContext";
 import "./chartsPage.css";
+
 const Charts = () => {
 	const [readingType, setReadingType] = useState("Blood Sugar");
 	const [readingValue, setReadingValue] = useState(null);
@@ -17,6 +19,8 @@ const Charts = () => {
 	const [showError, setShowError] = useState(false);
 	const [fetchedData, setFetchedData] = useState([[]]);
 	const [requiredError, setRequiredError] = useState(false);
+	const { user } = useAuthContext();
+
 	useEffect(() => {
 		handleFetch();
 	}, [readingType]);
@@ -43,6 +47,7 @@ const Charts = () => {
 			url: "http://localhost:4000/api/labcounts",
 			headers: {
 				"Content-Type": "application/json",
+				Authorization: `Bearer ${user.token}`,
 			},
 			data: data,
 		};
@@ -58,68 +63,70 @@ const Charts = () => {
 				setShowError(true);
 			});
 	};
-
 	const handleFetch = async (e) => {
 		// e.preventDefault();
-		try {
-			const axios = require("axios");
-			let data = JSON.stringify({
-				testName: readingType,
+
+		const axios = require("axios");
+		let data = JSON.stringify({
+			testName: readingType,
+		});
+		let config = {
+			method: "post",
+			maxBodyLength: Infinity,
+			url: "http://localhost:4000/api/labCounts/type",
+			headers: {
+				"Content-Type": "application/json",
+				Authorization: `Bearer ${user.token}`,
+			},
+			data: data,
+		};
+		axios
+			.request(config)
+			.then((response) => {
+				setFetchedData(response.data);
+			})
+			.catch((error) => {
+				setShowError(true);
 			});
-
-			let config = {
-				method: "post",
-				maxBodyLength: Infinity,
-				url: "http://localhost:4000/api/labcounts/type",
-				headers: {
-					"Content-Type": "application/json",
-				},
-				data: data,
-			};
-
-			axios
-				.request(config)
-				.then((response) => {
-					setFetchedData(response.data);
-				})
-				.catch((error) => {
-					setShowError(true);
-				});
-		} catch (err) {
-			console.log(err);
-			setShowError(true);
-		}
 	};
 
 	const handleDelete = async (e) => {
 		e.preventDefault();
+		let data = JSON.stringify({
+			testName: readingType,
+		});
 		let config = {
 			method: "delete",
 			maxBodyLength: Infinity,
 			url: "http://localhost:4000/api/labcounts/latest",
-			headers: {},
+			headers: {
+				"Content-Type": "application/json",
+				Authorization: `Bearer ${user.token}`,
+			},
+			data: data,
 		};
 
 		axios
 			.request(config)
 			.then((response) => {
-				console.log(JSON.stringify(response.data));
+				// console.log(JSON.stringify(response.data));
+				handleFetch();
 			})
 			.catch((error) => {
+				handleFetch();
 				console.log(error);
 			});
 	};
 
 	return (
 		<>
-			<Navbar buttons={false} />
+			<Navbar buttons={true} />
 			<div>
-				<h3 id="charts-heading">
+				<h3 className="charts-heading">
 					Charts <BiBarChartAlt2 style={{ fontSize: "30px" }} />
 				</h3>
 			</div>
 			<div
-				className="d-flex justify-content-evenly"
 				id="charts-container"
 			>
 				<div>
@@ -142,7 +149,6 @@ const Charts = () => {
 									style={{ fontSize: "15px" }}
 									onClick={() => {
 										setReadingType("Blood Sugar");
-										handleFetch();
 									}}
 								>
 									Blood Sugar
@@ -151,7 +157,6 @@ const Charts = () => {
 									style={{ fontSize: "15px" }}
 									onClick={() => {
 										setReadingType("Blood Pressure");
-										handleFetch();
 									}}
 								>
 									Blood Pressure
@@ -160,7 +165,6 @@ const Charts = () => {
 									style={{ fontSize: "15px" }}
 									onClick={() => {
 										setReadingType("Haemoglobin");
-										handleFetch();
 									}}
 								>
 									Haemoglobin

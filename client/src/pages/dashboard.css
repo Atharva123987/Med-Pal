@@ -1,30 +1,33 @@
 #content{
     display: flex;
-    position:absolute;
     width: 100%;
-    min-height: 100vh;
     font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 
 }
 
+.react-calendar__tile--now{
+    background-color: rgb(207, 207, 207)!important;
+    color:black;
+}
+
+
 
 span{
-    font-size: 4vh;
     
 }
 #user-details{
     display: grid;
     width: 30%;
-    margin: 1vh 2vh;
-    font-size: 3vh;
+    margin: 0.3rem 0.5rem;
+    font-size: 1rem;
     
 }
 
 #name{
-    font-size: 5vh;
+    font-size: 2rem;
 }
 #uname{
-    margin: auto auto auto 2vh;
+    margin: auto auto auto 20px;
 }
 
 #profile{
@@ -46,27 +49,26 @@ span{
 
 
 #profile-pic{
-    width:15vh;
-    height: 15vh;
-    margin-top: 2vh;
+    width:7rem;
+    height: 7rem;
+    margin-top: 1rem;
     border-radius: 50%;
     border:1px solid rgb(0, 0, 0);
 }
 
 #profile-pic:hover{
-    opacity: 50%;
 }
 
 #info{
     display: flex;
     justify-content:space-around;
-    margin:1vh 0;
+    margin:1rem 0;
 }
 
 #details{
-    font-size: 2vh;
+    font-size: 0.8rem;
     border:1px solid black;
-    border-radius: 6vh;
+    border-radius: 2rem;
     width: 40%;
     height: fit-content+10px;
     font-weight: bold;
@@ -75,25 +77,11 @@ span{
     text-align: center;
 }
 
-@keyframes details-animation {
-    0%{
 
-    }
-    100%{
-        box-shadow: 2px 2px 10px black;
-    }
-}
-
-#details:hover{
-    animation-name: details-animation;
-    animation-duration: 1s;
-    animation-timing-function: ease-in-out;
-    animation-fill-mode: forwards;
-}
 
 #details p{
     font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    margin-top: 3vh;
+    margin-top: 1.3rem;
     margin-bottom: 0!important;
 }
 
@@ -102,17 +90,17 @@ span{
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    font-size: 3vh;
+    font-size: 1rem;
 }
 
 #badge{
-    height: 15vh;
-    width: 15vh;
+    height: 7rem;
+    width: 7rem;
 }
 
 #doctors table{
     margin: auto;
-    font-size: 2vh;
+    font-size: 0.7rem;
     border: 2px solid black;
     
 }
@@ -122,7 +110,7 @@ span{
 #doctors th{  
     color:rgb(255, 255, 255);    
     padding: 10px;
-    border: 0.22vh solid black;
+    border: 1.5px solid black;
 }
 #doctors tr{
     background-color: rgb(0, 174, 255);  
@@ -130,7 +118,7 @@ span{
     padding: 10px;
 }
 #doctors td{
-    border: 0.22vh solid black;
+    border: 1.5px solid black;
 }
 
 @keyframes fade {
@@ -147,7 +135,7 @@ span{
 
 #tips{
     text-align: center;
-    font-size: 2vh;
+    font-size: 0.9rem;
     opacity: 0%;
     animation-name: fade;
     animation-duration: 2s;
@@ -159,12 +147,11 @@ span{
 
 #dash-components{
     display: flex;
-
     width: 70%;
-    height: 100vh;
-    justify-content:space-evenly;
+    /* height: 100vh; */
+    /* justify-content:space-evenly; */
     flex-direction: column;   
-    margin: auto;
+    /* margin: auto; */
     
 }
 
@@ -173,30 +160,16 @@ span{
 #r1{
     display: flex;
     flex-direction: row;
-    margin: 10px;
+    gap: 10px;
+    max-width: fit-content;
 }
 #r2{
     display: flex;
     flex-direction: row;
-    margin: 10px;
+    gap: 10px;
+    max-width: fit-content;
 }
 
-/* .sc-eDWCr{
-    font-size: 1.5vh;
+#c5{
+    
 }
-.hbotQl{
-    font-size: 1.5vh;
-}
-
-.sc-hLBbgP {
-    font-size: 1.5vh;
-    padding:0;
-    width:1vh;
-
-}
-.rdt_TableCell{
-    background-color: red;
-
-} */
-/* sc-eDvSVe sc-jSUZER eVPPvF bQdYbR dtqzBx rdt_TableCell */
-/* sc-hLBbgP sc-eDvSVe sc-jSUZER eVPPvF bQdYbR dtqzBx rdt_TableCell */

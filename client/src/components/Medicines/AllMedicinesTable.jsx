@@ -1,26 +1,54 @@
 import Table from "react-bootstrap/Table";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { CgUnavailable } from "react-icons/cg";
 import Button from "react-bootstrap/esm/Button";
 import { AiFillDelete } from "react-icons/ai";
 import Toast from 'react-bootstrap/Toast';
-
+import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
+import Popover from 'react-bootstrap/Popover';
+import { useAuthContext } from "../../hooks/useAuthContext"; 
 const AllMedicinesTable = (props) => {
-	// const [deleteID, setDeleteID] = useState(null)
 	const fetchedData = props.fetchedData;
-	
+	const [showPopup, setShowPopup] = useState(false);
+	const [target, setTarget] = useState(null);
+	const [deleteID, setDeleteID] = useState(null);
+	const ref = useRef(null);
+	const [clickedIndex, setClickedIndex] = useState(null);
+	const {user} = useAuthContext();
 
-	useEffect(() => { }, [fetchedData]);
+	const handlePopup = (event, deleteID, index) => {
+		setDeleteID(deleteID);
+		setShowPopup(true);
+		setClickedIndex(index);
+	};
+
+	const handleClosePopup = () => {
+		setShowPopup(false);
+	};
+	const popover = (
+		<Popover id="popover-basic">
+			<Popover.Header as="h3" className="text-white bg-danger">Warning</Popover.Header>
+			<Popover.Body>
+				Are you sure you want to <strong>delete this medicine?</strong>
+				<Button variant="danger" className="mx-2" onClick={(e) => {
+					handleDelete(deleteID)
+					handleClosePopup();
+				}}>Yes</Button>
+				<Button variant="dark" onClick={() => setShowPopup(false)}>No</Button>
+			</Popover.Body>
+		</Popover>
+	);
 
 	const handleDelete = async (deleteID) => {
-		console.log(deleteID);
 		const axios = require("axios");
 
 		let config = {
 			method: "delete",
 			maxBodyLength: Infinity,
 			url: "http://localhost:4000/api/medicines/" + deleteID,
-			headers: {},
+			headers: {
+				Authorization:`Bearer ${user.token}`
+			},
 		};
 
 		axios
@@ -68,14 +96,14 @@ const AllMedicinesTable = (props) => {
 												element.expiry
 											).toLocaleDateString()}
 										</td>
-										<td>
+										<td > 
 											{element.frequency ? (
 												element.frequency
 											) : (
 												<CgUnavailable />
 											)}
 										</td>
-										<td>
+										<td >
 											{
 												<ul id="meds-table-list">
 													{element?.timeOfDay &&
@@ -84,9 +112,7 @@ const AllMedicinesTable = (props) => {
 														).every(
 															(val) => !val.yesOrNot
 														) ? (
-														<li>
-															<CgUnavailable />
-														</li>
+															<CgUnavailable/>
 													) : (
 														<>
 															{element?.timeOfDay
@@ -146,20 +172,33 @@ const AllMedicinesTable = (props) => {
 												</ul>
 											}
 										</td>
-										<td>
-											<Button
-												onClick={(e) => {
-													// setDeleteID(element._id)
-													handleDelete(element._id);
+										<td id='popup-overlay'>
+											<OverlayTrigger
+												trigger="click"
+												placement="right"
+												overlay={popover}
+												rootClose
+												flip
+												fallbackPlacements={['left', 'top', 'bottom']}
+												show={showPopup && clickedIndex === idx}
+												onHide={() => {
+													setShowPopup(false);
+													setClickedIndex(null);
 												}}
-												variant="danger"
 											>
-												<AiFillDelete />
-											</Button>
+												<Button
+													onClick={(e) => {
+														handlePopup(e, element._id, idx);
+													}}
+													variant="danger"
+												>
+													<AiFillDelete id="delete-button-overlay" />
+												</Button>
+											</OverlayTrigger>
 										</td>
 									</tr>
 
-									
+
 
 								</>
 							);

@@ -31,19 +31,20 @@ input::-webkit-inner-spin-button {
 }
 
 #add-medicine-button {
-  color: white;
+  color: black;
   scale: 100%;
-  transition: background-color 0.4s, scale 0.4s;
-  background-color: #00BFFF;
+  transition: all 0.4s;
+  background-color: #fff;
 }
 
 #add-medicine-button:hover {
-  transition: background-color 0.4s;
-  background-color: #000
+  transition: all 0.4s;
+  background-color: rgb(39,33,33);
+  color:white;
 }
 
 #add-medicine-button:active {
-  transition: scale 0.4s;
+  transition: all 0.4s;
   scale: 105%;
 }
 
@@ -55,12 +56,15 @@ h3 {
   text-align: center;
     color: white;
     text-shadow: 2px 2px 2px rgba(81, 81, 81, 0.499);
-    background-color: rgb(0, 0, 0);
-    margin-bottom: 40px;
-    margin:0 auto;
+    background-color: rgb(23,29,61);
+    margin:2rem auto 2rem auto;
     padding:5px;
     border-radius: 40px;
     width: 400px;
+}
+
+.medicines-container{
+  min-height: 100vh;
 }
 
 #back-to-top {
@@ -116,16 +120,15 @@ h3 {
   padding: 0;
 }
 
-#meds-table-list li::before {
+/* #meds-table-list li::before {
   content: "";
   display: inline-block;
-  width: 20px; /* set the width */
-  height: 20px; /* set the height */
-  /* background-image: url('../assets/bullet.png'); */
+  width: 20px; 
+  height: 20px; 
   background-size: contain;
   background-repeat:no-repeat;
   margin-right: 10px;
-}
+} */
 
 #custom-switch{
   font-size: 14px;
@@ -162,4 +165,27 @@ h3 {
 #inline-checkbox:hover{
   box-shadow: 2px 2px 4px #00BCE4;
   transition: all 0.3s;
+}
+
+#unavailable-logo{
+  text-align: end;
+}
+
+@media screen and (max-width: 520px) {
+  #delete-button-overlay{
+    font-size: 13px;
+  }
+  thead, tr, td{
+    font-size: 0.7rem;
+    max-width: 10px;
+    overflow-wrap:break-word;
+    
+  }
+
+  #medicines-heading{
+    width:20rem;
+    margin-bottom: 1rem;
+  }
+
+ 
 }

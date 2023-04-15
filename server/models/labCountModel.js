@@ -16,6 +16,10 @@ const labCountSchema = new Schema(
 			type: Date,
 			required: true,
 		},
+		user_id:{
+			type:String,
+			requred:true,
+		}
 	},
 	{ timestamps: true }
 );

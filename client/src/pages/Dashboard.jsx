@@ -10,8 +10,15 @@ import Calendar from "../components/Calendar";
 import Streaks from "../components/Streaks";
 import Tips from "../components/Tips";
 import { useState } from "react";
+import AllCharts from '../components/Charts'
+import { useEffect } from "react";
+import Footer from '../components/Footer'
+import Navbar from '../components/Navbar'
+import { useAuthContext } from "../hooks/useAuthContext";
+
 
 const Dashboard = () => {
+	const {user} = useAuthContext();
 	const [userDetails, setUserDetails] = useState([
 		{
 			name: "John Doe",
@@ -42,8 +49,74 @@ const Dashboard = () => {
 		},
 	]);
 
+	 const appointments = [
+		{
+		  id: 1,
+		  date: "2023-04-01T14:00:00.000Z",
+		  doctor: "Dr. Smith",
+		  phoneNumber: "555-1234",
+		  address: "123 Main St.",
+		  notes: "Bring medical records",
+		},
+		{
+		  id: 2,
+		  date: new Date("2023-04-03T14:00:00.000Z"),
+		  doctor: "Dr. Johnson",
+		  phoneNumber: "555-5678",
+		  address: "456 Oak St.",
+		  notes: "Get blood test",
+		},
+		{
+		  id: 2,
+		  date: new Date("2023-04-05T14:00:00.000Z"),
+		  doctor: "Dr. Drake",
+		  phoneNumber: "322-5678",
+		  address: "96 Fat St.",
+		  notes: "Get sugar report",
+		}
+	]
+
+	const [readingType, setReadingType] = useState("Blood Sugar")
+	const [fetchedData, setFetchedData] = useState(null)
+	
+
+	useEffect(()=>{
+		handleFetch()
+		console.log("here")
+	}, [])
+
+	const handleFetch = async (e) => {
+		
+			const axios = require("axios");
+			let data = JSON.stringify({
+				testName: readingType,
+			});
+			let config = {
+				method: "post",
+				maxBodyLength: Infinity,
+				url: "http://localhost:4000/api/labcounts/type",
+				headers: {
+					"Content-Type": "application/json",
+					Authorization:`Bearer ${user.token}`
+				},
+				data: data,
+			};
+
+			axios
+				.request(config)
+				.then((response) => {
+					setFetchedData(response.data);
+					console.log(fetchedData)
+				})
+				.catch((error) => {
+					// setShowError(true);
+				});
+		
+	};
+
 	return (
 		<>
+		<Navbar/>
 			<div id="content">
 				<Sidenav />
 				<div id="user-details">
@@ -93,12 +166,12 @@ const Dashboard = () => {
 						<Tips />
 					</div>
 				</div>
+
 				<div id="dash-components">
 					<div id="r1">
 						<div
 							id="c1"
 							className="component"
-							style={{ flexGrow: 6, maxWidth: "20vw" }}
 						>
 							<TabList />
 						</div>
@@ -106,14 +179,12 @@ const Dashboard = () => {
 						<div
 							id="c2"
 							className="component"
-							style={{ flexGrow: 4, maxWidth: "25vw" }}
 						>
 							<TabStock />
 						</div>
 						<div
 							id="c3"
 							className="component"
-							style={{ flexGrow: 5, maxWidth: "20vw" }}
 						>
 							<Prescription />
 						</div>
@@ -123,51 +194,33 @@ const Dashboard = () => {
 						<div
 							id="c4"
 							className="component"
-							style={{ flexGrow: 6 }}
 						>
-							<Charts chartData={[
-								{
-									date: new Date(2020, 6, 1).toISOString().slice(0, 10),
-									count: 130,
-								},
-								{
-									date: new Date(2021, 5, 1).toISOString().slice(0, 10),
-									count: 220,
-								},
-								{
-									date: new Date(2021, 7, 1).toISOString().slice(0, 10),
-									count: 250,
-								},
-								{
-									date: new Date(2021, 8, 1).toISOString().slice(0, 10),
-									count: 300,
-								},
-								{
-									date: new Date(2022, 12, 1).toISOString().slice(0, 10),
-									count: 100,
-								},
-							]} readingType="Blood Sugar" />
+							{
+
+							fetchedData && <AllCharts chartData={fetchedData} chartType={readingType} width={450} height={230} />
+							}
 
 						</div>
 
 						<div
 							id="c5"
 							className="component"
-							style={{ flexGrow: 6 }}
+							
 						>
-							<Calendar />
+							<Calendar appointments={appointments} />
 						</div>
 
-						<div
+						{/* <div
 							id="c6"
 							className="component"
 							style={{ flexGrow: 6 }}
 						>
-							{/* <Streaks /> */}
-						</div>
+							<Streaks />
+						</div> */}
 					</div>
 				</div>
 			</div>
+			{/* <Footer/> */}
 		</>
 	);
 };

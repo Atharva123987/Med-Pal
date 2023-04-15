@@ -8,8 +8,12 @@ const {
 	getTypeOfLabCount,
 	deleteLatestLabCount,
 } = require("../controllers/labCountController");
+const requireAuth = require("../middleware/requireAuth");
 
 const router = express.Router();
+
+// require auth for all workout routes
+router.use(requireAuth);
 
 // GET type of labCount
 router.post("/type", getTypeOfLabCount);

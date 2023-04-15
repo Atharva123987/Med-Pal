@@ -1,9 +1,33 @@
-.subsection1{
-    background-color: rgb(255, 255, 255);
+.subsection1, .subsection2{
+    padding: 20px;
+    width: 100%;
+    border-radius: 10px;
+    
 }
-.subsection2{
-    background-color: rgb(213, 213, 213);
+.home-content-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
 }
-.subsection3{
-    background-color: rgb(255, 255, 255);
+.home-content-heading{
+    color:white;
+    /* text-align: center; */
+    background-color: rgb(38, 39, 33);
+    border-radius: 10px;
+    padding:10px
+}
+
+.card{
+    color: white !important;
+    background-color: rgb(39,33,33)!important;
+}
+.accordion-button{
+    background-color: rgb(23,29,61)!important;
+    color: white !important;
+}
+.collapsed{
+    background-color: white!important;
+    color: black!important;
 }

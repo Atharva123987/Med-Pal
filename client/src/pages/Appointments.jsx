@@ -5,8 +5,13 @@ import axios from "axios";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import Toast from "react-bootstrap/Toast";
-import AddAppointmentModal from "../components/Appointments/addAppointmentModal";
-import Navbar from '../components/Navbar'
+import Calendar from '../components/Calendar'
+import { useEffect } from "react";
+import Navbar from "../components/Navbar";
+import { FaClinicMedical } from 'react-icons/fa'
+import AddAppointmentModal from '../components/Appointments/AddAppointmentModal'
+import './appointments.css'
+import { useAuthContext } from "../hooks/useAuthContext";
 const Appointments = () => {
 	const [doctorName, setDoctorName] = useState(null);
 	const [doctorNumber, setDoctorNumber] = useState(null);
@@ -17,8 +22,52 @@ const Appointments = () => {
 	const [show, setShow] = useState(false);
 	const [month, setMonth] = useState("");
 	const [error, setError] = useState(false);
+	const {user} = useAuthContext();
+
+
 	const handleSubmit = async (e) => {
 		e.preventDefault();
+
+		switch (appointmentDateAndTime?.getMonth()) {
+			case 0:
+				setMonth("January");
+				break;
+			case 1:
+				setMonth("February");
+				break;
+			case 2:
+				setMonth("March");
+				break;
+			case 3:
+				setMonth("April");
+				break;
+			case 4:
+				setMonth("May");
+				break;
+			case 5:
+				setMonth("June");
+				break;
+			case 6:
+				setMonth("July");
+				break;
+			case 7:
+				setMonth("August");
+				break;
+			case 8:
+				setMonth("September");
+				break;
+			case 9:
+				setMonth("October");
+				break;
+			case 10:
+				setMonth("November");
+				break;
+			case 11:
+				setMonth("December");
+				break;
+			default:
+				setMonth("");
+		}
 
 		// !!!HANDLE POST REQUST HERE
 		let data = JSON.stringify({
@@ -35,6 +84,7 @@ const Appointments = () => {
 			url: "http://localhost:4000/api/appointments",
 			headers: {
 				"Content-Type": "application/json",
+				Authorization:`Bearer ${user.token}`
 			},
 			data: data,
 		};
@@ -43,19 +93,14 @@ const Appointments = () => {
 			.request(config)
 			.then((response) => {
 				console.log(JSON.stringify(response.data));
+				handleFetch();
 			})
 			.catch((error) => {
 				console.log(error);
 			});
 
 		try {
-			console.log("Sent Data :", {
-				doctorName,
-				doctorNumber,
-				doctorAddress,
-				appointmentDateAndTime,
-				notes,
-			});
+			
 			if (doctorName) setShow(true);
 			else setError(true);
 		} catch (err) {
@@ -64,23 +109,36 @@ const Appointments = () => {
 		}
 	};
 
-	const handleFetch = async (e) => {
-	
 
+
+	useEffect(() => handleFetch(), [])
+
+	const handleFetch = async (e) => {
 		try {
-			const response = await axios.get(
-				`http://localhost:4000/api/appointments`
-			);
+			const axios = require("axios");
+			let config = {
+				method: "get",
+				url: "http://localhost:4000/api/appointments",
+				headers: {
+					"Content-Type": "application/json",
+					"Authorization": `Bearer ${user.token}`,
+				},
+				data: {},
+			};
+			const response = await axios(config);
 			setFetchedData(response.data);
 			console.log(response.data[0]);
 		} catch (err) {
 			console.log(err);
 		}
 	};
+	
+	
+
 
 	return (
 		<>
-			<Navbar/>
+
 			<div className="w-100">
 				<div
 					id="toasts"
@@ -157,67 +215,20 @@ const Appointments = () => {
 					</Toast>
 				</div>
 
-				<h1>Appointments Page</h1>
-				<div className="d-flex justify-content-evenly">
+				<Navbar buttons='true' />
 
-					<div className="ml-5">
-						<h3>Upcoming appointments</h3>
-					<AddAppointmentModal/>
-
-						</div>
-					
-						<dl></dl>
-						<br></br>
-						<div>
-
-						<h2>Fetch Appointments and Doctor details</h2>
-						<button
-							className="btn btn-primary"
-							onClick={handleFetch}
-						>
-							Fetch Appointements
-						</button>
-						<div style={{ height: "50vh", overflowY: "scroll" }}>
-							<ol>
-								{fetchedData &&
-									fetchedData.map((element, i) => {
-										return (
-											<li key={i}>
-												<ul>
-													<li
-														key={element.doctorName}
-													>
-														{element.doctorName}
-													</li>
-													<li
-														key={
-															element.phoneNumber
-														}
-													>
-														{element.phoneNumber}
-													</li>
-													<li key={element.address}>
-														{element.address}
-													</li>
-													<li
-														key={
-															element.timeAndDate
-														}
-													>
-														{element.timeAndDate}
-													</li>
-													<li key={element.notes}>
-														{element.notes}
-													</li>
-												</ul>
-											</li>
-										);
-									})}
-							</ol>
-						</div>
-						</div>
-
-					
+					<h3 className="charts-heading">
+						Appointments <FaClinicMedical style={{ fontSize: "30px" }} />
+					</h3>
+						
+				<div id='appointments-container'>
+				
+				<Calendar id='calendar-component' appointments={fetchedData? fetchedData : null} setDoctorName={setDoctorName} 
+				setDoctorNumber={setDoctorNumber} 
+				setDoctorAddress={setDoctorAddress} 
+				setNotes={setNotes} 
+				setAppointmentDateAndTime={setAppointmentDateAndTime} 
+				handleSubmit={handleSubmit}/>
 				</div>
 			</div>
 		</>
