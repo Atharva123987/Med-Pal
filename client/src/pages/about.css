@@ -5,6 +5,9 @@
   font-size: 60px;
   color: black;
 }
+p{
+  font-size: 4vh;
+}
 
 .team-profile {
   display: flex;

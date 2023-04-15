@@ -80,20 +80,6 @@ const Calendar = (props) => {
       setClicked(true)
       return (
         <div>
-          {/* {matchingAppointments.map((appointment, index) => (
-            <div
-              key={index}
-              onClick={() => {
-                // alert(
-                //   `Doctor: ${appointment.doctorName}\nPhone: ${appointment.phoneNumber}\nDate: ${appointment.timeAndDate}\nAddress: ${appointment.address}\nNotes: ${appointment.notes}`
-                // );
-              }}
-              style={{ cursor: "pointer" }}
-            >
-              Dr. {appointment.doctorName.split(' ')[0]}
-             
-            </div>
-          ))} */}
           <GiHospitalCross id='appointment-indicator' />
         </div>
       );
@@ -101,7 +87,7 @@ const Calendar = (props) => {
     return null;
   };
 
-  if (loading || appointments === null) {
+  if (loading) {
     return <p>Loading...</p>;
   }
 

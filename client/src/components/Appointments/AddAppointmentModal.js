@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
@@ -9,7 +9,6 @@ const AddAppointmentModal = (props) => {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-  const [isDaily, setIsDaily] = useState(false)
 
   const handleSubmit = (e) => {
     props.handleSubmit(e);
