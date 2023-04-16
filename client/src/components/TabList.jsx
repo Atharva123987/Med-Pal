@@ -26,7 +26,7 @@ const TabList = (props) => {
                                         <td>{element.name}</td>
                                         <td>
                                             {element?.frequency ? (
-                                                element.frequency
+                                                element?.frequency
                                             ) : (
                                                 <CgUnavailable style={{color:"black"}} />
                                             )}
@@ -35,7 +35,7 @@ const TabList = (props) => {
 										<ul id="meds-table-list">
 													{element?.timeOfDay &&
 														Object.values(
-															element.timeOfDay
+															element?.timeOfDay
 														).every(
 															(val) => !val.yesOrNot
 														) ? (
