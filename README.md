@@ -1,6 +1,17 @@
-# MedPal - Your Personal Medical Tracker 🩺
+<!-- PROJECT LOGO -->
+<br />
+<div align="center">
+  <a href="https://med-pal.vercel.app">
+    <img src="https://ik.imagekit.io/spursy/MedPal/apple-touch-icon.png?updatedAt=1681674938894" alt="Logo" width="80" height="80">
+  </a>
+  <h1 align="center">MedPal</h3>
+</div>
 
-MedPal is a personal medical tracker that lets users manage their well-being online by helping them record and monitor their health particulars. The vision behind MedPal is to empower every Indian with full control over their medical data.
+
+
+MedPal is a personal medical tracker that lets users manage their well-being online by helping them record and monitor their health particulars. The vision behind MedPal is to empower everyone with full control over their medical data.
+
+Visit the webpage on <a href="https://med-pal.vercel.app">this link</a>
 
 ## Features
 
@@ -13,12 +24,14 @@ MedPal is a personal medical tracker that lets users manage their well-being onl
 
 ## Tech Stack
 
-- React with Bootstrap (Front-end)
-- Express and Node.js (Back-end)
-- MongoDB (Database)
+- <img height="20" src="https://user-images.githubusercontent.com/25181517/183897015-94a058a6-b86e-4e42-a37f-bf92061753e5.png" alt="React" title="React" /><img height="22" src="https://user-images.githubusercontent.com/25181517/183898054-b3d693d4-dafb-4808-a509-bab54cf5de34.png" alt="Bootstrap" title="Bootstrap" /> React with Bootstrap (Front-end)
+- <img height="22" src="https://user-images.githubusercontent.com/25181517/183568594-85e280a7-0d7e-4d1a-9028-c8c2209e073c.png" alt="Node.js" title="Node.js" /><img height="22" src="https://user-images.githubusercontent.com/25181517/183859966-a3462d8d-1bc7-4880-b353-e2cbed900ed6.png" alt="Express" title="Express" /> Express and Node.js (Back-end)
+- <img height="22" src="https://user-images.githubusercontent.com/25181517/182884177-d48a8579-2cd0-447a-b9a6-ffc7cb02560e.png" alt="mongoDB" title="mongoDB" /> MongoDB (Database)
 - Vercel (Front-end hosting)
 - Render (Back-end hosting)
-- Google Cloud Platform (Cloud Storage Bucket, VM Instance, and Cloud Cluster)
+- <img height="22" src="https://user-images.githubusercontent.com/25181517/183911547-990692bc-8411-4878-99a0-43506cdb69cf.png" alt="GCP" title="GCP" /> Google Cloud Platform (Cloud Storage Bucket, VM Instance, and Cloud Cluster)
+- <img height="22" src="https://user-images.githubusercontent.com/25181517/192109061-e138ca71-337c-4019-8d42-4792fdaa7128.png" alt="Postman" title="Postman" /> Postman (API Testing)
+- <img height="22" src="https://user-images.githubusercontent.com/25181517/192108891-d86b6220-e232-423a-bf5f-90903e6887c3.png" alt="Visual Studio Code" title="Visual Studio Code" /> VS Code (Code editor)
 
 ## Getting Started
 
@@ -27,7 +40,7 @@ Follow these steps to set up the project on your local machine:
 1. Clone the repository
 
 ```
-git clone https://github.com/atharva123987/medpal.git
+git clone https://github.com/spursycoder/medpal.git
 ```
 
 2. Navigate to the project directory
@@ -53,7 +66,7 @@ PORT = <your_port_number>
 SECRET = <for_bcrypt_hashing>
 ```
 
-Note : You also might need to get google cloud api json file for using a GCP bucket
+Note : You also might need to get Google Cloud API key JSON file for using a GCP bucket
 
 5. Start the frontend and backend servers in separate terminal windows
 
@@ -67,9 +80,13 @@ npm run dev
 
 Visit `http://localhost:3000` to view the application in your browser.
 
+## Extras
+
+There is a cronjob running as an AMD VM instance on Google Cloud Compute Engine. To learn more visit [it's GitHub repo](https://github.com/spursycoder/Medpal-remainder-script).
+
 ## Deployment 🔗
 
-The frontend is deployed on [Vercel](https://vercel.com/),and the backend is deployed on [Render](https://medpal-backend.onrender.com/api). The reminder cronjob on [Github](https://github.com/spursycoder/Medpal-remainder-script). To deploy your own version, follow the instructions provided by the respective platforms.
+The frontend is deployed on [Vercel](https://med-pal.vercel.app), and the backend is deployed on [Render](https://medpal-backend.onrender.com/api). To deploy your own version, follow the instructions provided by the respective platforms.
 
 
 
