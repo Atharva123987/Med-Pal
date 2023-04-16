@@ -25,7 +25,7 @@ const TabList = (props) => {
                                     <tr key={key}>
                                         <td>{element.name}</td>
                                         <td>
-                                            {element.frequency ? (
+                                            {element?.frequency ? (
                                                 element.frequency
                                             ) : (
                                                 <CgUnavailable style={{color:"black"}} />
