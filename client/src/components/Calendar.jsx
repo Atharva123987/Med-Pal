@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Calendar1 from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Container, Row, Col, ListGroup, Button } from 'react-bootstrap';
+import { Container, Row, Col, ListGroup, Button, CloseButton } from 'react-bootstrap';
 import { GrCaretNext } from 'react-icons/gr'
 import { GrCaretPrevious } from 'react-icons/gr'
 import { TbPlayerTrackPrev } from 'react-icons/tb'
@@ -27,7 +27,7 @@ const Calendar = (props) => {
   const [loading, setLoading] = useState(true);
   const [clicked, setClicked] = useState(false)
   const [deleteID, setDeleteID] = useState(null)
-
+  const [hideList, setHideList] = useState(false)
   
 
   useEffect(() => {
@@ -86,15 +86,22 @@ const Calendar = (props) => {
   const tileContent = ({ date }) => {
     const matchingAppointments = findAppointments(date);
     if (matchingAppointments?.length > 0) {
-      setClicked(true)
       return (
-        <div>
+        <div onClick={() => handleTileClick(date)}>
           <GiHospitalCross id='appointment-indicator' />
         </div>
       );
     }
     return null;
   };
+
+  const handleTileClick = (date) => {
+  setClicked((prevState) => !prevState);
+  setHideList((prevState) => !prevState);
+  setSelectedDate(date.toISOString());
+};
+
+  
 
   if (loading) {
     return <p>Loading...</p>;
@@ -157,6 +164,44 @@ const Calendar = (props) => {
           
         </div>
 }
+      {
+       hideList&& !showList && <>
+          <div id='appointments-list-dashboard'>
+       
+       <div className='d-flex justify-content-between'>
+       
+       <h4 className='m-3'>Appointment Details</h4>
+       <CloseButton variant='white' onClick={handleTileClick} className='dash-button'></CloseButton >
+       
+           </div>
+    
+       
+       <div id='appointments-list-box'>
+         {clicked && findAppointments(selectedDate).length > 0 ? (
+           <ListGroup>
+             {findAppointments(selectedDate).map((appointment, index) => (
+               <>
+                 
+                 <ListGroup.Item key={index} style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
+                   <div><RiNurseLine style={{ fontSize: "20px" }} />Dr. {appointment.doctorName}</div>
+                   <div><BsFillTelephoneFill /> {appointment.phoneNumber}</div>
+                   <div><BsFillCalendarFill /> {new Date(appointment.timeAndDate).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</div>
+                   <div><ImLocation2 /> {appointment.address}</div>
+                   <div><MdNotes /> {appointment.notes}</div>
+                   
+                 </ListGroup.Item>
+               </>
+             ))}
+           </ListGroup>
+         ) : (
+           <p id='no-appointments'>No appointments available</p>
+         )}
+       </div>
+       
+     </div>
+        </>
+      }
+
       </div>
     </>
   );

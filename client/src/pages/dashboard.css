@@ -1,8 +1,10 @@
 #content{
     display: flex;
+    position: sticky;
+    top:0;
     width: 100%;
     font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-
+    height: 100vh;
 }
 
 .react-calendar__tile--now{
@@ -16,32 +18,32 @@ span{
     
 }
 #user-details{
-    display: grid;
+    display: flex;
+    flex-direction: column;
+    /* gap:10rem; */
     /* width: 30%; */
     margin: 0.3rem 0.5rem;
-    font-size: 1rem;
-    
+    min-width: 20rem;
+    max-height: 100vh;
 }
 
-#name{
-    font-size: 2rem;
-}
+
 #uname{
-    margin: auto auto auto 20px;
+    max-width: 20rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 #profile{
     display: flex;
     flex-direction: row;
-}
-
-#name{
-    margin:auto;
+    justify-content: start;
+    
 }
 
 #email{
-    margin: auto;
-    color:orangered;
+    color:rgb(255, 111, 59);
 }
 
 
@@ -50,9 +52,6 @@ span{
 #profile-pic{
     width:7rem;
     height: 7rem;
-    margin-top: 1rem;
-    border-radius: 50%;
-    border:1px solid rgb(0, 0, 0);
 }
 
 #profile-pic:hover{
@@ -69,7 +68,7 @@ span{
     flex-direction: column;
     /* justify-content: center; */
     align-items: center;
-    font-size: 0.8rem;
+    font-size: 1rem;
     border:1px solid black;
     border-radius: 20px;
     width: 13rem;
@@ -145,22 +144,13 @@ span{
     }
     100%{
         opacity: 100%;
-
-        
     }
     
 }
 
-#tips{
+#tips-container{
     text-align: center;
-    font-size: 0.9rem;
-    opacity: 0%;
-    animation-name: fade;
-    animation-duration: 2s;
-    animation-iteration-count: 1;
-    animation-timing-function:ease-in-out;
-    animation-play-state: running;
-    animation-fill-mode: forwards;
+    font-size: 1rem;
 }
 
 #dash-components{
