@@ -4,9 +4,16 @@
 
 .dash-component{
     background-color: rgba(255, 255, 255, 0.536);
-    width: 20vw;
+    /* width: 20vw; */
     margin:0.4rem;
     height: 18rem;
+}
+#floater-nodata{
+    position:relative;
+    width: fit-content;
+    color: rgb(148, 148, 148);
+    top: 40%;
+    left:45%;
 }
 
 .dash-component::-webkit-scrollbar {
@@ -31,17 +38,8 @@
 
 
 
-.dash-component{
-    /* box-shadow: 3px 2px 10px black;
-    display: flex;
-    flex-direction: column;
-    font-size: 2rem;
-    border-radius: 10px;     */
-    
-}
-
 #prescription{
-    box-shadow: 3px 2px 10px black;
+    box-shadow: 0px 0px 5px black;
     display: flex;
     flex-direction: column;
     border-radius: 10px; 
@@ -50,7 +48,7 @@
 }
 
 #tab-stock{
-    box-shadow: 3px 3px 10px black;
+    box-shadow: 0px 0px 5px black;
     display: flex;
     flex-direction: column;
     border-radius: 10px; 
@@ -59,7 +57,7 @@
 }
 
 #tab-list{
-    box-shadow: 3px 2px 10px black;
+    box-shadow: 0px 0px 5px black;
     display: flex;
     flex-direction: column;
     border-radius: 10px; 
@@ -85,7 +83,7 @@
     box-shadow: 0px 0px 5px black;
 }
 
-#prescription>table > tr{
+#prescription>table > tr td span{
     padding:10px;
 }
 
@@ -98,12 +96,10 @@ td>a{
     color:black;
 }
 
-.dash-component:hover{
 
-}
 
 legend{
-    color: black;
+    /* color: black; */
     font-size: 3.2rem; 
     font-style:italic;
     margin:4px 0 0 4px;
@@ -125,13 +121,13 @@ legend{
     overflow:hidden
 }
 
-#floater-nodata{
+/* #floater-nodata{
     position:relative;
     width: fit-content;
     color: rgb(148, 148, 148);
     top: 40%;
     left:45%;
-}
+} */
 
 .dash-button-container{
     margin-top: auto;
@@ -141,21 +137,11 @@ legend{
 
 
 
-
-
-.dash-button:active{
-}
-
-
 /* --- For mobile devices --- */
 
 @media screen and (max-width:480px) {
 
-    .dash-component{
-        height: 200px;
-        width: 200px;
-        overflow: auto;
-    }
+    
     
     .dash-button{
         margin:0 0 auto auto;

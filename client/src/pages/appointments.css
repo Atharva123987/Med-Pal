@@ -9,7 +9,6 @@
 }
 #calendar-component {
     width: 100%;
-    
   }
 
   #calendar-container{
@@ -23,6 +22,8 @@
     position: -webkit-sticky;
   position: sticky;
   top: 10%;
+  width: 20rem;
+  
   }
   
   .react-calendar__viewContainer {
@@ -33,8 +34,8 @@
     /* background-color: rgb(51, 68, 80)!important; */
     /* color: white!important; */
     font-size: 1rem!important;
-    width: 30rem !important;
-    height: 3rem !important;
+    /* width: 30rem !important; */
+    /* height: 3rem !important; */
 }
 
 .react-calendar__tile--active{
@@ -48,7 +49,7 @@
 
 #appointments-list{
   border-radius: 5%;
-  width:30rem;
+  max-width:30rem;
   background-color: rgb(86, 0, 0);
   color:white;
   padding:10px;
@@ -57,20 +58,7 @@
   margin-left: 5rem;
 
 }
-#appointments-list-dashboard{
-  position: absolute;
-  display: flex;
-  flex-direction: column;
-  margin:3rem 0 0 7rem;
-  border-radius: 5%;
-  background-color: rgb(86, 0, 0);
-  color:white;
-  padding:10px;
-  max-width: 20rem;
-  max-height: 20rem;
-  font-size: small;
-  overflow-y: auto;
-}
+
 
 .list-group-item{
   border:none;
@@ -132,11 +120,13 @@
 
 }
 
+
+
 @media screen and (max-width:650px) {
 
   .react-calendar, .react-calendar__navigation, .react-calendar__navigation__label__labelText, .react-calendar__navigation__label__labelText--from, .react-calendar__month-view__days button, .react-calendar__navigation{
-    width: 20rem !important;;
-    height:3rem!important;;
+    width: 20rem !important;
+    height:3rem!important;
   }
 
   #appointments-list{

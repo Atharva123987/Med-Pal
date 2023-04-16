@@ -259,9 +259,9 @@ const Charts = () => {
 				<AllCharts
 					chartData={fetchedData}
 					chartType={readingType}
-					width={width < 500 ? 380:undefined}
+					// width={width < 500 ? 10:undefined}
 					// height={width < 500 ? height : undefined}
-					height={width < 500 ?250:undefined}
+					// height={width < 500 ?10:undefined}
 				/>
 
 				<div

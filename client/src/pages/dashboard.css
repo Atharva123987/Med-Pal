@@ -1,75 +1,75 @@
-#content{
+#content {
     display: flex;
-    position: sticky;
-    top:0;
-    width: 100%;
-    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    /* position: sticky; */
+    /* top: 0; */
+    /* width: 100%; */
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     height: 100vh;
+
 }
 
-.react-calendar__tile--now{
-    background-color: rgb(207, 207, 207)!important;
-    color:black;
+.react-calendar__tile--now {
+    background-color: rgb(210, 226, 255) !important;
+    color: black;
 }
 
 
 
-span{
-    
-}
-#user-details{
+span {}
+
+#user-details {
     display: flex;
     flex-direction: column;
     /* gap:10rem; */
     /* width: 30%; */
     margin: 0.3rem 0.5rem;
-    min-width: 20rem;
-    max-height: 100vh;
+    max-width: 20rem;
+    flex: 1;
+    /* max-height: 100vh; */
 }
 
 
-#uname{
+#uname {
     max-width: 20rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
 }
 
-#profile{
+#profile {
     display: flex;
     flex-direction: row;
     justify-content: start;
-    
+
 }
 
-#email{
-    color:rgb(255, 111, 59);
+#email {
+    color: rgb(255, 111, 59);
 }
 
 
 
 
-#profile-pic{
-    width:7rem;
+#profile-pic {
+    width: 7rem;
     height: 7rem;
 }
 
-#profile-pic:hover{
-}
+#profile-pic:hover {}
 
-#info{
+#info {
     display: flex;
-    justify-content:center;
-    margin:1rem 0;
+    justify-content: center;
+    margin: 1rem 0;
 }
 
-#details{
+#details {
     display: flex;
     flex-direction: column;
     /* justify-content: center; */
     align-items: center;
     font-size: 1rem;
-    border:1px solid black;
+    border: 1px solid black;
     border-radius: 20px;
     width: 13rem;
     height: fit-content+10px;
@@ -77,24 +77,24 @@ span{
     /* background-color:whitesmoke; */
     box-shadow: 0px 0px 10px rgb(0, 0, 0);
     text-align: center;
-    
+
 }
 
 .arrow-down {
-    width: 0; 
-    margin:0;
+    width: 0;
+    margin: 0;
     position: relative;
-    top:-2%;
-    height: 0; 
+    top: -2%;
+    height: 0;
     border-left: 40px solid transparent;
     border-right: 40px solid transparent;
-    border-top: 20px solid rgb(39,33,33);
-  }
+    border-top: 20px solid rgb(39, 33, 33);
+}
 
 
 
-#details p{
-    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+#details p {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin-top: 1.3rem;
     width: 100%;
     margin-bottom: 0;
@@ -102,7 +102,7 @@ span{
     border-top: 1px solid black;
 }
 
-#badge-container{
+#badge-container {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -110,82 +110,289 @@ span{
     font-size: 1rem;
 }
 
-#badge{
+#badge {
     height: 7rem;
     width: 7rem;
 }
 
-#doctors table{
+#doctors table {
     margin: auto;
     font-size: 0.7rem;
     border: 2px solid black;
-    
+
 }
 
 
 
-#doctors th{  
-    color:rgb(255, 255, 255);    
+#doctors th {
+    color: rgb(255, 255, 255);
     padding: 10px;
     border: 1.5px solid black;
 }
-#doctors tr{
-    background-color: rgb(0, 174, 255);  
-    color:white;
+
+#doctors tr {
+    background-color: rgb(0, 174, 255);
+    color: white;
     padding: 10px;
 }
-#doctors td{
+
+#doctors td {
     border: 1.5px solid black;
 }
 
 @keyframes fade {
-    0%{
+    0% {
         opacity: 0%;
     }
-    100%{
+
+    100% {
         opacity: 100%;
     }
-    
+
 }
 
-#tips-container{
+#tips-container {
     text-align: center;
     font-size: 1rem;
 }
 
-#dash-components{
+#dash-components {
     display: flex;
     width: 70%;
     /* height: 100vh; */
-    /* justify-content:space-evenly; */
-    flex-direction: column;   
+    /* justify-content:space-evenly;  */
+    flex-direction: column;
+    flex: 1;
     /* margin: auto; */
-    
+
+}
+
+#c1,
+#c2,
+#c3 {
+    flex: 1;
+}
+
+#appointments-list-dashboard {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    margin: 3rem 0 0 3rem;
+    border-radius: 5%;
+    background-color: rgb(86, 0, 0);
+    color: white;
+    padding: 10px;
+    max-width: 15rem;
+    max-height: 15rem;
+    font-size: 1rem;
+    overflow-y: auto;
 }
 
 
 
-#r1{
+#r1 {
     display: flex;
     flex-direction: row;
     gap: 10px;
-    max-width: fit-content;
 }
-#r2{
+
+#r2 {
     display: flex;
     flex-direction: row;
     gap: 10px;
-    max-width: fit-content;
+    max-width: 100%;
+
 }
 
-#c5{
-    
+#c4,
+#c5 {
+    flex-grow: 1;
 }
 
 
-  
-  .line {
+
+
+.line {
     width: 100%;
     height: 20px;
     border-bottom: 1px solid #000;
-  }
+}
+
+@media screen and (max-width:1172px) {
+    .react-calendar {
+        width: fit-content;
+    }
+
+    #appointments-list-dashboard {
+        width: 100px;
+    }
+
+    #r2 {
+        flex-direction: column;
+        justify-content: center;
+        width: 100%;
+    }
+
+    #r1 {
+        display: grid;
+        /* grid-template-columns: auto auto; */
+    }
+
+    #content {
+        height: fit-content;
+    }
+
+    #profile {
+        position: sticky;
+        top: 5%;
+    }
+
+    #info {
+        position: sticky;
+        top: 20%;
+    }
+
+    #tips-container {
+        position: sticky;
+        top: 50%;
+    }
+
+    .dash-component {
+        /* min-width: 30rem; */
+    }
+
+    #r1 {
+        justify-content: center;
+    }
+
+    #calendar-container {
+        justify-content: center;
+    }
+
+}
+
+@media screen and(max-width:800px) {
+    #r1 {
+        display: flex !important;
+        flex-direction: column;
+    }
+
+    .dash-component {
+        width: fit-content;
+    }
+
+    #r2 {
+        justify-content: center;
+        align-items: center;
+    }
+
+    #c4,
+    #c5 {
+        justify-content: center;
+    }
+
+}
+
+@media screen and (max-width:480px) {
+    #content {
+        flex-direction: column;
+        justify-content: center;
+        margin:0;
+        padding:0;
+        /* width:100% */
+    }
+    #user-details{
+        justify-content: center;
+        align-items: center;
+        margin:10px auto auto auto;
+    }
+
+    .sidenav {
+        position: sticky;
+        top: 0;
+        max-height: 10rem;
+        flex-direction: row;
+        justify-content: space-evenly;
+    }
+
+    #dash-components{
+        width: fit-content;
+        justify-content: center;
+        align-items: center;
+    }
+
+    #r1{
+        width: fit-content;
+    }
+
+    #r1{
+        display: flex;
+        margin-top: 2rem;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        min-width: 100%;
+    }
+    #r2{
+        max-width: 20rem;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .recharts-wrapper{
+        max-width: 20rem;
+    }
+    .recharts-surface{
+        max-width: 20rem;
+        /* translate: -20px; */
+    }
+   
+
+    #tab-list,#tab-stock,#prescription{
+        box-shadow: none!important;
+        box-shadow: 0px -5px 5px black!important;
+        min-width: 20rem;
+
+    }
+
+    #c4,#c5{
+        box-shadow: 0px -5px 5px black!important;
+        /* margin-left: 10px;
+        margin-top: 3rem; */
+    }
+    #c4{
+        margin:20px 0px 20px 0px;
+    }
+
+    #dash-components{
+        width: 100%;
+    }
+
+    #tab-list,#prescription,#tab-stock{
+        /* margin:0;
+        margin-top: 3rem; */
+    }
+   #tab-list>table>tr , #tab-stock>table>tr{
+        /* width:80%; */
+    }
+
+    #prescription>table > tr td span{
+        /* margin:0;
+        max-width: 100px; */
+    }
+
+    .dash-component{
+        padding: 0px 10px;
+    }
+
+    
+    
+    #profile,
+    #info,
+    #tips-container{
+        position: inherit;
+
+    }
+
+
+}

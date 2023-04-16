@@ -21,11 +21,10 @@ const Charts = (props) => {
   if (!displayData) {
     return (
       <>
-        <div>
           <Legend align="center">{props.chartType}</Legend>
           <p id="floater-nodata">No data to show</p>
           <LineChart
-            width={width ? width : 500}
+            width={width ? width : 1}
             height={height ? height : 300}
             data={[
               { count: "Not available", dateTaken: `${new Date()}` },
@@ -40,7 +39,6 @@ const Charts = (props) => {
             {/* <Legend /> */}
             {/* <Line type="monotone" dataKey="count" stroke="#8884d8" /> */}
           </LineChart>
-        </div>
       </>
     );
   }

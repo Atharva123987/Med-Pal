@@ -20,6 +20,7 @@ import axios from 'axios';
 import { AiFillDelete } from 'react-icons/ai';
 
 const Calendar = (props) => {
+
   const { user } = useAuthContext();
   const {showList} = props
   const appointments = props.appointments;
@@ -32,6 +33,7 @@ const Calendar = (props) => {
 
   useEffect(() => {
     setLoading(false);
+    console.log(loading)
   }, [appointments]);
 
   useEffect(()=>{
@@ -42,7 +44,7 @@ const Calendar = (props) => {
   if(!appointments){
     return(<h4>Loading...</h4>)
   }
-  
+
   const handleDelete = async () => {
     if(!deleteID)return 
     let config = {
@@ -120,6 +122,7 @@ const Calendar = (props) => {
           prev2Label={<TbPlayerTrackPrev />}
           next2Label={<TbPlayerTrackNext />}
         />
+
          {showList &&
         <div id='appointments-list'>
        

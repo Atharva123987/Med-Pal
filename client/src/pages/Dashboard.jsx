@@ -126,6 +126,7 @@ const Dashboard = () => {
 		<>
 			<Navbar />
 			<div id="content">
+				
 				<Sidenav />
 				<div id="user-details">
 
