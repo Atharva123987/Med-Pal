@@ -10,7 +10,7 @@ const TabList = (props) => {
     return (
         <>
             <div id="tab-list" className="dash-component">
-                <legend align="center">Tablet List</legend>
+                <legend align="center">Medicines List</legend>
                 {fetchedMedicineData ? (
                     <>
                         <Table striped bordered hover>

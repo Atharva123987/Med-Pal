@@ -18,6 +18,7 @@ import AddAppointmentModal from './Appointments/AddAppointmentModal';
 import { useAuthContext } from '../hooks/useAuthContext';
 import axios from 'axios';
 import { AiFillDelete } from 'react-icons/ai';
+import LoadingCircle from './SkeletonLoaders/LoadingCircle';
 
 const Calendar = (props) => {
 
@@ -106,7 +107,8 @@ const Calendar = (props) => {
   
 
   if (loading) {
-    return <p>Loading...</p>;
+  return <LoadingCircle/>;
+
   }
 
   return (
