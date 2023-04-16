@@ -37,6 +37,9 @@ p{
 
 #about-container{
   display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* justify-content: center; */
   height: 100vh;
   font-size: 1.5rem;
 }
@@ -60,4 +63,17 @@ p{
 }
 .about-links:active{
   transition: all 0.4s;
+}
+
+@media screen and (max-width:480px) {
+
+  #about-text{
+    font-size: 1rem;
+  }
+  .about-right{
+    flex-direction: column;
+  }
+  #about-container{
+    min-height:fit-content ;
+  }
 }

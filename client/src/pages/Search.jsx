@@ -71,7 +71,6 @@ const Search = () => {
 		<>
 		<Navbar/>
 			<div className="sidebar">
-				<div>
 				<Form onSubmit={handleSubmit}>
 				
 					<Form.Group>
@@ -129,8 +128,7 @@ const Search = () => {
 
 					<Button type="submit">Submit</Button>
 				</Form>
-				</div>
-			<div>
+			<div className="d-flex flex-column search-container" >
 				{results &&
 					results.map((elem) => {
 						return (

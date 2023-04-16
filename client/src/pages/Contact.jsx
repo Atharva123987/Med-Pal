@@ -8,47 +8,77 @@ import { SiGmail } from "react-icons/si";
 import './contact.css'
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import { useState } from "react";
 
 const Contact = () => {
+
+  const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
+    const [message, setMessage] = useState('');
+
+
+    const generateMailtoLink = () => {
+      const subject = "Contact Form Submission";
+      const body = `Name: ${name}%0D%0AEmail: ${email}%0D%0A%0D%0AMessage:%0D%0A${message}`;
+  
+      return `mailto:you@example.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  };
+
+  
     return ( 
-        <div>
+        <div  >
           <Navbar buttons={true}/>
-        <Container
+        <Container 
       className="border mt-5 mb-5 mt-md-4 mt-lg-5"
-      style={{ maxWidth: "600px" }}
+      style={{ minHeight:"100vh",maxWidth: "600px" }}
     >
         <h1 className="heading2">Contact Here</h1>
         <Form>
-          <Form.Group controlId = "formBasicName">           
-          <Form.Label>Name</Form.Label>
-          <Form.Control type="text" placeholder="Enter your name" />
+          <Form.Group controlId="formBasicName">
+            <Form.Label>Name</Form.Label>
+            <Form.Control
+              type="text"
+              placeholder="Enter your name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+            />
           </Form.Group>
-        <br/>
-         <Form.Group controlId="formBasicEmail">
-         <Form.Label>Email</Form.Label>
-         <Form.Control type="email" placeholder="Enter your email"/>
-         </Form.Group>
-        <br/>
-        <Form.Group controlId="formBasicTextArea">
-        <Form.Label>Message</Form.Label>
-        <Form.Control as="textarea" rows={3} placeholder="Type your message here..."/>
-        </Form.Group>
-        <br/>
-        <Button variant="success" type="submit" className="my-2">Submit
-        </Button>
-        <br/>
-        <h2 className="heading2"> Also, Connect With Us at... </h2>
-        <br/>
-      </Form>
-      <div className='d-flex align-items-center'>
-      <IconContext.Provider value={{size: 30}}>
-      <p className="nav-item"  ><a href="#"><FaTwitter style={{color:"black"}} className="social-icon"/></a></p>
-      <p className="nav-item" ><a href="#"><FaInstagram style={{color:"black"}} className="social-icon"/></a></p>
-      <p className="nav-item" ><a href="#"><FaLinkedin style={{color:"black"}} className="social-icon"/></a></p>
-      <p className="nav-item" ><a href="#"><SiGmail style={{color:"black"}} className="social-icon"/></a></p>
-      </IconContext.Provider>
-      </div>
+
+          <Form.Group controlId="formBasicEmail">
+            <Form.Label>Email address</Form.Label>
+            <Form.Control
+              type="email"
+              placeholder="Enter email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+            <Form.Text className="text-muted">
+              We'll never share your email with anyone else.
+            </Form.Text>
+          </Form.Group>
+
+          <Form.Group controlId="formBasicMessage">
+            <Form.Label>Message</Form.Label>
+            <Form.Control
+              as="textarea"
+              rows={3}
+              placeholder="Type your message here..."
+              value={message}
+              onChange={(e) => setMessage(e.target.value)}
+            />
+          </Form.Group>
+
+          <Button
+            variant="success"
+            type="button"
+            className="my-2"
+            onClick={() => (window.location.href = generateMailtoLink())}
+          >
+            Submit
+          </Button>
+        </Form>
       </Container>
+    
       <Footer/>
     </div>
      );

@@ -3,10 +3,11 @@
 }
 
 .dash-component{
-    background-color: rgba(255, 255, 255, 0.536);
+    background-color: white;
     /* width: 20vw; */
     margin:0.4rem;
     height: 18rem;
+    overflow-x: hidden;
 }
 #floater-nodata{
     position:relative;
@@ -36,30 +37,43 @@
     background: #000000cd; 
 }
 
-
+#prescription:hover,#tab-stock:hover,#tab-list:hover{
+    transition: all 0.4s;
+    scale:105%;
+    
+}
 
 #prescription{
-    box-shadow: 0px 0px 5px black;
+    /* box-shadow: 0px 0px 10px black; */
+    box-shadow: 0px 0px 5px rgb(95, 236, 255);
+    border:1px solid rgb(0, 145, 255);
     display: flex;
     flex-direction: column;
     border-radius: 10px; 
     overflow: hidden;
     overflow-y:auto;
+    transition: all 0.4s;
 }
 
 #tab-stock{
-    box-shadow: 0px 0px 5px black;
+    /* box-shadow: 0px 0px 10px black; */
+    box-shadow: 0px 0px 5px rgb(95, 236, 255);
+    border:1px solid rgb(0, 145, 255);
     display: flex;
     flex-direction: column;
     border-radius: 10px; 
     overflow: hidden;
     overflow-y:auto;
+    transition: all 0.4s;
 }
 
 #tab-list{
-    box-shadow: 0px 0px 5px black;
+    /* box-shadow: 0px 0px 10px black; */
+    box-shadow: 0px 0px 5px rgb(95, 236, 255);
+    border:1px solid rgb(0, 145, 255);
     display: flex;
     flex-direction: column;
+    transition: all 0.4s;
     border-radius: 10px; 
     overflow: hidden;
     overflow-y:auto;
@@ -70,7 +84,7 @@
     
 
 #tab-list>table>tr , #tab-stock>table>tr{
-    border:1px solid black;
+    /* border:0.1px solid black; */
 }
 
 #tab-list>table > tr:hover{
@@ -100,12 +114,16 @@ td>a{
 
 legend{
     /* color: black; */
+    background-color: rgba(102, 51, 153, 0);
     font-size: 3.2rem; 
     font-style:italic;
+    border-radius: 1rem;
     margin:4px 0 0 4px;
 }
 
-
+.dash-button-container{
+    overflow: hidden;
+}
 
 .dash-button{
     display: flex;
@@ -115,10 +133,22 @@ legend{
     width:1.5rem;
     border-radius: 50%;
     color:white;
-    font-size: large;
+    font-size:1rem;
     border: double 4px white;
     background-color:black;
-    overflow:hidden
+    overflow:hidden;
+    transition:all 0.3s;
+}
+
+.dash-button:hover{
+    color:black;
+    scale:110%;
+    background-color: rgb(0, 200, 255);
+    transition:all 0.3s;
+}
+.dash-button:active{
+    scale:95%;
+    transition:all 0.3s;
 }
 
 /* #floater-nodata{
@@ -129,6 +159,9 @@ legend{
     left:45%;
 } */
 
+.table .table-striped .table-bordered .table-hover{
+    background-color: rgba(23, 48, 61, 0.08);
+}
 .dash-button-container{
     margin-top: auto;
     margin-left: auto;

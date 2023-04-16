@@ -30,8 +30,8 @@ const About = () => {
 					</p>
 				</div>
 
-				<div className="d-flex">
-					<div>
+				<div className="d-flex about-right">
+					<div style={{flex:"1"}}>
 					<Fade delay={100} damping={0.05} triggerOnce>
 						<img src={sampleImg} />
 						<p style={{textAlign:"center"}}>Atharva Amberkar</p>

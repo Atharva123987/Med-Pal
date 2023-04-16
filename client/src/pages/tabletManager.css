@@ -31,10 +31,10 @@ input::-webkit-inner-spin-button {
 }
 
 #add-medicine-button {
-  color: black;
+  color: white;
   scale: 100%;
   transition: all 0.4s;
-  background-color: #fff;
+  background-color: rgb(0, 179, 255);
 }
 
 #add-medicine-button:hover {

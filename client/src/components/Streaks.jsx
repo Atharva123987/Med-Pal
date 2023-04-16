@@ -1,9 +1,9 @@
 const Streaks = () =>{
     return (
         <>
+          <legend align="center">Streaks</legend>
         <div id="component-name" className="dash-component"> {/* <== Change id of the div to the name of component  */}
         
-          <legend align="left">Streaks</legend>
           
           {/* <-- Add component specific info here --> */}
             <h5>Coming soon...</h5>

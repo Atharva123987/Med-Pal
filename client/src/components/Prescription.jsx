@@ -42,7 +42,7 @@ const Prescription = (props) => {
                                                 <FaFileImage />
                                             )}
                                             {/* {val.date} */}
-                                            <span>{val.reportName?.slice(0, 10)}...</span>
+                                            <span>{val.reportName?.slice(0, 20)}...</span>
                                         </a>
                                     </td>
                                 </tr>

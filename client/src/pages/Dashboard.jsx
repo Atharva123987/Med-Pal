@@ -158,6 +158,11 @@ const Dashboard = () => {
 					<div id="tips-container">
 						<Tips />
 					</div>
+
+					<div id="badge-container">
+							<img id="badge" src={Badge} />
+							<p>Gold Member</p>
+						</div>
 				</div>
 
 				<div id="dash-components">
