@@ -147,13 +147,17 @@ const Search = () => {
 												width={100}
 											/>
 										</div>
-										<div>
+										<div className="mx-5">
 											<Card.Title>
 												{elem.doctorName}
 											</Card.Title>
+											<Card.Title>
+												Clinic name : {elem.clinicOrHospitalName}
+											</Card.Title>
 											<Card.Text>
-												Address : {elem.address}
+												Address : {elem.city}, {elem.district},  {elem.state}
 											</Card.Text>
+											
 											<Card.Text>
 												Fees : {elem.fees}
 											</Card.Text>
