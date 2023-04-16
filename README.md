@@ -1,6 +1,15 @@
-# MedPal - Your Personal Medical Tracker 🩺
+<!-- PROJECT LOGO -->
+<br />
+<div align="center">
+  <a href="https://med-pal.vercel.app">
+    <img src="https://ik.imagekit.io/spursy/MedPal/apple-touch-icon.png?updatedAt=1681674938894" alt="Logo" width="80" height="80">
+  </a>
+  <h1 align="center">MedPal</h3>
+</div>
 
-MedPal is a personal medical tracker that lets users manage their well-being online by helping them record and monitor their health particulars. The vision behind MedPal is to empower every Indian with full control over their medical data.
+
+
+MedPal is a personal medical tracker that lets users manage their well-being online by helping them record and monitor their health particulars. The vision behind MedPal is to empower everyone with full control over their medical data.
 
 ## Features
 
@@ -13,7 +22,7 @@ MedPal is a personal medical tracker that lets users manage their well-being onl
 
 ## Tech Stack
 
-- React with Bootstrap (Front-end)
+- <img height="20" src="https://user-images.githubusercontent.com/25181517/183897015-94a058a6-b86e-4e42-a37f-bf92061753e5.png" alt="React" title="React" />React with Bootstrap (Front-end)
 - Express and Node.js (Back-end)
 - MongoDB (Database)
 - Vercel (Front-end hosting)
