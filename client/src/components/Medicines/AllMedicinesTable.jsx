@@ -3,9 +3,9 @@ import { useState, useEffect, useRef } from "react";
 import { CgUnavailable } from "react-icons/cg";
 import Button from "react-bootstrap/esm/Button";
 import { AiFillDelete } from "react-icons/ai";
-import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
-import Popover from 'react-bootstrap/Popover';
-import { useAuthContext } from "../../hooks/useAuthContext"; 
+import OverlayTrigger from "react-bootstrap/OverlayTrigger";
+import Popover from "react-bootstrap/Popover";
+import { useAuthContext } from "../../hooks/useAuthContext";
 const AllMedicinesTable = (props) => {
 	const fetchedData = props.fetchedData;
 	const [showPopup, setShowPopup] = useState(false);
@@ -13,7 +13,7 @@ const AllMedicinesTable = (props) => {
 	const [deleteID, setDeleteID] = useState(null);
 	const ref = useRef(null);
 	const [clickedIndex, setClickedIndex] = useState(null);
-	const {user} = useAuthContext();
+	const { user } = useAuthContext();
 
 	const handlePopup = (event, deleteID, index) => {
 		setDeleteID(deleteID);
@@ -26,14 +26,24 @@ const AllMedicinesTable = (props) => {
 	};
 	const popover = (
 		<Popover id="popover-basic">
-			<Popover.Header as="h3" className="text-white bg-danger">Warning</Popover.Header>
+			<Popover.Header as="h3" className="text-white bg-danger">
+				Warning
+			</Popover.Header>
 			<Popover.Body>
 				Are you sure you want to <strong>delete this medicine?</strong>
-				<Button variant="danger" className="mx-2" onClick={(e) => {
-					handleDelete(deleteID)
-					handleClosePopup();
-				}}>Yes</Button>
-				<Button variant="dark" onClick={() => setShowPopup(false)}>No</Button>
+				<Button
+					variant="danger"
+					className="mx-2"
+					onClick={(e) => {
+						handleDelete(deleteID);
+						handleClosePopup();
+					}}
+				>
+					Yes
+				</Button>
+				<Button variant="dark" onClick={() => setShowPopup(false)}>
+					No
+				</Button>
 			</Popover.Body>
 		</Popover>
 	);
@@ -44,9 +54,10 @@ const AllMedicinesTable = (props) => {
 		let config = {
 			method: "delete",
 			maxBodyLength: Infinity,
-			url: "http://localhost:4000/api/medicines/" + deleteID,
+			url:
+				"https://medpal-backend.onrender.com/api/medicines/" + deleteID,
 			headers: {
-				Authorization:`Bearer ${user.token}`
+				Authorization: `Bearer ${user.token}`,
 			},
 		};
 
@@ -55,7 +66,6 @@ const AllMedicinesTable = (props) => {
 			.then((response) => {
 				console.log(JSON.stringify(response.data));
 				props.setDeleteCalled(!props.deleteCalled);
-
 			})
 			.catch((error) => {
 				console.log(error);
@@ -95,91 +105,98 @@ const AllMedicinesTable = (props) => {
 												element.expiry
 											).toLocaleDateString()}
 										</td>
-										<td > 
+										<td>
 											{element.frequency ? (
 												element.frequency
 											) : (
 												<CgUnavailable />
 											)}
 										</td>
-										<td >
+										<td>
 											{
 												<ul id="meds-table-list">
 													{element?.timeOfDay &&
-														Object.values(
-															element.timeOfDay
-														).every(
-															(val) => !val.yesOrNot
-														) ? (
-															<CgUnavailable/>
+													Object.values(
+														element.timeOfDay
+													).every(
+														(val) => !val.yesOrNot
+													) ? (
+														<CgUnavailable />
 													) : (
 														<>
 															{element?.timeOfDay
 																?.morning
 																?.yesOrNot && (
-																	<li>
-																		Morning{" "}
-																		{
-																			fetchedData[0]
-																				.timeOfDay
-																				.morning
-																				.yesOrNot
-																		}
-																	</li>
-																)}
+																<li>
+																	Morning{" "}
+																	{
+																		fetchedData[0]
+																			.timeOfDay
+																			.morning
+																			.yesOrNot
+																	}
+																</li>
+															)}
 															{element?.timeOfDay
 																?.afternoon
 																?.yesOrNot && (
-																	<li>
-																		Afternoon{" "}
-																		{
-																			fetchedData[0]
-																				.timeOfDay
-																				.afternoon
-																				.yesOrNot
-																		}
-																	</li>
-																)}
+																<li>
+																	Afternoon{" "}
+																	{
+																		fetchedData[0]
+																			.timeOfDay
+																			.afternoon
+																			.yesOrNot
+																	}
+																</li>
+															)}
 															{element?.timeOfDay
 																?.evening
 																?.yesOrNot && (
-																	<li>
-																		Evening{" "}
-																		{
-																			fetchedData[0]
-																				.timeOfDay
-																				.evening
-																				.yesOrNot
-																		}
-																	</li>
-																)}
+																<li>
+																	Evening{" "}
+																	{
+																		fetchedData[0]
+																			.timeOfDay
+																			.evening
+																			.yesOrNot
+																	}
+																</li>
+															)}
 															{element?.timeOfDay
 																?.night
 																?.yesOrNot && (
-																	<li>
-																		Night{" "}
-																		{
-																			fetchedData[0]
-																				.timeOfDay
-																				.night
-																				.yesOrNot
-																		}
-																	</li>
-																)}
+																<li>
+																	Night{" "}
+																	{
+																		fetchedData[0]
+																			.timeOfDay
+																			.night
+																			.yesOrNot
+																	}
+																</li>
+															)}
 														</>
 													)}
 												</ul>
 											}
 										</td>
-										<td id='popup-overlay'>
+										<td id="popup-overlay">
 											<OverlayTrigger
 												trigger="click"
 												placement="right"
 												overlay={popover}
 												rootClose
 												flip
-												fallbackPlacements={['left', 'top', 'bottom']}
-												show={showPopup && clickedIndex === idx}
+												fallbackPlacements={[
+													"left",
+													"top",
+													"bottom",
+												]}
+												show={
+													showPopup &&
+													clickedIndex === idx
+												}
 												onHide={() => {
 													setShowPopup(false);
 													setClickedIndex(null);
@@ -187,7 +204,11 @@ const AllMedicinesTable = (props) => {
 											>
 												<Button
 													onClick={(e) => {
-														handlePopup(e, element._id, idx);
+														handlePopup(
+															e,
+															element._id,
+															idx
+														);
 													}}
 													variant="danger"
 												>
@@ -196,9 +217,6 @@ const AllMedicinesTable = (props) => {
 											</OverlayTrigger>
 										</td>
 									</tr>
-
-
-
 								</>
 							);
 						})}
