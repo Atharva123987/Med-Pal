@@ -10,7 +10,7 @@ const TabStock = (props) => {
 	return (
 		<>
 			<div id="tab-stock" className="dash-component">
-				<legend align="center">Medicine Stock</legend>
+				<legend align="center">Medicine Inventory</legend>
 
 				<Table striped bordered hover>
 					<tr>

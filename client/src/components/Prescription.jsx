@@ -17,7 +17,7 @@ const Prescription = (props) => {
     return (
         <>
             <div id="prescription" className="dash-component">
-                <legend align="left">Prescriptions</legend>
+                <legend align="center">Medical Documents</legend>
                 {isLoading ? (
                     <LoadingCircle /> // display loading circle if data is not fetched yet
                 ) : (

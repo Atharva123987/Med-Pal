@@ -6,9 +6,9 @@ const Streaks = () =>{
           <legend align="left">Streaks</legend>
           
           {/* <-- Add component specific info here --> */}
-            <h1>Coming soon...</h1>
+            <h5>Coming soon...</h5>
           <div className="dash-button-container">
-          <button className='dash-button'><span>+</span></button>
+          {/* <button className='dash-button'><span>+</span></button> */}
           </div>
         </div>
         </>

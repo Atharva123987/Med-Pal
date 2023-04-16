@@ -11,7 +11,7 @@ const TabList = (props) => {
     return (
         <>
             <div id="tab-list" className="dash-component">
-                <legend align="center">Medicines List</legend>
+                <legend align="center">Medicine Reminder</legend>
                 {fetchedMedicineData ? (
                     <>
                         <Table striped bordered hover>
@@ -20,87 +20,73 @@ const TabList = (props) => {
                                 <th>Frequency</th>
                                 <th>Time</th>
                             </tr>
-                            {fetchedMedicineData.map((element, key) => {
-                                return (
-                                    <tr key={key}>
-                                        <td>{element.name}</td>
-                                        <td>
-                                            {element?.frequency ? (
-                                                element?.frequency
-                                            ) : (
-                                                <CgUnavailable style={{color:"black"}} />
-                                            )}
-                                        </td>
-                                        <td>
-										<ul id="meds-table-list">
-													{element?.timeOfDay &&
-														Object.values(
-															element?.timeOfDay
-														).every(
-															(val) => !val.yesOrNot
-														) ? (
-															<CgUnavailable/>
-													) : (
-														<>
-															{element?.timeOfDay
-																?.morning
-																?.yesOrNot && (
-																	<li>
-																		Morning{" "}
-																		{
-																			fetchedMedicineData[0]
-																				.timeOfDay
-																				.morning
-																				.yesOrNot
-																		}
-																	</li>
-																)}
-															{element?.timeOfDay
-																?.afternoon
-																?.yesOrNot && (
-																	<li>
-																		Afternoon{" "}
-																		{
-																			fetchedMedicineData[0]
-																				.timeOfDay
-																				.afternoon
-																				.yesOrNot
-																		}
-																	</li>
-																)}
-															{element?.timeOfDay
-																?.evening
-																?.yesOrNot && (
-																	<li>
-																		Evening{" "}
-																		{
-																			fetchedMedicineData[0]
-																				.timeOfDay
-																				.evening
-																				.yesOrNot
-																		}
-																	</li>
-																)}
-															{element?.timeOfDay
-																?.night
-																?.yesOrNot && (
-																	<li>
-																		Night{" "}
-																		{
-																			fetchedMedicineData[0]
-																				.timeOfDay
-																				.night
-																				.yesOrNot
-																		}
-																	</li>
-																)}
-														</>
-													)}
-												</ul>
-                                        </td>
-                                    </tr>
-                                );
-                            })}
+                            {fetchedMedicineData
+    .filter((element) => element?.frequency)
+    .map((element, key) => {
+        return (
+            <tr key={key}>
+                <td>{element.name}</td>
+                <td>
+                    {element.frequency}
+                </td>
+                <td>
+                    <ul id="meds-table-list">
+                        {element?.timeOfDay &&
+                            Object.values(
+                                element?.timeOfDay
+                            ).every(
+                                (val) => !val.yesOrNot
+                            ) ? (
+                                <CgUnavailable style={{ color: "black" }} />
+                        ) : (
+                            <>
+                                {element?.timeOfDay?.morning?.yesOrNot && (
+                                    <li>
+                                        Morning{" "}
+                                        {
+                                            element.timeOfDay
+                                                .morning
+                                                .yesOrNot
+                                        }
+                                    </li>
+                                )}
+                                {element?.timeOfDay?.afternoon?.yesOrNot && (
+                                    <li>
+                                        Afternoon{" "}
+                                        {
+                                            element.timeOfDay
+                                                .afternoon
+                                                .yesOrNot
+                                        }
+                                    </li>
+                                )}
+                                {element?.timeOfDay?.evening?.yesOrNot && (
+                                    <li>
+                                        Evening{" "}
+                                        {
+                                            element.timeOfDay
+                                                .evening
+                                                .yesOrNot
+                                        }
+                                    </li>
+                                )}
+                                {element?.timeOfDay?.night?.yesOrNot && (
+                                    <li>
+                                        Night{" "}
+                                        {
+                                            element.timeOfDay
+                                                .night
+                                                .yesOrNot
+                                        }
+                                    </li>
+                                )}
+                            </>
+                        )}
+                    </ul>
+                </td>
+            </tr>
+        );
+})}
                         </Table>
                         <div className="dash-button-container">
                             <Link to={'/medicines'}> <button className="dash-button">

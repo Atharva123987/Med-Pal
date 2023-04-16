@@ -46,8 +46,9 @@ const Charts = (props) => {
   return (
     <>
       {displayData && (
-        <div>
-          <legend id="charts-legend" align="center">{props.chartType}</legend>
+        <div className="d-flex flex-column align-items-center">
+              <legend align="center">{props.chartType} chart</legend>
+          {/* <legend id="charts-legend" align="center">{props.chartType} chart</legend> */}
           <LineChart
             width={width ? width : 500}
             height={height ? height : 300}

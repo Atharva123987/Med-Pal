@@ -195,6 +195,7 @@ const Dashboard = () => {
 						</div>
 
 						<div id="c5" className="component">
+						<legend align="center">Medicine Reminder</legend>
 							<Calendar
 								appointments={appointments}
 								setDoctorName={setDoctorName}
@@ -205,6 +206,14 @@ const Dashboard = () => {
 							/>
 							
 						</div>
+
+						<div
+							id="c6"
+							className="component"
+							style={{ flexGrow: 6 }}
+						>
+							<Streaks />
+						</div> 
 
 					</div>
 				</div>
