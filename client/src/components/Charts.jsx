@@ -79,6 +79,7 @@ const Charts = (props) => {
               data={displayData}
             />
           </LineChart>
+          
         </div>
       )}
     </>

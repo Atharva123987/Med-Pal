@@ -14,6 +14,7 @@ import { useEffect } from "react";
 import Footer from '../components/Footer'
 import Navbar from '../components/Navbar'
 import { useAuthContext } from "../hooks/useAuthContext";
+import { Link, Navigate } from "react-router-dom";
 
 
 const Dashboard = () => {
@@ -30,6 +31,9 @@ const Dashboard = () => {
 	const [doctorAddress, setDoctorAddress] = useState("");
 	const [notes, setNotes] = useState("");
 	const [appointmentDateAndTime, setAppointmentDateAndTime] = useState("");
+
+ 
+
 	useEffect(() => {
 		handleFetch()
 		console.log("here")
@@ -199,6 +203,7 @@ const Dashboard = () => {
 								setNotes={setNotes}
 								setAppointmentDateAndTime={setAppointmentDateAndTime}
 							/>
+							
 						</div>
 
 					</div>

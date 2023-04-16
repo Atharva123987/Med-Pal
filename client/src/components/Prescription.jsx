@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import PImg from "../assets/prescription.jpg";
 import { FaFilePdf, FaFileWord, FaFileExcel, FaFileImage } from "react-icons/fa";
 import LoadingCircle from "../components/SkeletonLoaders/LoadingCircle"
+import { Link } from "react-router-dom";
 
 const Prescription = (props) => {
     const [fetchedData, setFetchedData] = useState(null);
@@ -29,7 +30,7 @@ const Prescription = (props) => {
                                 >
                                     <td>
                                         <a href={val.reportResourceURL} target="_blank" rel="noopener noreferrer"
-                                        style={{display:"block", fontSize:"1.2rem",marginLeft:"10px"}}>
+                                            style={{ display: "block", fontSize: "1.2rem", marginLeft: "10px" }}>
                                             {isPdf ? (
                                                 <FaFilePdf
                                                     style={{
@@ -38,7 +39,7 @@ const Prescription = (props) => {
                                                     }}
                                                 />
                                             ) : (
-                                                <FaFileImage/>
+                                                <FaFileImage />
                                             )}
                                             {/* {val.date} */}
                                             <span>{val.reportName?.slice(0, 10)}...</span>
@@ -51,9 +52,10 @@ const Prescription = (props) => {
                 )}
 
                 <div className="dash-button-container">
-                    <button className="dash-button">
+                    <Link to={'/reports'}> <button className="dash-button">
                         <span>+</span>
                     </button>
+                    </Link>
                 </div>
             </div>
         </>

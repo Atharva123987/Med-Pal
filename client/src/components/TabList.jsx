@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Table } from "react-bootstrap";
 import { CgUnavailable } from "react-icons/cg";
+import { Link } from "react-router-dom";
 
 const TabList = (props) => {
     const [fetchedMedicineData, setFetchedMedicineData] = useState(null);
@@ -102,9 +103,10 @@ const TabList = (props) => {
                             })}
                         </Table>
                         <div className="dash-button-container">
-                            <button className="dash-button">
+                            <Link to={'/medicines'}> <button className="dash-button">
                                 <span>+</span>
                             </button>
+							</Link>
                         </div>
                     </>
                 ) : (

@@ -19,6 +19,7 @@ import { useAuthContext } from '../hooks/useAuthContext';
 import axios from 'axios';
 import { AiFillDelete } from 'react-icons/ai';
 import LoadingCircle from './SkeletonLoaders/LoadingCircle';
+import { Link } from 'react-router-dom';
 
 const Calendar = (props) => {
 
@@ -124,7 +125,6 @@ const Calendar = (props) => {
           prev2Label={<TbPlayerTrackPrev />}
           next2Label={<TbPlayerTrackNext />}
         />
-
          {showList &&
         <div id='appointments-list'>
        
@@ -154,7 +154,7 @@ const Calendar = (props) => {
                       <div><ImLocation2 /> {appointment.address}</div>
                       <div><MdNotes /> {appointment.notes}</div>
                       <Button className='w-25' variant='danger' onClick={(e) => {
-                      setDeleteID(appointment?._id)
+                        setDeleteID(appointment?._id)
                     }
                     }
                     > <AiFillDelete /></Button>
@@ -164,13 +164,13 @@ const Calendar = (props) => {
               </ListGroup>
             ) : (
               <p id='no-appointments'>No appointments available</p>
-            )}
+              )}
           </div>
           
         </div>
 }
       {
-       hideList&& !showList && <>
+        hideList&& !showList && <>
           <div id='appointments-list-dashboard'>
        
        <div className='d-flex justify-content-between'>

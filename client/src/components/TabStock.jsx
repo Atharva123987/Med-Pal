@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Table } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 const TabStock = (props) => {
 	const [fetchedMedicineData, setFetchedMedicineData] = useState(null);
@@ -31,9 +32,10 @@ const TabStock = (props) => {
 				</Table>
 
 				<div className="dash-button-container">
-					<button className="dash-button">
-						<span>+</span>
-					</button>
+				<Link to={'/medicines'}> <button className="dash-button">
+                                <span>+</span>
+                            </button>
+							</Link>
 				</div>
 			</div>
 		</>

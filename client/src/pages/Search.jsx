@@ -21,6 +21,7 @@ const Search = () => {
 	const [latitude, setLatitude] = useState(null);
 	const [longitude, setLongitude] = useState(null);
 	const {user} = useAuthContext();
+
 	if (navigator.geolocation) {
 		navigator.geolocation.getCurrentPosition((position) => {
 			const { latitude, longitude } = position.coords;
@@ -134,7 +135,6 @@ const Search = () => {
 					results.map((elem) => {
 						return (
 							<>
-
 								<Card
 									style={{
 										width: "40rem",

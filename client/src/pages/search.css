@@ -4,3 +4,10 @@
 .sidebar{
     display: flex;
 }
+
+.card{
+    background-color: rgb(23,29,61);
+    color:white;
+    margin:5px;
+    box-shadow: 2px -2px 20px white;
+}
