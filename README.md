@@ -11,7 +11,7 @@
 
 MedPal is a personal medical tracker that lets users manage their well-being online by helping them record and monitor their health particulars. The vision behind MedPal is to empower everyone with full control over their medical data.
 
-Visit the webpage on <a href="https://med-pal.vercel.app">this link</a>
+Visit the webpage on <a href="https://med-pal-nu.vercel.app/">this link</a>
 
 ## Features
 
@@ -96,7 +96,7 @@ We are always looking for feedback and suggestions from our users, so if you hav
 
 ## Deployment 🔗
 
-The frontend is deployed on [Vercel](https://med-pal.vercel.app), and the backend is deployed on [Render](https://medpal-backend.onrender.com/api). To deploy your own version, follow the instructions provided by the respective platforms.
+The frontend is deployed on [Vercel](https://med-pal-nu.vercel.app/), and the backend is deployed on [Render](https://medpal-backend.onrender.com/api). To deploy your own version, follow the instructions provided by the respective platforms.
 
 
 
