@@ -15,12 +15,20 @@ Visit the webpage on <a href="https://med-pal.vercel.app">this link</a>
 
 ## Features
 
-- Store and analyze lab vitals in charts for easy insights 📊
-- Manage medicine inventory and get daily reminders 💊
-- Securely store and access lab reports and prescriptions with web viewer 🗊
-- Keep track of medical appointments with the integrated calendar 📅
-- Search for nearby doctors using geolocation 👨‍⚕️
-- Responsive design for seamless experience on mobile devices 📱
+- View everything MedPal has to offer collectively in our dashboard<br/><br/>
+<img src="https://ik.imagekit.io/spursy/MedPal/Github_Readme/MainDashboard.png?updatedAt=1682356243714" alt="Dashboard"/><br/><br/>
+- Store and analyze lab vitals in charts for easy insights 📊<br/><br/>
+<img src="https://ik.imagekit.io/spursy/MedPal/Github_Readme/Charts.png?updatedAt=1682356243168" alt="Charts"/><br/><br/>
+- Manage medicine inventory and get daily reminders 💊<br/><br/>
+<img src="https://ik.imagekit.io/spursy/MedPal/Github_Readme/MedicineManager.png?updatedAt=1682356243236" alt="MedicineManager"/><br/><br/>
+- Securely store and access lab reports and prescriptions with web viewer 🗊<br/><br/>
+<img src="https://ik.imagekit.io/spursy/MedPal/Github_Readme/ReportsViewer.png?updatedAt=1682356243712" alt="ReportsViewer"/><br/><br/>
+- Keep track of medical appointments with the integrated calendar 📅<br/><br/>
+<img src="https://ik.imagekit.io/spursy/MedPal/Github_Readme/AppointmentPage.png?updatedAt=1682356243491" alt="AppointmentPage"/><br/><br/>
+- Search for nearby doctors using geolocation 👨‍⚕️<br/><br/>
+<img src="https://ik.imagekit.io/spursy/MedPal/Github_Readme/DoctorSearch.png?updatedAt=1682356243220" alt="DoctorSearch"/><br/><br/>
+- Responsive design for seamless experience on mobile devices 📱<br/><br/>
+<p align="center"><img src="https://ik.imagekit.io/spursy/MedPal/Github_Readme/ResponsiveMobile.jpg?updatedAt=1682356243154" alt="ResponsiveMobile"/></p><br/><br/>
 
 ## Tech Stack
 
