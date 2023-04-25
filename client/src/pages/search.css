@@ -3,6 +3,17 @@
 }
 .sidebar{
     display: flex;
+    flex-direction: column;
+}
+
+.sidebar Form {
+    display: flex;
+    margin-left: 2vw;
+    gap: 8vw;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    margin-bottom: 30px;
 }
 
 .card{
