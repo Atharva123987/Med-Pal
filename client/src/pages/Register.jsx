@@ -125,7 +125,7 @@ export const Register = (props) => {
 					<Form.Label>Password</Form.Label>
 					<Form.Control
 						type="password"
-						placeholder="Enter Password"
+						placeholder="Min 8 chars with a special symbol and caps letter"
 						onChange={(e) => {
 							setPass(e.target.value);
 						}}
