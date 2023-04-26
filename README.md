@@ -11,7 +11,7 @@
 
 MedPal is a personal medical tracker that lets users manage their well-being online by helping them record and monitor their health particulars. The vision behind MedPal is to empower everyone with full control over their medical data.
 
-Visit the webpage on <a href="https://med-pal.vercel.app">this link</a>
+Visit the webpage on <a href="https://med-pal.vercel.app">this link</a>. Initial load time might be slow due to the hosting being on the free tier. Also much action cannot be seen in the website until a new user adds some data. So, kindly be patient. 
 
 ## Features
 
