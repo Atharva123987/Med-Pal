@@ -5,15 +5,12 @@ import {BsArrowUpCircle} from 'react-icons/bs';
 import {AiFillGithub} from 'react-icons/ai';
 import {CiLinkedin} from 'react-icons/ci';
 import {AiOutlineMail} from 'react-icons/ai';
-
 const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth"
-    });
-    document.getElementById("root").focus(); // focus on the root element to enable scrolling with arrow keys
-  }
-  
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  });
+}
 
 const Footer = ()=>{
     
@@ -21,11 +18,10 @@ const Footer = ()=>{
         <>
         <footer>
             <div id='footer-top'>
-            <a href="#" className='footer-links d-flex' onClick={scrollToTop}>
-  <BsArrowUpCircle/>
-  <h4>Back to Top</h4>
-</a>
-
+            <L smooth to="#" className='footer-links d-flex' onClick={scrollToTop}>
+                <BsArrowUpCircle/>
+                <h4>   Back to Top</h4>
+                </L>
             </div>
             <div id='footer-bottom'>
 
