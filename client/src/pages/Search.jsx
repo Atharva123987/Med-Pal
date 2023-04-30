@@ -58,7 +58,11 @@ const Search = () => {
       .request(config)
       .then((response) => {
         console.log(response.data);
-        setResults(response.data);
+        if(response.data.length == 0) {
+          setResults([]);
+        }
+        else 
+          setResults(response.data);
         console.log("HERE");
       })
       .catch((error) => {
@@ -125,7 +129,7 @@ const Search = () => {
           <Button type="submit">Submit</Button>
         </Form>
         <div className="d-flex flex-column search-container">
-          {results ? 
+          {results ? results.length > 0 ? 
             results.map((elem) => {
               return (
                 <>
@@ -168,7 +172,9 @@ const Search = () => {
                   </Card>
                 </>
               )
-            }) : console.log("No results to display")}
+            }) : <p style={{ fontSize: "25px" }}>No Doctors to display</p>
+          : <p style={{ fontSize: "25px" }}>Search Doctors Nearby</p>
+          }
         </div>
       </div>
     </>

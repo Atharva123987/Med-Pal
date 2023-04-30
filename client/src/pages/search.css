@@ -8,12 +8,12 @@
 
 .sidebar Form {
     display: flex;
-    margin-left: 2vw;
-    gap: 8vw;
+    margin-left: 2rem;
+    gap: 8rem;
     align-items: center;
     text-align: center;
     justify-content: center;
-    margin-bottom: 30px;
+    margin-bottom: 2rem;
 }
 
 .card{
