@@ -70,7 +70,7 @@ const Search = () => {
       });
   };
 
-  // useEffect(() => console.log(filters), [filters]);
+  useEffect(() => console.log(filters), [filters]);
   return (
     <>
       <Navbar />
@@ -144,7 +144,6 @@ const Search = () => {
                       <div>
                         <img
                           src="https://t4.ftcdn.net/jpg/00/64/67/63/360_F_64676383_LdbmhiNM6Ypzb3FM4PPuFP9rHe7ri8Ju.jpg"
-                          alt="img"
                           width={100}
                         />
                       </div>
