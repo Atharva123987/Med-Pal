@@ -10,6 +10,7 @@ import Card from "react-bootstrap/Card";
 import { IoIosNavigate } from "react-icons/io";
 import { useAuthContext } from "../hooks/useAuthContext";
 import Navbar from "../components/Navbar";
+import { AiFillUpCircle } from "react-icons/ai";
 
 const Search = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -75,29 +76,31 @@ const Search = () => {
     <>
       <Navbar />
       <div className="sidebar">
+        <h4>Search Doctors Nearby</h4>
         <Form onSubmit={handleSubmit}>
-          <Form.Group>
+          <Form.Group >
             <label htmlFor="distanceSlider">
               Distance (in miles): {distanceValue}
             </label>
             <Form.Control
               type="range"
               name="distanceSlider"
+              
               min={min}
               max={max}
               value={distanceValue}
               onChange={(e) => setDistanceValue(e.target.value)}
             />
           </Form.Group>
-          <Form.Group >
-            {/* <label>Category:</label> */}
 
+          <Form.Group className="distance-slider">
+            <label>Category:</label>
             <DropdownButton
-              title={`${filters ? filters : "Select a category"}`}
+              title={`${filters ? filters : "All"}`}
               onSelect={(e) => setFilters(e)}
             >
               <Dropdown.Item style={{ fontSize: "15px" }} eventKey="">
-                Select a category
+                All
               </Dropdown.Item>
               <Dropdown.Item
                 style={{ fontSize: "15px" }}
@@ -126,24 +129,20 @@ const Search = () => {
             </DropdownButton>
           </Form.Group>
 
-          <Button type="submit">Submit</Button>
+          <Button type="submit">Search</Button>
         </Form>
         <div className="d-flex flex-column search-container">
           {results ? results.length > 0 ? 
             results.map((elem) => {
               return (
                 <>
-                  <Card
-                    style={{
-                      width: "40rem",
-                      height: "20rem",
-                      marginLeft: "3rem",
-                    }}
-                  >
+                  <Card>
                     <Card.Body className="d-flex">
                       <div>
                         <img
                           src="https://t4.ftcdn.net/jpg/00/64/67/63/360_F_64676383_LdbmhiNM6Ypzb3FM4PPuFP9rHe7ri8Ju.jpg"
+                          alt="img"
+                          id='doctor-image'
                           width={100}
                         />
                       </div>
@@ -162,7 +161,7 @@ const Search = () => {
                         <Button variant="success">
                           <IoIosNavigate
                             style={{
-                              fontSize: "30px",
+                              fontSize: "",
                               margin: "5px",
                             }}
                           />
@@ -173,7 +172,7 @@ const Search = () => {
                 </>
               )
             }) : <p style={{ fontSize: "25px" }}>No Doctors to display</p>
-          : <p style={{ fontSize: "25px" }}>Search Doctors Nearby</p>
+          : <p style={{ fontSize: "25px" }}>Set search parameters to search<AiFillUpCircle/></p>
           }
         </div>
       </div>
