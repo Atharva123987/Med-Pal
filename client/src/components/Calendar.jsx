@@ -35,12 +35,10 @@ const Calendar = (props) => {
 
   useEffect(() => {
     setLoading(false);
-    console.log(loading)
   }, [appointments]);
 
   useEffect(()=>{
     if(deleteID !== null)handleDelete();
-    console.log(deleteID)
   },[deleteID])
 
   if(!appointments){

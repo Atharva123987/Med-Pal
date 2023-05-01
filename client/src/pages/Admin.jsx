@@ -52,7 +52,7 @@ const Admin = () => {
 		axios
 			.request(config)
 			.then((response) => {
-				console.log(JSON.stringify(response.data));
+				// console.log(JSON.stringify(response.data));
 				setShow(true);
 			})
 			.catch((error) => {
@@ -60,17 +60,17 @@ const Admin = () => {
 				setError(true);
 			});
 
-		console.log(
-			doctorName,
-			speciality,
-			phoneNumber,
-			clinicOrHospitalName,
-			address,
-			city,
-			district,
-			state,
-			fees
-		);
+		// console.log(
+		// 	doctorName,
+		// 	speciality,
+		// 	phoneNumber,
+		// 	clinicOrHospitalName,
+		// 	address,
+		// 	city,
+		// 	district,
+		// 	state,
+		// 	fees
+		// );
 	};
 
 	const fetchData = async (e) => {
@@ -80,7 +80,6 @@ const Admin = () => {
 			);
 
 			setFetchedData(response.data);
-			console.log(await response.data);
 		} catch (err) {
 			console.log(err);
 		}

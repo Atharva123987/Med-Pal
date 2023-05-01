@@ -43,7 +43,6 @@ const Search = () => {
       distance: Number(distanceValue),
       speciality: filters,
     });
-    console.log(newData);
     let config = {
       method: "post",
       maxBodyLength: Infinity,
@@ -58,20 +57,17 @@ const Search = () => {
     await axios
       .request(config)
       .then((response) => {
-        console.log(response.data);
         if(response.data.length == 0) {
           setResults([]);
         }
         else 
           setResults(response.data);
-        console.log("HERE");
       })
       .catch((error) => {
         console.log(error);
       });
   };
 
-  useEffect(() => console.log(filters), [filters]);
   return (
     <>
       <Navbar />

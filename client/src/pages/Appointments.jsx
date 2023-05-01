@@ -92,7 +92,6 @@ const Appointments = () => {
 		axios
 			.request(config)
 			.then((response) => {
-				console.log(JSON.stringify(response.data));
 				handleFetch();
 			})
 			.catch((error) => {
@@ -131,7 +130,6 @@ const Appointments = () => {
 			};
 			const response = await axios(config);
 			setFetchedData(response.data);
-			console.log(response.data[0]);
 		} catch (err) {
 			console.log(err);
 		}

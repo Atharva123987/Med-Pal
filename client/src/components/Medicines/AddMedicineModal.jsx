@@ -11,7 +11,7 @@ const AddMedicineModal = (props) => {
   const [formError, setFormError] = useState(false);
   const [isDaily, setIsDaily] = useState(false)
 
-  const handleClose = () => { setShow(false); setIsDaily(false); console.log(isDaily) }
+  const handleClose = () => { setShow(false); setIsDaily(false);  }
   const handleShow = () => setShow(true);
 
   const handleSubmit = (e) => {
