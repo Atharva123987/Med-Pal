@@ -64,7 +64,7 @@ const AllMedicinesTable = (props) => {
 		axios
 			.request(config)
 			.then((response) => {
-				console.log(JSON.stringify(response.data));
+				// console.log(JSON.stringify(response.data));
 				props.setDeleteCalled(!props.deleteCalled);
 			})
 			.catch((error) => {

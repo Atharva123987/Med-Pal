@@ -45,7 +45,6 @@ const TabletManager = () => {
 			}
 		  );
 		  setFetchedData(response.data);
-		  console.log(response.data[0]);
 		} catch (err) {
 		  console.log(err);
 		}
@@ -55,7 +54,6 @@ const TabletManager = () => {
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-		console.log(selectedFile);
 
 		if (!name || !quantity || !expiry) {
 			setNameError(true)

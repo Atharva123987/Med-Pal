@@ -36,7 +36,6 @@ const Dashboard = () => {
 
 	useEffect(() => {
 		handleFetch()
-		console.log("here")
 	}, [])
 
 	const handleFetch = async (e) => {

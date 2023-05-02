@@ -44,7 +44,7 @@ const Sidenav = () =>{
                    <Link to='/about' onClick={scrollToTop}><BsInfoCircle /></Link>
                   <Link to={'/'} onClick={handleLogout}><CgLogOut/></Link>
 
-                   {/* <Link><button onClick={()=>{console.log("herdfdgde")}}><AiOutlineSearch/></button></Link>      */}
+                   
         
         </div>
         </>

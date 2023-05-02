@@ -27,7 +27,6 @@ const Reports = () => {
 					},
 				});
 				setReports(response.data);
-				console.log(reports);
 			} catch (error) {
 				console.error(error);
 			}
