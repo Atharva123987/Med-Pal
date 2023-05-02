@@ -107,10 +107,6 @@ input[type="range"]::-moz-range-thumb {
     box-shadow: 2px -2px 20px white;
 }
 
-.card{
-    width: 35rem;
-    margin:auto;
-}
 
 .search-container {
     gap:1rem;
