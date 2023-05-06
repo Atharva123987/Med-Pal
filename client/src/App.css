@@ -21,6 +21,39 @@ body{
 }
 
 
+.login-container,
+.register-container {
+  background-color: whitesmoke;
+  border-radius: 0.5rem;
+  padding: 1rem;  
+}
+
+.login,
+.register {
+  color: black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.login-img,
+.register-img {
+  height: 85vh;
+  width: 40vw;
+}
+
+.login-img img {
+  height: 100%;
+  width: 100%;
+  mix-blend-mode: multiply;
+}
+
+.register-img img {
+  height: 100%;
+  width: 100%;
+  mix-blend-mode:multiply;
+
+}
 
 label {
   text-align: left;
@@ -58,5 +91,5 @@ input {
     border: 1px solid white;
     border-radius: 10px;
     margin: 0.5rem;
-  }
+    }
 }
