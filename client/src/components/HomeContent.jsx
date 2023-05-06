@@ -37,13 +37,11 @@ useEffect(() => {
     intervalId = setInterval(() => {
       index = (index + 1) % buttonsRef.current.length;
       buttonsRef.current[index].click();
-      console.log("USER CLICK: ", userClick);
     }, 5000);
   };
 
   if (userClick) {
     clearInterval(intervalId);
-    console.log("INTERVAL CLEARED");
   } else {
     if (!isFirstButtonClicked.current) {
       buttonsRef.current[0].click();
