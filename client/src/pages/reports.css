@@ -1,6 +1,7 @@
 #reports-page-container{
     display: flex;
     flex-direction: row;
+    position: relative;
     justify-content: space-evenly;
 }
 
@@ -20,7 +21,10 @@
 #viewer-container{
     /* height: 35rem; */
     width: 30rem;
+    height: fit-content;
     padding: 1rem;
+    position: sticky;
+    top:4%;
     box-shadow: 0px 0px 5px rgb(62, 109, 173);
     border-radius: 20px;
     color:rgb(62, 109, 173);

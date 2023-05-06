@@ -152,7 +152,7 @@ const Appointments = () => {
 				>
 					<Toast
 						onClose={() => setShow(false)}
-						bg="light"
+						bg="success"
 						position="middle-center"
 						show={show}
 						delay={3000}
@@ -160,11 +160,11 @@ const Appointments = () => {
 						style={{
 							position: "fixed",
 							zIndex: "10",
-							top: "3%",
+							top: "5	rem",
 							right: "3%",
 						}}
 					>
-						<Toast.Header>
+						<Toast.Header className="text-success">
 							<img
 								src="holder.js/20x20?text=%20"
 								className="rounded me-2"
@@ -173,13 +173,13 @@ const Appointments = () => {
 							<strong className="me-auto">
 								Appointment Added!
 							</strong>
-							<small>
+							<small className="text-secondary">
 								Doctor{" "}
 								{doctorName?.charAt(0).toUpperCase() +
 									doctorName?.slice(1)}
 							</small>
 						</Toast.Header>
-						<Toast.Body>
+						<Toast.Body className="text-white">
 							<b>
 								{appointmentDateAndTime?.getDate()}th of {month}
 							</b>{" "}
@@ -194,10 +194,10 @@ const Appointments = () => {
 						}}
 						bg="danger"
 						position="middle-center"
-						show={error}
+						show={!error}
 						delay={2000}
 						autohide
-						style={{ position: "relative", zIndex: "10" }}
+						style={{ position: "relative", zIndex: "10", top:"4rem" }}
 					>
 						<Toast.Header>
 							<img

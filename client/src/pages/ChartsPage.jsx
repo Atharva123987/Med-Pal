@@ -1,6 +1,6 @@
 import Navbar from "../components/Navbar";
 import AllCharts from "../components/Charts";
-import { Form, Toast } from "react-bootstrap";
+import { Form, OverlayTrigger, Popover, Toast } from "react-bootstrap";
 import { useState, useRef, useEffect } from "react";
 import axios from "axios";
 import ButtonGroup from "react-bootstrap/ButtonGroup";
@@ -22,7 +22,7 @@ const Charts = () => {
 	const [requiredError, setRequiredError] = useState(false);
 	const [width, setWidth] = useState(window.innerWidth);
 	const [height, setHeight] = useState(window.innerHeight);
-
+	const [showDeletePopup, setShowDeletePopup] = useState(false);
 
 	useEffect(() => {
 		handleFetch();
@@ -30,16 +30,16 @@ const Charts = () => {
 
 	useEffect(() => {
 		const handleResize = () => {
-		  setWidth(window.innerWidth);
-		  setHeight(window.innerHeight);
+			setWidth(window.innerWidth);
+			setHeight(window.innerHeight);
 		};
-		
+
 		window.addEventListener('resize', handleResize);
-		
+
 		return () => {
-		  window.removeEventListener('resize', handleResize);
+			window.removeEventListener('resize', handleResize);
 		};
-	  }, []);
+	}, []);
 
 
 	const handleSubmit = async (e) => {
@@ -107,8 +107,8 @@ const Charts = () => {
 			});
 	};
 
-	const handleDelete = async (e) => {
-		e.preventDefault();
+	const handleDelete = async () => {
+		// e.preventDefault();
 		let data = JSON.stringify({
 			testName: readingType,
 		});
@@ -133,6 +133,34 @@ const Charts = () => {
 				console.log(error);
 			});
 	};
+
+	const handleClosePopup = () => {
+		setShowDeletePopup(false);
+	};
+
+	const popover = (
+		<Popover id="popover-basic">
+			<Popover.Header as="h3" className="text-white bg-danger">
+				Warning
+			</Popover.Header>
+			<Popover.Body>
+				Are you sure you want to <strong>delete this medicine?</strong>
+				<Button
+					variant="danger"
+					className="mx-2"
+					onClick={(e) => {
+						handleDelete();
+						handleClosePopup();
+					}}
+				>
+					Yes
+				</Button>
+				<Button variant="dark" onClick={() => setShowDeletePopup(false)}>
+					No
+				</Button>
+			</Popover.Body>
+		</Popover>
+	);
 
 	return (
 		<>
@@ -207,7 +235,6 @@ const Charts = () => {
 							<Form.Control
 								type="number"
 								placeholder="Value"
-								required
 								onChange={(e) =>
 									setReadingValue(e.target.value)
 								}
@@ -232,35 +259,55 @@ const Charts = () => {
 							<Form.Control
 								type="date"
 								placeholder="Enter date"
-								required
-								onChange={(e) =>
+									onChange={(e) =>
 									setReadingDate(new Date(e.target.value))
 								}
 							/>
 						</Form.Group>
+						<div className="d-flex flex-row chart-button-div">
+							
 
-						<button
-							id="add-value"
-							className="bg-dark d-flex"
-							onClick={handleSubmit}
-						>
-							<AiFillPlusCircle id="add-icon" />
-						</button>
+							<OverlayTrigger
+								trigger="click"
+								placement="top"
+								overlay={popover}
+								rootClose
+								flip
+								fallbackPlacements={["left", "top", "bottom"]}
+								show={showDeletePopup}
+								onHide={() => {
+									setShowDeletePopup(false);
+									// setClickedIndex(null);
+								}}
+								
+							>
+								<button
+								className="btn btn-danger h-50"
+								onClick={(e) =>{e.preventDefault(); setShowDeletePopup(true)} }
+							>
+								Delete last entry
+							</button>
+							</OverlayTrigger>
+
+
+							<button
+								id="add-value"
+								className="bg-dark d-flex"
+								onClick={handleSubmit}
+							>
+								<AiFillPlusCircle id="add-icon" />
+							</button>
+						</div>
 					</Form>
-					<button
-						className="btn btn-danger my-3"
-						onClick={handleDelete}
-					>
-						Delete last entry
-					</button>
+
 				</div>
 
 				<AllCharts
 					chartData={fetchedData}
 					chartType={readingType}
-					// width={width < 500 ? 10:undefined}
-					// height={width < 500 ? height : undefined}
-					// height={width < 500 ?10:undefined}
+				// width={width < 500 ? 10:undefined}
+				// height={width < 500 ? height : undefined}
+				// height={width < 500 ?10:undefined}
 				/>
 
 				<div
@@ -277,11 +324,10 @@ const Charts = () => {
 							setShowToast(false);
 						}}
 						bg="success"
-						position="middle-center"
 						show={showToast}
 						delay={3000}
 						autohide
-						style={{ position: "relative", zIndex: "10" }}
+						style={{ position: "relative", zIndex: "10", top: "4rem" }}
 					>
 						<Toast.Header>
 							<img
@@ -304,11 +350,10 @@ const Charts = () => {
 							setShowError(false);
 						}}
 						bg="danger"
-						position="middle-center"
 						show={showError}
 						delay={2000}
 						autohide
-						style={{ position: "relative", zIndex: "10" }}
+						style={{ position: "relative", zIndex: "10", top: "4rem" }}
 					>
 						<Toast.Header>
 							<img

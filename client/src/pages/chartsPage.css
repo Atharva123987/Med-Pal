@@ -20,11 +20,13 @@
     border-radius: 10px;
 }
 
+
+
 #add-value {
     font-size: 30px;
     color: white;
     transition: all 0.3s;
-    padding: 10px;
+    padding: .5rem;
     margin-left: auto;
     border-radius: 10px;
 }

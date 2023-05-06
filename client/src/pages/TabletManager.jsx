@@ -165,19 +165,6 @@ const TabletManager = () => {
 
 					<div className='d-flex my-3'>
 
-						{/* <Form style={{ width: "300px", padding: "5px", position: "sticky", top: "0%" }}>
-							<Form.Group className='d-flex'>
-								<AiOutlineSearch style={{ fontSize: "25px", margin: "auto" }} />
-								<Form.Control
-									type="text"
-									name="searchQuery"
-									placeholder="Search..."
-									value={searchQuery}
-									onChange={(e) => setSearchQuery(e.target.value)}
-								/>
-							</Form.Group>
-						</Form> */}
-
 						<AddMedicineModal
 							setName={setName}
 							setQuantity={setQuantity}
