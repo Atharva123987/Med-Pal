@@ -6,7 +6,7 @@ import { Button } from "react-bootstrap";
 import { Form } from "react-bootstrap";
 import { FaFilePdf, FaFileWord, FaFileExcel, FaFileImage } from "react-icons/fa";
 import tempImg from '../assets/badge.png'
-import {GrSelect} from 'react-icons/gr'
+import { GrSelect } from 'react-icons/gr'
 import './reports.css'
 import { TbReportMedical } from "react-icons/tb";
 const Reports = () => {
@@ -109,11 +109,11 @@ const Reports = () => {
 				</div>
 
 				<div id="reports-container">
-				<div>
-				<h3 className="charts-heading">
-					My Reports <TbReportMedical style={{ fontSize: "30px" }} />
-				</h3>
-			</div>
+					<div>
+						<h3 className="charts-heading">
+							My Reports <TbReportMedical style={{ fontSize: "30px" }} />
+						</h3>
+					</div>
 					<h2>My Reports</h2>
 					<Form onSubmit={handleSubmit}>
 						<Form.Group controlId="formBasicFile">
@@ -146,7 +146,7 @@ const Reports = () => {
 				</div>
 				{currentFile ?
 					(
-						<div id="viewer-container" style={{backgroundColor:"rgb(23,29,61)",color:"white"}} >
+						<div id="viewer-container" style={{ backgroundColor: "rgb(23,29,61)", color: "white" }} >
 							<div className="d-flex justify-content-between" >
 								<h3>Reports viewer</h3>
 
@@ -157,33 +157,33 @@ const Reports = () => {
 
 							</div>
 							<div id="viewer">
-							{(extension === "pdf" ? (
-								<embed
-									src={`https://docs.google.com/gview?url=${currentFile?.reportResourceURL}&embedded=true`}
-									id="viewer-embed"
-									type="application/pdf"
-								/>
-							) : (
-								<img
-									src={currentFile.reportResourceURL}
-									
-									id="viewer-image"
-									alt="report image"
-								/>
-							))}
+								{(extension === "pdf" ? (
+									<embed
+										src={`https://docs.google.com/gview?url=${currentFile?.reportResourceURL}&embedded=true`}
+										id="viewer-embed"
+										type="application/pdf"
+									/>
+								) : (
+									<img
+										src={currentFile.reportResourceURL}
+
+										id="viewer-image"
+										alt="report image"
+									/>
+								))}
 							</div>
 						</div>)
 					:
 					(
-						<div id="viewer-container" style={{backgroundColor:"rgb(23,29,61)", color:"white"}}>
+						<div id="viewer-container" style={{ backgroundColor: "rgb(23,29,61)", color: "white" }}>
 							<div className="d-flex justify-content-between" >
 								<h3>Reports viewer</h3>
-								
+
 
 							</div>
-							<div className="d-flex justify-content-center align-items-center" style={{backgroundColor:"rgb(147,148,150,0.3)", width:'100%', height:"90%"}}>
-									<span style={{fontSize:"1.2rem"}}><GrSelect />Select a file to view</span>
-									</div>
+							<div className="d-flex justify-content-center align-items-center" style={{ backgroundColor: "rgb(147,148,150,0.3)", width: '100%', height: "90%" }}>
+								<span style={{ fontSize: "1.2rem" }}><GrSelect />Select a file to view</span>
+							</div>
 
 						</div>
 					)

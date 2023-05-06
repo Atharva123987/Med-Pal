@@ -34,7 +34,7 @@ export const Register = (props) => {
             <Col md="6" className="register">
               <Form onSubmit={handleSubmit}>
                 <Form.Group>
-                  <h3 className="mt-3 text-center">Register</h3>
+                  <h3 className="mt-3 text-center">Get started with us!</h3>
                 </Form.Group>
 
                 <Form.Group className="mb-3">
@@ -145,13 +145,14 @@ export const Register = (props) => {
 
                 <Form.Group>
                   <Form.Text className="text-muted">
-                    Already Have an Account,
+                    Already Have an Account?
+                    <br></br>
                     <Link
                       to={"/login"}
                       style={{
                         textDecoration: "none",
                         color: "blue",
-                        fontSize: 16,
+                        fontSize: 14,
                       }}
                     >
                       Login Here

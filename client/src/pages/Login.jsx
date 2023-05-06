@@ -30,7 +30,7 @@ export const Login = (props) => {
               <img src={Login_img} alt="Login" />
             </Col>
             <Col md="6" className="login">
-              <Form onSubmit={handleSubmit}>
+              <Form onSubmit={handleSubmit} className="w-100">
                 <Form.Group>
                   <h3 className="mt-4 text-center">Welcome Back!</h3>
                   <h5 className="mb-3 text-center">Login to your Account </h5>
@@ -70,13 +70,14 @@ export const Login = (props) => {
 
                 <Form.Group className="mb-3">
                   <Form.Text className="text-muted">
-                    Doesn't have an account, 
+                    Don't have an account? 
+                    <br></br>
                     <Link
                       to={"/register"}
                       style={{
                         textDecoration: "none",
                         color: "blue",
-                        fontSize: 16,
+                        fontSize: 14,
                       }}
                     >
                       Register Here

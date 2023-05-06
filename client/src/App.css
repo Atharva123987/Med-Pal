@@ -33,7 +33,7 @@ body {
   background-color: whitesmoke;
   margin-bottom: 1rem;
   border-radius: 0.5rem;
-  padding: 1rem;
+  padding: 1rem;  
 }
 
 .login,
@@ -86,6 +86,9 @@ input {
 }
 
 @media screen and (max-width: 600px) {
+  .login-container > .row {
+        padding: 1rem;
+    }
   .outer-container {
     align-items: flex-start;
   }
@@ -94,9 +97,8 @@ input {
     width: fit-content !important;
   }
   .register-container {
-    margin-top: 1rem;
-    margin-bottom: 3rem;
     width: fit-content !important;
+    margin-top: 2rem;
   }
   .register-img,
   .login-img {
