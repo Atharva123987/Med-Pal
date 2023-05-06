@@ -1,7 +1,6 @@
 .App {
   text-align: center;
   display: flex;
-  /* min-height: 100vh; */
   align-items: center;
   justify-content: center;
   color: white;
@@ -18,14 +17,6 @@ body {
   flex-direction: column;
 }
 
-/* .auth-container {
-  box-shadow: 2px 2px 5px black;
-  background-color: white;
-  color: black;
-  padding: 20px;
-  margin: 20px auto 0px auto;
-} */
-
 .outer-container {
   min-height: 100vh;
   display: flex;
@@ -40,7 +31,6 @@ body {
 .login-container,
 .register-container {
   background-color: whitesmoke;
-  /* margin-top: 1rem; */
   margin-bottom: 1rem;
 }
 
@@ -96,7 +86,6 @@ input {
 @media screen and (max-width: 600px) {
   .register-container,
   .login-container {
-    /* margin: 0rem; */
     width: fit-content !important;
   }
   .register-img,
@@ -104,7 +93,6 @@ input {
     display: none !important;
   }
   .row {
-    /* display: block !important; */
     width: 20rem !important;
   }
   .register {

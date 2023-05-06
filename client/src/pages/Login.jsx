@@ -87,17 +87,6 @@ export const Login = (props) => {
             </Col>
           </Row>
         </Container>
-
-        {/* <div className="login-img">
-			<img src={Login_img} alt="Login"/>
-		</div> */}
-        {/* <div
-          className="auth-container"
-          style={{ maxWidth: "400px" }}
-        > */}
-
-        {/* </div> */}
-        {/* </div> */}
       </div>
     </>
   );

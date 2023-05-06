@@ -162,12 +162,6 @@ export const Register = (props) => {
             </Col>
           </Row>
         </Container>
-        {/* <div
-			className="auth-container"
-			style={{ maxWidth: "400px" }}
-		> */}
-
-        {/* </div> */}
       </div>
     </>
   );
