@@ -5,33 +5,69 @@
   align-items: center;
   justify-content: center;
   color: white;
-  background-image: linear-gradient(79deg, #7439db, #C66FBC 48%, #F7944D);
-  
+  background-image: linear-gradient(79deg, #7439db, #c66fbc 48%, #f7944d);
 }
-body{
-  margin:0;
+body {
+  margin: 0;
 }
 
-.auth-form-container, .login-form, .register-form {
+.auth-form-container,
+.login-form,
+.register-form {
   display: flex;
   flex-direction: column;
-  
 }
 
-.auth-container{
+/* .auth-container {
   box-shadow: 2px 2px 5px black;
   background-color: white;
-  color:black;
-  padding:20px;
-  margin:20px auto 0px auto;
+  color: black;
+  padding: 20px;
+  margin: 20px auto 0px auto;
+} */
+
+.outer-container {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  background: linear-gradient(-45deg, #00efd1, #b9d4ff, #adb7f9, #00fffb);
+  background-size: 400% 400%;
+  animation: gradient 10s infinite alternate 1s;
 }
 
-.outer-container{
-  min-height: 100vh;
-  color:white;
-  background: linear-gradient(-45deg, #00EFD1, #b9d4ff, #adb7f9,#00fffb);
-    background-size: 400% 400%;
-    animation:gradient 10s infinite alternate 1s;
+.login-container,
+.register-container {
+  background-color: whitesmoke;
+  /* margin-top: 1rem; */
+  margin-bottom: 1rem;
+}
+
+.login,
+.register {
+  color: black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.login-img,
+.register-img {
+  height: 85vh;
+  width: 40vw;
+}
+
+.login-img img {
+  height: 100%;
+  width: 100%;
+  mix-blend-mode: multiply;
+}
+
+.register-img img {
+  height: 100%;
+  width: 100%;
+  mix-blend-mode:multiply;
 
 }
 
@@ -47,7 +83,7 @@ input {
   border-radius: 10px;
 }
 
-.form-text{
+.form-text {
   color: black !important;
 }
 
@@ -57,12 +93,22 @@ input {
   text-decoration: underline;
 }
 
-@media screen and (min-width: 600px) {
-  .auth-form-container {
-    padding: 5rem;
-    border: 1px solid white;
-    border-radius: 10px;
-    margin: 0.5rem;
+@media screen and (max-width: 600px) {
+  .register-container,
+  .login-container {
+    /* margin: 0rem; */
+    width: fit-content !important;
+  }
+  .register-img,
+  .login-img {
+    display: none !important;
+  }
+  .row {
+    /* display: block !important; */
+    width: 20rem !important;
+  }
+  .register {
+    padding: 1rem;
   }
 }
 
