@@ -32,6 +32,8 @@ body {
 .register-container {
   background-color: whitesmoke;
   margin-bottom: 1rem;
+  border-radius: 0.5rem;
+  padding: 1rem;
 }
 
 .login,
@@ -84,8 +86,16 @@ input {
 }
 
 @media screen and (max-width: 600px) {
-  .register-container,
+  .outer-container {
+    align-items: flex-start;
+  }
   .login-container {
+    margin-top: 2rem;
+    width: fit-content !important;
+  }
+  .register-container {
+    margin-top: 1rem;
+    margin-bottom: 3rem;
     width: fit-content !important;
   }
   .register-img,
@@ -98,6 +108,7 @@ input {
   .register {
     padding: 1rem;
   }
+
 }
 
 @keyframes gradient {

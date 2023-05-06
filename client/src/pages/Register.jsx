@@ -34,7 +34,7 @@ export const Register = (props) => {
             <Col md="6" className="register">
               <Form onSubmit={handleSubmit}>
                 <Form.Group>
-                  <h3 className="mt-3">Register</h3>
+                  <h3 className="mt-3 text-center">Register</h3>
                 </Form.Group>
 
                 <Form.Group className="mb-3">
