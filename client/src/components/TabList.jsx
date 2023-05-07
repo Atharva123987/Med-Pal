@@ -14,7 +14,35 @@ const TabList = (props) => {
 
     useEffect(() => setFetchedMedicineData(props.fetchedMedicineData), [props.fetchedMedicineData]);
 
+    const handleDelete = async (deleteID) => {
+		const axios = require("axios");
+
+		let config = {
+			method: "delete",
+			maxBodyLength: Infinity,
+			url:
+				"https://medpal-backend.onrender.com/api/medicines/" + deleteID,
+			headers: {
+				Authorization: `Bearer ${user.token}`,
+			},
+		};
+
+		axios
+			.request(config)
+			.then((response) => {
+				props.handleFetch();
+			})
+			.catch((error) => {
+				console.log(error);
+			});
+	};
+
     const handleEdit = async (e,id,quantity,name) => {
+        if(quantity === 1){
+            handleDelete(id);
+            return;
+        }
+
 		e.preventDefault();
 		console.log("ID ",id)
 		console.log("QUANTITY ",quantity)
