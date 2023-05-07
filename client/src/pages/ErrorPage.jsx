@@ -11,7 +11,7 @@ const ErrorPage = () => {
 				src={tempImg}
 				style={{ width: "5rem" }}
 			/>
-			<Link><Button>Go to Home</Button></Link>
+			<Link to={'/'}><Button>Go to Home</Button></Link>
 		</div>
 	);
 };
