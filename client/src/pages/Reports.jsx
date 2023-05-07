@@ -10,6 +10,9 @@ import { GrSelect } from 'react-icons/gr'
 import './reports.css'
 import { TbReportMedical } from "react-icons/tb";
 import { AiFillDelete } from "react-icons/ai";
+import Sidenav from '../components/Sidenav'
+import Footer from '../components/Footer'
+
 const Reports = () => {
 	const [reports, setReports] = useState([]);
 	const { user } = useAuthContext();
@@ -156,6 +159,8 @@ const Reports = () => {
 						{selectedFile?selectedFile.name:"No file selected"}
 					</Toast.Body>
 				</Toast>
+				<div className="page-container">
+					<Sidenav/>
 			<div className="my-4" id="reports-page-container">
 
 				<div id="reports-container">
@@ -242,6 +247,8 @@ const Reports = () => {
 				}
 
 			</div>
+			</div>
+			<Footer/>
 			</div>
 		</>
 	);

@@ -32,7 +32,6 @@ input::-webkit-inner-spin-button {
 
 .page-container{
   display: flex;
-  height: 100%;
 }
 
 #add-medicine-button {

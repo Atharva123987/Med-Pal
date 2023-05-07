@@ -3,6 +3,7 @@
     flex-direction: row;
     position: relative;
     justify-content: space-evenly;
+    width: 100%;
 }
 
 #reports-button{

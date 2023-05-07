@@ -12,6 +12,9 @@ import { FaClinicMedical } from 'react-icons/fa'
 import AddAppointmentModal from '../components/Appointments/AddAppointmentModal'
 import './appointments.css'
 import { useAuthContext } from "../hooks/useAuthContext";
+import Sidenav from '../components/Sidenav'
+import Footer from '../components/Footer'
+
 const Appointments = () => {
 	const [doctorName, setDoctorName] = useState(null);
 	const [doctorNumber, setDoctorNumber] = useState(null);
@@ -140,7 +143,6 @@ const Appointments = () => {
 	return (
 		<>
 
-			<div className="w-100">
 				<div
 					id="toasts"
 					style={{
@@ -218,11 +220,16 @@ const Appointments = () => {
 
 				<Navbar buttons='true' />
 
+				<div className="page-container" > 
+				<Sidenav />
+
+				<div className="w-100" style={{minHeight:"100vh", display:"flex", flexDirection:"column"}}>
+					<div style={{marginBottom:"auto"}}>
 					<h3 className="charts-heading">
 						My Appointments <FaClinicMedical style={{ fontSize: "30px" }} />
 					</h3>
 						
-				<div id='appointments-container'>
+				<div id='appointments-container' >
 				
 				<Calendar id='calendar-component' appointments={fetchedData? fetchedData : null} setDoctorName={setDoctorName} 
 				setDoctorNumber={setDoctorNumber} 
@@ -233,7 +240,11 @@ const Appointments = () => {
 				handleFetch={handleFetch}
 				showList={true}
 				/>
+
 				</div>
+				</div>
+				<Footer/>
+			</div>
 			</div>
 		</>
 	);
