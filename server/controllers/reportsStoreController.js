@@ -92,6 +92,8 @@ const deleteReport = async (req, res) => {
 
 		// delete the file from MongoDB using Mongoose
 		await ReportStore.findByIdAndDelete(report_id);
+
+		res.status(200).json({ msg: "Report deleted successfully" });
 	} catch (error) {
 		console.error(error);
 		res.status(500).send("Server error");
