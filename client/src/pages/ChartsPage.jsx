@@ -176,7 +176,7 @@ const Charts = () => {
 						Charts <BiBarChartAlt2 style={{ fontSize: "30px" }} />
 					</h3>
 				</div>
-				<div className="d-flex  justify-content-evenly h-100">
+				<div className="d-flex  justify-content-evenly h-100 chart-container-bottom">
 					<div>
 						<Form id="charts-form">
 							<h4>Add reading</h4>
@@ -375,8 +375,8 @@ const Charts = () => {
 					</Toast>
 				</div>
 
-			<Footer/>
 			</div>
+			<Footer/>
 			</div>
 		</>
 	);

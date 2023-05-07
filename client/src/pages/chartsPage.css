@@ -81,4 +81,8 @@
     #charts-form{
         max-width: 30rem;
     }
+    .chart-container-bottom{
+        flex-direction: column;
+        width: 100%;
+    }
 }

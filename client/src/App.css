@@ -88,6 +88,7 @@ input {
 @media screen and (max-width: 600px) {
   .login-container > .row {
         padding: 1rem;
+        width: 20rem !important;
     }
   .outer-container {
     align-items: flex-start;
@@ -104,9 +105,7 @@ input {
   .login-img {
     display: none !important;
   }
-  .row {
-    width: 20rem !important;
-  }
+ 
   .register {
     padding: 1rem;
   }
