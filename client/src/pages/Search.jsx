@@ -165,7 +165,7 @@ const Search = () => {
                     </Card.Body>
                   </Card>
               )
-            }) : <p style={{ fontSize: "25px" }}>No Doctors to display</p>
+            }) : <p style={{ fontSize: "25px" }}>No Doctors Found!</p>
           : <p style={{ fontSize: "25px" }}>Set search parameters to search<AiFillUpCircle/></p>
           }
         </div>
