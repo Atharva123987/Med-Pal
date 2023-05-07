@@ -72,7 +72,7 @@ const Search = () => {
 
   return (
     <>
-      <Navbar />
+      <Navbar buttons={true}/>
         <div className="page-container">
         <Sidenav/>
 
