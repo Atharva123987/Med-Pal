@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import { Table } from "react-bootstrap";
+import { Button, Table } from "react-bootstrap";
+import { AiFillPlusCircle } from "react-icons/ai";
 import { Link } from "react-router-dom";
 
 const TabStock = (props) => {
@@ -32,10 +33,8 @@ const TabStock = (props) => {
 				</Table>
 
 				<div className="dash-button-container">
-				<Link to={'/medicines'}> <button className="dash-button">
-                                <span>+</span>
-                            </button>
-							</Link>
+				<Link to={'/medicines'}> <Button variant="info"><AiFillPlusCircle color="white"/></Button> 
+                            </Link>
 				</div>
 			</div>
 		</>

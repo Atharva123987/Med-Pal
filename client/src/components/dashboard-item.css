@@ -75,7 +75,7 @@
     flex-direction: column;
     transition: all 0.4s;
     border-radius: 10px; 
-    overflow: hidden;
+    /* overflow: hidden; */
     overflow-y:auto;
 }
 
@@ -122,7 +122,8 @@ legend{
 }
 
 .dash-button-container{
-    overflow: hidden;
+    /* overflow: hidden; */
+    margin:10px;
 }
 
 .dash-button{
