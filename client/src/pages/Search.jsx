@@ -129,10 +129,9 @@ const Search = () => {
         </Form>
         <div className="d-flex flex-column search-container">
           {results ? results.length > 0 ? 
-            results.map((elem) => {
+            results.map((elem,id) => {
               return (
-                <>
-                  <Card>
+                  <Card key={id}>
                     <Card.Body className="d-flex">
                       <div>
                         <img
@@ -165,7 +164,6 @@ const Search = () => {
                       </div>
                     </Card.Body>
                   </Card>
-                </>
               )
             }) : <p style={{ fontSize: "25px" }}>No Doctors to display</p>
           : <p style={{ fontSize: "25px" }}>Set search parameters to search<AiFillUpCircle/></p>

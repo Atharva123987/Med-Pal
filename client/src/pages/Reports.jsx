@@ -210,10 +210,9 @@ const Reports = () => {
 							</div>
 							<div id="viewer">
 								{(extension === "pdf" ? (
-									<iframe
+									<embed
 										src={`https://docs.google.com/gview?url=${currentFile?.reportResourceURL}&embedded=true`}
 										id="viewer-embed"
-										title="viewer"
 										type="application/pdf"
 									/>
 								) : (
@@ -234,7 +233,7 @@ const Reports = () => {
 
 
 							</div>
-							<div className="d-flex justify-content-center align-items-center" style={{ backgroundColor: "rgb(147,148,150,0.3)", width: '100%', height: "90%" }}>
+							<div className="d-flex justify-content-center align-items-center" style={{ backgroundColor: "rgb(147,148,150,0.3)", width: '100%', minHeight: "20rem" }}>
 								<span style={{ fontSize: "1.2rem" }}><GrSelect />Select a file to view</span>
 							</div>
 

@@ -199,7 +199,7 @@ const Dashboard = () => {
 						</div>
 
 						<div id="c5" className="component">
-						<legend align="center">Medicine Reminder</legend>
+						<legend align="center">Appointments</legend>
 							<Calendar
 								appointments={appointments}
 								setDoctorName={setDoctorName}

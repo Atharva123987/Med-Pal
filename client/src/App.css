@@ -31,7 +31,7 @@ body {
 .login-container,
 .register-container {
   background-color: whitesmoke;
-  margin-bottom: 1rem;
+  margin:1rem;
   border-radius: 0.5rem;
   padding: 1rem;  
 }

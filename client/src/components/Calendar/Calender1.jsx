@@ -30,7 +30,7 @@ function App() {
             Add Appointment
           </button>
         </Col>
-        <Col md={8}>
+        {/* <Col md={8}>
           <h4>Appointments:</h4>
           <ListGroup>
             {appointments.map((appointment, index) => (
@@ -39,7 +39,7 @@ function App() {
               </ListGroup.Item>
             ))}
           </ListGroup>
-        </Col>
+        </Col> */}
       </Row>
     </Container>
   );

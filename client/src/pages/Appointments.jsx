@@ -194,7 +194,7 @@ const Appointments = () => {
 						}}
 						bg="danger"
 						position="middle-center"
-						show={!error}
+						show={error}
 						delay={2000}
 						autohide
 						style={{ position: "relative", zIndex: "10", top:"4rem" }}

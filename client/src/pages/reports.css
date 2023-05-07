@@ -22,6 +22,7 @@
 
 #viewer-container{
     width: 30rem;
+    height: fit-content;
     max-height: 40rem;
     padding: 1rem;
     position: sticky;
@@ -34,7 +35,7 @@
 
 #viewer{
     background-color: white;
-    /* min-height: 30rem; */
+    min-height: 20rem;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -91,7 +92,7 @@
         border-radius:5px ;
     }
     #viewer-embed{
-        min-height: 30rem;
+        max-height: 30rem;
     }
    
 }
