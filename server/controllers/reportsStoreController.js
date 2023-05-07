@@ -87,7 +87,7 @@ const deleteReport = async (req, res) => {
 					console.error(`Error deleting file: ${err}`);
 					return;
 				}
-				console.log(`File ${fileName} deleted successfully`);
+				console.log(`File ${bucketReportName} deleted successfully`);
 			});
 
 		// delete the file from MongoDB using Mongoose
