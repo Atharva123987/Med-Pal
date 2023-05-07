@@ -61,14 +61,14 @@ span {}
     display: flex;
     flex-direction: column;
     text-align: center;
-    justify-content:end;
+    justify-content:flex-end;
     margin-top: 10px;
 }
 
 #profile {
     display: flex;
     flex-direction: row;
-    justify-content: start;
+    justify-content: flex-start;
 
 }
 

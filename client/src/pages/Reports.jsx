@@ -2,13 +2,14 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useAuthContext } from "../hooks/useAuthContext";
 import Navbar from "../components/Navbar";
-import { Button } from "react-bootstrap";
+import { Button, Toast } from "react-bootstrap";
 import { Form } from "react-bootstrap";
 import { FaFilePdf, FaFileWord, FaFileExcel, FaFileImage } from "react-icons/fa";
 import tempImg from '../assets/badge.png'
 import { GrSelect } from 'react-icons/gr'
 import './reports.css'
 import { TbReportMedical } from "react-icons/tb";
+import { AiFillDelete } from "react-icons/ai";
 const Reports = () => {
 	const [reports, setReports] = useState([]);
 	const { user } = useAuthContext();
@@ -17,6 +18,7 @@ const Reports = () => {
 	const [fileUrl, setFileUrl] = useState(null);
 	const [currentFile, setCurrentFile] = useState(null);
 	const [extension, setExtension] = useState(null);
+	const[showSuccess, setShowSuccess] = useState(false);
 
 	useEffect(() => {
 		const fetchReports = async () => {
@@ -38,6 +40,7 @@ const Reports = () => {
 	const handleFileSelect = (event) => {
 		setSelectedFile(event.target.files[0]);
 		setIsFileSelected(true);
+		console.log(selectedFile.name);
 	};
 
 	const handleSubmit = async (event) => {
@@ -59,10 +62,35 @@ const Reports = () => {
 			});
 
 			setFileUrl(response.data.fileUrl);
+			setShowSuccess(true);
 		} catch (error) {
 			console.error(error);
 		}
 	};
+
+	const handleDelete = async(id) =>{
+		const axios = require("axios");
+
+		let config = {
+			method: "delete",
+			maxBodyLength: Infinity,
+			url:
+				"https://medpal-backend.onrender.com/api/medicines/" + id,
+			headers: {
+				Authorization: `Bearer ${user.token}`,
+			},
+		};
+
+		axios
+			.request(config)
+			.then((response) => {
+				console.log(JSON.stringify(response.data));
+			})
+			.catch((error) => {
+				console.log(error);
+			});
+
+	}
 
 	const handleDownloadReport = async (report) => {
 		try {
@@ -103,10 +131,32 @@ const Reports = () => {
 	return (
 		<>
 			<Navbar buttons='true' />
+			<div style={{position:"relative"}}>
+			<Toast
+					onClose={() => {
+						setShowSuccess(false);
+					}}
+					bg="success"
+					show={showSuccess}
+					delay={2000}
+					autohide
+					style={{ position: "absolute", zIndex: "20", right:"1rem" }}
+				>
+					<Toast.Header>
+						<img
+							src="holder.js/20x20?text=%20"
+							className="rounded me-2"
+							alt=""
+						/>
+						<strong className="me-auto text-success">
+							File uploaded successfully!
+						</strong>
+					</Toast.Header>
+					<Toast.Body className="text-white">
+						{selectedFile?selectedFile.name:"No file selected"}
+					</Toast.Body>
+				</Toast>
 			<div className="my-4" id="reports-page-container">
-				<div>
-
-				</div>
 
 				<div id="reports-container">
 					<div>
@@ -132,11 +182,13 @@ const Reports = () => {
 						{reports.map((report) => (
 							<li key={report._id}>
 								<div className="d-flex justify-content-between my-3">
-									<Button id="reports-button" onClick={() => {
+									<Button id="reports-button" className="d-flex  align-items-center justify-content-between" onClick={() => {
 										setCurrentFile(report);
 										setExtension(report.reportResourceURL.split(".").pop());
 									}}>
-										<span className="mx-2">{report.reportName.length <= 20 ? report.reportName : report.reportName.slice(0, 20) + "..."}</span>
+										<span className="">{report.reportName.length <= 20 ? report.reportName : report.reportName.slice(0, 20) + "..."}</span>
+										{/* <Button variant="danger" onClick={()=>handleDelete(report._id)}><AiFillDelete/></Button> */}
+
 									</Button>
 
 								</div>
@@ -158,9 +210,10 @@ const Reports = () => {
 							</div>
 							<div id="viewer">
 								{(extension === "pdf" ? (
-									<embed
+									<iframe
 										src={`https://docs.google.com/gview?url=${currentFile?.reportResourceURL}&embedded=true`}
 										id="viewer-embed"
+										title="viewer"
 										type="application/pdf"
 									/>
 								) : (
@@ -189,6 +242,7 @@ const Reports = () => {
 					)
 				}
 
+			</div>
 			</div>
 		</>
 	);
