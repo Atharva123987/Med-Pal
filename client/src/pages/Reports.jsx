@@ -78,7 +78,7 @@ const Reports = () => {
 			method: "delete",
 			maxBodyLength: Infinity,
 			url:
-				"https://medpal-backend.onrender.com/api/medicines/" + id,
+				"https://medpal-backend.onrender.com/api/reportsStore/" + id,
 			headers: {
 				Authorization: `Bearer ${user.token}`,
 			},
@@ -192,7 +192,7 @@ const Reports = () => {
 										setExtension(report.reportResourceURL.split(".").pop());
 									}}>
 										<span className="">{report.reportName.length <= 20 ? report.reportName : report.reportName.slice(0, 20) + "..."}</span>
-										{/* <Button variant="danger" onClick={()=>handleDelete(report._id)}><AiFillDelete/></Button> */}
+										<Button variant="danger" onClick={()=>handleDelete(report._id)}><AiFillDelete/></Button>
 
 									</Button>
 

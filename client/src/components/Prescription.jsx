@@ -16,6 +16,13 @@ const Prescription = (props) => {
         setIsLoading(false); // set loading state to false after data is fetched
     }, [props.fetchedReportsData]);
 
+    const scrollToTop = () => {
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+    }
+
     return (
         <>
             <div id="prescription" className="dash-component">
@@ -54,8 +61,8 @@ const Prescription = (props) => {
                 )}
 
                 <div className="dash-button-container">
-                <Link to={'/medicines'}> <Button variant="info"><AiFillPlusCircle color="white"/></Button> 
-                            </Link>
+                    <Link to={'/reports'}> <Button variant="info" onClick={scrollToTop}><AiFillPlusCircle color="white" /></Button>
+                    </Link>
                 </div>
             </div>
         </>

@@ -10,7 +10,12 @@ const TabList = (props) => {
     const [fetchedMedicineData, setFetchedMedicineData] = useState(null);
     const { user } = useAuthContext();
     
-
+    const scrollToTop = () => {
+		window.scrollTo({
+		  top: 0,
+		  behavior: "smooth"
+		});
+	  }
 
     useEffect(() => setFetchedMedicineData(props.fetchedMedicineData), [props.fetchedMedicineData]);
 
@@ -165,7 +170,7 @@ const TabList = (props) => {
                                 })}
                         </Table>
                         <div className="dash-button-container">
-                            <Link to={'/medicines'}> <Button variant="info"><AiFillPlusCircle color="white"/></Button> 
+                            <Link to={'/medicines'}> <Button variant="info" onClick={scrollToTop}><AiFillPlusCircle color="white"/></Button> 
                             </Link>
                         </div>
                     </>
