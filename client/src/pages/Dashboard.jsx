@@ -140,9 +140,10 @@ const Dashboard = () => {
 						}}
 						bg="success"
 						show={showTaken}
+						position='middle-center'
 						delay={2000}
 						autohide
-						style={{ position: "absolute", zIndex: "10", right: "2rem" }}
+						style={{ position: "fixed", zIndex: "10", right: "2rem", top:"10%" }}
 					>
 						<Toast.Header>
 							<img
@@ -205,7 +206,7 @@ const Dashboard = () => {
 							id="c2"
 							className="component"
 						>
-							<TabStock fetchedMedicineData={fetchedMedicinesData ? fetchedMedicinesData : null} />
+							<TabStock fetchedMedicineData={fetchedMedicinesData ? fetchedMedicinesData : null} handleFetch={handleFetch} showTaken={showTaken} setShowTaken={setShowTaken} setTabletName={setTabletName}/>
 						</div>
 						<div
 							id="c3"

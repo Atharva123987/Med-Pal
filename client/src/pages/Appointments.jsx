@@ -146,10 +146,8 @@ const Appointments = () => {
 				<div
 					id="toasts"
 					style={{
-						position: "fixed",
-						zIndex: "10",
-						top: "3%",
-						right: "3%",
+						position: "relative",
+						zIndex: "30",
 					}}
 				>
 					<Toast
@@ -161,8 +159,7 @@ const Appointments = () => {
 						autohide
 						style={{
 							position: "fixed",
-							zIndex: "10",
-							top: "5	rem",
+							top: "10%",
 							right: "3%",
 						}}
 					>
@@ -199,7 +196,11 @@ const Appointments = () => {
 						show={error}
 						delay={2000}
 						autohide
-						style={{ position: "relative", zIndex: "10", top:"4rem" }}
+						style={{
+							position: "fixed",
+							top: "10%",
+							right: "3%",
+						}}
 					>
 						<Toast.Header>
 							<img

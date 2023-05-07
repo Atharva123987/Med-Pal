@@ -48,7 +48,7 @@ const Reports = () => {
 
 	const handleSubmit = async (event) => {
 		event.preventDefault();
-
+		
 		if (selectedFile.size > 2 * 1024 * 1024) {
 			alert("File size should be less than 2MB");
 			return;
@@ -177,7 +177,7 @@ const Reports = () => {
 							<Form.Text className="text-muted">
 								The file <b>should not exceed 2MB</b> in size.
 							</Form.Text>
-							<Button type="submit" disabled={!isFileSelected}>
+							<Button type="submit" disabled={!isFileSelected} >
 								Upload
 							</Button>
 						</Form.Group>
