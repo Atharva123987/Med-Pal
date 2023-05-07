@@ -16,7 +16,7 @@ const Footer = ()=>{
     
     return(
         <>
-        <footer>
+        <footer style={{width:"100%"}}>
             <div id='footer-top'>
             <L smooth to="#" className='footer-links d-flex' onClick={scrollToTop}>
                 <BsArrowUpCircle/>

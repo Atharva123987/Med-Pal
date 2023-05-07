@@ -375,8 +375,8 @@ const Charts = () => {
 					</Toast>
 				</div>
 
-			</div>
 			<Footer/>
+			</div>
 			</div>
 		</>
 	);
