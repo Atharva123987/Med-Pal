@@ -22,7 +22,7 @@ const Contact = () => {
   const sendEmail = (e) => {
     e.preventDefault();
 
-    emailjs.sendForm(`${process.env.SERVICE_ID_EMAIL_JS}`, `${process.env.TEMPLATE_ID_EMAIL_JS}`, form.current, `${process.env.API_KEY_EMAIL_JS}`)
+    emailjs.sendForm("service_o7in3zf","template_003mf2t", form.current, "eunUXS9Pz6wes028U")
       .then((result) => {
         setShowSuccess(true);
       }, (error) => {
