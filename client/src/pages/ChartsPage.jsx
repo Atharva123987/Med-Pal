@@ -25,6 +25,7 @@ const Charts = () => {
 	const [width, setWidth] = useState(window.innerWidth);
 	const [height, setHeight] = useState(window.innerHeight);
 	const [showDeletePopup, setShowDeletePopup] = useState(false);
+	const [showDeleteSuccess,setShowDeleteSuccess] = useState(false);
 
 	useEffect(() => {
 		handleFetch();
@@ -129,6 +130,7 @@ const Charts = () => {
 			.request(config)
 			.then((response) => {
 				handleFetch();
+				setShowDeleteSuccess(true);
 			})
 			.catch((error) => {
 				handleFetch();
@@ -146,7 +148,7 @@ const Charts = () => {
 				Warning
 			</Popover.Header>
 			<Popover.Body>
-				Are you sure you want to <strong>delete this medicine?</strong>
+				Are you sure you want to <strong>delete this reading?</strong>
 				<Button
 					variant="danger"
 					className="mx-2"
@@ -373,6 +375,27 @@ const Charts = () => {
 							All fields are mandatory
 						</Toast.Body>
 					</Toast>
+
+					<Toast
+						onClose={() => {
+							setShowDeleteSuccess(false);
+						}}
+						bg="secondary"
+						show={showDeleteSuccess}
+						delay={2000}
+						autohide
+						style={{ position: "relative", zIndex: "10", top: "4rem" }}
+					>
+						<Toast.Header>
+							<strong className="me-auto text-danger">
+								Reading deleted!
+							</strong>
+						</Toast.Header>
+						<Toast.Body className="text-white">
+							Reading deleted successfully
+						</Toast.Body>
+					</Toast>
+
 				</div>
 
 			<Footer/>
