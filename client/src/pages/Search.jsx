@@ -11,6 +11,8 @@ import { IoIosNavigate } from "react-icons/io";
 import { useAuthContext } from "../hooks/useAuthContext";
 import Navbar from "../components/Navbar";
 import { AiFillUpCircle } from "react-icons/ai";
+import Sidenav from '../components/Sidenav'
+import Footer from '../components/Footer'
 
 const Search = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -70,7 +72,11 @@ const Search = () => {
 
   return (
     <>
-      <Navbar />
+      <Navbar buttons={true}/>
+        <div className="page-container">
+        <Sidenav/>
+
+        <div style={{width:"100%"}}>
       <div className="sidebar">
         <h4>Search Doctors Nearby</h4>
         <Form onSubmit={handleSubmit}>
@@ -129,10 +135,9 @@ const Search = () => {
         </Form>
         <div className="d-flex flex-column search-container">
           {results ? results.length > 0 ? 
-            results.map((elem) => {
+            results.map((elem,id) => {
               return (
-                <>
-                  <Card>
+                  <Card key={id}>
                     <Card.Body className="d-flex">
                       <div>
                         <img
@@ -165,12 +170,14 @@ const Search = () => {
                       </div>
                     </Card.Body>
                   </Card>
-                </>
               )
-            }) : <p style={{ fontSize: "25px" }}>No Doctors to display</p>
+            }) : <p style={{ fontSize: "25px" }}>No Doctors Found!</p>
           : <p style={{ fontSize: "25px" }}>Set search parameters to search<AiFillUpCircle/></p>
           }
         </div>
+        </div>
+        <Footer/>
+      </div>
       </div>
     </>
   );

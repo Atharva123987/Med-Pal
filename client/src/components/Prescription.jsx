@@ -3,6 +3,8 @@ import PImg from "../assets/prescription.jpg";
 import { FaFilePdf, FaFileWord, FaFileExcel, FaFileImage } from "react-icons/fa";
 import LoadingCircle from "../components/SkeletonLoaders/LoadingCircle"
 import { Link } from "react-router-dom";
+import { AiFillPlusCircle } from "react-icons/ai";
+import { Button } from "react-bootstrap";
 
 const Prescription = (props) => {
     const [fetchedData, setFetchedData] = useState(null);
@@ -52,10 +54,8 @@ const Prescription = (props) => {
                 )}
 
                 <div className="dash-button-container">
-                    <Link to={'/reports'}> <button className="dash-button">
-                        <span>+</span>
-                    </button>
-                    </Link>
+                <Link to={'/medicines'}> <Button variant="info"><AiFillPlusCircle color="white"/></Button> 
+                            </Link>
                 </div>
             </div>
         </>

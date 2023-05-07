@@ -11,6 +11,7 @@ import { BsArrowUpSquareFill } from 'react-icons/bs'
 import Footer from '../components/Footer'
 import { HashLink as L } from 'react-router-hash-link';
 import { useAuthContext } from '../hooks/useAuthContext';
+import Sidenav from '../components/Sidenav'
 
 const TabletManager = () => {
 	const [name, setName] = useState("");
@@ -140,8 +141,9 @@ const TabletManager = () => {
 	return (
 		<>
 			<Navbar buttons={true} />
-
-
+			<div className='page-container'>
+			<Sidenav/>
+			<div style={{width:"100%"}}>
 			<h3 id='medicines-heading'>Medicine Manager</h3>
 
 			{
@@ -164,19 +166,6 @@ const TabletManager = () => {
 				<div id='medicines-table' className='d-flex flex-column' >
 
 					<div className='d-flex my-3'>
-
-						{/* <Form style={{ width: "300px", padding: "5px", position: "sticky", top: "0%" }}>
-							<Form.Group className='d-flex'>
-								<AiOutlineSearch style={{ fontSize: "25px", margin: "auto" }} />
-								<Form.Control
-									type="text"
-									name="searchQuery"
-									placeholder="Search..."
-									value={searchQuery}
-									onChange={(e) => setSearchQuery(e.target.value)}
-								/>
-							</Form.Group>
-						</Form> */}
 
 						<AddMedicineModal
 							setName={setName}
@@ -242,6 +231,8 @@ const TabletManager = () => {
 
 			</div>
 			<Footer />
+			</div>
+			</div>
 		</>
 	);
 

@@ -89,7 +89,7 @@ const AllMedicinesTable = (props) => {
 						<th>Medicine expiry</th>
 						<th>Medicine frequency</th>
 						<th>Medicine time of days</th>
-						<th>Remove</th>
+						<th>Action</th>
 					</tr>
 				</thead>
 				<tbody>

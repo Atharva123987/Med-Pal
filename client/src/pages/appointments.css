@@ -2,8 +2,9 @@
     display: flex;
     flex-direction: row;
     justify-content:center;
-    position: relative;
-    /* min-height: 100vh; */
+    position: relative; 
+    margin-bottom: 15rem;
+
     /* margin: 0px; */
     
 }
@@ -12,7 +13,6 @@
   }
 
   #calendar-container{
-    /* height:25rem; */
     display: flex;
     
   }

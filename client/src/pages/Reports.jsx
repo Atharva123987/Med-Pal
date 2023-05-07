@@ -2,13 +2,17 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useAuthContext } from "../hooks/useAuthContext";
 import Navbar from "../components/Navbar";
-import { Button } from "react-bootstrap";
+import { Button, Toast } from "react-bootstrap";
 import { Form } from "react-bootstrap";
 import { FaFilePdf, FaFileWord, FaFileExcel, FaFileImage } from "react-icons/fa";
 import tempImg from '../assets/badge.png'
-import {GrSelect} from 'react-icons/gr'
+import { GrSelect } from 'react-icons/gr'
 import './reports.css'
 import { TbReportMedical } from "react-icons/tb";
+import { AiFillDelete } from "react-icons/ai";
+import Sidenav from '../components/Sidenav'
+import Footer from '../components/Footer'
+
 const Reports = () => {
 	const [reports, setReports] = useState([]);
 	const { user } = useAuthContext();
@@ -17,6 +21,7 @@ const Reports = () => {
 	const [fileUrl, setFileUrl] = useState(null);
 	const [currentFile, setCurrentFile] = useState(null);
 	const [extension, setExtension] = useState(null);
+	const[showSuccess, setShowSuccess] = useState(false);
 
 	useEffect(() => {
 		const fetchReports = async () => {
@@ -38,11 +43,12 @@ const Reports = () => {
 	const handleFileSelect = (event) => {
 		setSelectedFile(event.target.files[0]);
 		setIsFileSelected(true);
+		console.log(selectedFile.name);
 	};
 
 	const handleSubmit = async (event) => {
 		event.preventDefault();
-
+		
 		if (selectedFile.size > 2 * 1024 * 1024) {
 			alert("File size should be less than 2MB");
 			return;
@@ -59,10 +65,35 @@ const Reports = () => {
 			});
 
 			setFileUrl(response.data.fileUrl);
+			setShowSuccess(true);
 		} catch (error) {
 			console.error(error);
 		}
 	};
+
+	const handleDelete = async(id) =>{
+		const axios = require("axios");
+
+		let config = {
+			method: "delete",
+			maxBodyLength: Infinity,
+			url:
+				"https://medpal-backend.onrender.com/api/medicines/" + id,
+			headers: {
+				Authorization: `Bearer ${user.token}`,
+			},
+		};
+
+		axios
+			.request(config)
+			.then((response) => {
+				console.log(JSON.stringify(response.data));
+			})
+			.catch((error) => {
+				console.log(error);
+			});
+
+	}
 
 	const handleDownloadReport = async (report) => {
 		try {
@@ -103,17 +134,41 @@ const Reports = () => {
 	return (
 		<>
 			<Navbar buttons='true' />
+			<div style={{position:"relative"}}>
+			<Toast
+					onClose={() => {
+						setShowSuccess(false);
+					}}
+					bg="success"
+					show={showSuccess}
+					delay={2000}
+					autohide
+					style={{ position: "absolute", zIndex: "20", right:"1rem" }}
+				>
+					<Toast.Header>
+						<img
+							src="holder.js/20x20?text=%20"
+							className="rounded me-2"
+							alt=""
+						/>
+						<strong className="me-auto text-success">
+							File uploaded successfully!
+						</strong>
+					</Toast.Header>
+					<Toast.Body className="text-white">
+						{selectedFile?selectedFile.name:"No file selected"}
+					</Toast.Body>
+				</Toast>
+				<div className="page-container">
+					<Sidenav/>
 			<div className="my-4" id="reports-page-container">
-				<div>
-
-				</div>
 
 				<div id="reports-container">
-				<div>
-				<h3 className="charts-heading">
-					My Reports <TbReportMedical style={{ fontSize: "30px" }} />
-				</h3>
-			</div>
+					<div>
+						<h3 className="charts-heading">
+							My Reports <TbReportMedical style={{ fontSize: "30px" }} />
+						</h3>
+					</div>
 					<h2>My Reports</h2>
 					<Form onSubmit={handleSubmit}>
 						<Form.Group controlId="formBasicFile">
@@ -122,7 +177,7 @@ const Reports = () => {
 							<Form.Text className="text-muted">
 								The file <b>should not exceed 2MB</b> in size.
 							</Form.Text>
-							<Button type="submit" disabled={!isFileSelected}>
+							<Button type="submit" disabled={!isFileSelected} >
 								Upload
 							</Button>
 						</Form.Group>
@@ -132,11 +187,13 @@ const Reports = () => {
 						{reports.map((report) => (
 							<li key={report._id}>
 								<div className="d-flex justify-content-between my-3">
-									<Button id="reports-button" onClick={() => {
+									<Button id="reports-button" className="d-flex  align-items-center justify-content-between" onClick={() => {
 										setCurrentFile(report);
 										setExtension(report.reportResourceURL.split(".").pop());
 									}}>
-										<span className="mx-2">{report.reportName.length <= 20 ? report.reportName : report.reportName.slice(0, 20) + "..."}</span>
+										<span className="">{report.reportName.length <= 20 ? report.reportName : report.reportName.slice(0, 20) + "..."}</span>
+										{/* <Button variant="danger" onClick={()=>handleDelete(report._id)}><AiFillDelete/></Button> */}
+
 									</Button>
 
 								</div>
@@ -146,7 +203,7 @@ const Reports = () => {
 				</div>
 				{currentFile ?
 					(
-						<div id="viewer-container" style={{backgroundColor:"rgb(23,29,61)",color:"white"}} >
+						<div id="viewer-container" style={{ backgroundColor: "rgb(23,29,61)", color: "white" }} >
 							<div className="d-flex justify-content-between" >
 								<h3>Reports viewer</h3>
 
@@ -157,38 +214,41 @@ const Reports = () => {
 
 							</div>
 							<div id="viewer">
-							{(extension === "pdf" ? (
-								<embed
-									src={`https://docs.google.com/gview?url=${currentFile?.reportResourceURL}&embedded=true`}
-									id="viewer-embed"
-									type="application/pdf"
-								/>
-							) : (
-								<img
-									src={currentFile.reportResourceURL}
-									
-									id="viewer-image"
-									alt="report image"
-								/>
-							))}
+								{(extension === "pdf" ? (
+									<embed
+										src={`https://docs.google.com/gview?url=${currentFile?.reportResourceURL}&embedded=true`}
+										id="viewer-embed"
+										type="application/pdf"
+									/>
+								) : (
+									<img
+										src={currentFile.reportResourceURL}
+
+										id="viewer-image"
+										alt="report image"
+									/>
+								))}
 							</div>
 						</div>)
 					:
 					(
-						<div id="viewer-container" style={{backgroundColor:"rgb(23,29,61)", color:"white"}}>
+						<div id="viewer-container" style={{ backgroundColor: "rgb(23,29,61)", color: "white" }}>
 							<div className="d-flex justify-content-between" >
 								<h3>Reports viewer</h3>
-								
+
 
 							</div>
-							<div className="d-flex justify-content-center align-items-center" style={{backgroundColor:"rgb(147,148,150,0.3)", width:'100%', height:"90%"}}>
-									<span style={{fontSize:"1.2rem"}}><GrSelect />Select a file to view</span>
-									</div>
+							<div className="d-flex justify-content-center align-items-center" style={{ backgroundColor: "rgb(147,148,150,0.3)", width: '100%', minHeight: "20rem" }}>
+								<span style={{ fontSize: "1.2rem" }}><GrSelect />Select a file to view</span>
+							</div>
 
 						</div>
 					)
 				}
 
+			</div>
+			</div>
+			<Footer/>
 			</div>
 		</>
 	);

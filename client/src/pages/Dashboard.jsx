@@ -15,6 +15,8 @@ import Footer from '../components/Footer'
 import Navbar from '../components/Navbar'
 import { useAuthContext } from "../hooks/useAuthContext";
 import { Link, Navigate } from "react-router-dom";
+import { Toast } from "react-bootstrap";
+import { AiFillPlusCircle } from "react-icons/ai";
 
 
 const Dashboard = () => {
@@ -31,8 +33,8 @@ const Dashboard = () => {
 	const [doctorAddress, setDoctorAddress] = useState("");
 	const [notes, setNotes] = useState("");
 	const [appointmentDateAndTime, setAppointmentDateAndTime] = useState("");
-
- 
+	const [showTaken,setShowTaken] = useState(false);
+	const [tabletName, setTabletName] = useState(null)
 
 	useEffect(() => {
 		handleFetch()
@@ -129,8 +131,34 @@ const Dashboard = () => {
 		<>
 			<Navbar />
 			<div id="content">
+			
 				
 				<Sidenav />
+				<Toast
+						onClose={() => {
+							setShowTaken(false);
+						}}
+						bg="success"
+						show={showTaken}
+						position='middle-center'
+						delay={2000}
+						autohide
+						style={{ position: "fixed", zIndex: "10", right: "2rem", top:"10%" }}
+					>
+						<Toast.Header>
+							<img
+								src="holder.js/20x20?text=%20"
+								className="rounded me-2"
+								alt=""
+							/>
+							<strong className="me-auto text-success">
+								Tablet Taken!
+							</strong>
+						</Toast.Header>
+						<Toast.Body className="text-white">
+							{tabletName}
+						</Toast.Body>
+					</Toast>
 				<div id="user-details">
 
 					<div id="profile">
@@ -170,7 +198,7 @@ const Dashboard = () => {
 							id="c1"
 							className="component"
 						>
-							<TabList fetchedMedicineData={fetchedMedicinesData ? fetchedMedicinesData : null} />
+							<TabList fetchedMedicineData={fetchedMedicinesData ? fetchedMedicinesData : null} handleFetch={handleFetch} showTaken={showTaken} setShowTaken={setShowTaken} setTabletName={setTabletName} />
 
 						</div>
 		
@@ -178,7 +206,7 @@ const Dashboard = () => {
 							id="c2"
 							className="component"
 						>
-							<TabStock fetchedMedicineData={fetchedMedicinesData ? fetchedMedicinesData : null} />
+							<TabStock fetchedMedicineData={fetchedMedicinesData ? fetchedMedicinesData : null} handleFetch={handleFetch} showTaken={showTaken} setShowTaken={setShowTaken} setTabletName={setTabletName}/>
 						</div>
 						<div
 							id="c3"
@@ -190,16 +218,18 @@ const Dashboard = () => {
 
 					<div id="r2">
 
-						<div id="c4" className="component">
+						<div id="c4" className="component d-flex flex-column">
+					
 							{
 
 								fetchedChartData && <AllCharts chartData={fetchedChartData} chartType={readingType} width={450} height={230} />
 							}
+							
 
 						</div>
 
 						<div id="c5" className="component">
-						<legend align="center">Medicine Reminder</legend>
+						<legend align="center">Appointments</legend>
 							<Calendar
 								appointments={appointments}
 								setDoctorName={setDoctorName}

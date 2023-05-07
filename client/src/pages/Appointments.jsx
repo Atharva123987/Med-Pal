@@ -12,6 +12,9 @@ import { FaClinicMedical } from 'react-icons/fa'
 import AddAppointmentModal from '../components/Appointments/AddAppointmentModal'
 import './appointments.css'
 import { useAuthContext } from "../hooks/useAuthContext";
+import Sidenav from '../components/Sidenav'
+import Footer from '../components/Footer'
+
 const Appointments = () => {
 	const [doctorName, setDoctorName] = useState(null);
 	const [doctorNumber, setDoctorNumber] = useState(null);
@@ -140,31 +143,27 @@ const Appointments = () => {
 	return (
 		<>
 
-			<div className="w-100">
 				<div
 					id="toasts"
 					style={{
-						position: "fixed",
-						zIndex: "10",
-						top: "3%",
-						right: "3%",
+						position: "relative",
+						zIndex: "30",
 					}}
 				>
 					<Toast
 						onClose={() => setShow(false)}
-						bg="light"
+						bg="success"
 						position="middle-center"
 						show={show}
 						delay={3000}
 						autohide
 						style={{
 							position: "fixed",
-							zIndex: "10",
-							top: "3%",
+							top: "10%",
 							right: "3%",
 						}}
 					>
-						<Toast.Header>
+						<Toast.Header className="text-success">
 							<img
 								src="holder.js/20x20?text=%20"
 								className="rounded me-2"
@@ -173,13 +172,13 @@ const Appointments = () => {
 							<strong className="me-auto">
 								Appointment Added!
 							</strong>
-							<small>
+							<small className="text-secondary">
 								Doctor{" "}
 								{doctorName?.charAt(0).toUpperCase() +
 									doctorName?.slice(1)}
 							</small>
 						</Toast.Header>
-						<Toast.Body>
+						<Toast.Body className="text-white">
 							<b>
 								{appointmentDateAndTime?.getDate()}th of {month}
 							</b>{" "}
@@ -197,7 +196,11 @@ const Appointments = () => {
 						show={error}
 						delay={2000}
 						autohide
-						style={{ position: "relative", zIndex: "10" }}
+						style={{
+							position: "fixed",
+							top: "10%",
+							right: "3%",
+						}}
 					>
 						<Toast.Header>
 							<img
@@ -218,11 +221,16 @@ const Appointments = () => {
 
 				<Navbar buttons='true' />
 
+				<div className="page-container" > 
+				<Sidenav />
+
+				<div className="w-100" style={{minHeight:"100vh", display:"flex", flexDirection:"column"}}>
+					<div style={{marginBottom:"auto"}}>
 					<h3 className="charts-heading">
 						My Appointments <FaClinicMedical style={{ fontSize: "30px" }} />
 					</h3>
 						
-				<div id='appointments-container'>
+				<div id='appointments-container' >
 				
 				<Calendar id='calendar-component' appointments={fetchedData? fetchedData : null} setDoctorName={setDoctorName} 
 				setDoctorNumber={setDoctorNumber} 
@@ -233,7 +241,11 @@ const Appointments = () => {
 				handleFetch={handleFetch}
 				showList={true}
 				/>
+
 				</div>
+				</div>
+				<Footer/>
+			</div>
 			</div>
 		</>
 	);

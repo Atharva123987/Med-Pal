@@ -1,6 +1,6 @@
 import Navbar from "../components/Navbar";
 import AllCharts from "../components/Charts";
-import { Form, Toast } from "react-bootstrap";
+import { Form, OverlayTrigger, Popover, Toast } from "react-bootstrap";
 import { useState, useRef, useEffect } from "react";
 import axios from "axios";
 import ButtonGroup from "react-bootstrap/ButtonGroup";
@@ -10,6 +10,8 @@ import Button from "react-bootstrap/Button";
 import { BiBarChartAlt2 } from "react-icons/bi";
 import { useAuthContext } from "../hooks/useAuthContext";
 import "./chartsPage.css";
+import Sidenav from "../components/Sidenav";
+import Footer from "../components/Footer";
 
 const Charts = () => {
 	const { user } = useAuthContext();
@@ -22,7 +24,7 @@ const Charts = () => {
 	const [requiredError, setRequiredError] = useState(false);
 	const [width, setWidth] = useState(window.innerWidth);
 	const [height, setHeight] = useState(window.innerHeight);
-
+	const [showDeletePopup, setShowDeletePopup] = useState(false);
 
 	useEffect(() => {
 		handleFetch();
@@ -30,16 +32,16 @@ const Charts = () => {
 
 	useEffect(() => {
 		const handleResize = () => {
-		  setWidth(window.innerWidth);
-		  setHeight(window.innerHeight);
+			setWidth(window.innerWidth);
+			setHeight(window.innerHeight);
 		};
-		
+
 		window.addEventListener('resize', handleResize);
-		
+
 		return () => {
-		  window.removeEventListener('resize', handleResize);
+			window.removeEventListener('resize', handleResize);
 		};
-	  }, []);
+	}, []);
 
 
 	const handleSubmit = async (e) => {
@@ -107,8 +109,8 @@ const Charts = () => {
 			});
 	};
 
-	const handleDelete = async (e) => {
-		e.preventDefault();
+	const handleDelete = async () => {
+		// e.preventDefault();
 		let data = JSON.stringify({
 			testName: readingType,
 		});
@@ -134,134 +136,183 @@ const Charts = () => {
 			});
 	};
 
+	const handleClosePopup = () => {
+		setShowDeletePopup(false);
+	};
+
+	const popover = (
+		<Popover id="popover-basic">
+			<Popover.Header as="h3" className="text-white bg-danger">
+				Warning
+			</Popover.Header>
+			<Popover.Body>
+				Are you sure you want to <strong>delete this medicine?</strong>
+				<Button
+					variant="danger"
+					className="mx-2"
+					onClick={(e) => {
+						handleDelete();
+						handleClosePopup();
+					}}
+				>
+					Yes
+				</Button>
+				<Button variant="dark" onClick={() => setShowDeletePopup(false)}>
+					No
+				</Button>
+			</Popover.Body>
+		</Popover>
+	);
+
 	return (
 		<>
 			<Navbar buttons={true} />
-			<div>
-				<h3 className="charts-heading">
-					Charts <BiBarChartAlt2 style={{ fontSize: "30px" }} />
-				</h3>
-			</div>
-			<div
-				id="charts-container"
-			>
+			<div className="page-container">
+			<Sidenav/>
+			<div id="charts-container">
+
 				<div>
-					<Form id="charts-form">
-						<h4>Add reading</h4>
+					<h3 className="charts-heading">
+						Charts <BiBarChartAlt2 style={{ fontSize: "30px" }} />
+					</h3>
+				</div>
+				<div className="d-flex  justify-content-evenly h-100 chart-container-bottom">
+					<div>
+						<Form id="charts-form">
+							<h4>Add reading</h4>
 
-						<Dropdown as={ButtonGroup} id="chart-dropdown">
-							<Dropdown.Toggle
-								split
-								variant="dark"
-								id="dropdown-split-basic"
-								drop="end"
-								key="end"
+							<Dropdown as={ButtonGroup} id="chart-dropdown">
+								<Dropdown.Toggle
+									split
+									variant="dark"
+									id="dropdown-split-basic"
+									drop="end"
+									key="end"
+								>
+									{readingType ? readingType : "Select a chart"}
+								</Dropdown.Toggle>
+
+								<Dropdown.Menu>
+									<Dropdown.Item
+										style={{ fontSize: "15px" }}
+										onClick={() => {
+											setReadingType("Blood Sugar");
+										}}
+									>
+										Blood Sugar
+									</Dropdown.Item>
+									<Dropdown.Item
+										style={{ fontSize: "15px" }}
+										onClick={() => {
+											setReadingType("Blood Pressure");
+										}}
+									>
+										Blood Pressure
+									</Dropdown.Item>
+									<Dropdown.Item
+										style={{ fontSize: "15px" }}
+										onClick={() => {
+											setReadingType("Haemoglobin");
+										}}
+									>
+										Haemoglobin
+									</Dropdown.Item>
+								</Dropdown.Menu>
+							</Dropdown>
+
+							<Form.Group
+								className="mb-3"
+								controlId="exampleForm.ControlInput2"
+								style={{ width: "300px" }}
 							>
-								{readingType ? readingType : "Select a chart"}
-							</Dropdown.Toggle>
+								<Form.Label>
+									Reading value{" "}
+									{requiredError && (
+										<p
+											style={{ all: "unset" }}
+											className="text-danger"
+										>
+											*
+										</p>
+									)}
+								</Form.Label>
+								<Form.Control
+									type="number"
+									placeholder="Value"
+									onChange={(e) =>
+										setReadingValue(e.target.value)
+									}
+								/>
+							</Form.Group>
 
-							<Dropdown.Menu>
-								<Dropdown.Item
-									style={{ fontSize: "15px" }}
-									onClick={() => {
-										setReadingType("Blood Sugar");
-									}}
-								>
-									Blood Sugar
-								</Dropdown.Item>
-								<Dropdown.Item
-									style={{ fontSize: "15px" }}
-									onClick={() => {
-										setReadingType("Blood Pressure");
-									}}
-								>
-									Blood Pressure
-								</Dropdown.Item>
-								<Dropdown.Item
-									style={{ fontSize: "15px" }}
-									onClick={() => {
-										setReadingType("Haemoglobin");
-									}}
-								>
-									Haemoglobin
-								</Dropdown.Item>
-							</Dropdown.Menu>
-						</Dropdown>
+							<Form.Group
+								className="mb-3"
+								controlId="appointmentTime"
+							>
+								<Form.Label>
+									Date{" "}
+									{requiredError && (
+										<p
+											style={{ all: "unset" }}
+											className="text-danger"
+										>
+											*
+										</p>
+									)}
+								</Form.Label>
+								<Form.Control
+									type="date"
+									placeholder="Enter date"
+									onChange={(e) =>
+										setReadingDate(new Date(e.target.value))
+									}
+								/>
+							</Form.Group>
+							<div className="d-flex flex-row chart-button-div">
 
-						<Form.Group
-							className="mb-3"
-							controlId="exampleForm.ControlInput2"
-							style={{ width: "300px" }}
-						>
-							<Form.Label>
-								Reading value{" "}
-								{requiredError && (
-									<p
-										style={{ all: "unset" }}
-										className="text-danger"
+
+								<OverlayTrigger
+									trigger="click"
+									placement="top"
+									overlay={popover}
+									rootClose
+									flip
+									fallbackPlacements={["left", "top", "bottom"]}
+									show={showDeletePopup}
+									onHide={() => {
+										setShowDeletePopup(false);
+										// setClickedIndex(null);
+									}}
+
+								>
+									<button
+										className="btn btn-danger h-50"
+										onClick={(e) => { e.preventDefault(); setShowDeletePopup(true) }}
 									>
-										*
-									</p>
-								)}
-							</Form.Label>
-							<Form.Control
-								type="number"
-								placeholder="Value"
-								required
-								onChange={(e) =>
-									setReadingValue(e.target.value)
-								}
-							/>
-						</Form.Group>
+										Delete last entry
+									</button>
+								</OverlayTrigger>
 
-						<Form.Group
-							className="mb-3"
-							controlId="appointmentTime"
-						>
-							<Form.Label>
-								Date{" "}
-								{requiredError && (
-									<p
-										style={{ all: "unset" }}
-										className="text-danger"
-									>
-										*
-									</p>
-								)}
-							</Form.Label>
-							<Form.Control
-								type="date"
-								placeholder="Enter date"
-								required
-								onChange={(e) =>
-									setReadingDate(new Date(e.target.value))
-								}
-							/>
-						</Form.Group>
 
-						<button
-							id="add-value"
-							className="bg-dark d-flex"
-							onClick={handleSubmit}
-						>
-							<AiFillPlusCircle id="add-icon" />
-						</button>
-					</Form>
-					<button
-						className="btn btn-danger my-3"
-						onClick={handleDelete}
-					>
-						Delete last entry
-					</button>
+								<button
+									id="add-value"
+									className="bg-dark d-flex"
+									onClick={handleSubmit}
+								>
+									<AiFillPlusCircle id="add-icon" />
+								</button>
+							</div>
+						</Form>
+
+					</div>
+
+					<AllCharts
+						chartData={fetchedData}
+						chartType={readingType}
+					
+					/>
 				</div>
 
-				<AllCharts
-					chartData={fetchedData}
-					chartType={readingType}
-					// width={width < 500 ? 10:undefined}
-					// height={width < 500 ? height : undefined}
-					// height={width < 500 ?10:undefined}
-				/>
 
 				<div
 					id="toasts"
@@ -277,11 +328,10 @@ const Charts = () => {
 							setShowToast(false);
 						}}
 						bg="success"
-						position="middle-center"
 						show={showToast}
 						delay={3000}
 						autohide
-						style={{ position: "relative", zIndex: "10" }}
+						style={{ position: "relative", zIndex: "10", top: "4rem" }}
 					>
 						<Toast.Header>
 							<img
@@ -304,11 +354,10 @@ const Charts = () => {
 							setShowError(false);
 						}}
 						bg="danger"
-						position="middle-center"
 						show={showError}
 						delay={2000}
 						autohide
-						style={{ position: "relative", zIndex: "10" }}
+						style={{ position: "relative", zIndex: "10", top: "4rem" }}
 					>
 						<Toast.Header>
 							<img
@@ -325,6 +374,9 @@ const Charts = () => {
 						</Toast.Body>
 					</Toast>
 				</div>
+
+			<Footer/>
+			</div>
 			</div>
 		</>
 	);
