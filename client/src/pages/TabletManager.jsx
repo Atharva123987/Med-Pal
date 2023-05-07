@@ -11,6 +11,7 @@ import { BsArrowUpSquareFill } from 'react-icons/bs'
 import Footer from '../components/Footer'
 import { HashLink as L } from 'react-router-hash-link';
 import { useAuthContext } from '../hooks/useAuthContext';
+import Sidenav from '../components/Sidenav'
 
 const TabletManager = () => {
 	const [name, setName] = useState("");
@@ -140,8 +141,9 @@ const TabletManager = () => {
 	return (
 		<>
 			<Navbar buttons={true} />
-
-
+			<div className='page-container'>
+			<Sidenav/>
+			<div style={{width:"100%"}}>
 			<h3 id='medicines-heading'>Medicine Manager</h3>
 
 			{
@@ -229,6 +231,8 @@ const TabletManager = () => {
 
 			</div>
 			<Footer />
+			</div>
+			</div>
 		</>
 	);
 

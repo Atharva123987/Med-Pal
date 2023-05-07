@@ -5,8 +5,11 @@
 
 #charts-container{
     display: flex;
-    justify-content: space-evenly;
-    margin-top: 2rem;
+    width: 100%;
+    flex-direction: column;
+    /* justify-content: space-evenly; */
+    min-height: 100vh;
+    /* margin-top: 2rem; */
 }
 
 #charts-form:hover {

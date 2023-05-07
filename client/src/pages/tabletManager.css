@@ -30,6 +30,11 @@ input::-webkit-inner-spin-button {
 
 }
 
+.page-container{
+  display: flex;
+  height: 100%;
+}
+
 #add-medicine-button {
   color: white;
   scale: 100%;
@@ -172,6 +177,11 @@ h3 {
 }
 
 @media screen and (max-width: 520px) {
+
+  .page-container{
+    flex-direction: column;
+  }
+
   #delete-button-overlay{
     font-size: 13px;
   }
