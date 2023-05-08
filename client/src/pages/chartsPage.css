@@ -65,6 +65,7 @@
     margin:2rem auto 20px auto;
     padding:5px;
     border-radius: 40px;
+    min-width: 10rem;
     max-width: 25rem;
 }
 

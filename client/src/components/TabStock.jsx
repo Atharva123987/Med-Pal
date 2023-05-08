@@ -10,6 +10,13 @@ const TabStock = (props) => {
 	const { user } = useAuthContext();
 	useEffect(() => setFetchedMedicineData(props.fetchedMedicineData), [props.fetchedMedicineData]);
 
+	const scrollToTop = () => {
+		window.scrollTo({
+		  top: 0,
+		  behavior: "smooth"
+		});
+	  }
+
 	const handleDelete = async (deleteID) => {
 		const axios = require("axios");
 
@@ -107,7 +114,7 @@ const TabStock = (props) => {
 				</Table>
 
 				<div className="dash-button-container">
-				<Link to={'/medicines'}> <Button variant="info"><AiFillPlusCircle color="white"/></Button> 
+				<Link to={'/medicines'}> <Button variant="info" onClick={scrollToTop}><AiFillPlusCircle color="white"/></Button> 
                             </Link>
 				</div>
 			</div>

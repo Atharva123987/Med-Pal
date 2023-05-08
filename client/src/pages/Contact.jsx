@@ -1,6 +1,6 @@
-import {Button, Form, Container} from "react-bootstrap";
+import { Button, Form, Container, Toast } from "react-bootstrap";
 import '../App.css'
-import {IconContext} from "react-icons";
+import { IconContext } from "react-icons";
 import { FaTwitter } from "react-icons/fa";
 import { FaInstagram } from "react-icons/fa";
 import { FaLinkedin } from "react-icons/fa";
@@ -8,80 +8,74 @@ import { SiGmail } from "react-icons/si";
 import './contact.css'
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
-import { useState } from "react";
+import emailjs from '@emailjs/browser';
+import { useRef, useState } from "react";
 
 const Contact = () => {
 
   const [name, setName] = useState('');
-    const [email, setEmail] = useState('');
-    const [message, setMessage] = useState('');
+  const [email, setEmail] = useState('');
+  const [message, setMessage] = useState('');
+  const [showSuccess,setShowSuccess] = useState(false);
+  const form = useRef();
 
+  const sendEmail = (e) => {
+    e.preventDefault();
 
-    const generateMailtoLink = () => {
-      const subject = "Contact Form Submission";
-      const body = `Name: ${name}%0D%0AEmail: ${email}%0D%0A%0D%0AMessage:%0D%0A${message}`;
-  
-      return `mailto:you@example.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    emailjs.sendForm("service_o7in3zf","template_003mf2t", form.current, "eunUXS9Pz6wes028U")
+      .then((result) => {
+        setShowSuccess(true);
+      }, (error) => {
+        console.log(error.text);
+      });
   };
 
-  
-    return ( 
-        <div  >
-          <Navbar buttons={true}/>
-        <Container 
-      className="border mt-5 mb-5 mt-md-4 mt-lg-5"
-      style={{ minHeight:"100vh",maxWidth: "600px" }}
-    >
+
+  return (
+    <div  >
+      <Navbar buttons={true} />
+
+      <Toast
+					onClose={() => {
+						setShowSuccess(false);
+					}}
+					bg="success"
+					show={showSuccess}
+					delay={2000}
+					autohide
+					style={{ position: "absolute", zIndex: "20", right:"1rem" }}
+				>
+					<Toast.Header>
+						<strong className="me-auto text-success">
+							Form submitted successfully!
+						</strong>
+					</Toast.Header>
+					<Toast.Body className="text-white">
+						We will get back to you soon.
+					</Toast.Body>
+				</Toast>
+      <Container
+        className="border mt-5 mb-5 mt-md-4 mt-lg-5"
+        style={{ minHeight: "100vh", maxWidth: "600px" }}
+      >
         <h1 className="heading2">Contact Here</h1>
-        <Form>
-          <Form.Group controlId="formBasicName">
-            <Form.Label>Name</Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="Enter your name"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-            />
-          </Form.Group>
 
-          <Form.Group controlId="formBasicEmail">
-            <Form.Label>Email address</Form.Label>
-            <Form.Control
-              type="email"
-              placeholder="Enter email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-            <Form.Text className="text-muted">
-              We'll never share your email with anyone else.
-            </Form.Text>
-          </Form.Group>
-
-          <Form.Group controlId="formBasicMessage">
-            <Form.Label>Message</Form.Label>
-            <Form.Control
-              as="textarea"
-              rows={3}
-              placeholder="Type your message here..."
-              value={message}
-              onChange={(e) => setMessage(e.target.value)}
-            />
-          </Form.Group>
-
-          <Button
-            variant="success"
-            type="button"
-            className="my-2"
-            onClick={() => (window.location.href = generateMailtoLink())}
-          >
-            Submit
+        <Form ref={form} onSubmit={sendEmail}>
+          <Form.Label>Name</Form.Label>
+          <Form.Control type="text" name="user_name" placeholder="Enter your name" required />
+          <Form.Label>Email</Form.Label>
+          <Form.Control type="email" name="user_email" placeholder="Enter email" required />
+          <Form.Label>Message</Form.Label>
+          <Form.Control as="textarea" rows={3} name="message" placeholder="Type your message here..." required />
+          <Button variant="success" type="submit" className="my-2">
+            Send
           </Button>
         </Form>
       </Container>
-    
-      <Footer/>
+
+      <Footer />
     </div>
-     );
+  );
 }
- 
+
 export default Contact;

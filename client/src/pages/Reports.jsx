@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useAuthContext } from "../hooks/useAuthContext";
 import Navbar from "../components/Navbar";
-import { Button, Toast } from "react-bootstrap";
+import { Button, OverlayTrigger, Popover, Toast } from "react-bootstrap";
 import { Form } from "react-bootstrap";
 import { FaFilePdf, FaFileWord, FaFileExcel, FaFileImage } from "react-icons/fa";
 import tempImg from '../assets/badge.png'
@@ -22,28 +22,35 @@ const Reports = () => {
 	const [currentFile, setCurrentFile] = useState(null);
 	const [extension, setExtension] = useState(null);
 	const[showSuccess, setShowSuccess] = useState(false);
+	const[showDeleteSuccess, setShowDeleteSuccess] = useState(false);
+	const [deletedFile, setDeletedFile] = useState("");
+	const [clickedIndex, setClickedIndex] = useState(null);
+	const [showPopup, setShowPopup] = useState(false);
+	const [deleteID, setDeleteID] = useState(null);
 
 	useEffect(() => {
-		const fetchReports = async () => {
-			try {
-				const response = await axios.get("https://medpal-backend.onrender.com/api/reportsStore", {
-					headers: {
-						Authorization: `Bearer ${user.token}`,
-					},
-				});
-				setReports(response.data);
-			} catch (error) {
-				console.error(error);
-			}
-		};
+		
 
 		fetchReports();
 	}, [user.token, fileUrl]);
 
+	const fetchReports = async () => {
+		try {
+			const response = await axios.get("https://medpal-backend.onrender.com/api/reportsStore", {
+				headers: {
+					Authorization: `Bearer ${user.token}`,
+				},
+			});
+			setReports(response.data);
+		} catch (error) {
+			console.error(error);
+		}
+	};
+
 	const handleFileSelect = (event) => {
 		setSelectedFile(event.target.files[0]);
 		setIsFileSelected(true);
-		console.log(selectedFile.name);
+		// console.log(selectedFile.name);
 	};
 
 	const handleSubmit = async (event) => {
@@ -73,27 +80,63 @@ const Reports = () => {
 
 	const handleDelete = async(id) =>{
 		const axios = require("axios");
-
 		let config = {
 			method: "delete",
 			maxBodyLength: Infinity,
 			url:
-				"https://medpal-backend.onrender.com/api/medicines/" + id,
+			"https://medpal-backend.onrender.com/api/reportsStore/" + id,
 			headers: {
 				Authorization: `Bearer ${user.token}`,
 			},
 		};
 
 		axios
-			.request(config)
-			.then((response) => {
-				console.log(JSON.stringify(response.data));
-			})
-			.catch((error) => {
-				console.log(error);
-			});
-
+		.request(config)
+		.then((response) => {
+			fetchReports();
+			setShowDeleteSuccess(true);
+		})
+		.catch((error) => {
+			console.log(error);
+		});
+		
 	}
+
+	const handlePopup = (event, deleteID,reportName, index) => {
+		setDeleteID(deleteID);
+		setShowPopup(true);
+		setClickedIndex(index);
+		setDeletedFile(reportName);
+		
+	};
+
+	const handleClosePopup = () => {
+		setShowPopup(false);
+	};
+
+	const popover = (
+		<Popover id="popover-basic">
+			<Popover.Header as="h3" className="text-white bg-danger">
+				Warning
+			</Popover.Header>
+			<Popover.Body>
+				Are you sure you want to <strong>delete this report?</strong>
+				<Button
+					variant="danger"
+					className="mx-2"
+					onClick={(e) => {
+						handleDelete(deleteID);
+						handleClosePopup();
+					}}
+				>
+					Yes
+				</Button>
+				<Button variant="dark" onClick={() => setShowPopup(false)}>
+					No
+				</Button>
+			</Popover.Body>
+		</Popover>
+	);
 
 	const handleDownloadReport = async (report) => {
 		try {
@@ -146,11 +189,6 @@ const Reports = () => {
 					style={{ position: "absolute", zIndex: "20", right:"1rem" }}
 				>
 					<Toast.Header>
-						<img
-							src="holder.js/20x20?text=%20"
-							className="rounded me-2"
-							alt=""
-						/>
 						<strong className="me-auto text-success">
 							File uploaded successfully!
 						</strong>
@@ -159,6 +197,28 @@ const Reports = () => {
 						{selectedFile?selectedFile.name:"No file selected"}
 					</Toast.Body>
 				</Toast>
+
+				<Toast
+					onClose={() => {
+						setShowDeleteSuccess(false);
+					}}
+					bg="secondary"
+					show={showDeleteSuccess}
+					delay={2000}
+					autohide
+					style={{ position: "absolute", zIndex: "20", right:"1rem" }}
+				>
+					<Toast.Header>
+						<strong className="me-auto text-danger">
+							File deleted successfully!
+						</strong>
+					</Toast.Header>
+					<Toast.Body className="text-white">
+						{deletedFile}
+					</Toast.Body>
+				</Toast>
+
+
 				<div className="page-container">
 					<Sidenav/>
 			<div className="my-4" id="reports-page-container">
@@ -184,7 +244,7 @@ const Reports = () => {
 					</Form>
 					<h4 className="my-3">All reports</h4>
 					<ul style={{ listStyle: "none", margin: "0px", padding: "0px" }}>
-						{reports.map((report) => (
+						{reports.map((report,idx) => (
 							<li key={report._id}>
 								<div className="d-flex justify-content-between my-3">
 									<Button id="reports-button" className="d-flex  align-items-center justify-content-between" onClick={() => {
@@ -192,8 +252,41 @@ const Reports = () => {
 										setExtension(report.reportResourceURL.split(".").pop());
 									}}>
 										<span className="">{report.reportName.length <= 20 ? report.reportName : report.reportName.slice(0, 20) + "..."}</span>
-										{/* <Button variant="danger" onClick={()=>handleDelete(report._id)}><AiFillDelete/></Button> */}
-
+										{/* <Button variant="danger" onClick={()=>handleDelete(report._id,report.reportName)}><AiFillDelete/></Button> */}
+										<OverlayTrigger
+												trigger="click"
+												placement="right"
+												overlay={popover}
+												rootClose
+												flip
+												fallbackPlacements={[
+													"left",
+													"top",
+													"bottom",
+												]}
+												show={
+													showPopup &&
+													clickedIndex === idx
+												}
+												onHide={() => {
+													setShowPopup(false);
+													setClickedIndex(null);
+												}}
+											>
+												<Button
+													onClick={(e) => {
+														handlePopup(
+															e,
+															report._id,
+															report.reportName,
+															idx
+														);
+													}}
+													variant="danger"
+												>
+													<AiFillDelete id="delete-button-overlay" />
+												</Button>
+											</OverlayTrigger>
 									</Button>
 
 								</div>

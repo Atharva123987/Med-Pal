@@ -83,7 +83,7 @@ const App = () => {
         
 				<Route
 					path="/reports"
-					element={user ? <Reports /> : <Navigate to="/error" />}
+					element={user ? <Reports /> : <Navigate to="/login" />}
 				/>
         <Route path="/error" element={<ErrorPage />} />
         <Route path="*" element={<ErrorPageLink />} />
