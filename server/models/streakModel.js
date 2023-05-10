@@ -13,7 +13,7 @@ const streakSchema = new Schema(
 			required: true,
 		},
 	},
-	{ timestamps: true }
+	{ timestamps: true, timeZone: "Asia/Kolkata" }
 );
 
 module.exports = mongoose.model("Streak", streakSchema);

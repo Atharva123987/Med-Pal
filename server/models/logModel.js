@@ -13,7 +13,7 @@ const logSchema = new Schema(
 			required: true,
 		},
 	},
-	{ timestamps: true }
+	{ timestamps: true, timeZone: "Asia/Kolkata" }
 );
 
 module.exports = mongoose.model("Log", logSchema);
