@@ -9,7 +9,10 @@ const requireAuth = require("../middleware/requireAuth");
 
 const router = express.Router();
 
-// require auth for all streak routes
+// POST reset user streak
+router.post("/reset/:id", resetUserStreak);
+
+// require auth for rest of the streak routes
 router.use(requireAuth);
 
 // GET user streak
@@ -17,8 +20,5 @@ router.get("/", getUserStreak);
 
 // POST increment user streak
 router.post("/increment", incrementUserStreak);
-
-// POST reset user streak
-router.post("/reset", resetUserStreak);
 
 module.exports = router;

@@ -38,12 +38,16 @@ const incrementUserStreak = async (req, res) => {
 };
 
 const resetUserStreak = async (req, res) => {
-	const user_id = req.user._id;
+	const { id } = req.params;
 
 	const streak = await Streak.findOneAndUpdate(
-		{ user_id },
+		{ user_id: id },
 		{ currentStreak: 0 }
 	);
+
+	if (!streak) {
+		res.status(400).json({ error: "User not found" });
+	}
 
 	res.status(200).json(streak);
 };
