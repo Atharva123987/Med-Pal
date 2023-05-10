@@ -1,6 +1,5 @@
 import './footer.css'
 import {Link} from 'react-router-dom'
-import { HashLink as L } from 'react-router-hash-link';
 import {BsArrowUpCircle} from 'react-icons/bs';
 import {AiFillGithub} from 'react-icons/ai';
 import {CiLinkedin} from 'react-icons/ci';
@@ -18,10 +17,10 @@ const Footer = ()=>{
         <>
         <footer style={{width:"100%"}}>
             <div id='footer-top'>
-            <L smooth to="#" className='footer-links d-flex' onClick={scrollToTop}>
+            <Link className='footer-links d-flex' onClick={scrollToTop}>
                 <BsArrowUpCircle/>
                 <h4>   Back to Top</h4>
-                </L>
+                </Link>
             </div>
             <div id='footer-bottom'>
 
