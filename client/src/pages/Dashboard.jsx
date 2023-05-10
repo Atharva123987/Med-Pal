@@ -35,6 +35,7 @@ const Dashboard = () => {
 	const [appointmentDateAndTime, setAppointmentDateAndTime] = useState("");
 	const [showTaken,setShowTaken] = useState(false);
 	const [tabletName, setTabletName] = useState(null)
+	const [showAlreadyAddedToast, setShowAlreadyAddedToast] = useState(false);
 
 	useEffect(() => {
 		handleFetch()
@@ -161,6 +162,31 @@ const Dashboard = () => {
 							{tabletName}
 						</Toast.Body>
 					</Toast>
+
+					<Toast
+						onClose={() => {
+							setShowAlreadyAddedToast(false);
+						}}
+						bg="danger"
+						show={showAlreadyAddedToast}
+						delay={2000}
+						autohide
+						style={{ position: "fixed", zIndex: "10", right: "2rem", top:"10%" }}
+					>
+						<Toast.Header>
+							<img
+								src="holder.js/20x20?text=%20"
+								className="rounded me-2"
+								alt=""
+							/>
+							<strong className="me-auto text-danger">
+								Streak already incremented!
+							</strong>
+						</Toast.Header>
+						<Toast.Body className="text-white">
+							Streak has already been incremented for today
+						</Toast.Body>
+					</Toast>
 				<div id="user-details">
 
 					<div id="profile">
@@ -248,7 +274,7 @@ const Dashboard = () => {
 							className="component"
 							style={{ flexGrow: 6 }}
 						>
-							<Streaks />
+							<Streaks setShowAlreadyAddedToast={setShowAlreadyAddedToast} />
 						</div> 
 
 					</div>
