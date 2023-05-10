@@ -11,7 +11,7 @@ const AddMedicineModal = (props) => {
   const [formError, setFormError] = useState(false);
   const [isDaily, setIsDaily] = useState(false)
 
-  const handleClose = () => { setShow(false); setIsDaily(false); console.log(isDaily) }
+  const handleClose = () => { setShow(false); setIsDaily(false);  }
   const handleShow = () => setShow(true);
 
   const handleSubmit = (e) => {
@@ -75,7 +75,7 @@ const AddMedicineModal = (props) => {
                 <br></br>
                 {isDaily && (
                   <Form.Group className="mb-3" controlId="exampleForm.ControlInput5" style={{ width: "300px" }}>
-                    <Form.Label>Tablet Time of Day</Form.Label>
+                    <Form.Label>Medicine Time of Day</Form.Label>
 
                     <div>
                       <Form.Check

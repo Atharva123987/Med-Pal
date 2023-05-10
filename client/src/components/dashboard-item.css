@@ -3,10 +3,18 @@
 }
 
 .dash-component{
-    background-color: rgba(255, 255, 255, 0.536);
-    width: 20vw;
+    background-color: white;
+    /* width: 20vw; */
     margin:0.4rem;
     height: 18rem;
+    overflow-x: hidden;
+}
+#floater-nodata{
+    position:relative;
+    width: fit-content;
+    color: rgb(148, 148, 148);
+    top: 40%;
+    left:45%;
 }
 
 .dash-component::-webkit-scrollbar {
@@ -29,39 +37,43 @@
     background: #000000cd; 
 }
 
-
-
-.dash-component{
-    /* box-shadow: 3px 2px 10px black;
-    display: flex;
-    flex-direction: column;
-    font-size: 2rem;
-    border-radius: 10px;     */
+#prescription:hover,#tab-stock:hover,#tab-list:hover{
+    transition: all 0.4s;
+    scale:105%;
     
 }
 
 #prescription{
-    box-shadow: 3px 2px 10px black;
+    /* box-shadow: 0px 0px 10px black; */
+    box-shadow: 0px 0px 5px rgb(95, 236, 255);
+    border:1px solid rgb(0, 145, 255);
     display: flex;
     flex-direction: column;
     border-radius: 10px; 
     overflow: hidden;
     overflow-y:auto;
+    transition: all 0.4s;
 }
 
 #tab-stock{
-    box-shadow: 3px 3px 10px black;
+    /* box-shadow: 0px 0px 10px black; */
+    box-shadow: 0px 0px 5px rgb(95, 236, 255);
+    border:1px solid rgb(0, 145, 255);
     display: flex;
     flex-direction: column;
     border-radius: 10px; 
     overflow: hidden;
     overflow-y:auto;
+    transition: all 0.4s;
 }
 
 #tab-list{
-    box-shadow: 3px 2px 10px black;
+    /* box-shadow: 0px 0px 10px black; */
+    box-shadow: 0px 0px 5px rgb(95, 236, 255);
+    border:1px solid rgb(0, 145, 255);
     display: flex;
     flex-direction: column;
+    transition: all 0.4s;
     border-radius: 10px; 
     overflow: hidden;
     overflow-y:auto;
@@ -72,7 +84,7 @@
     
 
 #tab-list>table>tr , #tab-stock>table>tr{
-    border:1px solid black;
+    /* border:0.1px solid black; */
 }
 
 #tab-list>table > tr:hover{
@@ -85,7 +97,7 @@
     box-shadow: 0px 0px 5px black;
 }
 
-#prescription>table > tr{
+#prescription>table > tr td span{
     padding:10px;
 }
 
@@ -98,18 +110,20 @@ td>a{
     color:black;
 }
 
-.dash-component:hover{
 
-}
 
 legend{
-    color: black;
+    /* color: black; */
+    background-color: rgba(102, 51, 153, 0);
     font-size: 3.2rem; 
     font-style:italic;
+    border-radius: 1rem;
     margin:4px 0 0 4px;
 }
 
-
+.dash-button-container{
+    overflow: hidden;
+}
 
 .dash-button{
     display: flex;
@@ -119,20 +133,35 @@ legend{
     width:1.5rem;
     border-radius: 50%;
     color:white;
-    font-size: large;
+    font-size:1rem;
     border: double 4px white;
     background-color:black;
-    overflow:hidden
+    overflow:hidden;
+    transition:all 0.3s;
 }
 
-#floater-nodata{
+.dash-button:hover{
+    color:black;
+    scale:110%;
+    background-color: rgb(0, 200, 255);
+    transition:all 0.3s;
+}
+.dash-button:active{
+    scale:95%;
+    transition:all 0.3s;
+}
+
+/* #floater-nodata{
     position:relative;
     width: fit-content;
     color: rgb(148, 148, 148);
     top: 40%;
     left:45%;
-}
+} */
 
+.table .table-striped .table-bordered .table-hover{
+    background-color: rgba(23, 48, 61, 0.08);
+}
 .dash-button-container{
     margin-top: auto;
     margin-left: auto;
@@ -141,21 +170,11 @@ legend{
 
 
 
-
-
-.dash-button:active{
-}
-
-
 /* --- For mobile devices --- */
 
 @media screen and (max-width:480px) {
 
-    .dash-component{
-        height: 200px;
-        width: 200px;
-        overflow: auto;
-    }
+    
     
     .dash-button{
         margin:0 0 auto auto;

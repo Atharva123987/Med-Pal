@@ -1,21 +1,79 @@
 .title {
-    z-index: 2;
-    position: relative;
-    margin: auto;
-    font-size: 60px;
-    color: rgb(255, 255, 255);
-  
+  z-index: 2;
+  position: relative;
+  margin: auto;
+  font-size: 60px;
+  color: black;
+}
+p{
+  /* font-size: 4vh; */
+}
+
+.team-profile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#team-profiles {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  flex-wrap: wrap; /* added */
+  margin-top: 2rem; /* added */
+}
+
+#about-content {
+  height: auto; /* changed from 100vh */
+  max-width: 40rem; /* changed from width */
+  margin: 0 auto; /* added */
+  padding: 2rem; /* added */
+}
+
+#about-text {
+  margin-top: 2rem; /* added */
+  font-size: 1.5rem;
+}
+
+#about-container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* justify-content: center; */
+  height: 100vh;
+  font-size: 1.5rem;
+}
+#about-left-container{
+  margin:10px 0px 10px 20px;
+}
+
+.about-links{
+  text-decoration: none;
+  margin: auto;
+  display: block;
+  font-size: 2rem;
+  margin-bottom: 15px;
+  transition: all 0.4s;
+  color:black
+}
+.about-links:hover{
+  transition: all 0.4s;
+  text-shadow: 2px 2px 2px cyan;
+  color:blue;
+}
+.about-links:active{
+  transition: all 0.4s;
+}
+
+@media screen and (max-width:480px) {
+
+  #about-text{
+    font-size: 1rem;
   }
-  
-  .team-profile{
-    display: flex;
+  .about-right{
     flex-direction: column;
-    align-items: center;
   }
-  
-  #team-profiles{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
-  
+  #about-container{
+    min-height:fit-content ;
   }
+}

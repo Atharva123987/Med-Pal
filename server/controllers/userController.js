@@ -14,8 +14,9 @@ const loginUser = async (req, res) => {
 
 		// create a token
 		const token = createToken(user._id);
+		const user_id = user._id;
 
-		res.status(200).json({ email, token });
+		res.status(200).json({ email, token, user_id });
 	} catch (error) {
 		res.status(400).json({ error: error.message });
 	}
@@ -37,11 +38,25 @@ const signupUser = async (req, res) => {
 
 		// create a token
 		const token = createToken(user._id);
-
-		res.status(200).json({ email, token });
+		const user_id = user._id;
+		res.status(200).json({ email, token, user_id });
 	} catch (error) {
 		res.status(400).json({ error: error.message });
 	}
 };
 
-module.exports = { signupUser, loginUser };
+const getUserDetailsWithId = async (req, res) => {
+	const { id } = req.params;
+	const user_data = await User.findById(id);
+	console.log(user_data);
+	res.status(200).json({
+		name: user_data.name,
+		email: user_data.email,
+		age: user_data.age,
+		gender: user_data.gender,
+		height: user_data.height,
+		weight: user_data.weight,
+	});
+};
+
+module.exports = { signupUser, loginUser, getUserDetailsWithId };

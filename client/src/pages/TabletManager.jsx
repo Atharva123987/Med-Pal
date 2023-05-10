@@ -5,7 +5,6 @@ import AllMedicinesTable from '../components/Medicines/AllMedicinesTable';
 import AddMedicineModal from '../components/Medicines/AddMedicineModal';
 import Navbar from '../components/Navbar'
 import './tabletManager.css'
-import UpcomingDose from '../components/Medicines/UpcomingDose';
 import Form from 'react-bootstrap/Form';
 import { AiOutlineSearch } from 'react-icons/ai'
 import { BsArrowUpSquareFill } from 'react-icons/bs'
@@ -25,11 +24,11 @@ const TabletManager = () => {
 	const [showToast, setShowToast] = useState(false);
 	const [nameError, setNameError] = useState(false);
 	const [flag, setFlag] = useState(0);
-	const isMountedRef = useRef(false);
 	const [searchQuery, setSearchQuery] = useState(null)
-	const [deleteCalled, setDeleteCalled] = useState(0);
+	const [deleteCalled, setDeleteCalled] = useState(false);
 	const [deleteToast, setDeleteToast] = useState(false)
 	const {user} = useAuthContext()
+
 	useEffect(() => {
 		handleFetch();
 	}, [flag, deleteCalled])
@@ -38,7 +37,7 @@ const TabletManager = () => {
 	const handleFetch = async () => {
 		try {
 		  const response = await axios.get(
-			"http://localhost:4000/api/medicines",
+			"https://medpal-backend.onrender.com/api/medicines",
 			{
 			  headers: {
 				Authorization: `Bearer ${user.token}`,
@@ -46,7 +45,6 @@ const TabletManager = () => {
 			}
 		  );
 		  setFetchedData(response.data);
-		  console.log(response.data[0]);
 		} catch (err) {
 		  console.log(err);
 		}
@@ -56,7 +54,6 @@ const TabletManager = () => {
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-		console.log(selectedFile);
 
 		if (!name || !quantity || !expiry) {
 			setNameError(true)
@@ -100,7 +97,7 @@ const TabletManager = () => {
 		let config = {
 			method: "post",
 			maxBodyLength: Infinity,
-			url: "http://localhost:4000/api/medicines",
+			url: "https://medpal-backend.onrender.com/api/medicines",
 			headers: {
 				"Content-Type": "application/json",
 				Authorization:`Bearer ${user.token}`,
@@ -142,7 +139,7 @@ const TabletManager = () => {
 
 	return (
 		<>
-			<Navbar buttons={false} />
+			<Navbar buttons={true} />
 
 
 			<h3 id='medicines-heading'>Medicine Manager</h3>
@@ -167,19 +164,6 @@ const TabletManager = () => {
 				<div id='medicines-table' className='d-flex flex-column' >
 
 					<div className='d-flex my-3'>
-
-						<Form style={{ width: "300px", padding: "5px", position: "sticky", top: "0%" }}>
-							<Form.Group className='d-flex'>
-								<AiOutlineSearch style={{ fontSize: "25px", margin: "auto" }} />
-								<Form.Control
-									type="text"
-									name="searchQuery"
-									placeholder="Search..."
-									value={searchQuery}
-									onChange={(e) => setSearchQuery(e.target.value)}
-								/>
-							</Form.Group>
-						</Form>
 
 						<AddMedicineModal
 							setName={setName}
@@ -210,7 +194,7 @@ const TabletManager = () => {
 							className="rounded me-2"
 							alt=""
 						/>
-						<strong className="me-auto text-success">Tablet Added!</strong>
+						<strong className="me-auto text-success">Medicine Added!</strong>
 						<small>{frequency?.charAt(0).toUpperCase() + frequency?.slice(1)}</small>
 					</Toast.Header>
 					<Toast.Body className='text-white'>Name : {name} | Quantity : {quantity}</Toast.Body>
@@ -225,7 +209,7 @@ const TabletManager = () => {
 						/>
 						<strong className="me-auto text-warning">Enter Valid Name!</strong>
 					</Toast.Header>
-					<Toast.Body className='text-white'>Tablet name should be unique</Toast.Body>
+					<Toast.Body className='text-white'>Medicine name should be unique</Toast.Body>
 				</Toast>
 
 				<Toast onClose={() => { setDeleteToast(false) }} bg='danger' position='middle-center' show={deleteToast} delay={3000} autohide style={{ position: "relative", zIndex: "10" }}>

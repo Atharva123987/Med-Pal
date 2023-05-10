@@ -17,7 +17,6 @@ const Sidebar = () => {
         try{
             const response = await axios.get(`https://random-data-api.com/api/v2/users?size=5`);
             setResults(response.data)
-            console.log(response.data)
         }
         catch(err){
             console.log(err)

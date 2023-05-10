@@ -1,6 +1,6 @@
 import Navbar from "../components/Navbar";
 import AllCharts from "../components/Charts";
-import { Form, Toast } from "react-bootstrap";
+import { Form, OverlayTrigger, Popover, Toast } from "react-bootstrap";
 import { useState, useRef, useEffect } from "react";
 import axios from "axios";
 import ButtonGroup from "react-bootstrap/ButtonGroup";
@@ -12,6 +12,7 @@ import { useAuthContext } from "../hooks/useAuthContext";
 import "./chartsPage.css";
 
 const Charts = () => {
+	const { user } = useAuthContext();
 	const [readingType, setReadingType] = useState("Blood Sugar");
 	const [readingValue, setReadingValue] = useState(null);
 	const [readingDate, setReadingDate] = useState(null);
@@ -19,12 +20,27 @@ const Charts = () => {
 	const [showError, setShowError] = useState(false);
 	const [fetchedData, setFetchedData] = useState([[]]);
 	const [requiredError, setRequiredError] = useState(false);
-	const {user} = useAuthContext();
-
+	const [width, setWidth] = useState(window.innerWidth);
+	const [height, setHeight] = useState(window.innerHeight);
+	const [showDeletePopup, setShowDeletePopup] = useState(false);
 
 	useEffect(() => {
 		handleFetch();
 	}, [readingType]);
+
+	useEffect(() => {
+		const handleResize = () => {
+			setWidth(window.innerWidth);
+			setHeight(window.innerHeight);
+		};
+
+		window.addEventListener('resize', handleResize);
+
+		return () => {
+			window.removeEventListener('resize', handleResize);
+		};
+	}, []);
+
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
@@ -45,10 +61,10 @@ const Charts = () => {
 		let config = {
 			method: "post",
 			maxBodyLength: Infinity,
-			url: "http://localhost:4000/api/labcounts",
+			url: "https://medpal-backend.onrender.com/api/labcounts",
 			headers: {
 				"Content-Type": "application/json",
-				Authorization:`Bearer ${user.token}`
+				Authorization: `Bearer ${user.token}`,
 			},
 			data: data,
 		};
@@ -66,48 +82,50 @@ const Charts = () => {
 	};
 	const handleFetch = async (e) => {
 		// e.preventDefault();
-		
-			const axios = require("axios");
-			let data = JSON.stringify({
-				testName: readingType,
+
+		const axios = require("axios");
+		let data = JSON.stringify({
+			testName: readingType,
+		});
+		let config = {
+			method: "post",
+			maxBodyLength: Infinity,
+			url: "https://medpal-backend.onrender.com/api/labCounts/type",
+			headers: {
+				"Content-Type": "application/json",
+				Authorization: `Bearer ${user.token}`,
+			},
+			data: data,
+		};
+		axios
+			.request(config)
+			.then((response) => {
+				setFetchedData(response.data);
+			})
+			.catch((error) => {
+				setShowError(true);
 			});
-			let config = {
-				method: "post",
-				maxBodyLength: Infinity,
-				url: "http://localhost:4000/api/labCounts/type",
-				headers: {
-					"Content-Type": "application/json",
-					Authorization:`Bearer ${user.token}`
-				},
-				data: data,
-				
-			};
-			axios
-				.request(config)
-				.then((response) => {
-					setFetchedData(response.data);
-				})
-				.catch((error) => {
-					setShowError(true);
-				});
-		
 	};
 
-	const handleDelete = async (e) => {
-		e.preventDefault();
+	const handleDelete = async () => {
+		// e.preventDefault();
+		let data = JSON.stringify({
+			testName: readingType,
+		});
 		let config = {
 			method: "delete",
 			maxBodyLength: Infinity,
-			url: "http://localhost:4000/api/labcounts/latest",
+			url: "https://medpal-backend.onrender.com/api/labcounts/latest",
 			headers: {
-				Authorization:`Bearer ${user.token}`
+				"Content-Type": "application/json",
+				Authorization: `Bearer ${user.token}`,
 			},
+			data: data,
 		};
 
 		axios
 			.request(config)
 			.then((response) => {
-				// console.log(JSON.stringify(response.data));
 				handleFetch();
 			})
 			.catch((error) => {
@@ -116,16 +134,43 @@ const Charts = () => {
 			});
 	};
 
+	const handleClosePopup = () => {
+		setShowDeletePopup(false);
+	};
+
+	const popover = (
+		<Popover id="popover-basic">
+			<Popover.Header as="h3" className="text-white bg-danger">
+				Warning
+			</Popover.Header>
+			<Popover.Body>
+				Are you sure you want to <strong>delete this medicine?</strong>
+				<Button
+					variant="danger"
+					className="mx-2"
+					onClick={(e) => {
+						handleDelete();
+						handleClosePopup();
+					}}
+				>
+					Yes
+				</Button>
+				<Button variant="dark" onClick={() => setShowDeletePopup(false)}>
+					No
+				</Button>
+			</Popover.Body>
+		</Popover>
+	);
+
 	return (
 		<>
-			<Navbar buttons={false} />
+			<Navbar buttons={true} />
 			<div>
 				<h3 className="charts-heading">
 					Charts <BiBarChartAlt2 style={{ fontSize: "30px" }} />
 				</h3>
 			</div>
 			<div
-				className="d-flex justify-content-evenly"
 				id="charts-container"
 			>
 				<div>
@@ -190,7 +235,6 @@ const Charts = () => {
 							<Form.Control
 								type="number"
 								placeholder="Value"
-								required
 								onChange={(e) =>
 									setReadingValue(e.target.value)
 								}
@@ -215,30 +259,56 @@ const Charts = () => {
 							<Form.Control
 								type="date"
 								placeholder="Enter date"
-								required
-								onChange={(e) =>
+									onChange={(e) =>
 									setReadingDate(new Date(e.target.value))
 								}
 							/>
 						</Form.Group>
+						<div className="d-flex flex-row chart-button-div">
+							
 
-						<button
-							id="add-value"
-							className="bg-dark d-flex"
-							onClick={handleSubmit}
-						>
-							<AiFillPlusCircle id="add-icon" />
-						</button>
+							<OverlayTrigger
+								trigger="click"
+								placement="top"
+								overlay={popover}
+								rootClose
+								flip
+								fallbackPlacements={["left", "top", "bottom"]}
+								show={showDeletePopup}
+								onHide={() => {
+									setShowDeletePopup(false);
+									// setClickedIndex(null);
+								}}
+								
+							>
+								<button
+								className="btn btn-danger h-50"
+								onClick={(e) =>{e.preventDefault(); setShowDeletePopup(true)} }
+							>
+								Delete last entry
+							</button>
+							</OverlayTrigger>
+
+
+							<button
+								id="add-value"
+								className="bg-dark d-flex"
+								onClick={handleSubmit}
+							>
+								<AiFillPlusCircle id="add-icon" />
+							</button>
+						</div>
 					</Form>
-					<button
-						className="btn btn-danger my-3"
-						onClick={handleDelete}
-					>
-						Delete last entry
-					</button>
+
 				</div>
 
-				<AllCharts chartData={fetchedData} chartType={readingType} />
+				<AllCharts
+					chartData={fetchedData}
+					chartType={readingType}
+				// width={width < 500 ? 10:undefined}
+				// height={width < 500 ? height : undefined}
+				// height={width < 500 ?10:undefined}
+				/>
 
 				<div
 					id="toasts"
@@ -254,11 +324,10 @@ const Charts = () => {
 							setShowToast(false);
 						}}
 						bg="success"
-						position="middle-center"
 						show={showToast}
 						delay={3000}
 						autohide
-						style={{ position: "relative", zIndex: "10" }}
+						style={{ position: "relative", zIndex: "10", top: "4rem" }}
 					>
 						<Toast.Header>
 							<img
@@ -281,11 +350,10 @@ const Charts = () => {
 							setShowError(false);
 						}}
 						bg="danger"
-						position="middle-center"
 						show={showError}
 						delay={2000}
 						autohide
-						style={{ position: "relative", zIndex: "10" }}
+						style={{ position: "relative", zIndex: "10", top: "4rem" }}
 					>
 						<Toast.Header>
 							<img

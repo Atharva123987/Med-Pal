@@ -2,7 +2,8 @@ const Medicines = require("../models/medicineModel");
 const mongoose = require("mongoose");
 
 const getAllMedicines = async (req, res) => {
-	const medicines = await Medicines.find({}).sort({ createdAt: -1 });
+	const user_id = req.user._id;
+	const medicines = await Medicines.find({user_id}).sort({ createdAt: -1 });
 	// console.log(medicines);
 	res.status(200).json(medicines);
 };
@@ -49,7 +50,7 @@ const createMedicine = async (req, res) => {
 
 const deleteMedicine = async (req, res) => {
 	const { id } = req.params;
-
+	
 	if (!mongoose.Types.ObjectId.isValid(id)) {
 		return res.status(404).send(`No medicine with id: ${id}`);
 	}

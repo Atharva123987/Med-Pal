@@ -59,10 +59,10 @@
   max-height:80vh;
 }
 
-.slide.active {
+.active {
   opacity: 1;
   transition-duration: 1s;
-  transform: scale(1.08);
+  transform: scale(1.0);
 }
 
 .carousel-caption {

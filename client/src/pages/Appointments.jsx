@@ -81,7 +81,7 @@ const Appointments = () => {
 		let config = {
 			method: "post",
 			maxBodyLength: Infinity,
-			url: "http://localhost:4000/api/appointments",
+			url: "https://medpal-backend.onrender.com/api/appointments",
 			headers: {
 				"Content-Type": "application/json",
 				Authorization:`Bearer ${user.token}`
@@ -92,7 +92,6 @@ const Appointments = () => {
 		axios
 			.request(config)
 			.then((response) => {
-				console.log(JSON.stringify(response.data));
 				handleFetch();
 			})
 			.catch((error) => {
@@ -111,14 +110,18 @@ const Appointments = () => {
 
 
 
-	useEffect(() => handleFetch(), [])
+	useEffect(() =>{
+		
+		handleFetch()
+	}, [])
 
+	
 	const handleFetch = async (e) => {
 		try {
 			const axios = require("axios");
 			let config = {
 				method: "get",
-				url: "http://localhost:4000/api/appointments",
+				url: "https://medpal-backend.onrender.com/api/appointments",
 				headers: {
 					"Content-Type": "application/json",
 					"Authorization": `Bearer ${user.token}`,
@@ -127,12 +130,10 @@ const Appointments = () => {
 			};
 			const response = await axios(config);
 			setFetchedData(response.data);
-			console.log(response.data[0]);
 		} catch (err) {
 			console.log(err);
 		}
-	};
-	
+	}
 	
 
 
@@ -151,7 +152,7 @@ const Appointments = () => {
 				>
 					<Toast
 						onClose={() => setShow(false)}
-						bg="light"
+						bg="success"
 						position="middle-center"
 						show={show}
 						delay={3000}
@@ -159,11 +160,11 @@ const Appointments = () => {
 						style={{
 							position: "fixed",
 							zIndex: "10",
-							top: "3%",
+							top: "5	rem",
 							right: "3%",
 						}}
 					>
-						<Toast.Header>
+						<Toast.Header className="text-success">
 							<img
 								src="holder.js/20x20?text=%20"
 								className="rounded me-2"
@@ -172,13 +173,13 @@ const Appointments = () => {
 							<strong className="me-auto">
 								Appointment Added!
 							</strong>
-							<small>
+							<small className="text-secondary">
 								Doctor{" "}
 								{doctorName?.charAt(0).toUpperCase() +
 									doctorName?.slice(1)}
 							</small>
 						</Toast.Header>
-						<Toast.Body>
+						<Toast.Body className="text-white">
 							<b>
 								{appointmentDateAndTime?.getDate()}th of {month}
 							</b>{" "}
@@ -193,10 +194,10 @@ const Appointments = () => {
 						}}
 						bg="danger"
 						position="middle-center"
-						show={error}
+						show={!error}
 						delay={2000}
 						autohide
-						style={{ position: "relative", zIndex: "10" }}
+						style={{ position: "relative", zIndex: "10", top:"4rem" }}
 					>
 						<Toast.Header>
 							<img
@@ -215,21 +216,23 @@ const Appointments = () => {
 					</Toast>
 				</div>
 
-				<Navbar />
+				<Navbar buttons='true' />
 
 					<h3 className="charts-heading">
-						Appointments <FaClinicMedical style={{ fontSize: "30px" }} />
+						My Appointments <FaClinicMedical style={{ fontSize: "30px" }} />
 					</h3>
 						
 				<div id='appointments-container'>
-				<AddAppointmentModal 
-				setDoctorName={setDoctorName} 
+				
+				<Calendar id='calendar-component' appointments={fetchedData? fetchedData : null} setDoctorName={setDoctorName} 
 				setDoctorNumber={setDoctorNumber} 
 				setDoctorAddress={setDoctorAddress} 
 				setNotes={setNotes} 
 				setAppointmentDateAndTime={setAppointmentDateAndTime} 
-				handleSubmit={handleSubmit} />
-				<Calendar id='calendar-component' appointments={fetchedData? fetchedData : null} />
+				handleSubmit={handleSubmit}
+				handleFetch={handleFetch}
+				showList={true}
+				/>
 				</div>
 			</div>
 		</>

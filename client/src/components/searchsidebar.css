@@ -1,23 +1,12 @@
 .sidebar {
-    position: fixed;
-    left: 0;
-    top: 0;
-    bottom: 0;
-    margin: 0;
-    padding: 20px;
+    /* position: fixed; */
     background-color: #f7f7f7;
-    border-radius: 5px;
   }
   
   .sidebar label {
     margin-right: 10px;
   }
+
   
-  .sidebar select {
-    margin-left: 10px;
-  }
-  
-  .sidebar button {
-    margin-top: 10px;
-  }
+
   

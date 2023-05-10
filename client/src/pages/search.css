@@ -1,3 +1,125 @@
-.dropdown-menu{
-    color:red;
+.dropdown-menu {
+    color: red;
+}
+
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.btn-primary{
+    background-color: #00B3FF;
+}
+
+.sidebar h4{
+    text-align: center;
+    padding: 10px;
+    margin:1rem auto 0 auto;
+    border-radius:10rem;
+    background-color: #171D3D;
+    padding:1rem;
+    color:white;
+    font-weight: 600;
+}
+
+.sidebar Form {
+    display: flex;
+    box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.273);
+    background-color:white;
+    padding:0.5rem;
+    border-radius: 1rem;
+    min-width: 35rem;
+    gap:2rem;
+    margin:1rem auto 2rem auto;
+    align-items: center;
+    justify-content: center;
+}
+
+#doctor-image{
+    border-radius: 50%;
+}
+
+.card-body{
+    font-size: 0.8rem;
+}
+
+.card-title{
+    font-size: 1rem;
+}
+
+.search-container p{
+    color:rgba(0, 0, 0, 0.633);
+    margin:0 auto;
+}
+
+.distance-slider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+input[type="range"] {
+    -webkit-appearance: none;
+    border-radius: 0;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    height: 25px;
+    background: #d3d3d3;
+    outline: none;
+    opacity: 0.7;
+    border-radius: 10px;
+    transition: background-color 0.3s;
+}
+
+
+input[type="range"]:focus {
+    box-shadow: none;
+    box-shadow: 0px 0px 3px black;
+    background-color: rgb(255, 255, 255);
+    transition: background-color 0.3s;
+}
+
+
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 25px;
+    height: 25px;
+    background: #00B3FF;
+    cursor: pointer;
+    border-radius: 10px;
+}
+
+
+input[type="range"]::-moz-range-thumb {
+    width: 25px;
+    height: 25px;
+    background: #04AA6D;
+    cursor: pointer;
+}
+
+.card {
+    box-shadow: 2px 2px 5px rgba(23, 29, 61, 0.452);
+    color: black;
+    margin: 5px;
+    box-shadow: 2px -2px 20px white;
+}
+
+
+.search-container {
+    gap:1rem;
+}
+
+@media screen and (max-width:560px) {
+    .sidebar Form{
+        min-width: 0;
+        margin:20px;
+        flex-direction: column;
+    }
+    .card{
+        width: auto;
+        margin:20px;
+    }
 }
