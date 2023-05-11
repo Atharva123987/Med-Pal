@@ -11,7 +11,7 @@ const getUserStreak = async (req, res) => {
 			user_id,
 		}).then((res)=>{
 			res.status(200).json(newStreak);	
-		}.catch((err)=>console.log(err));
+		}).catch((err)=>console.log(err));
 	}
 	else{
 		res.status(200).json(streak);
