@@ -6,12 +6,17 @@ const getUserStreak = async (req, res) => {
 	const streak = await Streak.findOne({ user_id });
 
 	if (!streak) {
-		const newStreak = await Streak.create({
+		Streak.create({
 			currentStreak: 0,
 			user_id,
-		});
-		res.status(200).json(newStreak);
+		}).then((res)=>{
+			res.status(200).json(newStreak);	
+		}.catch((err)=>console.log(err));
 	}
+	else{
+		res.status(200).json(streak);
+	}
+	
 	
 };
 
