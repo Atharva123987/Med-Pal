@@ -77,13 +77,13 @@ const Streaks = ({ setShowAlreadyAddedToast }) => {
 
 
       <legend align='center'>Streak</legend>
-      {/* <div style={{ fontSize: "3rem"}} className="d-flex justify-content-center align-items-center">
+      <div style={{ fontSize: "3rem"}} className="d-flex justify-content-center align-items-center">
         <AiFillFire style={fireStyle} />
         <span style={fireStyle}>{streakNumber}</span>
-      </div> */}
+      </div>
    
 
-      {/* <Button variant='info' onClick={(e) => handleIncrementStreak(e)} style={{ color: "white" }}>I took all my medicines today!  <BiHappy /></Button> */}
+      <Button variant='info' onClick={(e) => handleIncrementStreak(e)} style={{ color: "white" }}>I took all my medicines today!  <BiHappy /></Button>
 
 
     </div>
