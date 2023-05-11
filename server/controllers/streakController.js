@@ -12,7 +12,7 @@ const getUserStreak = async (req, res) => {
 		});
 		res.status(200).json(newStreak);
 	}
-	res.status(200).json(streak);
+	
 };
 
 const incrementUserStreak = async (req, res) => {
