@@ -10,6 +10,7 @@ import { Link } from "react-router-dom";
 import { useAuthContext } from "../hooks/useAuthContext";
 import axios from "axios";
 import { Tooltip, OverlayTrigger } from "react-bootstrap";
+import LoadingCircle from "./SkeletonLoaders/LoadingCircle";
 
 const TabList = (props) => {
   const [fetchedMedicineData, setFetchedMedicineData] = useState(null);
@@ -88,7 +89,7 @@ const TabList = (props) => {
 
   return (
     <>
-      <div id="tab-list" className="dash-component">
+      <div id="tab-list" className={fetchedMedicineData?"dash-component":"dash-component loading-screen"}>
         <legend align="center">Medicine Reminder</legend>
         {fetchedMedicineData ? (
           <>
@@ -176,7 +177,7 @@ const TabList = (props) => {
             </div>
           </>
         ) : (
-          <p>Loading medicine data...</p>
+          <LoadingCircle/>
         )}
       </div>
     </>

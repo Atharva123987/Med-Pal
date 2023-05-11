@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import axios from 'axios'
 import { useAuthContext } from "../hooks/useAuthContext";
 import { BiHappy, BiSad } from "react-icons/bi";
+import LoadingCircle from "./SkeletonLoaders/LoadingCircle";
 
 const Streaks = ({ setShowAlreadyAddedToast }) => {
   const { user } = useAuthContext();
@@ -70,6 +71,15 @@ const Streaks = ({ setShowAlreadyAddedToast }) => {
     }
     : { color: "grey" };
 
+
+    if(!streakNumber){
+      return(
+        <>
+      <legend align='center'>Streak</legend>
+        <LoadingCircle/>
+        </>
+      )
+    }
 
   return (
 

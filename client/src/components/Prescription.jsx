@@ -25,10 +25,10 @@ const Prescription = (props) => {
 
     return (
         <>
-            <div id="prescription" className="dash-component">
+            <div id="prescription" className={fetchedData?"dash-component":"dash-component loading-screen"}>
                 <legend align="center">Medical Documents</legend>
-                {isLoading ? (
-                    <LoadingCircle /> // display loading circle if data is not fetched yet
+                {!fetchedData? (
+                    <LoadingCircle /> 
                 ) : (
                     <table>
                         {fetchedData?.map((val, key) => {

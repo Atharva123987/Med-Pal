@@ -13,12 +13,15 @@ import groupBy from "lodash/groupBy";
 
 import "./dashboard-item.css";
 import "../pages/chartsPage.css";
+import LoadingCircle from "./SkeletonLoaders/LoadingCircle";
 
 const Charts = (props) => {
   const displayData = props.chartData.data;
   const { width, height } = props;
 
-  if (!displayData) {
+ 
+
+  if (displayData=={}) {
     return (
       <>
           <Legend align="center">{props.chartType}</Legend>
