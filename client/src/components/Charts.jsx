@@ -19,7 +19,14 @@ const Charts = (props) => {
   const displayData = props.chartData.data;
   const { width, height } = props;
 
- 
+  
+  if(!displayData){
+    return(
+      <>
+      <LoadingCircle/>
+      </>
+    )
+  }
 
   if (displayData=={}) {
     return (
@@ -45,6 +52,8 @@ const Charts = (props) => {
       </>
     );
   }
+
+  
 
   return (
     <>

@@ -190,35 +190,52 @@ const Dashboard = () => {
 				</Toast>
 				<div id="user-details">
 
-					<div id="profile">
-						<img id="profile-pic" alt="profile" src='https://ik.imagekit.io/0qlf5pqwx/am-a-19-year-old-multimedia-artist-student-from-manila_-_21.png?updatedAt=1681593465157'></img>
 
-						<div id="uname">
 
-							<h2 id="name">{userDetails?.name}</h2>
+					{
+						!userDetails ? (
+							<>
+							<div className="d-flex justify-content-center align-items-center h-100">
+								<LoadingCircle />
+								</div>
+							</>
+						) : (
+							<>
+								<div id="profile">
+									<img id="profile-pic" alt="profile" src='https://ik.imagekit.io/0qlf5pqwx/am-a-19-year-old-multimedia-artist-student-from-manila_-_21.png?updatedAt=1681593465157'></img>
 
-							<p id="email">{userDetails?.email}</p>
-						</div>
-					</div>
+									<div id="uname">
 
-					<div id="info">
-						<div id="details">
-							<div class="arrow-down"></div>
-							<p>Age : {userDetails?.age}</p>
-							<p>Gender : {userDetails?.gender[0].toUpperCase() + userDetails?.gender.slice(1, 10)}</p>
-							<p>Height : {userDetails?.height} cm</p>
-							<p>Weight : {userDetails?.weight} kg</p>
-						</div>
-					</div>
+										<h2 id="name">{userDetails?.name}</h2>
 
-					<div id="tips-container">
-						<Tips />
-					</div>
+										<p id="email">{userDetails?.email}</p>
+									</div>
+								</div>
+								<div id="info">
 
-					<div id="badge-container">
-						<img id="badge" src={Badge} />
-						<p>Gold Member</p>
-					</div>
+									<div id="details">
+										<div class="arrow-down"></div>
+										<p>Age : {userDetails?.age}</p>
+										<p>Gender : {userDetails?.gender[0]?.toUpperCase() + userDetails?.gender.slice(1, 10)}</p>
+										<p>Height : {userDetails?.height} cm</p>
+										<p>Weight : {userDetails?.weight} kg</p>
+									</div>
+								</div>
+								<div id="tips-container">
+									<Tips />
+								</div>
+
+								<div id="badge-container">
+									<img id="badge" src={Badge} />
+									<p>Gold Member</p>
+								</div>
+							</>
+
+						)
+					}
+
+
+
 				</div>
 
 				<div id="dash-components">
@@ -250,9 +267,9 @@ const Dashboard = () => {
 						<div id="c4" className="component d-flex flex-column">
 							{
 								!fetchedChartData ? (<>
-								<div className="dash-component">
-									<legend align="center" >Charts</legend>
-									<LoadingCircle />
+									<div className="dash-component">
+										<legend align="center" >Charts</legend>
+										<LoadingCircle />
 									</div>
 								</>
 								) : (
@@ -268,8 +285,8 @@ const Dashboard = () => {
 								!appointments ? (
 									<>
 										<div className="dash-component">
-										<legend align="center" >Appointments</legend>
-										<LoadingCircle />
+											<legend align="center" >Appointments</legend>
+											<LoadingCircle />
 										</div>
 									</>
 								) : (
