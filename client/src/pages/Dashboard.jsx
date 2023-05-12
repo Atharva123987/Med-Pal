@@ -37,7 +37,7 @@ const Dashboard = () => {
 	const [showTaken, setShowTaken] = useState(false);
 	const [tabletName, setTabletName] = useState(null)
 	const [showAlreadyAddedToast, setShowAlreadyAddedToast] = useState(false);
-
+	const [showStreakAddedToast, setShowStreakAddedToast] = useState(false);
 	useEffect(() => {
 		handleFetch()
 	}, [])
@@ -161,6 +161,28 @@ const Dashboard = () => {
 					</Toast.Header>
 					<Toast.Body className="text-white">
 						{tabletName}
+					</Toast.Body>
+				</Toast>
+
+				<Toast
+					onClose={() => {
+						setShowStreakAddedToast(false);
+					}}
+					bg="success"
+					show={showStreakAddedToast}
+					position='middle-center'
+					delay={2000}
+					autohide
+					style={{ position: "fixed", zIndex: "10", right: "2rem", top: "10%" }}
+				>
+					<Toast.Header>
+
+						<strong className="me-auto text-success">
+							Streak Updated!
+						</strong>
+					</Toast.Header>
+					<Toast.Body className="text-white">
+						Streak has been incremented
 					</Toast.Body>
 				</Toast>
 
@@ -311,7 +333,7 @@ const Dashboard = () => {
 							id="c6"
 							className="component"
 						>
-							<Streaks setShowAlreadyAddedToast={setShowAlreadyAddedToast} />
+							<Streaks setShowAlreadyAddedToast={setShowAlreadyAddedToast} setShowStreakAddedToast={setShowStreakAddedToast} />
 						</div>
 
 					</div>
