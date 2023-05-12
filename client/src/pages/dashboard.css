@@ -48,7 +48,7 @@
 }
 
 #c1, #c4{
-    max-width: 20rem;
+    /* max-width: 20rem; */
     /* max-height: 20rem; */
 }
 
@@ -205,11 +205,12 @@ height: 100%;
 }
 
 #c4{
-    width: 10rem;
+    /* width: 10rem; */
     height: 100%;
 }
 
 .recharts-surface, .recharts-wrapper{
+    scale:85%;
     /* background-color: white; */
     /* width: fit-content; */
 }

@@ -28,9 +28,6 @@ const Navbar = (props) => {
 				<div className="navbar-buttons">
 
 
-					{/* {user && (
-						
-					)} */}
 					<div>
 						{props.buttons && !user && (
 							<>
@@ -51,6 +48,7 @@ const Navbar = (props) => {
 							</>
 						)}
 
+<Link to='/logs '><Button>Logs</Button></Link>
 						{props.buttons && user && (
 							<>
 
@@ -63,6 +61,7 @@ const Navbar = (props) => {
 							</>
 						)
 						}
+						
 					</div>
 				</div>
 			</div>

@@ -131,6 +131,29 @@ const Dashboard = () => {
 
 	};
 
+	const handleAddLogs = async(medName)=>{
+		const axios = require("axios");
+		
+		let content = `Medicine ${medName} taken at ${new Date()}` 
+		axios.post(
+			"https://medpal-backend.onrender.com/api/logs",
+			{
+			  content: content
+			},
+			{
+			  headers: {
+				"Content-Type": "application/json",
+				Authorization: `Bearer ${user.token}`,
+			  }
+			}
+		  ).then(response => {
+			console.log(response.data);
+		  }).catch(error => {
+			console.error(error);
+		  });
+		  
+	}
+
 	return (
 		<>
 			<Navbar />
@@ -268,7 +291,7 @@ const Dashboard = () => {
 							id="c1"
 							className="component"
 						>
-							<TabList fetchedMedicineData={fetchedMedicinesData ? fetchedMedicinesData : null} handleFetch={handleFetch} showTaken={showTaken} setShowTaken={setShowTaken} setTabletName={setTabletName} />
+							<TabList fetchedMedicineData={fetchedMedicinesData ? fetchedMedicinesData : null} handleFetch={handleFetch} showTaken={showTaken} setShowTaken={setShowTaken} setTabletName={setTabletName} handleAddLogs={handleAddLogs} />
 
 						</div>
 
@@ -276,7 +299,7 @@ const Dashboard = () => {
 							id="c2"
 							className="component"
 						>
-							<TabStock fetchedMedicineData={fetchedMedicinesData ? fetchedMedicinesData : null} handleFetch={handleFetch} showTaken={showTaken} setShowTaken={setShowTaken} setTabletName={setTabletName} />
+							<TabStock fetchedMedicineData={fetchedMedicinesData ? fetchedMedicinesData : null} handleFetch={handleFetch} showTaken={showTaken} setShowTaken={setShowTaken} setTabletName={setTabletName} handleAddLogs={handleAddLogs} />
 						</div>
 
 						<div
