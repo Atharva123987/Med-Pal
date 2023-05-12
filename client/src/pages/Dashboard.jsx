@@ -210,6 +210,8 @@ const Dashboard = () => {
 						Streak has already been incremented for today
 					</Toast.Body>
 				</Toast>
+
+				
 				<div id="user-details">
 
 
@@ -260,8 +262,8 @@ const Dashboard = () => {
 
 				</div>
 
-				<div id="dash-components">
-					<div id="r1">
+				<div id="dash-components" className="dashboard-grid-container">
+
 						<div
 							id="c1"
 							className="component"
@@ -276,17 +278,16 @@ const Dashboard = () => {
 						>
 							<TabStock fetchedMedicineData={fetchedMedicinesData ? fetchedMedicinesData : null} handleFetch={handleFetch} showTaken={showTaken} setShowTaken={setShowTaken} setTabletName={setTabletName} />
 						</div>
+
 						<div
 							id="c3"
 							className="component"
 						>
 							<Prescription fetchedReportsData={fetchedReportsData ? fetchedReportsData : null} />
 						</div>
-					</div>
 
-					<div id="r2">
 
-						<div id="c4" className="component d-flex flex-column">
+						<div id="c4" className="component">
 							{
 								!fetchedChartData ? (<>
 									<div className="dash-component">
@@ -302,7 +303,7 @@ const Dashboard = () => {
 
 						</div>
 
-						<div id="c5" className="component">
+						<div id="c5" className="component calendar-container">
 							{
 								!appointments ? (
 									<>
@@ -336,7 +337,6 @@ const Dashboard = () => {
 							<Streaks setShowAlreadyAddedToast={setShowAlreadyAddedToast} setShowStreakAddedToast={setShowStreakAddedToast} />
 						</div>
 
-					</div>
 				</div>
 			</div>
 		</>

@@ -7,6 +7,7 @@ import {
   Tooltip,
   Line,
   Legend,
+  ResponsiveContainer,
 } from "recharts";
 import moment from "moment";
 import groupBy from "lodash/groupBy";
@@ -33,6 +34,7 @@ const Charts = (props) => {
       <>
           <Legend align="center">{props.chartType}</Legend>
           <p id="floater-nodata">No data to show</p>
+          <ResponsiveContainer width="100%" height="100%">
           <LineChart
             width={width ? width : 1}
             height={height ? height : 300}
@@ -49,6 +51,7 @@ const Charts = (props) => {
             {/* <Legend /> */}
             {/* <Line type="monotone" dataKey="count" stroke="#8884d8" /> */}
           </LineChart>
+          </ResponsiveContainer>
       </>
     );
   }

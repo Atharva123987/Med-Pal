@@ -5,11 +5,19 @@
     /* width: 100%; */
     background-color: rgba(85, 204, 255, 0.324);
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    height: 100vh;
+    min-height: 100vh;
 }
 
 #component-name{
     box-shadow: 0px 0px 2px black;
+}
+
+.dashboard-grid-container{
+    display: grid!important;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap:1rem;
+    width: 100%;
+    /* background-color: red; */
 }
 
 .react-calendar__tile--now {
@@ -36,10 +44,17 @@
     /* background-color: rgba(255, 255, 255, 0.521); */
 }
 #c6{
-    max-width: 20rem;
+    /* max-width: 20rem; */
 }
 
-span {}
+#c1, #c4{
+    max-width: 20rem;
+    /* max-height: 20rem; */
+}
+
+
+
+
 
 #user-details {
     display: flex;
@@ -152,9 +167,25 @@ span {}
 
 }
 
-#calendar-container{
-    align-items: center;
-    justify-content: center;
+.calendar-container{
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    align-items:     center;
+    width: 100%;
+    /* height: fit-content; */
+
+}
+
+#c5{
+    position: relative;
+}
+
+#c5>.react-calendar{
+    position: absolute;
+    top:3%;
+height: 100%;
+    scale:75%
 }
 
 #doctors th {
@@ -173,9 +204,16 @@ span {}
     border: 1.5px solid black;
 }
 
-.recharts-wrapper{
-    /* background-color: white; */
+#c4{
+    width: 10rem;
+    height: 100%;
 }
+
+.recharts-surface, .recharts-wrapper{
+    /* background-color: white; */
+    /* width: fit-content; */
+}
+
 
 @keyframes fade {
     0% {
@@ -195,7 +233,7 @@ span {}
 
 #dash-components {
     display: flex;
-    width: 70%;
+    /* width: 70%; */
     /* height: 100vh; */
     /* justify-content:space-evenly;  */
     flex-direction: column;
@@ -207,12 +245,7 @@ span {}
 
 
 
-#c1,
-#c2,
-#c3 {
-    flex: 1;
-    
-}
+
 
 #appointments-list-dashboard {
     position: absolute;
@@ -231,19 +264,19 @@ span {}
 
 
 
-#r1 {
+/* #r1 {
     display: flex;
     flex-direction: row;
     gap: 10px;
-}
-
+} */
+/* 
 #r2 {
     display: flex;
     flex-direction: row;
     gap: 20px;
     max-width: 100%;
 margin-top: 10px;
-}
+} */
 
 #c4{
     margin-left: 5px;
