@@ -94,12 +94,15 @@ const TabList = (props) => {
         {fetchedMedicineData ? (
           <>
             <Table striped bordered hover>
+              <thead>
               <tr>
                 <th>Name</th>
                 <th>Frequency</th>
                 <th>Time</th>
                 <th>Action</th>
               </tr>
+              </thead>
+              <tbody>
               {fetchedMedicineData
                 .filter((element) => element?.frequency)
                 .map((element, key) => {
@@ -166,6 +169,7 @@ const TabList = (props) => {
                     </tr>
                   );
                 })}
+                </tbody>
             </Table>
             <div className="dash-button-container">
               <Link to={"/medicines"}>

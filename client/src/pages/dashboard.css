@@ -12,16 +12,6 @@
     box-shadow: 0px 0px 2px black;
 }
 
-.loading-screen{
-    display: flex;
-    /* justify-content: center; */
-    align-items: center;
-}
-
-.loading-screen legend{
-    margin-bottom: 3rem;
-}
-
 .react-calendar__tile--now {
     background-color: rgb(210, 226, 255) !important;
     color: black;

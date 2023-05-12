@@ -30,6 +30,7 @@ const Prescription = (props) => {
                 {!fetchedData? (
                     <LoadingCircle /> 
                 ) : (
+                    <>
                     <table>
                         {fetchedData?.map((val, key) => {
                             const isPdf = val.reportResourceURL?.toLowerCase().endsWith(".pdf");
@@ -58,12 +59,14 @@ const Prescription = (props) => {
                             );
                         })}
                     </table>
+                     <div className="dash-button-container">
+                     <Link to={'/reports'}> <Button variant="info" onClick={scrollToTop}><AiFillPlusCircle color="white" /></Button>
+                     </Link>
+                 </div>
+                 </>
                 )}
 
-                <div className="dash-button-container">
-                    <Link to={'/reports'}> <Button variant="info" onClick={scrollToTop}><AiFillPlusCircle color="white" /></Button>
-                    </Link>
-                </div>
+               
             </div>
         </>
     );

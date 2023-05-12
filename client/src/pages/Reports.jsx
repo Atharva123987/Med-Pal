@@ -33,7 +33,7 @@ const Reports = () => {
 
 
 		fetchReports();
-	}, [user.token, fileUrl]);
+	}, [user?.token, fileUrl]);
 
 	const fetchReports = async () => {
 		try {
