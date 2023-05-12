@@ -5,6 +5,7 @@ import { AiFillMinusCircle, AiFillPlusCircle } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import { useAuthContext } from "../hooks/useAuthContext";
 import { Tooltip, OverlayTrigger } from "react-bootstrap";
+import LoadingCircle from "./SkeletonLoaders/LoadingCircle";
 
 const TabStock = (props) => {
   const [fetchedMedicineData, setFetchedMedicineData] = useState(null);
@@ -84,10 +85,12 @@ const TabStock = (props) => {
 
   return (
     <>
-      <div id="tab-stock" className="dash-component">
+      <div id="tab-stock" className={fetchedMedicineData?"dash-component":"dash-component loading-screen"}>
         <legend align="center">Medicine Inventory</legend>
-
-        <Table striped bordered hover>
+    {
+      !fetchedMedicineData?<LoadingCircle/>:(
+        <>
+<Table striped bordered hover>
           <tr>
             <th>Name</th>
             <th>Stock</th>
@@ -131,6 +134,10 @@ const TabStock = (props) => {
             </Button>
           </Link>
         </div>
+        </>
+      )
+    }
+        
       </div>
     </>
   );

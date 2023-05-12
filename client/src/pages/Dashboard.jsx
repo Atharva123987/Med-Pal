@@ -17,6 +17,7 @@ import { useAuthContext } from "../hooks/useAuthContext";
 import { Link, Navigate } from "react-router-dom";
 import { Toast } from "react-bootstrap";
 import { AiFillPlusCircle } from "react-icons/ai";
+import LoadingCircle from "../components/SkeletonLoaders/LoadingCircle";
 
 
 const Dashboard = () => {
@@ -33,15 +34,15 @@ const Dashboard = () => {
 	const [doctorAddress, setDoctorAddress] = useState("");
 	const [notes, setNotes] = useState("");
 	const [appointmentDateAndTime, setAppointmentDateAndTime] = useState("");
-	const [showTaken,setShowTaken] = useState(false);
+	const [showTaken, setShowTaken] = useState(false);
 	const [tabletName, setTabletName] = useState(null)
 	const [showAlreadyAddedToast, setShowAlreadyAddedToast] = useState(false);
-
+	const [showStreakAddedToast, setShowStreakAddedToast] = useState(false);
 	useEffect(() => {
 		handleFetch()
 	}, [])
 
-	
+
 
 	const handleFetch = async (e) => {
 
@@ -134,90 +135,129 @@ const Dashboard = () => {
 		<>
 			<Navbar />
 			<div id="content">
-			
-				
+
+
 				<Sidenav />
 				<Toast
-						onClose={() => {
-							setShowTaken(false);
-						}}
-						bg="success"
-						show={showTaken}
-						position='middle-center'
-						delay={2000}
-						autohide
-						style={{ position: "fixed", zIndex: "10", right: "2rem", top:"10%" }}
-					>
-						<Toast.Header>
-							<img
-								src="holder.js/20x20?text=%20"
-								className="rounded me-2"
-								alt=""
-							/>
-							<strong className="me-auto text-success">
-								Tablet Taken!
-							</strong>
-						</Toast.Header>
-						<Toast.Body className="text-white">
-							{tabletName}
-						</Toast.Body>
-					</Toast>
+					onClose={() => {
+						setShowTaken(false);
+					}}
+					bg="success"
+					show={showTaken}
+					position='middle-center'
+					delay={2000}
+					autohide
+					style={{ position: "fixed", zIndex: "10", right: "2rem", top: "10%" }}
+				>
+					<Toast.Header>
+						<img
+							src="holder.js/20x20?text=%20"
+							className="rounded me-2"
+							alt=""
+						/>
+						<strong className="me-auto text-success">
+							Tablet Taken!
+						</strong>
+					</Toast.Header>
+					<Toast.Body className="text-white">
+						{tabletName}
+					</Toast.Body>
+				</Toast>
 
-					<Toast
-						onClose={() => {
-							setShowAlreadyAddedToast(false);
-						}}
-						bg="danger"
-						show={showAlreadyAddedToast}
-						delay={2000}
-						autohide
-						style={{ position: "fixed", zIndex: "10", right: "2rem", top:"10%" }}
-					>
-						<Toast.Header>
-							<img
-								src="holder.js/20x20?text=%20"
-								className="rounded me-2"
-								alt=""
-							/>
-							<strong className="me-auto text-danger">
-								Streak already incremented!
-							</strong>
-						</Toast.Header>
-						<Toast.Body className="text-white">
-							Streak has already been incremented for today
-						</Toast.Body>
-					</Toast>
+				<Toast
+					onClose={() => {
+						setShowStreakAddedToast(false);
+					}}
+					bg="success"
+					show={showStreakAddedToast}
+					position='middle-center'
+					delay={2000}
+					autohide
+					style={{ position: "fixed", zIndex: "10", right: "2rem", top: "10%" }}
+				>
+					<Toast.Header>
+
+						<strong className="me-auto text-success">
+							Streak Updated!
+						</strong>
+					</Toast.Header>
+					<Toast.Body className="text-white">
+						Streak has been incremented
+					</Toast.Body>
+				</Toast>
+
+				<Toast
+					onClose={() => {
+						setShowAlreadyAddedToast(false);
+					}}
+					bg="danger"
+					show={showAlreadyAddedToast}
+					delay={2000}
+					autohide
+					style={{ position: "fixed", zIndex: "10", right: "2rem", top: "10%" }}
+				>
+					<Toast.Header>
+						<img
+							src="holder.js/20x20?text=%20"
+							className="rounded me-2"
+							alt=""
+						/>
+						<strong className="me-auto text-danger">
+							Streak already incremented!
+						</strong>
+					</Toast.Header>
+					<Toast.Body className="text-white">
+						Streak has already been incremented for today
+					</Toast.Body>
+				</Toast>
 				<div id="user-details">
 
-					<div id="profile">
-						<img id="profile-pic" alt="profile" src='https://ik.imagekit.io/0qlf5pqwx/am-a-19-year-old-multimedia-artist-student-from-manila_-_21.png?updatedAt=1681593465157'></img>
-					
-						<div id="uname">
-							
-							<h2 id="name">{userDetails?.name}</h2>
 
-							<p id="email">{userDetails?.email}</p>
-						</div>
-					</div>
 
-					<div id="info">
-						<div id="details">
-							<div class="arrow-down"></div>
-							<p>Age : {userDetails?.age}</p>
-							<p>Gender : {userDetails?.gender[0].toUpperCase() + userDetails?.gender.slice(1, 10)}</p>
-							<p>Height : {userDetails?.height} cm</p>
-							<p>Weight : {userDetails?.weight} kg</p>
-						</div>
-					</div>
+					{
+						!userDetails ? (
+							<>
+							<div className="d-flex justify-content-center align-items-center h-100">
+								<LoadingCircle />
+								</div>
+							</>
+						) : (
+							<>
+								<div id="profile">
+									<img id="profile-pic" alt="profile" src='https://ik.imagekit.io/0qlf5pqwx/am-a-19-year-old-multimedia-artist-student-from-manila_-_21.png?updatedAt=1681593465157'></img>
 
-					<div id="tips-container">
-						<Tips />
-					</div>
+									<div id="uname">
 
-					<div id="badge-container">
-							<img id="badge" src={Badge} />
-							<p>Gold Member</p>
-						</div>
+										<h2 id="name">{userDetails?.name}</h2>
+
+										<p id="email">{userDetails?.email}</p>
+									</div>
+								</div>
+								<div id="info">
+
+									<div id="details">
+										<div class="arrow-down"></div>
+										<p>Age : {userDetails?.age}</p>
+										<p>Gender : {userDetails?.gender[0]?.toUpperCase() + userDetails?.gender.slice(1, 10)}</p>
+										<p>Height : {userDetails?.height} cm</p>
+										<p>Weight : {userDetails?.weight} kg</p>
+									</div>
+								</div>
+								<div id="tips-container">
+									<Tips />
+								</div>
+
+								<div id="badge-container">
+									<img id="badge" src={Badge} />
+									<p>Gold Member</p>
+								</div>
+							</>
+
+						)
+					}
+
+
+
 				</div>
 
 				<div id="dash-components">
@@ -229,12 +269,12 @@ const Dashboard = () => {
 							<TabList fetchedMedicineData={fetchedMedicinesData ? fetchedMedicinesData : null} handleFetch={handleFetch} showTaken={showTaken} setShowTaken={setShowTaken} setTabletName={setTabletName} />
 
 						</div>
-		
+
 						<div
 							id="c2"
 							className="component"
 						>
-							<TabStock fetchedMedicineData={fetchedMedicinesData ? fetchedMedicinesData : null} handleFetch={handleFetch} showTaken={showTaken} setShowTaken={setShowTaken} setTabletName={setTabletName}/>
+							<TabStock fetchedMedicineData={fetchedMedicinesData ? fetchedMedicinesData : null} handleFetch={handleFetch} showTaken={showTaken} setShowTaken={setShowTaken} setTabletName={setTabletName} />
 						</div>
 						<div
 							id="c3"
@@ -247,35 +287,54 @@ const Dashboard = () => {
 					<div id="r2">
 
 						<div id="c4" className="component d-flex flex-column">
-					
 							{
+								!fetchedChartData ? (<>
+									<div className="dash-component">
+										<legend align="center" >Charts</legend>
+										<LoadingCircle />
+									</div>
+								</>
+								) : (
+									<AllCharts chartData={fetchedChartData ? fetchedChartData : {}} chartType={readingType} width={450} height={230} />
 
-								fetchedChartData && <AllCharts chartData={fetchedChartData} chartType={readingType} width={450} height={230} />
+								)
 							}
-							
 
 						</div>
 
 						<div id="c5" className="component">
-						<legend align="center">Appointments</legend>
-							<Calendar
-								appointments={appointments}
-								setDoctorName={setDoctorName}
-								setDoctorNumber={setDoctorNumber}
-								setDoctorAddress={setDoctorAddress}
-								setNotes={setNotes}
-								setAppointmentDateAndTime={setAppointmentDateAndTime}
-							/>
-							
+							{
+								!appointments ? (
+									<>
+										<div className="dash-component">
+											<legend align="center" >Appointments</legend>
+											<LoadingCircle />
+										</div>
+									</>
+								) : (
+									<>
+										<legend align="center">Appointments</legend>
+										<Calendar
+											appointments={appointments}
+											setDoctorName={setDoctorName}
+											setDoctorNumber={setDoctorNumber}
+											setDoctorAddress={setDoctorAddress}
+											setNotes={setNotes}
+											setAppointmentDateAndTime={setAppointmentDateAndTime}
+										/>
+									</>
+								)
+							}
+
+
 						</div>
 
 						<div
 							id="c6"
 							className="component"
-							style={{ flexGrow: 6 }}
 						>
-							<Streaks setShowAlreadyAddedToast={setShowAlreadyAddedToast} />
-						</div> 
+							<Streaks setShowAlreadyAddedToast={setShowAlreadyAddedToast} setShowStreakAddedToast={setShowStreakAddedToast} />
+						</div>
 
 					</div>
 				</div>

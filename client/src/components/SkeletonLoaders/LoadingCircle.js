@@ -3,9 +3,12 @@ import './loadingCircle.css';
 
 const LoadingCircle = () => {
   return (
-    <div className="loading-circle-container">
-      <div className="loading-circle"></div>
+    <>
+    <div>
+    <p>Loading</p>
+    <div className="loader"></div>
     </div>
+    </>
   );
 };
 

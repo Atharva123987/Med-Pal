@@ -5,10 +5,12 @@ import { useEffect, useState } from "react";
 import axios from 'axios'
 import { useAuthContext } from "../hooks/useAuthContext";
 import { BiHappy, BiSad } from "react-icons/bi";
+import LoadingCircle from "./SkeletonLoaders/LoadingCircle";
 
-const Streaks = ({ setShowAlreadyAddedToast }) => {
+const Streaks = ({ setShowAlreadyAddedToast, setShowStreakAddedToast }) => {
   const { user } = useAuthContext();
   const [streakNumber, setStreakNumber] = useState(null);
+
   useEffect(() => {
     handleFetchStreak();
   }, [streakNumber])
@@ -51,16 +53,15 @@ const Streaks = ({ setShowAlreadyAddedToast }) => {
     axios
       .request(config)
       .then((response) => {
-        console.log(response)
-        // setStreakNumber(response.)
+        console.log(response.data.currentStreak)
+        setShowStreakAddedToast(true)
+        setStreakNumber(response.data.currentStreak)
       })
       .catch((error) => {
         if (error.response.status === 400) {
           setShowAlreadyAddedToast(true);
-          console.log("HERERER")
         }
-        console.log(error.response.status);
-
+        
       });
   }
 
@@ -70,6 +71,16 @@ const Streaks = ({ setShowAlreadyAddedToast }) => {
     }
     : { color: "grey" };
 
+
+    // if(!streakNumber){
+    //   console.log(streakNumber)
+    //   return(
+    //     <>
+    //   <legend align='center'>Streak</legend>
+    //     <LoadingCircle/>
+    //     </>
+    //   )
+    // }
 
   return (
 
