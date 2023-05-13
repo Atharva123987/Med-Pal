@@ -13,7 +13,7 @@ const Streaks = ({ setShowAlreadyAddedToast, setShowStreakAddedToast }) => {
 
   useEffect(() => {
     handleFetchStreak();
-  }, [streakNumber])
+  }, [])
 
   const handleFetchStreak = async () => {
     let config = {
@@ -56,6 +56,8 @@ const Streaks = ({ setShowAlreadyAddedToast, setShowStreakAddedToast }) => {
         console.log(response.data.currentStreak)
         setShowStreakAddedToast(true)
         setStreakNumber(response.data.currentStreak)
+    handleFetchStreak();
+
       })
       .catch((error) => {
         if (error.response.status === 400) {
