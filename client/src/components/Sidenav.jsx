@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import "./sidenav.css";
 import { AiOutlineHome, AiOutlineAreaChart} from "react-icons/ai";
-import { CgLogOut } from "react-icons/cg";
+import { FiLogOut } from "react-icons/fi";
 import { useLogout } from "../hooks/useLogout";
 import { BsInfoCircle } from "react-icons/bs";
 import { GiMedicines } from "react-icons/gi";
@@ -95,7 +95,7 @@ const Sidenav = () => {
           overlay={<Tooltip>Logout</Tooltip>}
         >
           <Link to="/" onClick={handleLogout}>
-            <CgLogOut />
+          <FiLogOut/>
           </Link>
         </OverlayTrigger>
 
