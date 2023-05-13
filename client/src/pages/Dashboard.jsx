@@ -1,6 +1,5 @@
 import Sidenav from "../components/Sidenav";
 import "./dashboard.css";
-import Badge from "../assets/badge.png";
 import TabList from "../components/TabList";
 import TabStock from "../components/TabStock";
 import Prescription from "../components/Prescription";
@@ -248,7 +247,7 @@ const Dashboard = () => {
 								</div>
 
 								<div id="badge-container">
-									<img id="badge" src={Badge} />
+									<img id="badge" src="https://ik.imagekit.io/medpal/badge.png?updatedAt=1683912182980" />
 									<p>Gold Member</p>
 								</div>
 							</>

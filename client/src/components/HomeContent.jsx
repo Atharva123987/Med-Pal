@@ -9,11 +9,7 @@ import { FaFilePrescription } from 'react-icons/fa';
 import { VscGraphLine } from 'react-icons/vsc'
 import { AiOutlineSearch } from 'react-icons/ai'
 import { BsFillPinMapFill } from 'react-icons/bs'
-import tempImg from '../assets/accordian1.jpg'
-import tempImg2 from '../assets/accordian2.jpg'
-import tempImg3 from '../assets/accordian3.jpg'
-import tempImg4 from '../assets/accordian4.jpg'
-// import tempImg4 from '../assets/accordian4.jpg'
+
 const HomeContent = () => {
   const accordionRef = useRef(null);
   const buttonsRef = useRef([]);
@@ -119,14 +115,14 @@ useEffect(() => {
           <Accordion.Item eventKey='0'>
             <Accordion.Header onFocus={()=>setUserClick(1)}><AiOutlineSearch style={{ marginRight: "10px" }} />Find a doctor that meets your needs</Accordion.Header>
             <Accordion.Body>
-              <img alt='accordion image1' src={tempImg} height={100} /><br></br>
+              <img alt='accordion image1' src="https://ik.imagekit.io/medpal/accordian1.webp?updatedAt=1683913601591" height={100} /><br></br>
               Our platform allows you to search for healthcare providers by name, specialty, location, and other filters, making it easy to find a doctor that fits your unique healthcare needs.
             </Accordion.Body>
           </Accordion.Item>
           <Accordion.Item eventKey='1'>
             <Accordion.Header onFocus={()=>setUserClick(1)}><VscGraphLine style={{ marginRight: "10px" }} />Track Your Progress with Charts and Graphs</Accordion.Header>
             <Accordion.Body>
-              <img alt='accordion image2' src={tempImg2} height={100} /> <br></br>
+              <img alt='accordion image2' src="https://ik.imagekit.io/medpal/accordian2.webp?updatedAt=1683913602477" height={100} /> <br></br>
               Med Pal provides you with easy-to-read charts and graphs that allow you to track your progress and monitor your health goals. With just a glance, you can see how your tablets info, doctor appointments, and medical history are affecting your overall health. Plus, our dashboard feature allows you to view your health data in a comprehensive and organized way, making it easy to identify areas for improvement and stay on top of your health.
             </Accordion.Body>
           </Accordion.Item>
@@ -134,14 +130,14 @@ useEffect(() => {
             <Accordion.Header onFocus={()=>setUserClick(1)}> <FaFilePrescription style={{ marginRight: "10px" }} /> Access medical records and history</Accordion.Header>
 
             <Accordion.Body>
-              <img alt='accordion image3' src={tempImg3} height={100} /> <br></br>
+              <img alt='accordion image3' src="https://ik.imagekit.io/medpal/accordian3.webp?updatedAt=1683913602612" height={100} /> <br></br>
               With our platform, you can easily access your medical records and history, so you can share them with your healthcare provider. This feature allows for more personalized care, and helps your doctor make informed decisions about your health.
             </Accordion.Body>
           </Accordion.Item>
           <Accordion.Item eventKey='3'>
             <Accordion.Header onFocus={()=>setUserClick(1)}><BsFillPinMapFill style={{ marginRight: "10px" }} />Get directions and contact information</Accordion.Header>
             <Accordion.Body>
-            <img alt='accordion image4' src={tempImg4} height={100} /> <br></br>
+            <img alt='accordion image4' src="https://ik.imagekit.io/medpal/accordian4.webp?updatedAt=1683913602260" height={100} /> <br></br>
               Med Pal provides easy access to a doctor's contact information, office hours, and directions. This allows you to plan your visit more efficiently and make the most of your time at the doctor's office.
             </Accordion.Body>
           </Accordion.Item>

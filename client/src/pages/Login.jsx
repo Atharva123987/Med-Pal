@@ -4,7 +4,6 @@ import "../App.css";
 import { Container, Row, Col, Button, Form } from "react-bootstrap";
 import { useLogin } from "../hooks/useLogin";
 import Navbar from "../components/Navbar";
-import Login_img from "../assets/6333040.jpg";
 
 export const Login = (props) => {
   const [email, setEmail] = useState("");
@@ -27,7 +26,7 @@ export const Login = (props) => {
         <Container className="login-container">
           <Row>
             <Col md="6" className="login-img">
-              <img src={Login_img} alt="Login" />
+              <img src="https://ik.imagekit.io/medpal/6333040.webp?updatedAt=1683912866695" alt="Login" />
             </Col>
             <Col md="6" className="login">
               <Form onSubmit={handleSubmit} className="w-100">
