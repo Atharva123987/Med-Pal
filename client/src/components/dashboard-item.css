@@ -5,8 +5,8 @@
 .dash-component{
     background-color: white;
     /* width: 20vw; */
-    margin:0.4rem;
-    height: 18rem;
+    /* margin:0.4rem; */
+    height: 100%;
     overflow-x: hidden;
 }
 #floater-nodata{

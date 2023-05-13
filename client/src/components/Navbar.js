@@ -9,6 +9,8 @@ import { useAuthContext } from "../hooks/useAuthContext";
 import { Button } from "react-bootstrap";
 import { FiLogOut } from 'react-icons/fi'
 import { MdDashboard } from 'react-icons/md'
+import { GrCatalog } from "react-icons/gr";
+import { BsLayoutTextSidebarReverse } from "react-icons/bs";
 
 const Navbar = (props) => {
 	const { logout } = useLogout();
@@ -28,9 +30,6 @@ const Navbar = (props) => {
 				<div className="navbar-buttons">
 
 
-					{/* {user && (
-						
-					)} */}
 					<div>
 						{props.buttons && !user && (
 							<>
@@ -50,6 +49,9 @@ const Navbar = (props) => {
 								</Link>
 							</>
 						)}
+				{
+				!props.LogButton && <Link to='/logs '><Button variant="light"><BsLayoutTextSidebarReverse/></Button></Link>
+}
 
 						{props.buttons && user && (
 							<>
@@ -63,6 +65,7 @@ const Navbar = (props) => {
 							</>
 						)
 						}
+						
 					</div>
 				</div>
 			</div>

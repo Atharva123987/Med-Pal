@@ -109,10 +109,10 @@ const Calendar = (props) => {
 
   return (
     <>
-      <div id='calendar-container'>
-        
         <Calendar1
+          id='calendar-main'
           onChange={(date) => setSelectedDate(date.toISOString())}
+          tileHeight={100}
           value={new Date(selectedDate)}
           tileContent={tileContent}
           nextLabel={<GrCaretNext />}
@@ -202,7 +202,6 @@ const Calendar = (props) => {
         </>
       }
 
-      </div>
     </>
   );
 

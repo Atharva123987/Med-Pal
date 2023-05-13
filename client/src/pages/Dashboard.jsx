@@ -131,6 +131,29 @@ const Dashboard = () => {
 
 	};
 
+	const handleAddLogs = async(medName)=>{
+		const axios = require("axios");
+		
+		let content = `Medicine ${medName} taken at ${new Date()}` 
+		axios.post(
+			"https://medpal-backend.onrender.com/api/logs",
+			{
+			  content: content
+			},
+			{
+			  headers: {
+				"Content-Type": "application/json",
+				Authorization: `Bearer ${user.token}`,
+			  }
+			}
+		  ).then(response => {
+			console.log(response.data);
+		  }).catch(error => {
+			console.error(error);
+		  });
+		  
+	}
+
 	return (
 		<>
 			<Navbar />
@@ -210,6 +233,8 @@ const Dashboard = () => {
 						Streak has already been incremented for today
 					</Toast.Body>
 				</Toast>
+
+				
 				<div id="user-details">
 
 
@@ -260,13 +285,13 @@ const Dashboard = () => {
 
 				</div>
 
-				<div id="dash-components">
-					<div id="r1">
+				<div id="dash-components" className="dashboard-grid-container">
+
 						<div
 							id="c1"
 							className="component"
 						>
-							<TabList fetchedMedicineData={fetchedMedicinesData ? fetchedMedicinesData : null} handleFetch={handleFetch} showTaken={showTaken} setShowTaken={setShowTaken} setTabletName={setTabletName} />
+							<TabList fetchedMedicineData={fetchedMedicinesData ? fetchedMedicinesData : null} handleFetch={handleFetch} showTaken={showTaken} setShowTaken={setShowTaken} setTabletName={setTabletName} handleAddLogs={handleAddLogs} />
 
 						</div>
 
@@ -274,19 +299,18 @@ const Dashboard = () => {
 							id="c2"
 							className="component"
 						>
-							<TabStock fetchedMedicineData={fetchedMedicinesData ? fetchedMedicinesData : null} handleFetch={handleFetch} showTaken={showTaken} setShowTaken={setShowTaken} setTabletName={setTabletName} />
+							<TabStock fetchedMedicineData={fetchedMedicinesData ? fetchedMedicinesData : null} handleFetch={handleFetch} showTaken={showTaken} setShowTaken={setShowTaken} setTabletName={setTabletName} handleAddLogs={handleAddLogs} />
 						</div>
+
 						<div
 							id="c3"
 							className="component"
 						>
 							<Prescription fetchedReportsData={fetchedReportsData ? fetchedReportsData : null} />
 						</div>
-					</div>
 
-					<div id="r2">
 
-						<div id="c4" className="component d-flex flex-column">
+						<div id="c4" className="component">
 							{
 								!fetchedChartData ? (<>
 									<div className="dash-component">
@@ -302,7 +326,7 @@ const Dashboard = () => {
 
 						</div>
 
-						<div id="c5" className="component">
+						<div id="c5" className="component calendar-container">
 							{
 								!appointments ? (
 									<>
@@ -336,7 +360,6 @@ const Dashboard = () => {
 							<Streaks setShowAlreadyAddedToast={setShowAlreadyAddedToast} setShowStreakAddedToast={setShowStreakAddedToast} />
 						</div>
 
-					</div>
 				</div>
 			</div>
 		</>
