@@ -1,9 +1,6 @@
 import React from "react";
 import "./Navbar.css";
 import { Link } from "react-router-dom";
-import Log_In from "../assets/login.png";
-import Register from "../assets/register.png";
-import Logo from "../assets/logo.png";
 import { useLogout } from "../hooks/useLogout";
 import { useAuthContext } from "../hooks/useAuthContext";
 import { Button } from "react-bootstrap";
@@ -24,7 +21,7 @@ const Navbar = (props) => {
 		<>
 			<div className="nav-container">
 				<a href="/">
-					<img src={Logo} className="logo" alt="website logo" />
+					<img src="https://ik.imagekit.io/medpal/logo.webp?updatedAt=1683913606511" className="logo" alt="website logo" />
 				</a>
 				<div className="heading">MEDPAL</div>
 				<div className="navbar-buttons">
@@ -35,14 +32,14 @@ const Navbar = (props) => {
 							<>
 								<Link to={"/login"}>
 									<img
-										src={Log_In}
+										src="https://ik.imagekit.io/medpal/login.webp?updatedAt=1683913603920"
 										id="login-button"
 										alt="login"
 									/>
 								</Link>
 								<Link to={"/register"}>
 									<img
-										src={Register}
+										src="https://ik.imagekit.io/medpal/register.webp?updatedAt=1683913606398"
 										id="register-button"
 										alt="register"
 									/>

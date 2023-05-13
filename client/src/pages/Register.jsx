@@ -4,7 +4,6 @@ import "../App.css";
 import { useRegister } from "../hooks/useRegister";
 import Navbar from "../components/Navbar";
 import { Container, Row, Col, Button, Form } from "react-bootstrap";
-import Register_img from "../assets/registerForm.jpg";
 
 export const Register = (props) => {
   const [name, setName] = useState("");
@@ -29,7 +28,7 @@ export const Register = (props) => {
         <Container className="register-container">
           <Row>
             <Col md="6" className="register-img">
-              <img src={Register_img} alt="Login" />
+              <img src="https://ik.imagekit.io/medpal/registerForm.webp?updatedAt=1683913064005" alt="Login" />
             </Col>
             <Col md="6" className="register">
               <Form onSubmit={handleSubmit}>

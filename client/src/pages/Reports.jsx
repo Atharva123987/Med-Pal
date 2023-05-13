@@ -5,7 +5,7 @@ import Navbar from "../components/Navbar";
 import { Button, OverlayTrigger, Popover, Toast } from "react-bootstrap";
 import { Form } from "react-bootstrap";
 import { FaFilePdf, FaFileWord, FaFileExcel, FaFileImage } from "react-icons/fa";
-import tempImg from '../assets/badge.png'
+// import tempImg from '../assets/badge.png'
 import { GrSelect } from 'react-icons/gr'
 import './reports.css'
 import { TbReportMedical } from "react-icons/tb";

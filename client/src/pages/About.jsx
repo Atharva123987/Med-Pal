@@ -1,5 +1,4 @@
 import Navbar from "../components/Navbar";
-import sampleImg from "../assets/sample-avatar.png";
 import "../App.css";
 import "./about.css";
 import Footer from "../components/Footer";
@@ -33,7 +32,7 @@ const About = () => {
 				<div className="d-flex about-right">
 					<div style={{ flex: "1" }}>
 						<Fade delay={100} damping={0.05} triggerOnce>
-							<img src={sampleImg} />
+							<img src="https://ik.imagekit.io/medpal/sample-avatar.webp?updatedAt=1683912444375" />
 							<p style={{ textAlign: "center" }}>Atharva Amberkar</p>
 
 							<a className="about-links" href='https://github.com/Atharva123987' style={{ textAlign: "center" }}><AiFillGithub />Atharva123987</a>
@@ -43,7 +42,7 @@ const About = () => {
 					</div>
 					<div>
 						<Fade delay={100} damping={0.05} triggerOnce>
-							<img src={sampleImg} />
+							<img src="https://ik.imagekit.io/medpal/sample-avatar.webp?updatedAt=1683912444375" />
 							<p style={{ textAlign: "center" }}>Aastle Stephno</p>
 
 							<a className="about-links" href='https://github.com/spursycoder' style={{ textAlign: "center" }}><AiFillGithub />spursycoder</a>
@@ -53,7 +52,7 @@ const About = () => {
 					</div>
 					<div>
 						<Fade delay={100} damping={0.05} triggerOnce>
-							<img src={sampleImg} />
+							<img src="https://ik.imagekit.io/medpal/sample-avatar.webp?updatedAt=1683912444375" />
 							<p style={{ textAlign: "center" }}>Pankaj Sirari</p>
 
 							<a className="about-links" href='https://github.com/pankajsirari222' style={{ textAlign: "center" }}><AiFillGithub />pankajsirari222</a>

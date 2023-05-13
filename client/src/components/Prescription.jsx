@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import PImg from "../assets/prescription.jpg";
 import { FaFilePdf, FaFileWord, FaFileExcel, FaFileImage } from "react-icons/fa";
 import LoadingCircle from "../components/SkeletonLoaders/LoadingCircle"
 import { Link } from "react-router-dom";
