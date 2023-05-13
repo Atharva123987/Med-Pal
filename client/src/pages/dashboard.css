@@ -12,6 +12,10 @@
     box-shadow: 0px 0px 2px black;
 }
 
+.component{
+    max-height: 22rem;
+}
+
 .dashboard-grid-container{
     display: grid!important;
     grid-template-columns: 1fr 1fr 1fr;
@@ -67,6 +71,7 @@
     margin: 0.3rem 0.7rem;
     max-width: 24rem;
     flex: 1;
+    padding: 10px;
     /* max-height: 100vh; */
 }
 
