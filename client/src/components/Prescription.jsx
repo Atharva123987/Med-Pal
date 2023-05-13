@@ -25,11 +25,12 @@ const Prescription = (props) => {
 
     return (
         <>
-            <div id="prescription" className="dash-component">
+            <div id="prescription" className={fetchedData?"dash-component":"dash-component loading-screen"}>
                 <legend align="center">Medical Documents</legend>
-                {isLoading ? (
-                    <LoadingCircle /> // display loading circle if data is not fetched yet
+                {!fetchedData? (
+                    <LoadingCircle /> 
                 ) : (
+                    <>
                     <table>
                         {fetchedData?.map((val, key) => {
                             const isPdf = val.reportResourceURL?.toLowerCase().endsWith(".pdf");
@@ -58,12 +59,14 @@ const Prescription = (props) => {
                             );
                         })}
                     </table>
+                     <div className="dash-button-container">
+                     <Link to={'/reports'}> <Button variant="info" onClick={scrollToTop}><AiFillPlusCircle color="white" /></Button>
+                     </Link>
+                 </div>
+                 </>
                 )}
 
-                <div className="dash-button-container">
-                    <Link to={'/reports'}> <Button variant="info" onClick={scrollToTop}><AiFillPlusCircle color="white" /></Button>
-                    </Link>
-                </div>
+               
             </div>
         </>
     );

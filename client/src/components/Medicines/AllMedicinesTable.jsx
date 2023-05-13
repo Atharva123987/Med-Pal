@@ -6,6 +6,7 @@ import { AiFillDelete } from "react-icons/ai";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Popover from "react-bootstrap/Popover";
 import { useAuthContext } from "../../hooks/useAuthContext";
+import LoadingCircle from "../SkeletonLoaders/LoadingCircle";
 const AllMedicinesTable = (props) => {
 	const fetchedData = props.fetchedData;
 	const [showPopup, setShowPopup] = useState(false);
@@ -71,6 +72,14 @@ const AllMedicinesTable = (props) => {
 				console.log(error);
 			});
 	};
+
+	if(!fetchedData){
+		return(
+			<>
+			<LoadingCircle/>
+			</>
+		)
+	}
 
 	return (
 		<>

@@ -18,6 +18,7 @@ import ErrorPageLink from "./pages/ErrorPageLink";
 import { useAuthContext } from "./hooks/useAuthContext";
 import Contact  from "./pages/Contact";
 import Reports from "./pages/Reports";
+import Logs from "./pages/Logs";
 
 
 const App = () => {
@@ -79,6 +80,10 @@ const App = () => {
         <Route
           path="/charts"
           element={user ? <Charts /> : <Navigate to="/login" />}
+        />
+        <Route
+          path="/logs"
+          element={user ? <Logs/> : <Navigate to="/login" />}
         />
         
 				<Route

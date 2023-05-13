@@ -33,16 +33,16 @@ const Calendar = (props) => {
   const [hideList, setHideList] = useState(false)
   
 
-  useEffect(() => {
-    setLoading(false);
-  }, [appointments]);
+
 
   useEffect(()=>{
     if(deleteID !== null)handleDelete();
   },[deleteID])
 
   if(!appointments){
-    return(<h4>Loading...</h4>)
+    return(
+      <LoadingCircle/>
+    )
   }
 
   const handleDelete = async () => {
@@ -105,10 +105,7 @@ const Calendar = (props) => {
 
   
 
-  if (loading) {
-  return <LoadingCircle/>;
-
-  }
+ 
 
   return (
     <>

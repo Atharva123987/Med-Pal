@@ -12,27 +12,28 @@ import { TbReportMedical } from "react-icons/tb";
 import { AiFillDelete } from "react-icons/ai";
 import Sidenav from '../components/Sidenav'
 import Footer from '../components/Footer'
+import LoadingCircle from "../components/SkeletonLoaders/LoadingCircle";
 
 const Reports = () => {
-	const [reports, setReports] = useState([]);
+	const [reports, setReports] = useState(null);
 	const { user } = useAuthContext();
 	const [selectedFile, setSelectedFile] = useState(null);
 	const [isFileSelected, setIsFileSelected] = useState(false);
 	const [fileUrl, setFileUrl] = useState(null);
 	const [currentFile, setCurrentFile] = useState(null);
 	const [extension, setExtension] = useState(null);
-	const[showSuccess, setShowSuccess] = useState(false);
-	const[showDeleteSuccess, setShowDeleteSuccess] = useState(false);
+	const [showSuccess, setShowSuccess] = useState(false);
+	const [showDeleteSuccess, setShowDeleteSuccess] = useState(false);
 	const [deletedFile, setDeletedFile] = useState("");
 	const [clickedIndex, setClickedIndex] = useState(null);
 	const [showPopup, setShowPopup] = useState(false);
 	const [deleteID, setDeleteID] = useState(null);
 
 	useEffect(() => {
-		
+
 
 		fetchReports();
-	}, [user.token, fileUrl]);
+	}, [user?.token, fileUrl]);
 
 	const fetchReports = async () => {
 		try {
@@ -55,7 +56,7 @@ const Reports = () => {
 
 	const handleSubmit = async (event) => {
 		event.preventDefault();
-		
+
 		if (selectedFile.size > 2 * 1024 * 1024) {
 			alert("File size should be less than 2MB");
 			return;
@@ -78,36 +79,36 @@ const Reports = () => {
 		}
 	};
 
-	const handleDelete = async(id) =>{
+	const handleDelete = async (id) => {
 		const axios = require("axios");
 		let config = {
 			method: "delete",
 			maxBodyLength: Infinity,
 			url:
-			"https://medpal-backend.onrender.com/api/reportsStore/" + id,
+				"https://medpal-backend.onrender.com/api/reportsStore/" + id,
 			headers: {
 				Authorization: `Bearer ${user.token}`,
 			},
 		};
 
 		axios
-		.request(config)
-		.then((response) => {
-			fetchReports();
-			setShowDeleteSuccess(true);
-		})
-		.catch((error) => {
-			console.log(error);
-		});
-		
+			.request(config)
+			.then((response) => {
+				fetchReports();
+				setShowDeleteSuccess(true);
+			})
+			.catch((error) => {
+				console.log(error);
+			});
+
 	}
 
-	const handlePopup = (event, deleteID,reportName, index) => {
+	const handlePopup = (event, deleteID, reportName, index) => {
 		setDeleteID(deleteID);
 		setShowPopup(true);
 		setClickedIndex(index);
 		setDeletedFile(reportName);
-		
+
 	};
 
 	const handleClosePopup = () => {
@@ -177,8 +178,8 @@ const Reports = () => {
 	return (
 		<>
 			<Navbar buttons='true' />
-			<div style={{position:"relative"}}>
-			<Toast
+			<div style={{ position: "relative" }}>
+				<Toast
 					onClose={() => {
 						setShowSuccess(false);
 					}}
@@ -186,7 +187,7 @@ const Reports = () => {
 					show={showSuccess}
 					delay={2000}
 					autohide
-					style={{ position: "absolute", zIndex: "20", right:"1rem" }}
+					style={{ position: "absolute", zIndex: "20", right: "1rem" }}
 				>
 					<Toast.Header>
 						<strong className="me-auto text-success">
@@ -194,7 +195,7 @@ const Reports = () => {
 						</strong>
 					</Toast.Header>
 					<Toast.Body className="text-white">
-						{selectedFile?selectedFile.name:"No file selected"}
+						{selectedFile ? selectedFile.name : "No file selected"}
 					</Toast.Body>
 				</Toast>
 
@@ -206,7 +207,7 @@ const Reports = () => {
 					show={showDeleteSuccess}
 					delay={2000}
 					autohide
-					style={{ position: "absolute", zIndex: "20", right:"1rem" }}
+					style={{ position: "absolute", zIndex: "20", right: "1rem" }}
 				>
 					<Toast.Header>
 						<strong className="me-auto text-danger">
@@ -220,128 +221,136 @@ const Reports = () => {
 
 
 				<div className="page-container">
-					<Sidenav/>
-			<div className="my-4" id="reports-page-container">
+					<Sidenav />
+					<div className="my-4" id="reports-page-container">
 
-				<div id="reports-container">
-					<div>
-						<h3 className="charts-heading">
-							My Reports <TbReportMedical style={{ fontSize: "30px" }} />
-						</h3>
-					</div>
-					<h2>My Reports</h2>
-					<Form onSubmit={handleSubmit}>
-						<Form.Group controlId="formBasicFile">
-							<Form.Label>Upload a file</Form.Label>
-							<Form.Control type="file" placeholder="Choose a file" onChange={handleFileSelect} />
-							<Form.Text className="text-muted">
-								The file <b>should not exceed 2MB</b> in size.
-							</Form.Text>
-							<Button type="submit" disabled={!isFileSelected} >
-								Upload
-							</Button>
-						</Form.Group>
-					</Form>
-					<h4 className="my-3">All reports</h4>
-					<ul style={{ listStyle: "none", margin: "0px", padding: "0px" }}>
-						{reports.map((report,idx) => (
-							<li key={report._id}>
-								<div className="d-flex justify-content-between my-3">
-									<Button id="reports-button" className="d-flex  align-items-center justify-content-between" onClick={() => {
-										setCurrentFile(report);
-										setExtension(report.reportResourceURL.split(".").pop());
-									}}>
-										<span className="">{report.reportName.length <= 20 ? report.reportName : report.reportName.slice(0, 20) + "..."}</span>
-										{/* <Button variant="danger" onClick={()=>handleDelete(report._id,report.reportName)}><AiFillDelete/></Button> */}
-										<OverlayTrigger
-												trigger="click"
-												placement="right"
-												overlay={popover}
-												rootClose
-												flip
-												fallbackPlacements={[
-													"left",
-													"top",
-													"bottom",
-												]}
-												show={
-													showPopup &&
-													clickedIndex === idx
-												}
-												onHide={() => {
-													setShowPopup(false);
-													setClickedIndex(null);
-												}}
-											>
-												<Button
-													onClick={(e) => {
-														handlePopup(
-															e,
-															report._id,
-															report.reportName,
-															idx
-														);
-													}}
-													variant="danger"
-												>
-													<AiFillDelete id="delete-button-overlay" />
-												</Button>
-											</OverlayTrigger>
+						<div id="reports-container">
+							<div>
+								<h3 className="charts-heading">
+									My Reports <TbReportMedical style={{ fontSize: "30px" }} />
+								</h3>
+							</div>
+							<h2>My Reports</h2>
+							<Form onSubmit={handleSubmit}>
+								<Form.Group controlId="formBasicFile">
+									<Form.Label>Upload a file</Form.Label>
+									<Form.Control type="file" placeholder="Choose a file" onChange={handleFileSelect} />
+									<Form.Text className="text-muted">
+										The file <b>should not exceed 2MB</b> in size.
+									</Form.Text>
+									<Button type="submit" disabled={!isFileSelected} >
+										Upload
 									</Button>
-
-								</div>
-							</li>
-						))}
-					</ul>
-				</div>
-				{currentFile ?
-					(
-						<div id="viewer-container" style={{ backgroundColor: "rgb(23,29,61)", color: "white" }} >
-							<div className="d-flex justify-content-between" >
-								<h3>Reports viewer</h3>
-
-
-								<Button variant="success" id="download-button" onClick={() => handleDownloadReport(currentFile)}>
-									Download {getFileTypeIcon(currentFile.reportName)}
-								</Button>
-
-							</div>
-							<div id="viewer">
-								{(extension === "pdf" ? (
-									<embed
-										src={`https://docs.google.com/gview?url=${currentFile?.reportResourceURL}&embedded=true`}
-										id="viewer-embed"
-										type="application/pdf"
-									/>
+								</Form.Group>
+							</Form>
+							<h4 className="my-3">All reports</h4>
+							{
+								!reports ? (
+									<div className="d-flex justify-content-center">
+									<LoadingCircle />
+									</div>
 								) : (
-									<img
-										src={currentFile.reportResourceURL}
+									<ul style={{ listStyle: "none", margin: "0px", padding: "0px" }}>
+										{reports.map((report, idx) => (
+											<li key={report._id}>
+												<div className="d-flex justify-content-between my-3">
+													<Button id="reports-button" className="d-flex  align-items-center justify-content-between" onClick={() => {
+														setCurrentFile(report);
+														setExtension(report.reportResourceURL.split(".").pop());
+													}}>
+														<span className="">{report.reportName.length <= 20 ? report.reportName : report.reportName.slice(0, 20) + "..."}</span>
+														{/* <Button variant="danger" onClick={()=>handleDelete(report._id,report.reportName)}><AiFillDelete/></Button> */}
+														<OverlayTrigger
+															trigger="click"
+															placement="right"
+															overlay={popover}
+															rootClose
+															flip
+															fallbackPlacements={[
+																"left",
+																"top",
+																"bottom",
+															]}
+															show={
+																showPopup &&
+																clickedIndex === idx
+															}
+															onHide={() => {
+																setShowPopup(false);
+																setClickedIndex(null);
+															}}
+														>
+															<Button
+																onClick={(e) => {
+																	handlePopup(
+																		e,
+																		report._id,
+																		report.reportName,
+																		idx
+																	);
+																}}
+																variant="danger"
+															>
+																<AiFillDelete id="delete-button-overlay" />
+															</Button>
+														</OverlayTrigger>
+													</Button>
 
-										id="viewer-image"
-										alt="report image"
-									/>
-								))}
-							</div>
-						</div>)
-					:
-					(
-						<div id="viewer-container" style={{ backgroundColor: "rgb(23,29,61)", color: "white" }}>
-							<div className="d-flex justify-content-between" >
-								<h3>Reports viewer</h3>
-
-
-							</div>
-							<div className="d-flex justify-content-center align-items-center" style={{ backgroundColor: "rgb(147,148,150,0.3)", width: '100%', minHeight: "20rem" }}>
-								<span style={{ fontSize: "1.2rem" }}><GrSelect />Select a file to view</span>
-							</div>
+												</div>
+											</li>
+										))}
+									</ul>
+								)
+							}
 
 						</div>
-					)
-				}
+						{currentFile ?
+							(
+								<div id="viewer-container" style={{ backgroundColor: "rgb(23,29,61)", color: "white" }} >
+									<div className="d-flex justify-content-between" >
+										<h3>Reports viewer</h3>
 
-			</div>
-			</div>
-			<Footer/>
+
+										<Button variant="success" id="download-button" onClick={() => handleDownloadReport(currentFile)}>
+											Download {getFileTypeIcon(currentFile.reportName)}
+										</Button>
+
+									</div>
+									<div id="viewer">
+										{(extension === "pdf" ? (
+											<embed
+												src={`https://docs.google.com/gview?url=${currentFile?.reportResourceURL}&embedded=true`}
+												id="viewer-embed"
+												type="application/pdf"
+											/>
+										) : (
+											<img
+												src={currentFile.reportResourceURL}
+												id="viewer-image"
+												alt="report img"
+											/>
+										))}
+									</div>
+								</div>)
+							:
+							(
+								<div id="viewer-container" style={{ backgroundColor: "rgb(23,29,61)", color: "white" }}>
+									<div className="d-flex justify-content-between" >
+										<h3>Reports viewer</h3>
+
+
+									</div>
+									<div className="d-flex justify-content-center align-items-center" style={{ backgroundColor: "rgb(147,148,150,0.3)", width: '100%', minHeight: "20rem" }}>
+										<span style={{ fontSize: "1.2rem" }}><GrSelect />Select a file to view</span>
+									</div>
+
+								</div>
+							)
+						}
+
+					</div>
+				</div>
+				<Footer />
 			</div>
 		</>
 	);
