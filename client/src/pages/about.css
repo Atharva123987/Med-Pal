@@ -40,8 +40,9 @@ p{
   flex-direction: column;
   align-items: center;
   /* justify-content: center; */
-  height: 100vh;
+  height: fit-content;
   font-size: 1.5rem;
+  min-height: 100vh;
 }
 #about-left-container{
   margin:10px 0px 10px 20px;
@@ -64,8 +65,21 @@ p{
 .about-links:active{
   transition: all 0.4s;
 }
+img[alt="about-pic"] {
+  border-radius: 50%;
+  width: 15rem;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.473);
+}
 
-@media screen and (max-width:480px) {
+.about-right{
+  gap:5rem;
+}
+
+.css-1c2fuzs > div{
+  height: fit-content;
+}
+
+@media screen and (max-width:900px) {
 
   #about-text{
     font-size: 1rem;

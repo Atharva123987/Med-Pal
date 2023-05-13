@@ -6,6 +6,8 @@ import { useAuthContext } from "../hooks/useAuthContext";
 import { Button } from "react-bootstrap";
 import { FiLogOut } from 'react-icons/fi'
 import { MdDashboard } from 'react-icons/md'
+import { GrCatalog } from "react-icons/gr";
+import { BsLayoutTextSidebarReverse } from "react-icons/bs";
 
 const Navbar = (props) => {
 	const { logout } = useLogout();
@@ -25,9 +27,6 @@ const Navbar = (props) => {
 				<div className="navbar-buttons">
 
 
-					{/* {user && (
-						
-					)} */}
 					<div>
 						{props.buttons && !user && (
 							<>
@@ -47,19 +46,21 @@ const Navbar = (props) => {
 								</Link>
 							</>
 						)}
+				
 
 						{props.buttons && user && (
 							<>
-
-								<Link to={'/dashboard'} className="navbar-buttons" > <Button variant="light" className="navbar-buttons" id="dashboard-button">Dashboard  <MdDashboard /></Button></Link>
-								{/* <span>{user.email}</span> */}
+							
+							<div className="d-flex justify-content-center align-items-center gap-2 navbar-button-container">
+								{!props.LogButton && <Link to='/logs '><Button variant="light"><BsLayoutTextSidebarReverse/></Button></Link>}
+								<Link to={'/dashboard'} className="navbar-buttons" > <Button variant="light" className="navbar-buttons" id="">Dashboard  <MdDashboard /></Button></Link>
 								
-								<Button variant="light" className="navbar-buttons" id="logout-button" onClick={handleClick}>Log out  <FiLogOut /></Button>
-								
-
+								<Button variant="light" className="navbar-buttons" id="" onClick={handleClick}>Log out  <FiLogOut /></Button>
+								</div>
 							</>
 						)
 						}
+						
 					</div>
 				</div>
 			</div>

@@ -15,7 +15,7 @@ import LoadingCircle from "./SkeletonLoaders/LoadingCircle";
 const TabList = (props) => {
   const [fetchedMedicineData, setFetchedMedicineData] = useState(null);
   const { user } = useAuthContext();
-
+  const {handleAddLogs} = props;
   const scrollToTop = () => {
     window.scrollTo({
       top: 0,
@@ -53,16 +53,17 @@ const TabList = (props) => {
   const handleEdit = async (e, id, quantity, name) => {
     if (quantity === 1) {
       handleDelete(id);
+      handleAddLogs(name);
       return;
     }
-
+    
     e.preventDefault();
     console.log("ID ", id);
     console.log("QUANTITY ", quantity);
     let data = JSON.stringify({
       quantity: quantity - 1,
     });
-
+    
     let config = {
       method: "patch",
       maxBodyLength: Infinity,
@@ -73,22 +74,24 @@ const TabList = (props) => {
       },
       data: data,
     };
-
+    
     axios
-      .request(config)
-      .then((response) => {
-        props.setShowTaken(true);
+    .request(config)
+    .then((response) => {
+      props.setShowTaken(true);
         props.setTabletName(name);
         props.handleFetch();
+        handleAddLogs(name);
+        
       })
       .catch((error) => {
         console.log(error);
         // setShowError(true);
       });
-  };
-
-  return (
-    <>
+    };
+    
+    return (
+      <>
       <div id="tab-list" className={fetchedMedicineData?"dash-component":"dash-component loading-screen"}>
         <legend align="center">Medicine Reminder</legend>
         {fetchedMedicineData ? (

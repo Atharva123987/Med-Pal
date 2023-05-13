@@ -10,6 +10,7 @@ import LoadingCircle from "./SkeletonLoaders/LoadingCircle";
 const TabStock = (props) => {
   const [fetchedMedicineData, setFetchedMedicineData] = useState(null);
   const { user } = useAuthContext();
+  const {handleAddLogs} = props
   useEffect(
     () => setFetchedMedicineData(props.fetchedMedicineData),
     [props.fetchedMedicineData]
@@ -49,9 +50,10 @@ const TabStock = (props) => {
       handleDelete(id);
       props.setShowTaken(true);
       props.setTabletName(name);
+      handleAddLogs(name);
       return;
     }
-
+    
     e.preventDefault();
     console.log("ID ", id);
     console.log("QUANTITY ", quantity);
@@ -69,18 +71,19 @@ const TabStock = (props) => {
       },
       data: data,
     };
-
+    
     axios
-      .request(config)
-      .then((response) => {
-        props.setShowTaken(true);
-        props.setTabletName(name);
-        props.handleFetch();
-      })
-      .catch((error) => {
-        console.log(error);
-        // setShowError(true);
-      });
+    .request(config)
+    .then((response) => {
+      props.setShowTaken(true);
+      props.setTabletName(name);
+      props.handleFetch();
+      handleAddLogs(name);
+    })
+    .catch((error) => {
+      console.log(error);
+      // setShowError(true);
+    });
   };
 
   return (
