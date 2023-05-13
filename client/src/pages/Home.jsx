@@ -9,7 +9,7 @@ const Home = () => {
     return (
         <>
             <div id="home-content" >
-                <Navbar buttons={true} LogButton='false'/>
+                <Navbar buttons={true} />
                 <Carousel slides={CarouselData}/>
                 <HomeContent/>
                 <Footer/>

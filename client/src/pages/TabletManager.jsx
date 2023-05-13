@@ -142,7 +142,8 @@ const TabletManager = () => {
 
 	return (
 		<>
-			<Navbar buttons={true} />
+							<Navbar buttons='true' LogButton='true' />
+
 			<div className='page-container'>
 				<Sidenav />
 				<div style={{ width: "100%" }}>

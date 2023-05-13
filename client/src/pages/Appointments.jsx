@@ -219,7 +219,7 @@ const Appointments = () => {
 					</Toast>
 				</div>
 
-				<Navbar buttons='true' />
+				<Navbar buttons='true' LogButton='true' />
 
 				<div className="page-container" > 
 				<Sidenav />

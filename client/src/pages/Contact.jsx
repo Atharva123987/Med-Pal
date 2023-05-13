@@ -33,7 +33,8 @@ const Contact = () => {
 
   return (
     <div  >
-      <Navbar buttons={true} />
+      				<Navbar buttons='true' LogButton='true' />
+
 
       <Toast
 					onClose={() => {

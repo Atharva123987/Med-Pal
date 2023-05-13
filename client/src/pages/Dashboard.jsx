@@ -155,7 +155,7 @@ const Dashboard = () => {
 
 	return (
 		<>
-			<Navbar />
+			<Navbar buttons='true' LogButton='false'/>
 			<div id="content">
 
 

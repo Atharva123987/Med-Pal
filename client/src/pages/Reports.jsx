@@ -177,7 +177,8 @@ const Reports = () => {
 
 	return (
 		<>
-			<Navbar buttons='true' />
+							<Navbar buttons='true' LogButton='true' />
+
 			<div style={{ position: "relative" }}>
 				<Toast
 					onClose={() => {
