@@ -97,7 +97,7 @@ const Navbar = (props) => {
                           LogOut <FiLogOut />
                         </>
                       ) : (
-                        <FiLogOut height={100} />
+                        <FiLogOut/>
                       )}
                     </Button>
                   </div>
