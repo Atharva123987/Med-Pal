@@ -65,7 +65,7 @@
     border-radius: 5%;
     /* width: 100%; */
     margin: 0.3rem 0.7rem;
-    max-width: 24rem;
+    min-width: 24rem;
     flex: 1;
     /* max-height: 100vh; */
 }
@@ -387,6 +387,7 @@ margin-top: 10px;
         margin:10px auto auto auto;
         /* background-color: rgba(255, 255, 255, 0.901); */
         min-height: 85vh;
+        width: 100%;
 
     }
     /* #c6{    

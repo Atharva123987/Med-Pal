@@ -64,7 +64,7 @@ export const Login = (props) => {
                     className="mb-3 text-center"
                     disabled={isLoading}
                   >
-                    Submit
+                    Login
                   </Button>
                 </Form.Group>
 

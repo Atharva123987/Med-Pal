@@ -136,10 +136,15 @@
     font-size: xx-large;
   }
 
-  #dashboard-button{
-    margin:2px;
-    padding:5px 0px;
+    #dashboard-button{
+      margin:0px;
+      --bs-btn-padding-x:0;
+    }
+
+  .navbar-button-container > button{
+    max-height:2rem;
   }
+
   #logout-button{
     margin:2px;
     padding:5px 3px;

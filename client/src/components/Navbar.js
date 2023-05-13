@@ -49,19 +49,17 @@ const Navbar = (props) => {
 								</Link>
 							</>
 						)}
-				{
-				!props.LogButton && <Link to='/logs '><Button variant="light"><BsLayoutTextSidebarReverse/></Button></Link>
-}
+				
 
 						{props.buttons && user && (
 							<>
-
-								<Link to={'/dashboard'} className="navbar-buttons" > <Button variant="light" className="navbar-buttons" id="dashboard-button">Dashboard  <MdDashboard /></Button></Link>
-								{/* <span>{user.email}</span> */}
+							
+							<div className="d-flex justify-content-center align-items-center gap-2 navbar-button-container">
+								{!props.LogButton && <Link to='/logs '><Button variant="light"><BsLayoutTextSidebarReverse/></Button></Link>}
+								<Link to={'/dashboard'} className="navbar-buttons" > <Button variant="light" className="navbar-buttons" id="">Dashboard  <MdDashboard /></Button></Link>
 								
-								<Button variant="light" className="navbar-buttons" id="logout-button" onClick={handleClick}>Log out  <FiLogOut /></Button>
-								
-
+								<Button variant="light" className="navbar-buttons" id="" onClick={handleClick}>Log out  <FiLogOut /></Button>
+								</div>
 							</>
 						)
 						}

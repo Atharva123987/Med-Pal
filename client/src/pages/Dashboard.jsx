@@ -242,7 +242,7 @@ const Dashboard = () => {
 					{
 						!userDetails ? (
 							<>
-							<div className="d-flex justify-content-center align-items-center h-100">
+							<div className="d-flex justify-content-center align-items-center" style={{minWidth:"100%"}}>
 								<LoadingCircle />
 								</div>
 							</>
