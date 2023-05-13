@@ -15,6 +15,8 @@ const doctorRoutes = require("./routes/doctorRoutes");
 const labCountRoutes = require("./routes/labCountRoutes.js");
 const userRoutes = require("./routes/userRoutes");
 const reportsStoreRoutes = require("./routes/reportsStoreRoutes");
+const logRoutes = require("./routes/logRoutes");
+const streakRoutes = require("./routes/streakRoutes");
 
 // middleware
 app.use(express.json());
@@ -31,6 +33,8 @@ app.use("/api/doctors", doctorRoutes);
 app.use("/api/labCounts", labCountRoutes);
 app.use("/api/user", userRoutes);
 app.use("/api/reportsStore", reportsStoreRoutes);
+app.use("/api/logs", logRoutes);
+app.use("/api/streaks", streakRoutes);
 
 // connect to db
 mongoose
