@@ -28,6 +28,7 @@ const Navbar = (props) => {
 
 
 					<div>
+						
 						{props.buttons && !user && (
 							<>
 								<Link to={"/login"}>
@@ -54,8 +55,9 @@ const Navbar = (props) => {
 							<div className="d-flex justify-content-center align-items-center gap-2 navbar-button-container">
 								{props.LogButton && <Link to='/logs '><Button variant="light"><BsLayoutTextSidebarReverse/></Button></Link>}
 								<Link to={'/dashboard'} className="navbar-buttons" > <Button variant="light" className="navbar-buttons" id="">Dashboard  <MdDashboard /></Button></Link>
-								
+								<div>
 								<Button variant="light" className="navbar-buttons" id="" onClick={handleClick}>Log out  <FiLogOut /></Button>
+								</div>
 								</div>
 							</>
 						)
