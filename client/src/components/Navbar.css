@@ -136,10 +136,13 @@
     font-size: xx-large;
   }
 
-    #dashboard-button{
-      margin:0px;
-      --bs-btn-padding-x:0;
-    }
+  #to-dashboard span{
+    display: none;
+  }
+
+  #to-logout span{
+    display: none;
+  }
 
   .navbar-button-container > button{
     max-height:2rem;

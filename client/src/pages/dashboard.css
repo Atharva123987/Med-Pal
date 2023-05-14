@@ -512,6 +512,11 @@ margin-top: 10px;
 
     }
 
+    #c4{
+        overflow: none;
+    }
+    
+
     .component{
         min-height: 20rem;
     }
