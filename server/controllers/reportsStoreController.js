@@ -5,8 +5,8 @@ const fs = require("fs");
 
 // create a new instance of the GCP Storage client
 const storage = new Storage({
-	projectId: "medpal-382613",
-	keyFilename: "../server/medpal-382613-8b0b0e1e1b0e.json",
+	projectId: "medpal-391816",
+	keyFilename: "../server/medpal-391816-67347d33ec13.json",
 });
 
 const getListOfReports = async (req, res) => {
