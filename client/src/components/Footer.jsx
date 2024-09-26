@@ -33,7 +33,7 @@ const Footer = ()=>{
             </div>
             
             <div id='footer-right'>
-                <span><a href='https://github.com/spursycoder/Med-Pal/blob/2271633f51fac523a066d9803d49117dff18a092/README.md'><AiFillGithub style={{fontSize:'1.5rem', margin:'5px'}}/></a> </span>
+                <span><a href='https://github.com/spursycoder/Med-Pal/'><AiFillGithub style={{fontSize:'1.5rem', margin:'5px'}}/></a> </span>
                 <span><a href="mailto:medpal96@gmail.com"><AiOutlineMail style={{fontSize:'1.5rem', margin:'5px'}}/></a> </span>
                 
             </div>

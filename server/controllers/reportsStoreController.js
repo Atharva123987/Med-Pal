@@ -5,8 +5,8 @@ const fs = require("fs");
 
 // create a new instance of the GCP Storage client
 const storage = new Storage({
-	projectId: "medpal-382613",
-	keyFilename: "../server/medpal-382613-8b0b0e1e1b0e.json",
+	projectId: "medpal-391816",
+	keyFilename: "/etc/secrets/medpal-391816-67347d33ec13.json",
 });
 
 const getListOfReports = async (req, res) => {
@@ -67,7 +67,41 @@ const createReport = async (req, res) => {
 	}
 };
 
+const deleteReport = async (req, res) => {
+	try {
+		const report_id = req.params.id;
+		const bucketName = "medpal-reports-bucket";
+
+		// get the file name from MongoDB using Mongoose
+		const report = await ReportStore.findById(report_id);
+
+		url = report.reportResourceURL;
+		bucketReportName = url.split("/").pop();
+
+		// delete the file from GCP CDN
+		storage
+			.bucket(bucketName)
+			.file(bucketReportName)
+			.delete((err, res) => {
+				if (err) {
+					console.error(`Error deleting file: ${err}`);
+					return;
+				}
+				console.log(`File ${bucketReportName} deleted successfully`);
+			});
+
+		// delete the file from MongoDB using Mongoose
+		await ReportStore.findByIdAndDelete(report_id);
+
+		res.status(200).json({ msg: "Report deleted successfully" });
+	} catch (error) {
+		console.error(error);
+		res.status(500).send("Server error");
+	}
+};
+
 module.exports = {
 	getListOfReports,
 	createReport,
+	deleteReport,
 };

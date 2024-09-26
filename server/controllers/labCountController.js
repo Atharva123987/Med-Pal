@@ -7,11 +7,11 @@ const getTypeOfLabCount = async (req, res) => {
 	LabCounts.find({ testName: testName, user_id: user_id })
 		.sort({ dateTaken: 1 })
 		.then((labCount) => {
-			if (!labCount.length) {
-				return res
-					.status(404)
-					.json({ success: false, error: `LabCount not found` });
-			}
+			// if (!labCount.length) {
+			// 	return res
+			// 		.status(404)
+			// 		.json({ success: false, error: `LabCount not found` });
+			// }
 			return res.status(200).json({ success: true, data: labCount });
 		})
 		.catch((err) =>
